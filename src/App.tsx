@@ -53,7 +53,7 @@ const projects: Project[] = [
       "QA case study focused on authentication behavior, failed authentication attempts, proactive lockout, test execution, defect reporting, retesting, and regression.",
     tags: ["Authentication", "Lockout", "Test Cases", "Defects", "Regression"],
     visualLabel: "Authentication flow / lockout evidence",
-    path: "/qa/projects/authentication-testing",
+    path: "/projects/authentication-testing",
     accent: "blue",
   },
   {
@@ -69,7 +69,7 @@ const projects: Project[] = [
       "Regression",
     ],
     visualLabel: "GET · POST · PUT · DELETE",
-    path: "/qa/projects/api-testing",
+    path: "/projects/api-testing",
     accent: "slate",
   },
 ];
