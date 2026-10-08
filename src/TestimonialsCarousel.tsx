@@ -6,12 +6,14 @@ const testimonials = [
     id: 'jeffrey-james-jacinto',
     name: 'Jeffrey James',
     role: 'Business Owner, Founder of JJJ Accounting and Tax Services',
+    rating: 5,
     quote: 'Ken consistently showed initiative, professionalism, and strong attention to detail throughout our work together. He approached tasks thoughtfully, communicated clearly, and took the time to understand requirements before delivering his work.His organized approach, reliability, and willingness to improve made the overall experience smooth and efficient. He consistently delivered quality work and was someone I could trust to handle tasks with care and accountability.Job well done, Ken.',
   },
   {
     id: 'bethany',
     name: 'Bethany',
     role: 'Business Owner',
+    rating: 4.5,
     quote: [
       'Ken was absolutely amazing to work with. He is incredibly professional, kind, and clearly takes so much pride in his work.',
       'From start to finish, everything was handled with care, precision, and attention to detail.',
@@ -69,9 +71,24 @@ export default function TestimonialsCarousel() {
                   .join('')}
               </div>
               <div className="testimonial-stars" aria-hidden="true">
-                {Array.from({ length: 5 }, (_, starIndex) => (
-                  <Star key={starIndex} size={18} />
-                ))}
+                {Array.from({ length: 5 }, (_, starIndex) => {
+                  const filledPercentage = Math.max(
+                    0,
+                    Math.min(100, (testimonial.rating - starIndex) * 100),
+                  )
+
+                  return (
+                    <span className="testimonial-star" key={starIndex}>
+                      <Star size={18} className="testimonial-star-empty" />
+                      <span
+                        className="testimonial-star-fill"
+                        style={{ width: `${filledPercentage}%` }}
+                      >
+                        <Star size={18} className="testimonial-star-filled" />
+                      </span>
+                    </span>
+                  )
+                })}
               </div>
               <h3>{testimonial.name}</h3>
               <p className="testimonial-role">{testimonial.role}</p>

@@ -1363,7 +1363,34 @@ img { max-width: 100%; display: block; }
   color: #d99a2b;
 }
 
-.testimonial-stars svg.is-filled {
+.testimonial-star {
+  position: relative;
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+}
+
+.testimonial-star svg {
+  position: absolute;
+  inset: 0;
+  width: 18px;
+  height: 18px;
+}
+
+.testimonial-star-empty {
+  color: rgba(217, 154, 43, 0.25);
+  fill: transparent;
+}
+
+.testimonial-star-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  overflow: hidden;
+}
+
+.testimonial-star-filled {
+  max-width: none;
+  color: #d99a2b;
   fill: currentColor;
   stroke: currentColor;
 }
