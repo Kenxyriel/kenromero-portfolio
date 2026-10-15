@@ -6,16 +6,19 @@ import react from '@vitejs/plugin-react'
 // (Messenger, LinkedIn, email) read. Each single-portfolio build gets its own.
 const pageMeta = {
   all: {
-    title: 'Ken Romero | QA / Application System Engineer',
-    description: 'Ken Romero - QA / Application System Engineer portfolio.',
+    title: 'Ken Romero | QA Engineer & Web Developer',
+    description:
+      'Ken Romero - QA and software development portfolio: manual and automation testing, API testing, and web applications built with React and TypeScript.',
   },
   qa: {
-    title: 'Ken Romero | QA / Application System Engineer',
-    description: 'Ken Romero - QA / Application System Engineer portfolio.',
+    title: 'Ken Romero | QA Engineer & Web Developer',
+    description:
+      'Ken Romero - QA and software development portfolio: manual and automation testing, API testing, and web applications built with React and TypeScript.',
   },
   it: {
-    title: 'Ken Romero | Software Development Portfolio',
-    description: 'Ken Romero - IT professional and developer building web applications with React and TypeScript.',
+    title: 'Ken Romero | QA Engineer & Web Developer',
+    description:
+      'Ken Romero - QA and software development portfolio: manual and automation testing, API testing, and web applications built with React and TypeScript.',
   },
   va: {
     title: 'Ken Romero | Social Media Manager, Podcast Editor & Graphic Designer',
@@ -24,13 +27,9 @@ const pageMeta = {
   },
 }
 
-// Files in public/ that belong to one portfolio. Single-portfolio builds drop
-// the others so, for example, the QA case-study PDF is not on the VA site.
-const publicFiles = {
-  qa: ['documents', 'case-study-preview', 'icons'],
-  it: [] as string[],
-  va: [] as string[],
-}
+// Files in public/ used only by the QA + development portfolio. The VA-only
+// build drops them so, for example, the QA case-study PDF is not on that site.
+const techOnlyFiles = ['documents', 'case-study-preview', 'icons']
 
 export default defineConfig(({ mode }) => {
   const portfolio = (loadEnv(mode, '.').VITE_PORTFOLIO || 'all') as keyof typeof pageMeta
@@ -50,11 +49,8 @@ export default defineConfig(({ mode }) => {
         name: 'portfolio-public-files',
         apply: 'build',
         writeBundle(options) {
-          if (portfolio === 'all') return
-          for (const [audience, files] of Object.entries(publicFiles)) {
-            if (audience === portfolio) continue
-            for (const file of files) rmSync(`${options.dir}/${file}`, { recursive: true, force: true })
-          }
+          if (portfolio !== 'va') return
+          for (const file of techOnlyFiles) rmSync(`${options.dir}/${file}`, { recursive: true, force: true })
         },
       },
     ],

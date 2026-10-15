@@ -30,9 +30,9 @@ export default function CaseStudyLayout({
         <div className="container case-nav-inner">
           <Link className="case-brand" to="/qa">
             <span>Ken Romero</span>
-            <small>QA / Application System Engineer</small>
+            <small>QA Engineer &amp; Web Developer</small>
           </Link>
-          <Link className="case-back" to="/qa">← Back to QA Portfolio</Link>
+          <Link className="case-back" to="/qa">← Back to portfolio</Link>
         </div>
       </header>
 
@@ -61,11 +61,11 @@ export default function CaseStudyLayout({
         <section className="section case-footer-cta">
           <div className="container case-cta">
             <div>
-              <p className="eyebrow">MORE QA PROJECTS</p>
-              <h2>Continue exploring the QA portfolio.</h2>
+              <p className="eyebrow">MORE PROJECTS</p>
+              <h2>Continue exploring the portfolio.</h2>
             </div>
-            <Link className="button button-primary" to="/qa">
-              Back to QA Portfolio
+            <Link className="button button-primary" to="/qa#projects">
+              See all projects
             </Link>
           </div>
         </section>

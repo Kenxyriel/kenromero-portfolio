@@ -4,9 +4,8 @@ import { Link, useLocation } from 'react-router-dom'
 const STORAGE_KEY = 'portfolio-view-switcher'
 
 const views = [
-  { label: 'QA', path: '/qa' },
-  { label: 'IT', path: '/it' },
-  { label: 'VA', path: '/va' },
+  { label: 'Tech', path: '/qa' },
+  { label: 'Creative', path: '/va' },
 ]
 
 // Production visitors should only see the portfolio they were sent, so the
@@ -27,7 +26,6 @@ function readPreference(search: string): boolean {
 }
 
 function activeView(pathname: string) {
-  if (pathname.startsWith('/it')) return '/it'
   if (pathname.startsWith('/va')) return '/va'
   return '/qa'
 }

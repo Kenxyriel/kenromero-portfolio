@@ -4820,3 +4820,39 @@ img { max-width: 100%; display: block; }
 
 /* Placeholder while a portfolio page loads on demand. */
 .route-loading { min-height: 100vh; }
+
+/* ---------- Owner-only portfolio view switcher ---------- */
+
+.view-switcher {
+  position: fixed;
+  z-index: 100;
+  left: 16px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px;
+  background: #0f172a;
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, .3);
+  font-family: Inter, system-ui, sans-serif;
+}
+.view-switcher span {
+  padding: 0 8px 0 10px;
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.view-switcher a {
+  min-width: 40px;
+  padding: 7px 12px;
+  color: #e2e8f0;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+.view-switcher a:hover { background: rgba(255, 255, 255, .1); }
+.view-switcher a.is-active { color: #0f172a; background: #f2b124; }

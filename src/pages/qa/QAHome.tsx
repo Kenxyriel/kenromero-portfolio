@@ -1,706 +1,431 @@
-import { ArrowRight } from "lucide-react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { ArrowRight, ArrowUpRight, Code2, FileText, Github, Linkedin, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import ContactForm from "../../components/ContactForm";
-import SiteFooter from "../../components/SiteFooter";
 import SiteHeader, { type NavItem } from "../../components/SiteHeader";
-import SectionHeading from "../../components/SectionHeading";
-import TestimonialsCarousel from "../../components/TestimonialsCarousel";
 import usePageMeta from "../../components/usePageMeta";
+import { profile } from "../../data/profile";
+import { techContent as content } from "../../data/tech";
 import { testimonials } from "../../data/testimonials";
-
-type Project = {
-  title: string;
-  category: string;
-  description: string;
-  tags: string[];
-  visualLabel: string;
-  path: string;
-  accent: "blue" | "slate";
-};
-
-const projects: Project[] = [
-  {
-    title: "Authentication & Proactive Lockout Testing",
-    category: "Manual / Functional QA",
-    description:
-      "QA case study focused on authentication behavior, failed authentication attempts, proactive lockout, test execution, defect reporting, retesting, and regression.",
-    tags: ["Authentication", "Lockout", "Test Cases", "Defects", "Regression"],
-    visualLabel: "Authentication flow / lockout evidence",
-    path: "/qa/projects/authentication-testing",
-    accent: "blue",
-  },
-  {
-    title: "API Testing and Validation",
-    category: "API / Functional QA",
-    description:
-      "QA case study focused on API testing and validation, including request and response validation, positive and negative scenarios, test execution, defect identification, retesting, and regression.",
-    tags: [
-      "API Testing",
-      "Request Validation",
-      "Response Validation",
-      "Defects",
-      "Regression",
-    ],
-    visualLabel: "GET · POST · PUT · DELETE",
-    path: "/qa/projects/api-testing",
-    accent: "slate",
-  },
-];
+import "./tech.css";
 
 const navItems: NavItem[] = [
-  "About",
-  "Expertise",
-  "Tools",
-  "Projects",
-  "Testimonials",
-  "Contact",
-].map((label) => ({ label, href: `#${label.toLowerCase()}` }));
+  { label: "About", href: "#about" },
+  { label: "Skills", href: "#skills" },
+  { label: "Projects", href: "#projects" },
+  { label: "Process", href: "#process" },
+  { label: "Testimonials", href: "#testimonials" },
+];
 
-const projectPreviewMap: Record<string, string> = {
-  "Authentication & Proactive Lockout Testing":
-    "/case-study-preview/case-study-one.png",
-  "API Testing and Validation": "/case-study-preview/case-study-two.png",
-};
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-function renderProjectVisual(project: Project) {
-  const previewSrc = projectPreviewMap[project.title];
+// Fades sections in as they scroll into view.
+function Reveal({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [shown, setShown] = useState(false);
 
-  if (!previewSrc) {
-    return (
-      <div className="artifact-placeholder">
-        <span className="artifact-kicker">EVIDENCE PREVIEW</span>
-        <strong>{project.visualLabel}</strong>
-        <small>Artifact preview coming soon.</small>
-      </div>
+  useEffect(() => {
+    const node = ref.current;
+    if (!node || prefersReducedMotion() || !("IntersectionObserver" in window)) {
+      setShown(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShown(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "0px 0px -10% 0px" },
     );
-  }
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <img
-      src={previewSrc}
-      alt={`${project.title} case study preview`}
-      className="project-preview-image"
-    />
+    <div ref={ref} className={`tx-reveal ${shown ? "is-shown" : ""} ${className}`} style={{ transitionDelay: `${delay}ms` }}>
+      {children}
+    </div>
   );
 }
-export default function QAHome() {
-  usePageMeta(
-    "Ken Romero | QA / Application System Engineer",
-    "Ken Romero - QA / Application System Engineer portfolio.",
-  );
+
+function RotatingWord({ words }: { words: string[] }) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (prefersReducedMotion()) return;
+    const timer = window.setInterval(() => setIndex((current) => (current + 1) % words.length), 2400);
+    return () => window.clearInterval(timer);
+  }, [words.length]);
 
   return (
-    <div className="site-shell">
-      <SiteHeader brandRole="TECHNICAL PORTFOLIO" navItems={navItems} cta={{ label: "Let's Connect", href: "#contact" }} />
+    <>
+      <span className="tx-sr-only">{words.join(", ")}</span>
+      <span className="tx-rotating" aria-hidden="true">
+        <span key={index} className="tx-rotating-word">
+          {words[index]}
+        </span>
+      </span>
+    </>
+  );
+}
+
+function TestWindow() {
+  return (
+    <div className="tx-window" aria-label="Sample API test cases from the API Testing case study">
+      <div className="tx-window-bar">
+        <span />
+        <span />
+        <span />
+        <strong>api-testing / test-cases</strong>
+      </div>
+      <ol className="tx-window-body">
+        {content.testWindow.map((test, index) => (
+          <li key={test.id} style={{ animationDelay: `${400 + index * 380}ms` }}>
+            <span className="tx-test-id">{test.id}</span>
+            <span className={`tx-method tx-method-${test.method.toLowerCase()}`}>{test.method}</span>
+            <span className="tx-test-name">{test.name}</span>
+            <span className="tx-test-expected">→ {test.expected}</span>
+          </li>
+        ))}
+      </ol>
+      <div className="tx-window-foot">
+        <ShieldCheck size={14} aria-hidden="true" /> Request &amp; response validated · regression covered
+      </div>
+    </div>
+  );
+}
+
+function BrowserMock() {
+  return (
+    <div className="tx-browser" aria-hidden="true">
+      <div className="tx-browser-bar">
+        <span />
+        <span />
+        <span />
+        <em>kenromerogoestdigital.space</em>
+      </div>
+      <div className="tx-browser-body">
+        <div className="tx-browser-routes">
+          <b>/qa</b>
+          <b>/va</b>
+        </div>
+        <code>
+          VITE_PORTFOLIO=<i>va</i>
+          <br />
+          npm run build
+        </code>
+        <Code2 className="tx-browser-icon" />
+      </div>
+    </div>
+  );
+}
+
+type Filter = "all" | "qa" | "dev";
+
+export default function QAHome() {
+  usePageMeta(content.meta.title, content.meta.description);
+  const [filter, setFilter] = useState<Filter>("all");
+  const projects = content.projects.filter((project) => filter === "all" || project.type === filter);
+
+  return (
+    <div className="site-shell tech-theme">
+      <SiteHeader brandRole="QA & SOFTWARE DEVELOPMENT" navItems={navItems} cta={{ label: "Let's Connect", href: "#contact" }} />
 
       <main id="top">
-        {/* SECTION: HERO */}
-        <section className="hero editorial-hero section">
-          <div className="container editorial-hero-inner">
-            <div className="editorial-greeting" aria-hidden="true">
-              <span className="greeting-hello">Hello,</span>
-              <span className="greeting-there">there</span>
-            </div>
-
-            <div
-              className="editorial-photo-wrap"
-              aria-label="Professional photo placeholder"
-            >
-              <div className="editorial-photo">
-                <div className="editorial-photo-glow" />
-                <img
-                  src="/ken-romero.JPG"
-                  alt="Ken Romero"
-                  className="editorial-photo-image"
-                />
-              </div>
-            </div>
-
-            <div className="editorial-badge">
-              <span className="badge-dot" />
-              Open for QA Work
-            </div>
-
-            <div className="editorial-intro">
-              <span className="editorial-label">I AM</span>
+        {/* HERO */}
+        <section className="tx-hero">
+          <div className="tx-grid-bg" aria-hidden="true" />
+          <div className="tx-glow tx-glow-a" aria-hidden="true" />
+          <div className="tx-glow tx-glow-b" aria-hidden="true" />
+          <div className="container tx-hero-grid">
+            <div className="tx-hero-copy">
+              <p className="tx-status">
+                <span className="tx-dot" /> {content.hero.status}
+              </p>
               <h1>
-                KEN
+                Ken
                 <br />
-                ROMERO
+                Romero<span className="tx-cursor">_</span>
               </h1>
+              <p className="tx-hero-role">
+                <span className="tx-mono">&gt;</span> <RotatingWord words={content.hero.rotating} />
+              </p>
+              <p className="tx-hero-lead">{content.hero.lead}</p>
+              <div className="tx-actions">
+                <a className="tx-btn tx-btn-primary" href="#projects">
+                  View projects <ArrowRight size={16} aria-hidden="true" />
+                </a>
+                <a className="tx-btn tx-btn-ghost" href="#contact">
+                  Let&apos;s connect
+                </a>
+                <a className="tx-icon-btn" href={profile.linkedin.href} target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                  <Linkedin size={18} />
+                </a>
+                <a className="tx-icon-btn" href={profile.github.href} target="_blank" rel="noreferrer" aria-label="GitHub">
+                  <Github size={18} />
+                </a>
+              </div>
+              <ul className="tx-chips">
+                {content.hero.chips.map((chip) => (
+                  <li key={chip}>{chip}</li>
+                ))}
+              </ul>
             </div>
 
-            <div className="editorial-role">
-              <div className="editorial-role-title">
-                <span>QA Specialist</span>
-                <span>APPLICATION SYSTEM ENGINEER</span>
-              </div>
-
-              <div className="editorial-role-details">
-                <span>Manual &amp; Automation Testing</span>
-                <span>
-                  Web Applications&nbsp;&nbsp;·&nbsp;&nbsp;API Testing
-                </span>
-                <span>Quality Assurance&nbsp;&nbsp;·&nbsp;&nbsp;Agile</span>
-              </div>
-            </div>
-
-            <div className="editorial-actions">
-              <a className="editorial-link" href="#projects">
-                View QA Projects <ArrowRight size={17} />
-              </a>
-              <a
-                className="editorial-link editorial-link-muted"
-                href="#contact"
-              >
-                Let&apos;s Connect
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION: ABOUT */}
-        <section id="about" className="about-editorial-section">
-          <div className="container">
-            <div className="about-editorial">
-              {/* LEFT: PHOTO */}
-              <div className="about-photo-column">
-                <div className="about-photo-card">
-                  <img
-                    src="/ken-romero-hero.JPG"
-                    alt="Ken Romero"
-                    className="about-photo"
-                  />
-
-                  <div className="about-photo-label">
-                    <span className="about-photo-dot" />
-                    <div>
-                      <strong>KEN ROMERO</strong>
-                      <small>QA SPECIALIST</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* RIGHT: INTRODUCTION */}
-              <div className="about-content">
-                <div className="about-intro-grid">
-                  <div className="about-introduction">
-                    <p className="eyebrow">Let's get to know</p>
-
-                    <h2>
-                      About <span>me</span>
-                    </h2>
-
-                    <div className="about-divider" />
-
-                    <p>
-                      I’m an IT professional and QA Analyst with 4+ years of
-                      experience working with enterprise applications and
-                      helping teams deliver reliable, quality software.
-                    </p>
-
-                    <p>
-                      I enjoy understanding how a system is supposed to work,
-                      breaking down requirements, and looking beyond the happy
-                      path to find the cases that can easily be missed.
-                    </p>
-
-                    <p>
-                      My QA experience covers manual and functional testing,
-                      regression and retesting, negative and boundary testing,
-                      test case design, defect reporting, API validation, and
-                      release support.
-                    </p>
-
-                    <p className="about-personal-note">
-                      What I enjoy most about QA is the investigation. I like
-                      asking
-                      <em> “What happens if...?”</em>, finding where things can
-                      break, and making sure fixes solve the problem without
-                      creating another one.
-                    </p>
-                  </div>
-
-                  {/* CAREER HIGHLIGHTS */}
-                  <div className="about-highlights">
-                    <p className="about-subheading">CAREER HIGHLIGHTS</p>
-
-                    <div className="highlight-item">
-                      <strong>4+ YEARS</strong>
-                      <span>IT EXPERIENCE</span>
-                    </div>
-
-                    <div className="highlight-item">
-                      <strong>QA SPECIALIST</strong>
-                      <span>ENTERPRISE APPLICATIONS</span>
-                    </div>
-
-                    <div className="highlight-item">
-                      <strong>5+ PROJECTS</strong>
-                      <span>IT / DIGITAL PROJECTS</span>
-                    </div>
-
-                    <div className="highlight-item">
-                      <strong>MANUAL QA</strong>
-                      <span>FUNCTIONAL · REGRESSION</span>
-                    </div>
-
-                    <div className="highlight-item">
-                      <strong>API TESTING</strong>
-                      <span>POSTMAN · SWAGGER</span>
-                    </div>
-
-                    <div className="highlight-item">
-                      <strong>AUTOMATION</strong>
-                      <span>PLAYWRIGHT · TYPESCRIPT</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* QA SPECIALIZATION */}
-                <div className="qa-specialization">
-                  <div className="qa-specialization-header">
-                    <p className="about-subheading">QA SPECIALIZATION</p>
-                  </div>
-
-                  <div className="qa-category-grid">
-                    <div className="qa-category">
-                      <span className="qa-category-number">01</span>
-
-                      <div>
-                        <h3>QA Foundation</h3>
-
-                        <ul>
-                          <li>Software Testing</li>
-                          <li>Manual &amp; Functional Testing</li>
-                          <li>Regression &amp; Retesting</li>
-                          <li>Negative &amp; Boundary Testing</li>
-                          <li>Test Management</li>
-                        </ul>
-                      </div>
-                    </div>
-
-                    <div className="qa-category">
-                      <span className="qa-category-number">02</span>
-
-                      <div>
-                        <h3>Quality &amp; Delivery</h3>
-
-                        <ul>
-                          <li>Test Cases &amp; Test Suites</li>
-                          <li>Defect Reporting &amp; Tracking</li>
-                          <li>Requirements &amp; Acceptance Criteria</li>
-                          <li>Release Validation</li>
-                        </ul>
-                      </div>
-                    </div>
-
-                    <div className="qa-category">
-                      <span className="qa-category-number">03</span>
-
-                      <div>
-                        <h3>API &amp; Automation</h3>
-
-                        <ul>
-                          <li>API Testing</li>
-                          <li>Postman &amp; Swagger</li>
-                          <li>TypeScript &amp; Playwright</li>
-                          <li>Selenium WebDriver</li>
-                          <li>Git &amp; GitHub Actions</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="tx-hero-visual">
+              <div className="tx-orbit" aria-hidden="true" />
+              <img className="tx-hero-photo" src="/ken-romero.JPG" alt={profile.name} />
+              <TestWindow />
             </div>
           </div>
         </section>
 
-        {/* SECTION: EXPERTISE */}
-        <section id="expertise" className="section section-muted">
-          <div className="container">
-            <div className="expertise-header">
-              <p className="eyebrow">WHAT I BRING TO QA</p>
+        {/* TOOL MARQUEE */}
+        <section className="tx-marquee" aria-label="Tools">
+          <div className="tx-marquee-track">
+            {[...content.tools, ...content.tools].map((tool, index) => (
+              <span className="tx-tool" key={`${tool.name}-${index}`} aria-hidden={index >= content.tools.length}>
+                <img src={tool.icon} alt="" />
+                {tool.name}
+              </span>
+            ))}
+          </div>
+        </section>
 
-              <h2>
-                A structured approach to testing, investigation, and quality
-                validation.
+        {/* ABOUT */}
+        <section id="about" className="tx-section tx-light">
+          <div className="container tx-about">
+            <Reveal className="tx-about-photo">
+              <img src="/ken-romero-hero.JPG" alt={`${profile.name}, casual portrait`} />
+              <span className="tx-tag-float">QA mindset · developer hands</span>
+            </Reveal>
+            <Reveal className="tx-about-copy" delay={120}>
+              <p className="tx-kicker">// about me</p>
+              <h2 className="tx-h2">
+                I look beyond the <span className="tx-hl">happy path.</span>
               </h2>
-            </div>
-
-            <div className="expertise-editorial-grid">
-              {/* 01 - FUNCTIONAL QA */}
-              <article className="expertise-editorial-card">
-                <div className="expertise-card-top">
-                  <span className="expertise-number">01</span>
-
-                  <span className="expertise-line" />
-                </div>
-
-                <h3>Functional QA</h3>
-
-                <p>
-                  I validate application behavior across expected, negative, and
-                  edge-case scenarios, helping ensure features work as intended.
-                </p>
-
-                <div className="expertise-tags">
-                  <span>MANUAL TESTING</span>
-                  <span>FUNCTIONAL TESTING</span>
-                  <span>POSITIVE / NEGATIVE</span>
-                  <span>BOUNDARY TESTING</span>
-                </div>
-              </article>
-
-              {/* 02 - TEST DESIGN */}
-              <article className="expertise-editorial-card">
-                <div className="expertise-card-top">
-                  <span className="expertise-number">02</span>
-
-                  <span className="expertise-line" />
-                </div>
-
-                <h3>Test Design</h3>
-
-                <p>
-                  I turn requirements into clear test scenarios and test cases,
-                  with a focus on expected behavior, execution, and measurable
-                  results.
-                </p>
-
-                <div className="expertise-tags">
-                  <span>TEST SCENARIOS</span>
-                  <span>TEST CASES</span>
-                  <span>EXPECTED / ACTUAL</span>
-                  <span>TEST EXECUTION</span>
-                </div>
-              </article>
-
-              {/* 03 - DEFECT MANAGEMENT */}
-              <article className="expertise-editorial-card">
-                <div className="expertise-card-top">
-                  <span className="expertise-number">03</span>
-
-                  <span className="expertise-line" />
-                </div>
-
-                <h3>Defect Management</h3>
-
-                <p>
-                  I investigate unexpected behavior, document defects clearly,
-                  and verify fixes through structured retesting and regression.
-                </p>
-
-                <div className="expertise-tags">
-                  <span>DEFECT IDENTIFICATION</span>
-                  <span>DEFECT REPORTING</span>
-                  <span>RETESTING</span>
-                  <span>REGRESSION</span>
-                </div>
-              </article>
-
-              {/* 04 - API & AUTHENTICATION */}
-              <article className="expertise-editorial-card expertise-card-featured">
-                <div className="expertise-card-top">
-                  <span className="expertise-number">04</span>
-
-                  <span className="expertise-line" />
-                </div>
-
-                <h3>API &amp; Authentication</h3>
-
-                <p>
-                  I validate API behavior and authentication flows by checking
-                  requests, responses, and security-related scenarios such as
-                  failed login and lockout behavior.
-                </p>
-
-                <div className="expertise-tags">
-                  <span>API VALIDATION</span>
-                  <span>REQUEST VALIDATION</span>
-                  <span>RESPONSE VALIDATION</span>
-                  <span>AUTHENTICATION</span>
-                  <span>LOCKOUT TESTING</span>
-                </div>
-              </article>
-            </div>
+              {content.about.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+              <blockquote className="tx-quote">{content.about.quote}</blockquote>
+              <div className="tx-stats">
+                {content.about.stats.map((stat) => (
+                  <div key={stat.label}>
+                    <strong>{stat.value}</strong>
+                    <span>{stat.label}</span>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
           </div>
         </section>
-        {/* SECTION: TOOLS */}
-        <section id="tools" className="section tools-workflow-section">
+
+        {/* DISCIPLINES */}
+        <section id="skills" className="tx-section tx-dark">
           <div className="container">
-            <div className="tools-workflow-grid">
-              {/* LEFT: TOOLS */}
-              <div className="tools-panel">
-                <div className="tools-header">
-                  <p className="eyebrow">HOW I WORK?</p>
-
-                  <h2>
-                    Tools behind the
-                    <br />
-                    QA workflow.
-                  </h2>
-
-                  <p>
-                    Tools I use across manual testing, automation, API
-                    validation, development, and QA workflows.
-                  </p>
-                </div>
-
-                <div className="tool-groups">
-                  {/* AUTOMATION */}
-                  <div className="tool-group">
-                    <div className="tool-group-label">AUTOMATION</div>
-
-                    <div className="tech-marquee">
-                      <div className="tech-marquee-track tech-marquee-left">
-                        {/* SET 1 */}
-                        <div className="tech-item">
-                          <img
-                            src="/icons/playwright-mono.svg"
-                            alt=""
-                            className="tech-logo"
-                          />
-                          <span>Playwright</span>
-                        </div>
-
-                        <div className="tech-item">
-                          <img
-                            src="/icons/selenium-mono.svg"
-                            alt=""
-                            className="tech-logo"
-                          />
-                          <span>Selenium WebDriver</span>
-                        </div>
-
-                        <div className="tech-item">
-                          <img
-                            src="/icons/typescript-mono.svg"
-                            alt=""
-                            className="tech-logo"
-                          />
-                          <span>TypeScript</span>
-                        </div>
-
-                        <div className="tech-item">
-                          <img
-                            src="/icons/playwright-mono.svg"
-                            alt=""
-                            className="tech-logo"
-                          />
-                          <span>Playwright API Testing</span>
-                        </div>
-
-                        {/* SET 2 */}
-                        <div className="tech-item" aria-hidden="true">
-                          <img
-                            src="/icons/playwright-mono.svg"
-                            alt=""
-                            className="tech-logo"
-                          />
-                          <span>Playwright</span>
-                        </div>
-
-                        <div className="tech-item" aria-hidden="true">
-                          <img
-                            src="/icons/selenium-mono.svg"
-                            alt=""
-                            className="tech-logo"
-                          />
-                          <span>Selenium WebDriver</span>
-                        </div>
-
-                        <div className="tech-item" aria-hidden="true">
-                          <img
-                            src="/icons/typescript-mono.svg"
-                            alt=""
-                            className="tech-logo"
-                          />
-                          <span>TypeScript</span>
-                        </div>
-
-                        <div className="tech-item" aria-hidden="true">
-                          <img
-                            src="/icons/playwright-mono.svg"
-                            alt=""
-                            className="tech-logo"
-                          />
-                          <span>Playwright API Testing</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* API & DEVELOPMENT */}
-                  <div className="tool-group">
-                    <div className="tool-group-label">API & DEVELOPMENT</div>
-
-                    <div className="tech-marquee">
-                      <div className="tech-marquee-track tech-marquee-right">
-                        <div className="tech-item">
-                          <img
-                            src="/icons/postman-mono.svg"
-                            alt=""
-                            className="tech-logo"
-                          />
-                          <span>Postman</span>
-                        </div>
-
-                        <div className="tech-item">
-                          <img
-                            src="/icons/git-mono.svg"
-                            alt=""
-                            className="tech-logo"
-                          />
-                          <span>Git</span>
-                        </div>
-
-                        <div className="tech-item">
-                          <img
-                            src="/icons/github-mono.svg"
-                            alt=""
-                            className="tech-logo"
-                          />
-                          <span>GitHub</span>
-                        </div>
-
-                        <div className="tech-item">
-                          <img
-                            src="/icons/github-actions-mono.svg"
-                            alt=""
-                            className="tech-logo"
-                          />
-                          <span>GitHub Actions</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* QA MANAGEMENT */}
-                  <div className="tool-group">
-                    <div className="tool-group-label">QA MANAGEMENT</div>
-
-                    <div className="tech-marquee">
-                      <div className="tech-marquee-track tech-marquee-left">
-                        <div className="tech-item">
-                          <img
-                            src="/icons/azure-devops-mono.svg"
-                            alt=""
-                            className="tech-logo"
-                          />
-                          <span>Azure DevOps</span>
-                        </div>
-
-                        <div className="tech-item">
-                          <img
-                            src="/icons/jira-mono.svg"
-                            alt=""
-                            className="tech-logo"
-                          />
-                          <span>Jira</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* RIGHT: QA WORKFLOW */}
-              <div className="tools-workflow-panel">
-                <div className="tools-workflow-heading">
-                  <p className="eyebrow">QA WORKFLOW</p>
-
-                  <h3>
-                    From expected behavior
-                    <br />
-                    to regression.
-                  </h3>
-                </div>
-
-                <div className="tools-workflow-grid-inner">
-                  {[
-                    ["01", "Expected Behavior"],
-                    ["02", "Test Scenarios"],
-                    ["03", "Test Cases"],
-                    ["04", "Execute"],
-                    ["05", "Expected vs Actual"],
-                    ["06", "Defect"],
-                    ["07", "Retest"],
-                    ["08", "Regression"],
-                  ].map(([number, title]) => (
-                    <div className="tools-workflow-card" key={number}>
-                      <button className="tools-workflow-number">
-                        {number}
-                      </button>
-                      <strong>{title}</strong>
+            <Reveal className="tx-heading">
+              <p className="tx-kicker">// what I do</p>
+              <h2 className="tx-h2">
+                Two disciplines. <span className="tx-hl">One mindset.</span>
+              </h2>
+              <p>Testing taught me how software fails. Building taught me how to prevent it.</p>
+            </Reveal>
+            <div className="tx-disciplines">
+              {content.disciplines.map((discipline, index) => (
+                <Reveal key={discipline.key} className={`tx-discipline tx-discipline-${discipline.key}`} delay={index * 140}>
+                  <p className="tx-mono tx-discipline-kicker">{discipline.kicker}</p>
+                  <h3>{discipline.title}</h3>
+                  <p>{discipline.text}</p>
+                  {discipline.groups.map((group) => (
+                    <div className="tx-skill-group" key={group.title}>
+                      <span>{group.title}</span>
+                      <ul>
+                        {group.items.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
                     </div>
                   ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        {/* SECTION: PROJECTS */}
-        <section id="projects" className="section">
-          <div className="container">
-            <SectionHeading
-              eyebrow="FEATURED QA PROJECTS"
-              title="Testing work with supporting evidence"
-              description="Two verified case studies form the core of this QA portfolio."
-            />
-
-            <div className="projects-grid">
-              {projects.map((project) => (
-                <article
-                  className={`project-card project-${project.accent}`}
-                  key={project.title}
-                >
-                  <div className="project-visual">
-                    {renderProjectVisual(project)}
-                  </div>
-                  <div className="project-content">
-                    <span className="project-category">{project.category}</span>
-                    <h3>{project.title}</h3>
-                    <p>{project.description}</p>
-                    <div className="tag-row">
-                      {project.tags.map((tag) => (
-                        <span key={tag}>{tag}</span>
-                      ))}
-                    </div>
-                    <Link className="text-link" to={project.path}>
-                      View Case Study <ArrowRight size={16} />
-                    </Link>
-                  </div>
-                </article>
+                </Reveal>
               ))}
             </div>
           </div>
         </section>
 
-        {/* SECTION: TESTIMONIALS */}
-        <section id="testimonials" className="section">
+        {/* PROJECTS */}
+        <section id="projects" className="tx-section tx-light">
           <div className="container">
-            <SectionHeading
-              eyebrow="TESTIMONIALS"
-              title="Client feedback"
-              description="Feedback from people who have worked with me."
-              compact
-            />
-            <TestimonialsCarousel testimonials={testimonials} />
+            <Reveal className="tx-heading tx-heading-row">
+              <div>
+                <p className="tx-kicker">// selected work</p>
+                <h2 className="tx-h2">
+                  Projects with <span className="tx-hl">evidence.</span>
+                </h2>
+              </div>
+              <div className="tx-filters" role="group" aria-label="Filter projects">
+                {(
+                  [
+                    ["all", "All"],
+                    ["qa", "QA"],
+                    ["dev", "Development"],
+                  ] as [Filter, string][]
+                ).map(([value, label]) => (
+                  <button
+                    key={value}
+                    className={filter === value ? "is-active" : ""}
+                    aria-pressed={filter === value}
+                    onClick={() => setFilter(value)}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </Reveal>
+
+            <div className="tx-projects">
+              {projects.map((project, index) => {
+                const body = (
+                  <>
+                    <div className={`tx-project-visual tx-project-${project.type}`}>
+                      {project.image ? <img src={project.image} alt={`${project.title} preview`} loading="lazy" /> : <BrowserMock />}
+                    </div>
+                    <div className="tx-project-body">
+                      <span className="tx-mono tx-project-cat">{project.category}</span>
+                      <h3>{project.title}</h3>
+                      <p>{project.description}</p>
+                      <ul className="tx-tags">
+                        {project.tags.map((tag) => (
+                          <li key={tag}>{tag}</li>
+                        ))}
+                      </ul>
+                      <span className="tx-link">
+                        {project.link.label}{" "}
+                        {"to" in project.link ? <ArrowRight size={16} aria-hidden="true" /> : <ArrowUpRight size={16} aria-hidden="true" />}
+                      </span>
+                    </div>
+                  </>
+                );
+                return (
+                  <Reveal key={project.title} delay={index * 100}>
+                    {"to" in project.link && project.link.to ? (
+                      <Link className="tx-project" to={project.link.to}>
+                        {body}
+                      </Link>
+                    ) : (
+                      <a className="tx-project" href={"href" in project.link ? project.link.href : "#"} target="_blank" rel="noreferrer">
+                        {body}
+                      </a>
+                    )}
+                  </Reveal>
+                );
+              })}
+            </div>
           </div>
         </section>
 
-        {/* SECTION: CONTACT */}
-        <section id="contact" className="section contact-section">
+        {/* PROCESS */}
+        <section id="process" className="tx-section tx-dark tx-process-section">
           <div className="container">
-            <ContactForm />
+            <Reveal className="tx-heading">
+              <p className="tx-kicker">// how I work</p>
+              <h2 className="tx-h2">
+                From expected behavior <span className="tx-hl">to regression.</span>
+              </h2>
+            </Reveal>
+            <ol className="tx-process">
+              {content.process.map((step, index) => (
+                <li key={step.title}>
+                  <Reveal delay={index * 80}>
+                    <span className="tx-step-num">{String(index + 1).padStart(2, "0")}</span>
+                    <strong>{step.title}</strong>
+                    <span>{step.text}</span>
+                  </Reveal>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        {/* TESTIMONIALS */}
+        <section id="testimonials" className="tx-section tx-light">
+          <div className="container">
+            <Reveal className="tx-heading">
+              <p className="tx-kicker">// testimonials</p>
+              <h2 className="tx-h2">
+                What people <span className="tx-hl">say.</span>
+              </h2>
+            </Reveal>
+            <div className="tx-testimonials">
+              {testimonials.map((item, index) => (
+                <Reveal key={item.id} delay={index * 120}>
+                  <figure className="tx-testimonial">
+                    <blockquote>“{item.quote}”</blockquote>
+                    <figcaption>
+                      <span className="tx-avatar" aria-hidden="true">
+                        {item.name
+                          .split(" ")
+                          .map((part) => part[0])
+                          .slice(0, 2)
+                          .join("")}
+                      </span>
+                      <span>
+                        <strong>{item.name}</strong>
+                        <small>{item.role}</small>
+                      </span>
+                    </figcaption>
+                  </figure>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CONTACT */}
+        <section id="contact" className="tx-section tx-dark tx-contact">
+          <div className="tx-grid-bg" aria-hidden="true" />
+          <div className="container">
+            <Reveal className="tx-heading">
+              <p className="tx-kicker">// let&apos;s connect</p>
+              <h2 className="tx-h2">
+                Let&apos;s build something <span className="tx-hl">reliable.</span>
+              </h2>
+              <div className="tx-actions tx-actions-center">
+                <a className="tx-btn tx-btn-ghost" href={profile.github.href} target="_blank" rel="noreferrer">
+                  <Github size={16} aria-hidden="true" /> GitHub
+                </a>
+                <a className="tx-btn tx-btn-ghost" href={`mailto:${profile.email}?subject=${encodeURIComponent("Resume request")}`}>
+                  <FileText size={16} aria-hidden="true" /> Request my resume
+                </a>
+              </div>
+            </Reveal>
+            <ContactForm intro={content.contactIntro} />
           </div>
         </section>
       </main>
 
-      <SiteFooter role="QA / Application System Engineer" />
+      <footer className="tx-footer">
+        <div className="container tx-footer-inner">
+          <div>
+            <strong>
+              KEN ROMERO<span className="tx-cursor">_</span>
+            </strong>
+            <span>QA Engineer · Web Developer</span>
+          </div>
+          <div className="tx-footer-links">
+            <a href={profile.linkedin.href} target="_blank" rel="noreferrer">
+              LinkedIn
+            </a>
+            <a href={profile.github.href} target="_blank" rel="noreferrer">
+              GitHub
+            </a>
+            <a href={`mailto:${profile.email}`}>{profile.email}</a>
+          </div>
+          <span>© {new Date().getFullYear()} {profile.name}</span>
+        </div>
+      </footer>
     </div>
   );
 }
