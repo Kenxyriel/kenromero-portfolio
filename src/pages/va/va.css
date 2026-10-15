@@ -31,8 +31,9 @@
 .va-theme h2,
 .va-theme h3 { color: var(--va-ink); }
 
-.va-theme .navbar { background: rgba(247, 244, 236, .9); }
+.va-theme .navbar { background: transparent; backdrop-filter: none; }
 .va-theme .navbar-scrolled { background: rgba(247, 244, 236, .98); border-color: var(--va-tan); }
+.va-theme .nav-links a:not(.nav-cta) { color: var(--va-ink); }
 .va-theme .nav-links a:not(.nav-cta):hover { color: var(--va-ink); text-decoration: underline; text-decoration-color: var(--va-amber); text-decoration-thickness: 3px; text-underline-offset: 6px; }
 .va-theme .nav-cta { background: var(--va-ink); }
 .va-theme .nav-cta:hover { background: var(--va-amber); color: var(--va-ink); }
@@ -153,7 +154,7 @@
   background: var(--va-sand);
   box-shadow: 0 30px 60px rgba(18, 12, 11, .18);
 }
-.va-hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+.va-hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
 
 /* ---------- About ---------- */
 
