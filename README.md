@@ -36,6 +36,12 @@ a "Content pending" marker under `npm run dev`. VA images live in `public/va/`; 
 whose `image` path is empty renders as a labelled placeholder. Only publish claims that are
 supported by real work.
 
+## Switching views
+
+A floating **QA | IT | VA** switcher (bottom-left) jumps between portfolios. It shows on
+`localhost` and Vercel preview URLs only, so production visitors never see it. On the live
+domain, add `?switcher=on` to any URL once to enable it in your browser (`?switcher=off` to hide).
+
 ## Notes
 
 - The contact form UI does not deliver messages yet; a form/email endpoint still needs to be connected.

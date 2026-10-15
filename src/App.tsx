@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import NotFound from "./components/NotFound";
 import ScrollManager from "./components/ScrollManager";
+import ViewSwitcher from "./components/ViewSwitcher";
 import ITHome from "./pages/it/ITHome";
 import ApiTestingCaseStudy from "./pages/qa/ApiTestingCaseStudy";
 import AuthenticationCaseStudy from "./pages/qa/AuthenticationCaseStudy";
@@ -47,6 +48,7 @@ function App() {
 
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <ViewSwitcher />
     </>
   );
 }
