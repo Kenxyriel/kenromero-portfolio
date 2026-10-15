@@ -4817,3 +4817,6 @@ img { max-width: 100%; display: block; }
     border-left: 0;
   }
 }
+
+/* Placeholder while a portfolio page loads on demand. */
+.route-loading { min-height: 100vh; }

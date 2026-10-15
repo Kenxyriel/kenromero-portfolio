@@ -1,54 +1,84 @@
+import { lazy, Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import NotFound from "./components/NotFound";
 import ScrollManager from "./components/ScrollManager";
 import ViewSwitcher from "./components/ViewSwitcher";
-import ITHome from "./pages/it/ITHome";
-import ApiTestingCaseStudy from "./pages/qa/ApiTestingCaseStudy";
-import AuthenticationCaseStudy from "./pages/qa/AuthenticationCaseStudy";
-import QAHome from "./pages/qa/QAHome";
-import VADesignBranding from "./pages/va/VADesignBranding";
-import VAHome from "./pages/va/VAHome";
-import { VAPodcastPackages, VASmmPackages } from "./pages/va/VAPackages";
-import VAPodcastEditing from "./pages/va/VAPodcastEditing";
-import VASocialMedia from "./pages/va/VASocialMedia";
 
-// One codebase, one domain, separate entry points per audience.
-// The root URL keeps serving the QA portfolio, which is the live, finished section.
+// One codebase, separate entry points per audience. VITE_PORTFOLIO decides
+// which portfolios a deployment contains (see src/portfolio.ts). These checks
+// are written inline so the build drops every portfolio it does not serve:
+// a VA-only site does not even contain the QA or IT pages.
+const mode = import.meta.env.VITE_PORTFOLIO;
+const HAS_QA = !mode || mode === "all" || mode === "qa";
+const HAS_IT = !mode || mode === "all" || mode === "it";
+const HAS_VA = !mode || mode === "all" || mode === "va";
+const SINGLE = mode === "qa" || mode === "it" || mode === "va";
+
+const QAHome = HAS_QA ? lazy(() => import("./pages/qa/QAHome")) : null;
+const AuthenticationCaseStudy = HAS_QA ? lazy(() => import("./pages/qa/AuthenticationCaseStudy")) : null;
+const ApiTestingCaseStudy = HAS_QA ? lazy(() => import("./pages/qa/ApiTestingCaseStudy")) : null;
+
+const ITHome = HAS_IT ? lazy(() => import("./pages/it/ITHome")) : null;
+
+const VAHome = HAS_VA ? lazy(() => import("./pages/va/VAHome")) : null;
+const VADesignBranding = HAS_VA ? lazy(() => import("./pages/va/VADesignBranding")) : null;
+const VASocialMedia = HAS_VA ? lazy(() => import("./pages/va/VASocialMedia")) : null;
+const VAPodcastEditing = HAS_VA ? lazy(() => import("./pages/va/VAPodcastEditing")) : null;
+const VAPodcastPackages = HAS_VA
+  ? lazy(() => import("./pages/va/VAPackages").then((m) => ({ default: m.VAPodcastPackages })))
+  : null;
+const VASmmPackages = HAS_VA
+  ? lazy(() => import("./pages/va/VAPackages").then((m) => ({ default: m.VASmmPackages })))
+  : null;
+
+// The root URL shows the QA portfolio on the combined site, or the only
+// portfolio a single-audience site serves.
+function rootElement() {
+  if (mode === "it") return <Navigate to="/it" replace />;
+  if (mode === "va") return <Navigate to="/va" replace />;
+  return QAHome ? <QAHome /> : <NotFound />;
+}
+
 function App() {
   return (
     <>
       <ScrollManager />
-      <Routes>
-        <Route path="/" element={<QAHome />} />
+      <Suspense fallback={<div className="route-loading" />}>
+        <Routes>
+          <Route path="/" element={rootElement()} />
 
-        <Route path="/qa" element={<QAHome />} />
-        <Route
-          path="/qa/projects/authentication-testing"
-          element={<AuthenticationCaseStudy />}
-        />
-        <Route path="/qa/projects/api-testing" element={<ApiTestingCaseStudy />} />
+          {QAHome && AuthenticationCaseStudy && ApiTestingCaseStudy && (
+            <>
+              <Route path="/qa" element={<QAHome />} />
+              <Route path="/qa/projects/authentication-testing" element={<AuthenticationCaseStudy />} />
+              <Route path="/qa/projects/api-testing" element={<ApiTestingCaseStudy />} />
 
-        <Route path="/it" element={<ITHome />} />
-        <Route path="/va" element={<VAHome />} />
-        <Route path="/va/design-branding" element={<VADesignBranding />} />
-        <Route path="/va/social-media-content" element={<VASocialMedia />} />
-        <Route path="/va/podcast-editing" element={<VAPodcastEditing />} />
-        <Route path="/va/podcast-packages" element={<VAPodcastPackages />} />
-        <Route path="/va/smm-packages" element={<VASmmPackages />} />
+              {/* Legacy case-study URLs that may already have been shared. */}
+              <Route
+                path="/projects/authentication-testing"
+                element={<Navigate to="/qa/projects/authentication-testing" replace />}
+              />
+              <Route path="/projects/api-testing" element={<Navigate to="/qa/projects/api-testing" replace />} />
+            </>
+          )}
 
-        {/* Legacy case-study URLs that may already have been shared. */}
-        <Route
-          path="/projects/authentication-testing"
-          element={<Navigate to="/qa/projects/authentication-testing" replace />}
-        />
-        <Route
-          path="/projects/api-testing"
-          element={<Navigate to="/qa/projects/api-testing" replace />}
-        />
+          {ITHome && <Route path="/it" element={<ITHome />} />}
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <ViewSwitcher />
+          {VAHome && VADesignBranding && VASocialMedia && VAPodcastEditing && VAPodcastPackages && VASmmPackages && (
+            <>
+              <Route path="/va" element={<VAHome />} />
+              <Route path="/va/design-branding" element={<VADesignBranding />} />
+              <Route path="/va/social-media-content" element={<VASocialMedia />} />
+              <Route path="/va/podcast-editing" element={<VAPodcastEditing />} />
+              <Route path="/va/podcast-packages" element={<VAPodcastPackages />} />
+              <Route path="/va/smm-packages" element={<VASmmPackages />} />
+            </>
+          )}
+
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
+      {!SINGLE && <ViewSwitcher />}
     </>
   );
 }
