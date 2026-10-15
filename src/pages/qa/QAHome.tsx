@@ -83,7 +83,7 @@ function TestWindow() {
       </div>
       <ol className="tx-window-body">
         {content.testWindow.map((test, index) => (
-          <li key={test.id} style={{ animationDelay: `${400 + index * 380}ms` }}>
+          <li key={test.id} style={{ animationDelay: `${300 + index * 300}ms` }}>
             <span className="tx-test-id">{test.id}</span>
             <span className={`tx-method tx-method-${test.method.toLowerCase()}`}>{test.method}</span>
             <span className="tx-test-name">{test.name}</span>
@@ -148,7 +148,7 @@ export default function QAHome() {
               <h1>
                 Ken
                 <br />
-                Romero<span className="tx-cursor">_</span>
+                Romero<span className="tx-cursor" aria-hidden="true" />
               </h1>
               <p className="tx-hero-role">
                 <span className="tx-mono">&gt;</span> <RotatingWord words={content.hero.rotating} />
@@ -178,7 +178,6 @@ export default function QAHome() {
             <div className="tx-hero-visual">
               <div className="tx-orbit" aria-hidden="true" />
               <img className="tx-hero-photo" src="/ken-romero.JPG" alt={profile.name} />
-              <TestWindow />
             </div>
           </div>
         </section>
@@ -289,8 +288,10 @@ export default function QAHome() {
               {projects.map((project, index) => {
                 const body = (
                   <>
-                    <div className={`tx-project-visual tx-project-${project.type}`}>
-                      {project.image ? <img src={project.image} alt={`${project.title} preview`} loading="lazy" /> : <BrowserMock />}
+                    <div className={`tx-project-visual tx-project-${project.visual}`}>
+                      {project.visual === "tests" && <TestWindow />}
+                      {project.visual === "browser" && <BrowserMock />}
+                      {project.visual === "image" && <img src={project.image} alt={`${project.title} preview`} loading="lazy" />}
                     </div>
                     <div className="tx-project-body">
                       <span className="tx-mono tx-project-cat">{project.category}</span>
@@ -410,7 +411,7 @@ export default function QAHome() {
         <div className="container tx-footer-inner">
           <div>
             <strong>
-              KEN ROMERO<span className="tx-cursor">_</span>
+              KEN ROMERO<span className="tx-cursor" aria-hidden="true" />
             </strong>
             <span>QA Engineer · Web Developer</span>
           </div>

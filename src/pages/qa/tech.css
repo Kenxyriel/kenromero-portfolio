@@ -108,7 +108,16 @@
 .tx-reveal { opacity: 0; transform: translateY(24px); transition: opacity 600ms ease, transform 600ms ease; }
 .tx-reveal.is-shown { opacity: 1; transform: none; }
 
-.tx-cursor { color: var(--t-blue-2); animation: tx-blink 1.1s steps(1) infinite; }
+.tx-cursor {
+  display: inline-block;
+  width: .07em;
+  height: .78em;
+  margin-left: .08em;
+  background: var(--t-blue-2);
+  border-radius: 2px;
+  vertical-align: baseline;
+  animation: tx-blink 1.1s steps(1) infinite;
+}
 @keyframes tx-blink { 50% { opacity: 0; } }
 
 /* ---------- Hero ---------- */
@@ -175,10 +184,8 @@
 .tx-hero-photo { position: absolute; left: 50%; bottom: 0; height: 96%; width: auto; max-width: 100%; transform: translateX(-50%); object-fit: contain; object-position: bottom; filter: drop-shadow(0 20px 40px rgba(0, 0, 0, .5)); }
 
 .tx-window {
-  position: absolute;
-  left: -6%;
-  bottom: 9%;
-  width: min(430px, 96%);
+  position: relative;
+  width: min(430px, 100%);
   overflow: hidden;
   background: rgba(10, 16, 32, .9);
   border: 1px solid rgba(96, 165, 250, .3);
@@ -200,8 +207,9 @@
   column-gap: 8px;
   padding: 6px 14px;
   opacity: 0;
-  animation: tx-line-in 400ms ease forwards;
 }
+/* Rows "run" once the project card scrolls into view. */
+.tx-reveal.is-shown .tx-window-body li { animation: tx-line-in 400ms ease forwards; }
 .tx-window-body li:hover { background: rgba(59, 130, 246, .08); }
 @keyframes tx-line-in { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: none; } }
 .tx-test-id { color: var(--t-muted); }
@@ -281,7 +289,8 @@
 }
 .tx-project:hover { transform: translateY(-4px); border-color: #bfdbfe; box-shadow: 0 24px 50px rgba(15, 23, 42, .1); }
 .tx-project-visual { display: grid; place-items: center; min-height: 320px; padding: 24px; background: #eef4ff; overflow: hidden; }
-.tx-project-dev { background: linear-gradient(140deg, var(--t-bg), #172554); }
+.tx-project-tests,
+.tx-project-browser { background: linear-gradient(140deg, var(--t-bg), #172554); }
 .tx-project-visual img { width: 100%; height: 100%; object-fit: contain; transition: transform 400ms ease; }
 .tx-project:hover .tx-project-visual img { transform: scale(1.03); }
 .tx-project-body { display: flex; flex-direction: column; justify-content: center; padding: clamp(26px, 4vw, 44px); }
@@ -366,7 +375,6 @@
   .tx-hero-grid { grid-template-columns: 1fr; min-height: 0; }
   .tx-hero-copy { padding-bottom: 0; }
   .tx-hero-visual { min-height: 520px; margin-top: 24px; }
-  .tx-window { left: 0; }
   .tx-about,
   .tx-disciplines,
   .tx-project,
@@ -377,9 +385,8 @@
 @media (max-width: 767px) {
   .tx-hero { padding-top: 104px; }
   .tx-hero-visual { min-height: 440px; }
-  .tx-window { width: 100%; bottom: 0; font-size: 11px; }
+  .tx-window { font-size: 11px; }
   .tx-window-body li { grid-template-columns: 54px 50px 1fr; }
-  .tx-window-body li:nth-child(n + 4) { display: none; }
   .tx-hero-photo { height: 100%; }
   .tx-about-photo { min-height: 380px; }
   .tx-process { grid-template-columns: 1fr; }
@@ -394,6 +401,7 @@
   .tx-cursor,
   .tx-dot,
   .tx-rotating-word { animation: none; }
-  .tx-window-body li { animation: none; opacity: 1; }
+  .tx-window-body li,
+  .tx-reveal.is-shown .tx-window-body li { animation: none; opacity: 1; }
   .tx-marquee { overflow-x: auto; }
 }

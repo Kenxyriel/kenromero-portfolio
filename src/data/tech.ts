@@ -13,7 +13,7 @@ export const techContent = {
     lead: 'IT professional with 4+ years of experience working with enterprise applications. I find what breaks, document it clearly, and build web applications with React and TypeScript.',
     chips: ['4+ years in IT', 'Manual + Automation QA', 'React · TypeScript'],
   },
-  // Real cases from the API Testing and Validation case study.
+  // Real cases from the API Testing and Validation case study (shown on its project card).
   testWindow: [
     { id: 'API-001', method: 'GET', name: 'Retrieve products', expected: 'Product list returned' },
     { id: 'API-003', method: 'POST', name: 'Add new product', expected: 'Product created successfully' },
@@ -77,6 +77,7 @@ export const techContent = {
       description:
         'Authentication behavior, failed attempts, and proactive lockout: test design, execution, defect reporting, retesting, and regression.',
       tags: ['Authentication', 'Lockout', 'Defects', 'Regression'],
+      visual: 'image' as const,
       image: '/case-study-preview/case-study-one.png',
       link: { label: 'Read case study', to: '/qa/projects/authentication-testing' },
     },
@@ -87,6 +88,8 @@ export const techContent = {
       description:
         'GET, POST, PUT, and DELETE validation: request and response checks, negative scenarios, API-to-UI comparison, and regression.',
       tags: ['Postman', 'REST API', 'Negative Testing', 'Regression'],
+      // Shows sample test cases from this case study instead of a picture.
+      visual: 'tests' as const,
       image: '/case-study-preview/case-study-two.png',
       link: { label: 'Read case study', to: '/qa/projects/api-testing' },
     },
@@ -97,6 +100,7 @@ export const techContent = {
       description:
         'One React and TypeScript codebase that builds separate portfolio sites per audience, with shared components, data-driven content, and per-site builds on Vercel.',
       tags: ['React', 'TypeScript', 'Vite', 'React Router', 'Vercel'],
+      visual: 'browser' as const,
       image: '',
       link: { label: 'Visit live site', href: 'https://www.kenromerogoestdigital.space/' },
     },
