@@ -1,7 +1,15 @@
 import { useState, type FormEvent } from 'react'
 import { Linkedin, Mail, MapPin, Send, Smartphone } from 'lucide-react'
+import { profile } from '../data/profile'
 
-export default function ContactForm() {
+type ContactFormProps = {
+  intro?: string
+}
+
+const defaultIntro =
+  'Have a QA project, testing opportunity, or collaboration in mind? Send a message and introduce yourself.'
+
+export default function ContactForm({ intro = defaultIntro }: ContactFormProps) {
   const [submitted, setSubmitted] = useState(false)
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -14,27 +22,22 @@ export default function ContactForm() {
       <div className="contact-info">
         <p className="eyebrow">CONTACT</p>
         <h2>Get in touch</h2>
-        <p className="contact-intro">
-          Have a QA project, testing opportunity, or collaboration in mind?
-          Send a message and introduce yourself.
-        </p>
+        <p className="contact-intro">{intro}</p>
 
         <ul className="contact-details">
           <li>
             <Mail size={17} aria-hidden="true" />
             <div>
               <span>Email</span>
-              <a href="mailto:kenromero.digital@gmail.com">
-                kenromero.digital@gmail.com
-              </a>
+              <a href={`mailto:${profile.email}`}>{profile.email}</a>
             </div>
           </li>
           <li>
             <Smartphone size={17} aria-hidden="true" />
             <div>
               <span>WhatsApp</span>
-              <a href="https://wa.me/639215036956" target="_blank" rel="noreferrer">
-                +63 921 503 6956
+              <a href={profile.whatsapp.href} target="_blank" rel="noreferrer">
+                {profile.whatsapp.label}
               </a>
             </div>
           </li>
@@ -42,19 +45,15 @@ export default function ContactForm() {
             <MapPin size={17} aria-hidden="true" />
             <div>
               <span>Location</span>
-              <p>Taytay, Rizal, Philippines 1920</p>
+              <p>{profile.location}</p>
             </div>
           </li>
           <li>
             <Linkedin size={17} aria-hidden="true" />
             <div>
               <span>LinkedIn</span>
-              <a
-                href="https://www.linkedin.com/in/kenxyrielromero/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                linkedin.com/in/kenxyrielromero
+              <a href={profile.linkedin.href} target="_blank" rel="noreferrer">
+                {profile.linkedin.label}
               </a>
             </div>
           </li>

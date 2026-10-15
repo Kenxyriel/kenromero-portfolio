@@ -1,23 +1,46 @@
-# QA Portfolio
+# Ken Romero Portfolio Platform
 
-Current homepage structure:
+One React + TypeScript codebase and one domain, with a separate entry point for each audience.
+Visitors only see navigation for the portfolio they were sent to.
 
-1. Navbar
-2. Hero
-3. About Me
-4. Expertise
-5. Testing Tools + QA Workflow
-6. Featured QA Work
-7. Testimonials
-8. Let's Connect (card form)
-9. Footer
+| Route | Audience | Status |
+| --- | --- | --- |
+| `/` and `/qa` | QA Analyst / Automation QA | Live |
+| `/qa/projects/authentication-testing` | QA case study | Live |
+| `/qa/projects/api-testing` | QA case study | Live |
+| `/it` | Software development roles | Scaffolded, content in progress |
+| `/va` | Virtual assistant clients | Scaffolded, content in progress |
 
-The following homepage-only sections were removed: standalone QA workflow, standalone evidence/artifacts, additional testing work. The case-study pages retain their verified detailed content.
+Old `/projects/*` case-study URLs redirect to `/qa/projects/*`. Unknown URLs show a 404 page.
 
-The contact form is presentation-ready but intentionally does not claim to deliver messages until a real email/form endpoint is configured.
-## Latest homepage update
+## Structure
 
-The `/qa` homepage now uses an editorial hero inspired by the supplied visual reference: oversized serif greeting, bold name treatment, centered photo area, compact QA role label, and a minimal navigation/contact treatment. The existing one-section Testing Tools + QA Workflow layout remains unchanged below the hero.
+```
+src/
+  App.tsx              routes
+  components/          shared UI (header, footer, hero, contact form, testimonials, case-study layout)
+  data/                content: profile.ts, testimonials.ts, it.ts, va.ts
+  pages/qa/            QA homepage, case studies, QA-specific components
+  pages/it/            IT homepage
+  pages/va/            VA homepage
+  styles.css           global design system + QA styles
+  audience.css         /it and /va layouts and accent themes
+```
 
-The standalone professional photo asset was not available in the project source, so the hero keeps a clearly labeled placeholder instead of inserting an unverified image. Replace that placeholder with the verified portrait asset when available.
+## Adding IT / VA content
 
+Edit `src/data/it.ts` and `src/data/va.ts`. Sections backed by an empty list (IT experience,
+VA tools and work samples) are hidden in production and show a "Content pending" marker
+under `npm run dev`. Only publish claims that are supported by real work.
+
+## Notes
+
+- The contact form UI does not deliver messages yet; a form/email endpoint still needs to be connected.
+
+## Scripts
+
+```
+npm run dev       # local dev server
+npm run build     # typecheck + production build
+npm run preview   # serve the production build
+```

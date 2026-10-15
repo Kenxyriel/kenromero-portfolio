@@ -20,7 +20,7 @@ import {
   UserRound,
   X,
 } from 'lucide-react'
-import CaseStudyLayout from './CaseStudyLayout'
+import CaseStudyLayout from '../../components/CaseStudyLayout'
 
 const objectives = [
   ['API FUNCTIONALITY', 'Verify GET, POST, PUT, and DELETE operations.', ClipboardCheck],

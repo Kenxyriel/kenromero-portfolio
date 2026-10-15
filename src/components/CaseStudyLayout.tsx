@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import type { ReactNode } from 'react'
+import usePageMeta from './usePageMeta'
 
 type CaseStudyLayoutProps = {
   category: string
@@ -21,6 +22,8 @@ export default function CaseStudyLayout({
   heroImage,
   children,
 }: CaseStudyLayoutProps) {
+  usePageMeta(`${title} | Ken Romero QA Case Study`, lead)
+
   return (
     <div className="case-study-page">
       <header className="case-nav">
