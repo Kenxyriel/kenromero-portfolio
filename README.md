@@ -3,17 +3,15 @@
 One React + TypeScript codebase and one domain, with a separate entry point for each audience.
 Visitors only see navigation for the portfolio they were sent to.
 
-| Route | Audience | Status |
-| --- | --- | --- |
-| `/` and `/qa` | QA Analyst / Automation QA | Live |
-| `/qa/projects/authentication-testing` | QA case study | Live |
-| `/qa/projects/api-testing` | QA case study | Live |
-| `/it` | Software development roles | Scaffolded, content in progress |
-| `/va` | Creative / VA clients (home) | Built from the Canva creative portfolio |
-| `/va/design-branding`, `/va/social-media-content`, `/va/podcast-editing` | VA work samples | Built; images pending |
-| `/va/smm-packages`, `/va/podcast-packages` | VA pricing (USD / PHP toggle) | Built |
+| Route | Audience |
+| --- | --- |
+| `/` and `/qa` | QA + software development portfolio (tech) |
+| `/qa/projects/authentication-testing`, `/qa/projects/api-testing` | QA case studies |
+| `/va` | Creative / VA portfolio home |
+| `/va/design-branding`, `/va/social-media-content`, `/va/podcast-editing` | VA work pages |
+| `/va/smm-packages`, `/va/podcast-packages` | VA pricing (USD / PHP toggle) |
 
-Old `/projects/*` case-study URLs redirect to `/qa/projects/*`. Unknown URLs show a 404 page.
+The former `/it` portfolio is merged into `/qa`; `/it` redirects there. Old `/projects/*` case-study URLs redirect to `/qa/projects/*`. Unknown URLs show a 404 page.
 
 ## Structure
 
@@ -21,20 +19,17 @@ Old `/projects/*` case-study URLs redirect to `/qa/projects/*`. Unknown URLs sho
 src/
   App.tsx              routes
   components/          shared UI (header, footer, hero, contact form, testimonials, case-study layout)
-  data/                content: profile.ts, testimonials.ts, it.ts, va.ts
-  pages/qa/            QA homepage, case studies, QA-specific components
-  pages/it/            IT homepage
+  data/                content: profile.ts, testimonials.ts, tech.ts, va.ts
+  pages/qa/            QA + development homepage (tech.css), case studies
   pages/va/            VA home, work pages, packages, va.css theme
   styles.css           global design system + QA styles
-  audience.css         /it and /va layouts and accent themes
 ```
 
-## Adding IT / VA content
+## Editing content
 
-Edit `src/data/it.ts` and `src/data/va.ts`. Empty IT sections are hidden in production and show
-a "Content pending" marker under `npm run dev`. VA images live in `public/va/`; any VA image
-whose `image` path is empty renders as a labelled placeholder. Only publish claims that are
-supported by real work.
+Edit `src/data/tech.ts` (QA + development) and `src/data/va.ts` (creative). VA images live in
+`public/va/`; any VA image whose `image` path is empty renders as a labelled placeholder. Only
+publish claims that are supported by real work.
 
 ## One portfolio per link (private views)
 
@@ -42,9 +37,8 @@ supported by real work.
 
 | Value | Site contains | Root URL |
 | --- | --- | --- |
-| `all` (default) | QA, IT, and VA, plus the owner-only view switcher | QA portfolio |
-| `qa` | QA portfolio and case studies only | QA portfolio |
-| `it` | IT portfolio only | redirects to `/it` |
+| `all` (default) | Tech and creative portfolios, plus the owner-only view switcher | Tech portfolio |
+| `qa` (or `it`) | Tech portfolio (QA + development) and case studies only | Tech portfolio |
 | `va` | VA / creative portfolio only | redirects to `/va` |
 
 A single-portfolio build does not include the other portfolios at all: their pages, text,
@@ -58,13 +52,12 @@ each with its own `VITE_PORTFOLIO` environment variable and domain, for example:
 | --- | --- | --- |
 | portfolio-qa | `qa` | `qa.kenromerogoestdigital.space` |
 | portfolio-va | `va` | `creative.kenromerogoestdigital.space` |
-| portfolio-it | `it` | `dev.kenromerogoestdigital.space` |
 
 Local check: `VITE_PORTFOLIO=va npm run build && npm run preview`.
 
 ### View switcher (combined site only)
 
-On the `all` build, a floating **QA | IT | VA** switcher (bottom-left) jumps between portfolios.
+On the `all` build, a floating **Tech | Creative** switcher (bottom-left) jumps between portfolios.
 It shows on `localhost` and Vercel preview URLs; on a production domain add `?switcher=on` once
 to enable it in your browser (`?switcher=off` to hide). Single-portfolio builds never include it.
 

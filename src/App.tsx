@@ -5,20 +5,18 @@ import ScrollManager from "./components/ScrollManager";
 import ViewSwitcher from "./components/ViewSwitcher";
 
 // One codebase, separate entry points per audience. VITE_PORTFOLIO decides
-// which portfolios a deployment contains (see src/portfolio.ts). These checks
-// are written inline so the build drops every portfolio it does not serve:
-// a VA-only site does not even contain the QA or IT pages.
+// which portfolios a deployment contains: "all" (default), "qa" (QA + development),
+// or "va". These checks are written inline so the build drops every portfolio
+// it does not serve: a VA-only site does not even contain the QA pages.
 const mode = import.meta.env.VITE_PORTFOLIO;
-const HAS_QA = !mode || mode === "all" || mode === "qa";
-const HAS_IT = !mode || mode === "all" || mode === "it";
+// "it" is kept as an alias: the IT portfolio is now part of the QA + development one.
+const HAS_QA = !mode || mode === "all" || mode === "qa" || mode === "it";
 const HAS_VA = !mode || mode === "all" || mode === "va";
 const SINGLE = mode === "qa" || mode === "it" || mode === "va";
 
 const QAHome = HAS_QA ? lazy(() => import("./pages/qa/QAHome")) : null;
 const AuthenticationCaseStudy = HAS_QA ? lazy(() => import("./pages/qa/AuthenticationCaseStudy")) : null;
 const ApiTestingCaseStudy = HAS_QA ? lazy(() => import("./pages/qa/ApiTestingCaseStudy")) : null;
-
-const ITHome = HAS_IT ? lazy(() => import("./pages/it/ITHome")) : null;
 
 const VAHome = HAS_VA ? lazy(() => import("./pages/va/VAHome")) : null;
 const VADesignBranding = HAS_VA ? lazy(() => import("./pages/va/VADesignBranding")) : null;
@@ -34,7 +32,6 @@ const VASmmPackages = HAS_VA
 // The root URL shows the QA portfolio on the combined site, or the only
 // portfolio a single-audience site serves.
 function rootElement() {
-  if (mode === "it") return <Navigate to="/it" replace />;
   if (mode === "va") return <Navigate to="/va" replace />;
   return QAHome ? <QAHome /> : <NotFound />;
 }
@@ -59,10 +56,10 @@ function App() {
                 element={<Navigate to="/qa/projects/authentication-testing" replace />}
               />
               <Route path="/projects/api-testing" element={<Navigate to="/qa/projects/api-testing" replace />} />
+              {/* The IT portfolio was merged into this one. */}
+              <Route path="/it" element={<Navigate to="/qa" replace />} />
             </>
           )}
-
-          {ITHome && <Route path="/it" element={<ITHome />} />}
 
           {VAHome && VADesignBranding && VASocialMedia && VAPodcastEditing && VAPodcastPackages && VASmmPackages && (
             <>
