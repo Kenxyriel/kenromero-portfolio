@@ -1,153 +1,183 @@
-import { ArrowUpRight, CalendarCheck, Headphones, Megaphone, PenTool } from 'lucide-react'
-import AudienceHero from '../../components/AudienceHero'
+import { ArrowRight, ArrowUpRight, Instagram, Linkedin, UserRound } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import ContactForm from '../../components/ContactForm'
-import PendingContent from '../../components/PendingContent'
-import SectionHeading from '../../components/SectionHeading'
-import SiteFooter from '../../components/SiteFooter'
-import SiteHeader, { type NavItem } from '../../components/SiteHeader'
 import TestimonialsCarousel from '../../components/TestimonialsCarousel'
-import usePageMeta from '../../components/usePageMeta'
-import { testimonials } from '../../data/testimonials'
-import { vaContent as content } from '../../data/va'
-
-const serviceIcons = [Megaphone, PenTool, Headphones, CalendarCheck]
-
-const showTools = content.tools.length > 0 || import.meta.env.DEV
-const showWork = content.workSamples.length > 0 || import.meta.env.DEV
-
-const navItems: NavItem[] = [
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  ...(showWork ? [{ label: 'Work', href: '#work' }] : []),
-  { label: 'Process', href: '#process' },
-  { label: 'Testimonials', href: '#testimonials' },
-  { label: 'Contact', href: '#contact' },
-]
+import { profile } from '../../data/profile'
+import { vaHome as content, vaLinks, vaTestimonials } from '../../data/va'
+import VALayout, { VAImg, VASectionTitle } from './VALayout'
 
 export default function VAHome() {
-  usePageMeta(content.meta.title, content.meta.description)
-
   return (
-    <div className="site-shell theme-va">
-      <SiteHeader
-        brandRole="VIRTUAL ASSISTANT"
-        navItems={navItems}
-        cta={{ label: "Let's Work Together", href: '#contact' }}
-      />
-
-      <main id="top">
-        <AudienceHero
-          eyebrow={content.hero.eyebrow}
-          role={content.roleLabel}
-          lead={content.hero.lead}
-          primary={{ label: 'View Services', href: '#services' }}
-          secondary={{ label: "Let's Work Together", href: '#contact' }}
-          photo="/ken-romero.JPG"
-        />
-
-        <section id="about" className="section">
-          <div className="container aud-about">
-            <SectionHeading eyebrow="ABOUT ME" title="Support you can rely on." />
-            <div className="aud-about-body">
-              {content.about.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+    <VALayout meta={content.meta}>
+      {/* HERO */}
+      <section className="va-hero">
+        <div className="container va-hero-grid">
+          <div className="va-hero-copy">
+            <h1>
+              <span>Ken</span>
+              <span>Romero</span>
+            </h1>
+            <ul className="va-hero-roles">
+              {content.hero.roles.map((role) => (
+                <li key={role}>{role}</li>
               ))}
+            </ul>
+            <p className="va-hero-tagline">{content.hero.tagline}</p>
+            <div className="va-hero-links">
+              <a href={vaLinks.instagram.href} target="_blank" rel="noreferrer">
+                <Instagram size={16} aria-hidden="true" /> Instagram
+              </a>
+              <a href={vaLinks.linkedin.href} target="_blank" rel="noreferrer">
+                <Linkedin size={16} aria-hidden="true" /> LinkedIn
+              </a>
+              <a href={vaLinks.aboutMe.href} target="_blank" rel="noreferrer">
+                <UserRound size={16} aria-hidden="true" /> {vaLinks.aboutMe.label}
+              </a>
             </div>
           </div>
-        </section>
-
-        <section id="services" className="section section-muted">
-          <div className="container">
-            <SectionHeading eyebrow="SERVICES" title="How I can help your business." />
-            <div className="aud-card-grid aud-card-grid-4">
-              {content.services.map((service, index) => {
-                const Icon = serviceIcons[index % serviceIcons.length]
-                return (
-                  <article className="aud-card" key={service.title}>
-                    <Icon className="aud-card-icon" aria-hidden="true" />
-                    <h3>{service.title}</h3>
-                    <p>{service.description}</p>
-                  </article>
-                )
-              })}
-            </div>
-            {showTools && (
-              <div className="aud-tools">
-                <p className="aud-label">TOOLS I USE</p>
-                {content.tools.length > 0 ? (
-                  <div className="aud-chip-row">
-                    {content.tools.map((tool) => (
-                      <span key={tool}>{tool}</span>
-                    ))}
-                  </div>
-                ) : (
-                  <PendingContent label="Add the tools you use in src/data/va.ts (tools)." />
-                )}
-              </div>
+          <div className="va-hero-photo">
+            {content.hero.photo.image ? (
+              <img src={content.hero.photo.image} alt={profile.name} />
+            ) : (
+              <img src="/ken-romero.JPG" alt={profile.name} />
             )}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {showWork && (
-          <section id="work" className="section">
-            <div className="container">
-              <SectionHeading eyebrow="CLIENT WORK" title="Selected work samples." />
-              <div className="aud-card-grid">
-                {content.workSamples.map((sample) => (
-                  <article className="aud-card" key={sample.title}>
-                    <span className="aud-status">{sample.category}</span>
-                    <h3>{sample.title}</h3>
-                    <p>{sample.description}</p>
-                    {sample.href && (
-                      <a className="text-link" href={sample.href} target="_blank" rel="noreferrer">
-                        View sample <ArrowUpRight size={16} aria-hidden="true" />
-                      </a>
-                    )}
-                  </article>
+      {/* ABOUT + NUMBERS */}
+      <section id="about" className="va-section">
+        <div className="container va-about-grid">
+          <div className="va-about-copy">
+            <p className="va-script">{content.about.eyebrow}</p>
+            <h2 className="va-display">
+              About <span>Me</span>
+            </h2>
+            <p className="va-greeting">{content.about.greeting}</p>
+            <p className="va-motto">{content.about.motto}</p>
+            <p>{content.about.body}</p>
+            <p className="va-signature">
+              <span className="va-script">{profile.name}</span>
+              {content.about.signature}
+            </p>
+          </div>
+          <div className="va-numbers">
+            <p className="va-numbers-kicker">by the Numbers</p>
+            <h3>{content.about.numbersTitle}</h3>
+            <div className="va-numbers-grid">
+              {content.about.numbers.map((item) => (
+                <div className="va-number" key={item.label}>
+                  <strong>{item.value}</strong>
+                  <span>{item.label}</span>
+                  <small>{item.detail}</small>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* WHAT I DO */}
+      <section className="va-section va-section-dark">
+        <div className="container">
+          <VASectionTitle eyebrow={content.whatIDo.eyebrow} title={content.whatIDo.title} />
+          <div className="va-whatido-grid">
+            {content.whatIDo.items.map((item) => (
+              <div className="va-whatido-item" key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+            ))}
+          </div>
+          <p className="va-script va-centered">{content.whatIDo.closing}</p>
+        </div>
+      </section>
+
+      {/* TOOLS */}
+      <section className="va-section">
+        <div className="container va-tools">
+          <div>
+            <h2 className="va-display">{content.tools.title}</h2>
+            <p>{content.tools.description}</p>
+          </div>
+          <ul className="va-chip-grid">
+            {content.tools.items.map((tool) => (
+              <li key={tool}>{tool}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* SERVICES */}
+      <section id="services" className="va-section va-section-cream">
+        <div className="container">
+          <VASectionTitle
+            eyebrow={content.services.eyebrow}
+            title={content.services.title}
+            description={content.services.description}
+          />
+          <div className="va-services-grid">
+            {content.services.items.map((service) => (
+              <article className="va-service-card" key={service.title}>
+                <span className="va-service-number">{service.number}</span>
+                <h3>{service.title}</h3>
+                <p className="va-service-tagline">{service.tagline}</p>
+                <ul>
+                  {service.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+                {service.path && (
+                  <Link className="va-text-link" to={service.path}>
+                    View Work <ArrowRight size={15} aria-hidden="true" />
+                  </Link>
+                )}
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURED PROJECTS */}
+      <section id="work" className="va-section">
+        <div className="va-band">
+          <h2>{content.featured.title}</h2>
+          <p>{content.featured.tagline}</p>
+        </div>
+        <div className="container">
+          {content.featured.groups.map((group) => (
+            <div className="va-featured-group" key={group.title}>
+              <div className="va-featured-head">
+                <h3>{group.title}</h3>
+                <Link className="va-text-link" to={group.path}>
+                  See all <ArrowUpRight size={15} aria-hidden="true" />
+                </Link>
+              </div>
+              <div className="va-gallery">
+                {group.items.map((item) => (
+                  <VAImg key={item.label} item={item} />
                 ))}
               </div>
-              {content.workSamples.length === 0 && (
-                <PendingContent label="Add sanitized, client-approved samples in src/data/va.ts (workSamples)." />
-              )}
             </div>
-          </section>
-        )}
+          ))}
+        </div>
+      </section>
 
-        <section id="process" className="section">
-          <div className="container">
-            <SectionHeading eyebrow="WORK PROCESS" title="Simple, clear, and organized." />
-            <ol className="aud-process">
-              {content.process.map((step, index) => (
-                <li key={step.title}>
-                  <span className="aud-card-number">{String(index + 1).padStart(2, '0')}</span>
-                  <h3>{step.title}</h3>
-                  <p>{step.description}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
+      {/* TESTIMONIALS */}
+      <section id="testimonials" className="va-section va-section-cream">
+        <div className="container">
+          <VASectionTitle eyebrow="Kind words" title="Client Testimonials" />
+          <TestimonialsCarousel testimonials={vaTestimonials} />
+        </div>
+      </section>
 
-        <section id="testimonials" className="section section-muted">
-          <div className="container">
-            <SectionHeading
-              eyebrow="TESTIMONIALS"
-              title="Client feedback"
-              description="Feedback from business owners I’ve worked with."
-              compact
-            />
-            <TestimonialsCarousel testimonials={testimonials} />
-          </div>
-        </section>
-
-        <section id="contact" className="section contact-section">
-          <div className="container">
-            <ContactForm intro={content.contactIntro} />
-          </div>
-        </section>
-      </main>
-
-      <SiteFooter role={content.roleLabel} />
-    </div>
+      {/* CONTACT */}
+      <section id="contact" className="va-section va-contact">
+        <div className="container">
+          <VASectionTitle eyebrow={content.closing.eyebrow} title={content.closing.title} />
+          <ContactForm intro="Need help with social media, content, podcast editing, or design? Send a message and tell me about your business." />
+        </div>
+      </section>
+    </VALayout>
   )
 }
