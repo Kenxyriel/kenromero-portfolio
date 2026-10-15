@@ -1,180 +1,337 @@
-import { ArrowRight, ArrowUpRight, Instagram, Linkedin, UserRound } from 'lucide-react'
+import {
+  ArrowRight,
+  BarChart3,
+  ClipboardList,
+  Headphones,
+  Heart,
+  MessageCircle,
+  Palette,
+  Quote,
+  Share2,
+} from 'lucide-react'
 import { Link } from 'react-router-dom'
 import ContactForm from '../../components/ContactForm'
-import TestimonialsCarousel from '../../components/TestimonialsCarousel'
 import { profile } from '../../data/profile'
-import { vaHome as content, vaLinks, vaTestimonials } from '../../data/va'
-import VALayout, { VAImg, VASectionTitle } from './VALayout'
+import { vaHome as content, vaTestimonials } from '../../data/va'
+import { CurlArrow, DotGrid, Mic, RotatingBadge, Sparkle, Squiggle, Waveform } from './VAArt'
+import VALayout from './VALayout'
+
+const serviceIcons = [Headphones, Share2, Palette, ClipboardList, BarChart3]
+
+const packageTeasers = [
+  {
+    kicker: 'Social Media',
+    title: 'Social Media Management Packages',
+    price: 'From $450 / month',
+    path: '/va/smm-packages',
+  },
+  {
+    kicker: 'Podcast',
+    title: 'Podcast Editing per Episode',
+    price: 'From $45 / episode',
+    path: '/va/podcast-packages',
+  },
+  {
+    kicker: 'Retainer',
+    title: 'Podcast Management Retainer',
+    price: '$800 / month',
+    path: '/va/podcast-packages',
+  },
+]
+
+// Typographic "covers" for each work category, drawn in CSS/SVG.
+function WorkCover({ kind }: { kind: 'design' | 'podcast' | 'social' }) {
+  if (kind === 'design') {
+    return (
+      <div className="vx-cover va-cover-design" aria-hidden="true">
+        <span className="va-cover-type">Aa</span>
+        <div className="va-swatches">
+          <i />
+          <i />
+          <i />
+          <i />
+        </div>
+        <span className="va-cover-label">BRAND KIT</span>
+        <Sparkle className="va-cover-spark" />
+      </div>
+    )
+  }
+  if (kind === 'podcast') {
+    return (
+      <div className="vx-cover va-cover-podcast" aria-hidden="true">
+        <Mic className="va-cover-mic" />
+        <Waveform className="va-cover-wave" />
+        <span className="va-cover-label">EP. 02 · CLIPS</span>
+      </div>
+    )
+  }
+  return (
+    <div className="vx-cover va-cover-social" aria-hidden="true">
+      <div className="va-mock-post">
+        <div className="va-mock-head">
+          <i />
+          <span />
+        </div>
+        <span className="va-mock-line" />
+        <span className="va-mock-line va-mock-line-short" />
+        <div className="va-mock-image">
+          <Sparkle />
+        </div>
+        <div className="va-mock-actions">
+          <Heart size={14} />
+          <MessageCircle size={14} />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const work = [
+  { kind: 'design' as const, title: 'Design & Branding', meta: 'Brand Kits, Graphic Design', path: '/va/design-branding' },
+  { kind: 'podcast' as const, title: 'Podcast Editing', meta: 'Episodes, Clips, Thumbnails', path: '/va/podcast-editing' },
+  { kind: 'social' as const, title: 'Social Media Content', meta: 'Captions, Calendars, Strategy', path: '/va/social-media-content' },
+]
 
 export default function VAHome() {
   return (
     <VALayout meta={content.meta}>
       {/* HERO */}
-      <section className="va-hero">
-        <div className="container va-hero-grid">
-          <div className="va-hero-copy">
+      <section className="vx-hero">
+        <div className="container vx-hero-grid">
+          <div className="vx-hero-copy">
+            <p className="vx-eyebrow">{content.about.signature}</p>
             <h1>
-              <span>Ken</span>
-              <span>Romero</span>
+              Ken
+              <br />
+              Romero
             </h1>
-            <ul className="va-hero-roles">
-              {content.hero.roles.map((role) => (
-                <li key={role}>{role}</li>
-              ))}
-            </ul>
-            <p className="va-hero-tagline">{content.hero.tagline}</p>
-            <div className="va-hero-links">
-              <a href={vaLinks.instagram.href} target="_blank" rel="noreferrer">
-                <Instagram size={16} aria-hidden="true" /> Instagram
-              </a>
-              <a href={vaLinks.linkedin.href} target="_blank" rel="noreferrer">
-                <Linkedin size={16} aria-hidden="true" /> LinkedIn
-              </a>
-              <a href={vaLinks.aboutMe.href} target="_blank" rel="noreferrer">
-                <UserRound size={16} aria-hidden="true" /> {vaLinks.aboutMe.label}
-              </a>
-            </div>
-          </div>
-          <div className="va-hero-photo">
-            {content.hero.photo.image ? (
-              <img src={content.hero.photo.image} alt={profile.name} />
-            ) : (
-              <img src="/ken-romero.JPG" alt={profile.name} />
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* ABOUT + NUMBERS */}
-      <section id="about" className="va-section">
-        <div className="container va-about-grid">
-          <div className="va-about-copy">
-            <p className="va-script">{content.about.eyebrow}</p>
-            <h2 className="va-display">
-              About <span>Me</span>
-            </h2>
-            <p className="va-greeting">{content.about.greeting}</p>
-            <p className="va-motto">{content.about.motto}</p>
-            <p>{content.about.body}</p>
-            <p className="va-signature">
-              <span className="va-script">{profile.name}</span>
-              {content.about.signature}
+            <Squiggle className="vx-hero-squiggle" />
+            <p className="vx-hero-roles">{content.hero.roles.join(' · ')}</p>
+            <p className="vx-hero-intro">
+              I help businesses turn ideas into content that connects, engages, and builds a consistent online presence.
             </p>
-          </div>
-          <div className="va-numbers">
-            <p className="va-numbers-kicker">by the Numbers</p>
-            <h3>{content.about.numbersTitle}</h3>
-            <div className="va-numbers-grid">
-              {content.about.numbers.map((item) => (
-                <div className="va-number" key={item.label}>
-                  <strong>{item.value}</strong>
-                  <span>{item.label}</span>
-                  <small>{item.detail}</small>
-                </div>
-              ))}
+            <div className="vx-hero-actions">
+              <a className="vx-pill" href="#work">
+                View my work <ArrowRight size={16} aria-hidden="true" />
+              </a>
+              <span className="vx-hand">{content.hero.tagline}</span>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* WHAT I DO */}
-      <section className="va-section va-section-dark">
-        <div className="container">
-          <VASectionTitle eyebrow={content.whatIDo.eyebrow} title={content.whatIDo.title} />
-          <div className="va-whatido-grid">
-            {content.whatIDo.items.map((item) => (
-              <div className="va-whatido-item" key={item.title}>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </div>
-            ))}
-          </div>
-          <p className="va-script va-centered">{content.whatIDo.closing}</p>
-        </div>
-      </section>
-
-      {/* TOOLS */}
-      <section className="va-section">
-        <div className="container va-tools">
-          <div>
-            <h2 className="va-display">{content.tools.title}</h2>
-            <p>{content.tools.description}</p>
-          </div>
-          <ul className="va-chip-grid">
-            {content.tools.items.map((tool) => (
-              <li key={tool}>{tool}</li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* SERVICES */}
-      <section id="services" className="va-section va-section-cream">
-        <div className="container">
-          <VASectionTitle
-            eyebrow={content.services.eyebrow}
-            title={content.services.title}
-            description={content.services.description}
-          />
-          <div className="va-services-grid">
-            {content.services.items.map((service) => (
-              <article className="va-service-card" key={service.title}>
-                <span className="va-service-number">{service.number}</span>
-                <h3>{service.title}</h3>
-                <p className="va-service-tagline">{service.tagline}</p>
-                <ul>
-                  {service.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-                {service.path && (
-                  <Link className="va-text-link" to={service.path}>
-                    View Work <ArrowRight size={15} aria-hidden="true" />
-                  </Link>
-                )}
-              </article>
-            ))}
+          <div className="vx-hero-art">
+            <div className="vx-hero-block" />
+            <img className="vx-hero-photo" src="/ken-romero.JPG" alt={profile.name} />
+            <RotatingBadge className="vx-hero-badge" text="PLAN • CREATE • PUBLISH • OPTIMIZE • " />
+            <Waveform className="vx-hero-wave" />
+            <DotGrid className="vx-hero-dots" />
+            <Sparkle className="vx-hero-spark" />
           </div>
         </div>
       </section>
 
-      {/* FEATURED PROJECTS */}
-      <section id="work" className="va-section">
-        <div className="va-band">
-          <h2>{content.featured.title}</h2>
-          <p>{content.featured.tagline}</p>
+      {/* ABOUT */}
+      <section id="about" className="vx-about">
+        <div className="vx-about-photo">
+          <img src="/ken-romero-hero.JPG" alt={`${profile.name}, casual portrait`} />
+          <Mic className="vx-about-mic" />
         </div>
-        <div className="container">
-          {content.featured.groups.map((group) => (
-            <div className="va-featured-group" key={group.title}>
-              <div className="va-featured-head">
-                <h3>{group.title}</h3>
-                <Link className="va-text-link" to={group.path}>
-                  See all <ArrowUpRight size={15} aria-hidden="true" />
-                </Link>
-              </div>
-              <div className="va-gallery">
-                {group.items.map((item) => (
-                  <VAImg key={item.label} item={item} />
-                ))}
-              </div>
+        <div className="vx-about-copy">
+          <p className="vx-eyebrow">About me</p>
+          <h2 className="vx-serif">
+            Creative thinking.
+            <br />
+            Strategic <em>execution.</em>
+          </h2>
+          <Squiggle className="vx-about-squiggle" />
+          <p className="vx-greeting">{content.about.greeting}</p>
+          <p>{content.about.body}</p>
+          <p className="vx-signature">{profile.name}</p>
+          <div className="vx-sticker">
+            <Sparkle />
+            <span>Based in the Philippines</span>
+          </div>
+        </div>
+      </section>
+
+      {/* NUMBERS */}
+      <section className="vx-numbers" aria-label="By the numbers">
+        <div className="container vx-numbers-row">
+          {content.about.numbers.map((item) => (
+            <div key={item.label}>
+              <strong>{item.value}</strong>
+              <span>{item.label}</span>
+              <small>{item.detail}</small>
             </div>
           ))}
         </div>
       </section>
 
+      {/* SERVICES */}
+      <section id="services" className="vx-services">
+        <div className="container vx-services-grid">
+          <div className="vx-services-intro">
+            <p className="vx-eyebrow vx-eyebrow-amber">Services</p>
+            <h2 className="vx-serif">
+              How I can
+              <br />
+              <em>help you</em>
+            </h2>
+            <Squiggle className="vx-amber" />
+          </div>
+          {content.services.items.map((service, index) => {
+            const Icon = serviceIcons[index]
+            const body = (
+              <>
+                <Icon className="vx-service-icon" aria-hidden="true" />
+                <h3>{service.title}</h3>
+                <p>{service.items.join(' · ')}</p>
+                <span className="vx-service-tag">{service.tagline}</span>
+              </>
+            )
+            return service.path ? (
+              <Link className="vx-service" key={service.title} to={service.path}>
+                {body}
+              </Link>
+            ) : (
+              <div className="vx-service" key={service.title}>
+                {body}
+              </div>
+            )
+          })}
+        </div>
+      </section>
+
+      {/* SELECTED WORK */}
+      <section id="work" className="vx-work">
+        <div className="container vx-split-grid">
+          <div className="vx-side">
+            <p className="vx-eyebrow">Featured projects</p>
+            <h2 className="vx-serif">
+              Selected <em>work</em>
+            </h2>
+            <Squiggle />
+            <p className="vx-side-note">{content.featured.tagline}</p>
+          </div>
+          <div className="vx-card-row">
+            {work.map((item) => (
+              <Link className="vx-work-card" key={item.title} to={item.path}>
+                <WorkCover kind={item.kind} />
+                <div className="vx-work-meta">
+                  <div>
+                    <h3>{item.title}</h3>
+                    <span>{item.meta}</span>
+                  </div>
+                  <ArrowRight size={18} aria-hidden="true" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* TESTIMONIALS */}
-      <section id="testimonials" className="va-section va-section-cream">
-        <div className="container">
-          <VASectionTitle eyebrow="Kind words" title="Client Testimonials" />
-          <TestimonialsCarousel testimonials={vaTestimonials} />
+      <section id="testimonials" className="vx-quotes">
+        <div className="container vx-split-grid">
+          <div className="vx-side">
+            <p className="vx-eyebrow vx-eyebrow-amber">Kind words</p>
+            <h2 className="vx-serif">
+              What clients <em>say</em>
+            </h2>
+            <Squiggle className="vx-amber" />
+            <Quote className="vx-quote-mark" aria-hidden="true" />
+          </div>
+          <div className="vx-quote-row">
+            {vaTestimonials.map((item) => (
+              <figure key={item.id}>
+                <blockquote>“{item.quote}”</blockquote>
+                <figcaption>
+                  <strong>{item.name}</strong>
+                  <span>{item.role}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TOOLS */}
+      <section className="vx-tools">
+        <div className="container vx-split-grid">
+          <div className="vx-side">
+            <p className="vx-eyebrow">My toolkit</p>
+            <h2 className="vx-serif">
+              Tools I <em>use</em>
+            </h2>
+            <Squiggle />
+          </div>
+          <div>
+            <p className="vx-side-note">{content.tools.description}</p>
+            <ul className="vx-tool-list">
+              {content.tools.items.map((tool) => (
+                <li key={tool}>{tool}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* PACKAGES TEASER */}
+      <section className="vx-packages">
+        <div className="container vx-split-grid">
+          <div className="vx-side">
+            <p className="vx-eyebrow">Packages</p>
+            <h2 className="vx-serif">
+              Ways to <em>work</em> together
+            </h2>
+            <Squiggle />
+            <Link className="vx-pill" to="/va/smm-packages">
+              View all packages <ArrowRight size={16} aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="vx-card-row">
+            {packageTeasers.map((item) => (
+              <Link className="vx-package-card" key={item.title} to={item.path}>
+                <span className="vx-eyebrow">{item.kicker}</span>
+                <h3>{item.title}</h3>
+                <strong>{item.price}</strong>
+                <span className="vx-more">
+                  See details <ArrowRight size={15} aria-hidden="true" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="vx-cta">
+        <div className="container vx-cta-grid">
+          <div>
+            <p className="vx-eyebrow">{content.closing.eyebrow}</p>
+            <h2 className="vx-serif">
+              Let’s build something
+              <br />
+              <em>amazing</em> together.
+            </h2>
+            <Squiggle />
+          </div>
+          <div>
+            <p>Tell me about your brand, your podcast, or your content goals, and let’s find the right plan.</p>
+            <a className="vx-pill vx-pill-dark" href="#contact">
+              Start a project <ArrowRight size={16} aria-hidden="true" />
+            </a>
+          </div>
+          <div className="vx-cta-art" aria-hidden="true">
+            <Mic />
+            <CurlArrow />
+            <Sparkle />
+          </div>
         </div>
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="va-section va-contact">
+      <section id="contact" className="vx-contact">
         <div className="container">
-          <VASectionTitle eyebrow={content.closing.eyebrow} title={content.closing.title} />
           <ContactForm intro="Need help with social media, content, podcast editing, or design? Send a message and tell me about your business." />
         </div>
       </section>

@@ -5,6 +5,7 @@ import SiteHeader, { type NavItem } from '../../components/SiteHeader'
 import usePageMeta from '../../components/usePageMeta'
 import { profile } from '../../data/profile'
 import { vaLinks, type VAImage } from '../../data/va'
+import { RotatingBadge, Sparkle, Squiggle } from './VAArt'
 import './va.css'
 
 const navItems: NavItem[] = [
@@ -41,36 +42,63 @@ export default function VALayout({ meta, children }: VALayoutProps) {
 function VAFooter() {
   return (
     <footer className="va-footer">
-      <div className="container va-footer-inner">
-        <div>
-          <p className="va-script">Let’s grow together</p>
-          <strong>{profile.name}</strong>
-          <span>Social Media • Content • Podcasts</span>
+      <div className="container va-footer-grid">
+        <div className="va-footer-brand">
+          <strong>
+            KEN ROMERO <Sparkle />
+          </strong>
+          <p>Social media, content, and podcast support for small brands with big plans.</p>
+          <div className="va-footer-social">
+            <a href={vaLinks.instagram.href} target="_blank" rel="noreferrer" aria-label="Instagram">
+              <Instagram size={17} />
+            </a>
+            <a href={vaLinks.linkedin.href} target="_blank" rel="noreferrer" aria-label="LinkedIn">
+              <Linkedin size={17} />
+            </a>
+            <a href={`mailto:${profile.email}`} aria-label="Email">
+              <Mail size={17} />
+            </a>
+          </div>
         </div>
-        <ul className="va-footer-links">
-          <li>
-            <Mail size={16} aria-hidden="true" />
-            <a href={`mailto:${profile.email}`}>{profile.email}</a>
-          </li>
-          <li>
-            <Smartphone size={16} aria-hidden="true" />
-            <a href={profile.whatsapp.href} target="_blank" rel="noreferrer">
-              {profile.whatsapp.label}
-            </a>
-          </li>
-          <li>
-            <Linkedin size={16} aria-hidden="true" />
-            <a href={vaLinks.linkedin.href} target="_blank" rel="noreferrer">
-              {profile.linkedin.label}
-            </a>
-          </li>
-          <li>
-            <Instagram size={16} aria-hidden="true" />
-            <a href={vaLinks.instagram.href} target="_blank" rel="noreferrer">
-              {vaLinks.instagram.label}
-            </a>
-          </li>
-        </ul>
+        <div>
+          <p className="va-footer-head">Navigation</p>
+          <ul>
+            {navItems.map((item) => (
+              <li key={item.href}>
+                <Link to={item.href}>{item.label}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p className="va-footer-head">Packages</p>
+          <ul>
+            <li>
+              <Link to="/va/smm-packages">Social Media Management</Link>
+            </li>
+            <li>
+              <Link to="/va/podcast-packages">Podcast Editing</Link>
+            </li>
+            <li>
+              <Link to="/va/podcast-packages">Podcast Retainer</Link>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <p className="va-footer-head">Contact</p>
+          <ul>
+            <li>
+              <a href={`mailto:${profile.email}`}>{profile.email}</a>
+            </li>
+            <li>
+              <a href={profile.whatsapp.href} target="_blank" rel="noreferrer">
+                <Smartphone size={14} aria-hidden="true" /> {profile.whatsapp.label}
+              </a>
+            </li>
+            <li>{vaLinks.instagram.label}</li>
+          </ul>
+        </div>
+        <RotatingBadge className="va-footer-badge" text="GOOD CONTENT • CREATES • OPPORTUNITIES • " />
       </div>
       <div className="container va-footer-bottom">
         <span>{vaLinks.handle}</span>
@@ -118,6 +146,7 @@ export function VAPageHero({
           {title}
           {subtitle && <span>{subtitle}</span>}
         </h1>
+        <Squiggle className="va-page-squiggle" />
         {tagline && <p className="va-tagline">{tagline}</p>}
         {intro && <p className="va-lead">{intro}</p>}
       </div>
