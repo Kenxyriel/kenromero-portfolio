@@ -149,7 +149,7 @@ export const vaHome = {
         { image: '/va/work/design/food-3.jpg', label: 'Bun Riot combo poster' },
       ],
       podcast: {
-        thumbnail: { image: '/va/work/podcast/thumbnail.jpg', label: 'Podcast episode thumbnail' },
+        teaser: { image: '/va/work/podcast/intro-teaser.jpg', video: '/va/work/podcast/intro-teaser.mp4', label: 'intro teaser clip' },
         clip: { image: '/va/work/podcast/ai-clip-1.jpg', video: '/va/work/podcast/ai-clip-1.mp4', label: 'short-form podcast clip' },
       },
       social: [

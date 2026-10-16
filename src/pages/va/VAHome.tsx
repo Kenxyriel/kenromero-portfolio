@@ -49,9 +49,8 @@ const toolGroupIcons = [Palette, Bot, Smartphone, Cloud]
 // Covers for each work category, built from real samples (picked in src/data/va.ts).
 const previews = content.featured.previews
 
-// Vertical clip that plays in place, with sound, when tapped.
-function PlayableClip() {
-  const { clip } = previews.podcast
+// A clip that plays in place, with sound, when tapped. Starting one pauses the other.
+function PlayableClip({ clip, className }: { clip: { image: string; video: string; label: string }; className: string }) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [playing, setPlaying] = useState(false)
   const toggle = () => {
@@ -61,14 +60,19 @@ function PlayableClip() {
     else video.pause()
   }
   return (
-    <div className={`va-cover-clip${playing ? ' is-playing' : ''}`}>
+    <div className={`va-cover-video ${className}${playing ? ' is-playing' : ''}`}>
       <video
         ref={videoRef}
         src={clip.video}
         poster={clip.image}
         preload="none"
         playsInline
-        onPlay={() => setPlaying(true)}
+        onPlay={(event) => {
+          setPlaying(true)
+          document.querySelectorAll<HTMLVideoElement>('.va-cover-video video').forEach((other) => {
+            if (other !== event.currentTarget) other.pause()
+          })
+        }}
         onPause={() => setPlaying(false)}
         onEnded={() => setPlaying(false)}
       />
@@ -101,10 +105,8 @@ function WorkCover({ kind }: { kind: 'design' | 'podcast' | 'social' }) {
   if (kind === 'podcast') {
     return (
       <div className="vx-cover va-cover-podcast">
-        <div className="va-cover-thumb">
-          <img src={previews.podcast.thumbnail.image} alt={previews.podcast.thumbnail.label} loading="lazy" />
-        </div>
-        <PlayableClip />
+        <PlayableClip clip={previews.podcast.teaser} className="va-cover-thumb" />
+        <PlayableClip clip={previews.podcast.clip} className="va-cover-clip" />
         <Waveform className="va-cover-wave" />
         <span className="va-cover-label">EPISODES · CLIPS</span>
       </div>

@@ -336,7 +336,7 @@
 /* Podcast: episode thumbnail with a vertical clip on top, on ink. */
 .va-cover-podcast { background: var(--va-ink); }
 .va-cover-podcast .va-cover-label { color: var(--va-amber); }
-.va-cover-thumb { position: absolute; left: 7%; top: 18%; width: 70%; aspect-ratio: 16 / 9; border: 2px solid var(--va-paper); }
+.va-cover-thumb { position: absolute; left: 7%; top: 18%; width: 70%; aspect-ratio: 16 / 9; overflow: hidden; border: 2px solid var(--va-paper); }
 .va-cover-clip {
   position: absolute;
   right: 7%;
@@ -350,7 +350,7 @@
   transition: transform 220ms ease;
 }
 .vx-work-card:hover .va-cover-clip { transform: translateY(-6px) rotate(2deg); }
-.va-cover-clip video { display: block; width: 100%; height: 100%; object-fit: cover; background: var(--va-ink); }
+.va-cover-video video { display: block; width: 100%; height: 100%; object-fit: cover; background: var(--va-ink); }
 /* Sits above the card's stretched link so tapping it plays the clip instead of opening the page. */
 .va-cover-play {
   z-index: 5;
@@ -373,7 +373,9 @@
 .va-cover-play:hover { transform: translate(-50%, -50%) scale(1.08); }
 .va-cover-play:focus-visible { outline: 3px solid var(--va-paper); outline-offset: 2px; }
 /* While playing, the pause button drops to the corner so it doesn't cover the video. */
-.va-cover-clip.is-playing .va-cover-play { left: auto; right: 6px; top: auto; bottom: 6px; width: 28px; height: 28px; transform: none; opacity: .85; }
+.va-cover-video.is-playing .va-cover-play { left: auto; right: 6px; top: auto; bottom: 6px; width: 28px; height: 28px; transform: none; opacity: .85; }
+/* The landscape teaser keeps its pause button on the left, clear of the vertical clip. */
+.va-cover-thumb.is-playing .va-cover-play { left: 6px; right: auto; }
 .va-cover-wave { position: absolute; left: 7%; bottom: 9%; width: 36%; color: var(--va-amber); }
 
 /* Social: two real posts in phone frames, tilted on teal. */
