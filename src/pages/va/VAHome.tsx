@@ -5,9 +5,12 @@ import {
   Headphones,
   Heart,
   MessageCircle,
+  Bot,
+  Cloud,
   Palette,
   Quote,
   Share2,
+  Smartphone,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import ContactForm from '../../components/ContactForm'
@@ -17,6 +20,9 @@ import { CurlArrow, DotGrid, Mic, RotatingBadge, Sparkle, Squiggle, Waveform } f
 import VALayout, { ToolBadge } from './VALayout'
 
 const serviceIcons = [Headphones, Share2, Palette, ClipboardList, BarChart3]
+
+// Same order as the tool groups in src/data/va.ts.
+const toolGroupIcons = [Palette, Bot, Smartphone, Cloud]
 
 const packageTeasers = [
   {
@@ -256,30 +262,37 @@ export default function VAHome() {
 
       {/* TOOLS */}
       <section className="vx-tools">
-        <div className="container vx-split-grid">
-          <div className="vx-side">
-            <p className="vx-eyebrow">My toolkit</p>
-            <h2 className="vx-serif">
-              Tools I <em>use</em>
-            </h2>
-            <Squiggle />
-          </div>
-          <div>
+        <div className="container">
+          <div className="vx-tools-head">
+            <div>
+              <p className="vx-eyebrow">My toolkit</p>
+              <h2 className="vx-serif">
+                Tools I <em>use</em>
+              </h2>
+              <Squiggle />
+            </div>
             <p className="vx-side-note">{content.tools.description}</p>
-            <div className="vx-tool-groups">
-              {content.tools.groups.map((group, groupIndex) => (
-                <div className="vx-tool-group" key={group.title}>
-                  <h3>
-                    <span aria-hidden="true">{group.emoji}</span> {group.title}
-                  </h3>
+          </div>
+          <div className="vx-tool-groups">
+            {content.tools.groups.map((group, groupIndex) => {
+              const Icon = toolGroupIcons[groupIndex]
+              return (
+                <article className="vx-tool-group" key={group.title}>
+                  <header>
+                    <span className="vx-tool-group-icon">
+                      <Icon size={18} aria-hidden="true" />
+                    </span>
+                    <h3>{group.title}</h3>
+                    <span className="vx-tool-group-num">{String(groupIndex + 1).padStart(2, '0')}</span>
+                  </header>
                   <ul className="va-tool-row">
                     {group.tools.map((tool, index) => (
                       <ToolBadge key={tool} name={tool} index={groupIndex * 4 + index} />
                     ))}
                   </ul>
-                </div>
-              ))}
-            </div>
+                </article>
+              )
+            })}
           </div>
         </div>
       </section>

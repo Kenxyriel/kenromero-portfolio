@@ -282,9 +282,31 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
 
 /* ---------- Tools ---------- */
 
-.vx-tool-groups { display: grid; gap: 26px; margin-top: 26px; }
-.vx-tool-group { display: grid; grid-template-columns: 260px 1fr; align-items: center; gap: 16px; }
-.vx-tool-group h3 { margin: 0; color: var(--va-ink); font-size: 19px; font-weight: 700; }
+.vx-tools-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 48px; margin-bottom: 36px; }
+.vx-tools-head .vx-side-note { max-width: 440px; }
+.vx-tools-head .va-squiggle { margin-top: 10px; }
+
+/* 2 x 2 grid of tool group cards. */
+.vx-tool-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.vx-tool-group {
+  padding: 22px 26px 26px;
+  background: white;
+  border: 2px solid var(--va-ink);
+  box-shadow: 6px 6px 0 var(--va-ink);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.vx-tool-group:nth-child(2) { box-shadow: 6px 6px 0 var(--va-teal); }
+.vx-tool-group:nth-child(3) { box-shadow: 6px 6px 0 var(--va-amber); }
+.vx-tool-group:hover { transform: translate(-2px, -2px); }
+.vx-tool-group header { display: flex; align-items: center; gap: 12px; padding-bottom: 16px; margin-bottom: 20px; border-bottom: 1px dashed var(--va-line); }
+.vx-tool-group-icon { display: grid; place-items: center; width: 36px; height: 36px; color: var(--va-ink); background: var(--va-amber); border: 2px solid var(--va-ink); border-radius: 50%; }
+.vx-tool-group h3 { flex: 1; margin: 0; color: var(--va-ink); font-family: var(--va-serif); font-size: 22px; font-weight: 600; line-height: 1.15; }
+.vx-tool-group-num { color: var(--va-teal); font-family: var(--va-serif); font-size: 22px; font-style: italic; font-weight: 600; }
+.vx-tool-group .va-tool-row { justify-content: space-between; }
+/* Badges grow with wide screens so the cards stay full. */
+.vx-tool-group .va-tool-badge { width: clamp(92px, 7vw, 124px); }
+.vx-tool-group .va-tool-circle { width: clamp(78px, 5.4vw, 104px); height: clamp(78px, 5.4vw, 104px); }
+.vx-tool-group .va-tool-name { font-size: clamp(12px, .8vw, 14px); }
 
 /* Circular official logos that bob and tilt; hover spins one. */
 .va-tool-row { display: flex; flex-wrap: wrap; gap: 18px 20px; margin: 0; padding: 0; list-style: none; }
@@ -578,7 +600,7 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
   .vx-split-grid { grid-template-columns: 1fr; }
   .vx-cta-grid { grid-template-columns: 1fr 1fr; }
   .vx-cta-art { display: none; }
-  .vx-tool-group { grid-template-columns: 1fr; }
+  .vx-tool-groups { grid-template-columns: 1fr; }
   .va-platforms { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .va-posts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .va-packages,
@@ -625,6 +647,11 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
   .va-tool-badge { width: 76px; }
   .va-tool-circle { width: 62px; height: 62px; border-width: 3px; }
   .va-tool-name { font-size: 11px; }
+  .vx-tool-group { padding: 18px 16px 20px; }
+  .vx-tool-group h3 { font-size: 19px; }
+  .vx-tool-group .va-tool-badge { width: 70px; }
+  .vx-tool-group .va-tool-circle { width: 58px; height: 58px; }
+  .vx-tool-group .va-tool-name { font-size: 11px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

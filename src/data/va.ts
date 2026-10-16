@@ -83,11 +83,11 @@ export const vaHome = {
     description:
       'A curated collection of tools and platforms that power my workflow and help me deliver high-quality work.',
     groups: [
-      { title: 'Content Creation', emoji: '🎨', tools: ['CapCut Pro', 'OpusClip', 'Canva', 'Riverside.fm'] },
-      { title: 'AI & Content Strategy', emoji: '🤖', tools: ['ChatGPT', 'Claude', 'ElevenLabs', 'Gemini AI'] },
-      { title: 'Social Media Management', emoji: '📱', tools: ['Meta Business', 'Buffer', 'Metricool', 'Notion'] },
-      { title: 'Workflow & Collaboration', emoji: '☁️', tools: ['Google Drive', 'Google Suite', 'Asana', 'Trello'] },
-    ] as { title: string; emoji: string; tools: ToolName[] }[],
+      { title: 'Content Creation', tools: ['CapCut Pro', 'OpusClip', 'Canva', 'Riverside.fm'] },
+      { title: 'AI & Content Strategy', tools: ['ChatGPT', 'Claude', 'ElevenLabs', 'Gemini AI'] },
+      { title: 'Social Media Management', tools: ['Meta Business', 'Buffer', 'Metricool', 'Notion'] },
+      { title: 'Workflow & Collaboration', tools: ['Google Drive', 'Google Suite', 'Asana', 'Trello'] },
+    ] as { title: string; tools: ToolName[] }[],
   },
   services: {
     eyebrow: 'My Services',
