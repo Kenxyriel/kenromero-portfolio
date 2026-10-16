@@ -7,8 +7,8 @@ export default function VAPodcastEditing() {
       <VAPageHero title={content.title} subtitle={content.subtitle} intro={content.intro} />
 
       <section className="va-section va-section-tight">
-        <div className="container va-tools-row">
-          <p className="va-kicker">Tools:</p>
+        <div className="container va-podcast-tools">
+          <p className="va-kicker">Tools I use</p>
           <ul className="va-tool-row">
             {content.tools.map((tool, index) => (
               <ToolBadge key={tool} name={tool} index={index} />

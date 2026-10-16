@@ -5,8 +5,12 @@
 // from the Canva creative portfolio). Leave `image` empty to show a labelled
 // placeholder until the real asset is added.
 
-/** `tall` marks a vertical (9:16) sample such as a short-form clip. */
-export type VAImage = { image?: string; label: string; tall?: boolean }
+/**
+ * A work sample. `image` is the still (or video poster); `video` is an MP4 in
+ * public/va/work that plays in place of the still once added. `tall` marks a
+ * vertical (9:16) sample such as a short-form clip.
+ */
+export type VAImage = { image?: string; video?: string; label: string; tall?: boolean }
 
 export const vaLinks = {
   instagram: { label: '@heyitskhenn', href: 'https://www.instagram.com/heyitskhenn/' },

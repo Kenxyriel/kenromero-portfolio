@@ -497,7 +497,25 @@
 .va-band p { margin: 6px 0 0; color: var(--va-amber); font-family: var(--va-hand); font-size: 24px; }
 
 .va-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr)); gap: 18px; align-items: start; }
-.va-img { margin: 0; overflow: hidden; background: white; border: 2px solid var(--va-ink); }
+.va-img { position: relative; margin: 0; overflow: hidden; background: white; border: 2px solid var(--va-ink); }
+.va-img video { display: block; width: 100%; height: auto; background: var(--va-ink); }
+/* Whole sample is clickable; the icon appears on hover. */
+.va-img-open { position: absolute; inset: 0; display: flex; align-items: flex-start; justify-content: flex-end; padding: 10px; background: transparent; cursor: zoom-in; }
+.va-img-open svg { padding: 7px; width: 32px; height: 32px; color: white; background: rgba(21, 18, 17, .72); border-radius: 50%; opacity: 0; transform: scale(.85); transition: opacity 160ms ease, transform 160ms ease; }
+.va-img:hover .va-img-open svg,
+.va-img-open:focus-visible svg { opacity: 1; transform: none; }
+.va-img-open:focus-visible { outline: 3px solid var(--va-amber); outline-offset: -3px; }
+/* Short-form clips share one 9:16 frame so the row lines up. */
+.va-img-tall img,
+.va-img-tall video { aspect-ratio: 9 / 16; object-fit: cover; }
+
+.va-lightbox { position: fixed; z-index: 200; inset: 0; display: grid; place-items: center; padding: 56px 20px 24px; background: rgba(12, 10, 9, .9); backdrop-filter: blur(4px); }
+.va-lightbox figure { margin: 0; max-width: min(1400px, 100%); max-height: 100%; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.va-lightbox img,
+.va-lightbox video { max-width: 100%; max-height: calc(100vh - 140px); object-fit: contain; border-radius: 8px; box-shadow: 0 20px 60px rgba(0, 0, 0, .5); }
+.va-lightbox figcaption { color: #f1ebd8; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.va-lightbox-close { position: absolute; top: 14px; right: 16px; display: grid; place-items: center; width: 44px; height: 44px; color: white; background: rgba(255, 255, 255, .12); border-radius: 50%; cursor: pointer; }
+.va-lightbox-close:hover { background: rgba(255, 255, 255, .22); }
 /* Show each sample whole, at its own proportions. */
 .va-img img { display: block; width: 100%; height: auto; }
 .va-img-placeholder {
@@ -569,8 +587,12 @@
 .va-post-shot { margin: 0; }
 .va-post-shot img { width: 100%; height: auto; border-radius: 22px; box-shadow: 0 18px 40px rgba(0, 0, 0, .35); }
 
-.va-tools-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
-.va-tools-row .va-kicker { margin: 0; }
+.va-podcast-tools { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.va-podcast-tools .va-kicker { margin: 0; }
+.va-podcast-tools .va-tool-row { justify-content: center; gap: 22px 28px; padding: 22px 28px; background: white; border: 2px solid var(--va-ink); border-radius: 26px; box-shadow: 5px 5px 0 var(--va-ink); }
+.va-podcast-tools .va-tool-badge { width: 104px; }
+.va-podcast-tools .va-tool-circle { width: 88px; height: 88px; }
+.va-podcast-tools .va-tool-name { font-size: 13px; }
 
 .va-cta { padding: clamp(56px, 8vw, 92px) 0; background: var(--va-amber); text-align: center; border-bottom: 2px solid var(--va-ink); }
 .va-cta-inner { margin: 0 auto; }
@@ -630,6 +652,26 @@
 .va-retainer ul { margin: 12px 0 0; padding-left: 18px; font-size: 14px; line-height: 1.8; }
 .va-section-dark .va-note { color: #c8beb2; }
 
+/* ---------- Design & Branding page ---------- */
+
+.va-design-inner { max-width: 1240px; }
+.va-filter { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 auto clamp(36px, 5vw, 56px); padding: 6px; width: fit-content; max-width: 100%; background: white; border: 2px solid var(--va-ink); border-radius: 999px; box-shadow: 4px 4px 0 var(--va-ink); }
+.va-filter button { padding: 9px 18px; color: var(--va-ink); background: transparent; border-radius: 999px; font-size: 13px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; transition: background 150ms ease; }
+.va-filter button:hover { background: var(--va-paper-2); }
+.va-filter button.is-active { background: var(--va-amber); }
+.va-design-section + .va-design-section { margin-top: clamp(56px, 7vw, 88px); }
+.va-design-head { margin-bottom: 28px; text-align: center; }
+.va-design-head h2 { margin: 0; font-family: var(--va-serif); font-size: clamp(32px, 4.4vw, 52px); font-weight: 600; letter-spacing: -.02em; }
+.va-design-head p { margin: 8px 0 0; color: var(--va-teal); font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.va-design-gallery + .va-design-gallery { margin-top: 40px; }
+.va-design-gallery h3 { display: flex; align-items: center; gap: 14px; margin: 0 0 16px; font-family: var(--va-hand); font-size: 30px; font-weight: 700; }
+.va-design-gallery h3::after { content: ""; flex: 1; height: 1px; background: var(--va-line); }
+.va-design-grid { display: grid; grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); gap: clamp(14px, 2vw, 24px); align-items: start; justify-content: center; }
+/* A single sample (e.g. food) stays a sensible size, centred. */
+.va-design-grid[style*="--cols: 1"] { grid-template-columns: minmax(0, 420px); }
+.va-design-grid .va-img { border-radius: 14px; box-shadow: 0 14px 30px -18px rgba(21, 18, 17, .45); transition: transform 200ms ease, box-shadow 200ms ease; }
+.va-design-grid .va-img:hover { transform: translateY(-5px); box-shadow: 6px 8px 0 var(--va-ink); }
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1100px) {
@@ -646,6 +688,10 @@
   .vx-cta-grid { grid-template-columns: 1fr 1fr; }
   .vx-cta-art { display: none; }
   .vx-tool-groups { grid-template-columns: 1fr; }
+  .va-podcast-tools .va-tool-row { padding: 16px 12px; gap: 14px 8px; }
+  .va-podcast-tools .va-tool-badge { width: 76px; }
+  .va-podcast-tools .va-tool-circle { width: 64px; height: 64px; }
+  .va-design-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .va-platforms { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .va-posts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .va-packages,
