@@ -209,133 +209,72 @@
 .vx-numbers-row span { margin-top: 4px; color: var(--va-ink); font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
 .vx-numbers-row small { color: #4a3a12; font-size: 12px; }
 
-/* ---------- Services (cards with mascots) ---------- */
+/* ---------- Services (compact row of cards) ---------- */
 
-.vx-services { position: relative; overflow: hidden; isolation: isolate; padding: clamp(64px, 8vw, 104px) 0; background: var(--va-paper); border-bottom: 2px solid var(--va-ink); }
-.vx-blob { position: absolute; z-index: -1; background: #f7d36b; opacity: .55; }
-.vx-blob-a { top: -90px; right: -70px; width: 340px; height: 260px; border-radius: 62% 38% 55% 45% / 48% 60% 40% 52%; }
-.vx-blob-b { bottom: -110px; left: -90px; width: 380px; height: 280px; border-radius: 45% 55% 38% 62% / 60% 42% 58% 40%; background: #f3c9b4; }
-.vx-services-dots { position: absolute; z-index: -1; top: 70px; left: 6%; width: 84px; color: var(--va-line); }
+.vx-services { position: relative; overflow: hidden; isolation: isolate; padding: clamp(56px, 6vw, 84px) 0; background: var(--va-paper); border-bottom: 2px solid var(--va-ink); }
+.vx-blob { position: absolute; z-index: -1; top: -110px; right: -90px; width: 360px; height: 270px; background: #f7d36b; opacity: .45; border-radius: 62% 38% 55% 45% / 48% 60% 40% 52%; }
 
-.vx-services-head { position: relative; max-width: 720px; margin: 0 auto clamp(36px, 4vw, 52px); text-align: center; }
-.vx-script { margin: 0; font-family: var(--va-hand); font-size: clamp(44px, 5.5vw, 64px); font-weight: 700; line-height: 1; color: var(--va-ink); }
-.vx-services-squiggle { margin: 2px auto 0; width: 170px; color: var(--va-amber-2); }
-.vx-head-spark { position: absolute; color: var(--va-teal); }
-.vx-head-spark-a { top: 4px; left: 22%; font-size: 26px; transform: rotate(-12deg); }
-.vx-head-spark-b { top: 44px; right: 20%; font-size: 18px; color: var(--va-amber-2); }
-.vx-services-head h2 { margin: 16px 0 0; font-size: clamp(22px, 2.6vw, 30px); font-weight: 800; letter-spacing: .02em; text-transform: uppercase; }
+.vx-services-head { position: relative; max-width: 680px; margin: 0 auto clamp(28px, 3.4vw, 40px); text-align: center; }
+.vx-script { margin: 0; font-family: var(--va-hand); font-size: clamp(40px, 4.6vw, 54px); font-weight: 700; line-height: 1; color: var(--va-ink); }
+.vx-services-squiggle { margin: 0 auto; width: 150px; color: var(--va-amber-2); }
+.vx-head-spark { position: absolute; top: 2px; left: 26%; font-size: 22px; color: var(--va-teal); transform: rotate(-12deg); }
+.vx-services-head h2 { margin: 12px 0 0; font-size: clamp(20px, 2.2vw, 26px); font-weight: 800; letter-spacing: .02em; text-transform: uppercase; }
 .vx-services-head mark { padding: 0 .3em; color: var(--va-ink); background: var(--va-amber); border-radius: 6px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
-.vx-services-head p { margin: 14px 0 0; color: var(--va-text); line-height: 1.6; }
+.vx-services-head p:not(.vx-script) { margin: 10px 0 0; color: var(--va-text); font-size: 15px; line-height: 1.6; }
 
-/* 3 cards on top, 2 centered below (6-column grid, each card spans 2). */
-.vx-service-cards { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 26px; }
+/* One row of five on desktop; swipeable row on phones. */
+.vx-svc-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; }
 
-/* Each service has its own soft colour (--card) and accent (--accent). */
-.vx-service-card { --card: #fde6a0; --accent: #f2b124; }
-.vx-service-card:nth-child(2) { --card: #fbd6c6; --accent: #ef8a68; }
-.vx-service-card:nth-child(3) { --card: #e4dcf7; --accent: #9b84e6; }
-.vx-service-card:nth-child(4) { --card: #cfe9df; --accent: #3fae90; }
-.vx-service-card:nth-child(5) { --card: #d4e7f6; --accent: #4f9fdc; }
+/* Restrained surface; each service keeps a soft accent only behind its mascot. */
+.vx-svc { --tint: #fde6a0; }
+.vx-svc:nth-child(2) { --tint: #fbd6c6; }
+.vx-svc:nth-child(3) { --tint: #e4dcf7; }
+.vx-svc:nth-child(4) { --tint: #cfe9df; }
+.vx-svc:nth-child(5) { --tint: #d4e7f6; }
 
-.vx-service-card {
-  position: relative;
-  isolation: isolate;
-  grid-column: span 2;
-  min-height: 310px;
+.vx-svc {
   display: flex;
   flex-direction: column;
-  padding: 24px 24px 26px;
+  padding: 18px 18px 20px;
+  background: #fffdf8;
+  border: 1.5px solid var(--va-ink);
+  border-radius: 20px;
+  box-shadow: 0 1px 0 var(--va-ink), 0 14px 30px -18px rgba(21, 18, 17, .35);
+  transition: transform 220ms ease, box-shadow 220ms ease, opacity 600ms ease, translate 600ms ease;
+}
+.vx-svc:hover { transform: translateY(-6px); box-shadow: 4px 4px 0 var(--va-ink), 0 22px 40px -20px rgba(21, 18, 17, .4); }
+.vx-svc-art {
+  display: grid;
+  place-items: end center;
+  height: 132px;
+  margin-bottom: 14px;
   overflow: hidden;
-  background: var(--card);
-  border: 2px solid var(--va-ink);
-  border-radius: 26px;
-  box-shadow: 6px 6px 0 var(--va-ink);
-  transition: transform 180ms ease, box-shadow 180ms ease, opacity 600ms ease, translate 600ms ease;
+  background: radial-gradient(circle at 50% 70%, color-mix(in srgb, var(--tint) 100%, white 0%) 0 58%, color-mix(in srgb, var(--tint) 45%, #fffdf8) 59% 100%);
+  border-radius: 14px;
 }
-/* Glowing circle behind the mascot. */
-.vx-service-card::before {
-  content: "";
-  position: absolute;
-  z-index: -2;
-  right: -40px;
-  bottom: -60px;
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
-  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 55%, white) 0%, color-mix(in srgb, var(--accent) 22%, transparent) 55%, transparent 72%);
-}
-.vx-service-card:nth-child(4) { grid-column: 2 / span 2; }
-.vx-service-card:hover { transform: translate(-2px, -3px); box-shadow: 8px 9px 0 var(--va-ink); }
-
-/* Cards rise in one after another when the section scrolls into view. */
-.vx-service-cards:not(.is-shown) .vx-service-card { opacity: 0; translate: 0 26px; }
-.vx-service-card:nth-child(2) { transition-delay: 0s, 0s, 90ms, 90ms; }
-.vx-service-card:nth-child(3) { transition-delay: 0s, 0s, 180ms, 180ms; }
-.vx-service-card:nth-child(4) { transition-delay: 0s, 0s, 270ms, 270ms; }
-.vx-service-card:nth-child(5) { transition-delay: 0s, 0s, 360ms, 360ms; }
-
-.vx-service-tag {
-  position: absolute;
-  top: 18px;
-  right: 22px;
-  max-width: 46%;
-  color: var(--va-ink);
-  font-family: var(--va-hand);
-  font-size: 19px;
-  font-weight: 600;
-  line-height: 1.1;
-  text-align: right;
-  transform: rotate(6deg);
-}
-.vx-service-card h3 {
-  max-width: 56%;
-  margin: 34px 0 0;
-  font-size: clamp(24px, 2.2vw, 30px);
-  font-weight: 800;
-  font-stretch: 85%;
-  line-height: .98;
-  letter-spacing: -.01em;
-  text-transform: uppercase;
-}
-.vx-service-card ul { max-width: 54%; margin: 16px 0 0; padding: 0; list-style: none; }
-.vx-service-card li { display: flex; align-items: center; gap: 8px; padding: 3px 0; color: var(--va-ink); font-size: 14px; font-weight: 600; }
-.vx-service-card li svg { flex-shrink: 0; width: 18px; height: 18px; padding: 3px; color: var(--va-ink); background: var(--accent); border-radius: 50%; }
-.vx-service-btn {
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: auto;
-  padding: 10px 18px;
-  color: white;
-  background: var(--va-ink);
-  border: 2px solid var(--va-ink);
-  border-radius: 999px;
-  box-shadow: 3px 3px 0 var(--accent);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  transition: transform 150ms ease, box-shadow 150ms ease;
-}
-.vx-service-btn:hover { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--accent); }
-.vx-service-art {
-  position: absolute;
-  z-index: -1;
-  right: -6px;
-  bottom: -4px;
-  width: 45%;
-  max-width: 220px;
-  height: auto;
-  pointer-events: none;
-  animation: vx-float 4.5s ease-in-out infinite;
-}
-.vx-service-card:nth-child(even) .vx-service-art { animation-delay: -2.2s; }
-.vx-service-card:hover .vx-service-art { animation-duration: 1.6s; }
+.vx-svc-art img { width: auto; height: 124px; animation: vx-float 4.5s ease-in-out infinite; }
+.vx-svc:nth-child(even) .vx-svc-art img { animation-delay: -2.2s; }
+.vx-svc:hover .vx-svc-art img { animation-duration: 1.6s; }
 @keyframes vx-float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(-1.5deg); }
+  0%, 100% { transform: translateY(2px); }
+  50% { transform: translateY(-6px); }
 }
+.vx-svc h3 { margin: 0; font-size: 18px; font-weight: 800; font-stretch: 85%; line-height: 1.05; letter-spacing: .01em; text-transform: uppercase; }
+.vx-svc-tag { margin: 4px 0 0; color: var(--va-teal); font-family: var(--va-hand); font-size: 18px; font-weight: 600; line-height: 1.15; }
+.vx-svc ul { margin: 12px 0 0; padding: 12px 0 0; border-top: 1px dashed var(--va-line); list-style: none; }
+.vx-svc li { display: flex; align-items: center; gap: 7px; padding: 2px 0; color: var(--va-text); font-size: 13px; font-weight: 600; }
+.vx-svc li svg { flex-shrink: 0; width: 16px; height: 16px; padding: 2.5px; color: var(--va-ink); background: var(--va-amber); border-radius: 50%; }
+.vx-svc-link { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; margin-top: auto; padding-top: 14px; color: var(--va-ink); font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.vx-svc-link svg { transition: transform 150ms ease; }
+.vx-svc-link:hover { text-decoration: underline; text-decoration-color: var(--va-amber); text-decoration-thickness: 3px; text-underline-offset: 5px; }
+.vx-svc-link:hover svg { transform: translateX(3px); }
+
+/* Cards rise in one after another when the row scrolls into view. */
+.vx-svc-row:not(.is-shown) .vx-svc { opacity: 0; translate: 0 22px; }
+.vx-svc:nth-child(2) { transition-delay: 0s, 0s, 80ms, 80ms; }
+.vx-svc:nth-child(3) { transition-delay: 0s, 0s, 160ms, 160ms; }
+.vx-svc:nth-child(4) { transition-delay: 0s, 0s, 240ms, 240ms; }
+.vx-svc:nth-child(5) { transition-delay: 0s, 0s, 320ms, 320ms; }
 
 /* ---------- Selected work ---------- */
 
@@ -685,10 +624,9 @@
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1100px) {
-  .vx-service-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .vx-service-card,
-  .vx-service-card:nth-child(4) { grid-column: auto; }
-  .vx-service-card:nth-child(5) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 12px); }
+  /* 3 + 2, with the second row centred. */
+  .vx-svc-row { display: flex; flex-wrap: wrap; justify-content: center; }
+  .vx-svc { flex: 0 0 calc((100% - 36px) / 3); }
   .vx-numbers-row { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 20px; }
   .va-footer-grid { grid-template-columns: 1fr 1fr; }
   .va-footer-badge { display: none; }
@@ -724,9 +662,21 @@
   .vx-about-photo { min-height: 360px; }
   .vx-about-photo::before { inset: 8% 12% 0; }
   .vx-sticker { position: static; width: 112px; margin-top: 20px; }
-  .vx-service-cards { grid-template-columns: 1fr; }
-  .vx-service-card:nth-child(5) { grid-column: auto; width: auto; }
-  .vx-service-card { min-height: 280px; }
+  /* Swipe through services instead of a tall stack. */
+  .vx-svc-row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 14px;
+    margin: 0 -20px;
+    padding: 4px 20px 18px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 20px;
+    scrollbar-width: none;
+  }
+  .vx-svc-row::-webkit-scrollbar { display: none; }
+  .vx-svc { flex: 0 0 74%; scroll-snap-align: start; }
   .vx-numbers-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .vx-quote-row { row-gap: 28px; }
   .vx-quote-row figure { padding: 0 0 0 16px; }
@@ -761,7 +711,7 @@
   .va-tool-circle { transition: none; }
   .va-tool-badge { animation: none; }
   .va-tool-badge:hover .va-tool-circle { transform: none; }
-  .vx-service-art { animation: none; }
-  .vx-service-card { transition: none; }
-  .vx-service-cards:not(.is-shown) .vx-service-card { opacity: 1; translate: none; }
+  .vx-svc-art img { animation: none; }
+  .vx-svc { transition: none; }
+  .vx-svc-row:not(.is-shown) .vx-svc { opacity: 1; translate: none; }
 }

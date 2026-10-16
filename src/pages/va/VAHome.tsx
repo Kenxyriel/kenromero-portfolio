@@ -176,13 +176,10 @@ export default function VAHome() {
 
       {/* SERVICES */}
       <section id="services" className="vx-services">
-        <span className="vx-blob vx-blob-a" aria-hidden="true" />
-        <span className="vx-blob vx-blob-b" aria-hidden="true" />
-        <DotGrid className="vx-services-dots" />
+        <span className="vx-blob" aria-hidden="true" />
         <div className="container">
           <div className="vx-services-head">
-            <Sparkle className="vx-head-spark vx-head-spark-a" />
-            <Sparkle className="vx-head-spark vx-head-spark-b" />
+            <Sparkle className="vx-head-spark" />
             <p className="vx-script">{content.services.eyebrow}</p>
             <Squiggle className="vx-services-squiggle" />
             <h2>
@@ -190,25 +187,27 @@ export default function VAHome() {
             </h2>
             <p>{content.services.description}</p>
           </div>
-          <div ref={cardsRef} className={`vx-service-cards${cardsShown ? ' is-shown' : ''}`}>
+          <div ref={cardsRef} className={`vx-svc-row${cardsShown ? ' is-shown' : ''}`}>
             {content.services.items.map((service) => (
-              <article className="vx-service-card" key={service.title}>
-                <span className="vx-service-tag">{service.tagline}</span>
+              <article className="vx-svc" key={service.title}>
+                <div className="vx-svc-art">
+                  <img src={service.image} alt="" loading="lazy" />
+                </div>
                 <h3>{service.title}</h3>
+                <p className="vx-svc-tag">{service.tagline}</p>
                 <ul>
                   {service.items.map((item) => (
                     <li key={item}>
-                      <Check size={12} strokeWidth={3} aria-hidden="true" />
+                      <Check size={11} strokeWidth={3} aria-hidden="true" />
                       {item}
                     </li>
                   ))}
                 </ul>
                 {service.path && (
-                  <Link className="vx-service-btn" to={service.path}>
+                  <Link className="vx-svc-link" to={service.path}>
                     View work <ArrowRight size={14} aria-hidden="true" />
                   </Link>
                 )}
-                <img className="vx-service-art" src={service.image} alt="" loading="lazy" />
               </article>
             ))}
           </div>
