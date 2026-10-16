@@ -167,8 +167,9 @@
 
 .vx-about { display: grid; grid-template-columns: 1fr 1.15fr; border-bottom: 2px solid var(--va-ink); }
 .vx-about-photo { position: relative; min-height: 460px; display: flex; align-items: flex-end; justify-content: center; background: var(--va-teal); overflow: hidden; }
-.vx-about-photo::before { content: ""; position: absolute; inset: 14% 18% 0; background: var(--va-paper-2); border-radius: 50% 50% 0 0; }
-.vx-about-photo img { position: relative; width: auto; max-width: 92%; max-height: 440px; object-fit: contain; }
+.vx-about-photo::before { content: ""; position: absolute; inset: 9% 15% 0; background: var(--va-paper-2); border-radius: 50% 50% 0 0; }
+/* Zoomed-in portrait framing: the photo fills the arch and is cropped below the waist. */
+.vx-about-photo img { position: absolute; left: 50%; bottom: -20%; width: auto; max-width: none; height: 112%; transform: translateX(-50%); object-fit: contain; }
 .vx-about-mic { position: absolute; top: 28px; left: 28px; width: 46px; color: var(--va-amber); transform: rotate(-12deg); }
 .vx-about-copy { position: relative; padding: clamp(40px, 6vw, 80px) clamp(24px, 6vw, 80px); }
 .vx-about-copy p { max-width: 560px; line-height: 1.75; }
@@ -566,7 +567,7 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
   .vx-hero-badge { left: 0; top: 4%; width: 84px; }
   .vx-hero-dots { width: 48px; }
   .vx-about-photo { min-height: 360px; }
-  .vx-about-photo img { max-height: 340px; }
+  .vx-about-photo::before { inset: 8% 12% 0; }
   .vx-sticker { position: static; width: 112px; margin-top: 20px; }
   .vx-services-grid { grid-template-columns: 1fr; }
   .vx-service { border-left: 0; border-top: 1px solid rgba(255, 255, 255, .18); padding: 18px 0 0; }
