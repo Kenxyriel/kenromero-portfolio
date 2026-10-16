@@ -147,18 +147,26 @@ export function VAPageHero({
   subtitle,
   tagline,
   intro,
+  backHref = '/va',
 }: {
   title: string
   subtitle?: string
   tagline?: string
   intro?: string
+  backHref?: string
 }) {
   return (
     <section className="va-page-hero">
       <div className="container va-narrow">
-        <Link className="va-back" to="/va">
-          ← Back to portfolio
-        </Link>
+        {backHref.startsWith('/') ? (
+          <Link className="va-back" to={backHref}>
+            ← Back to portfolio
+          </Link>
+        ) : (
+          <a className="va-back" href={backHref}>
+            ← Back to portfolio
+          </a>
+        )}
         <h1>
           {title}
           {subtitle && <span>{subtitle}</span>}
