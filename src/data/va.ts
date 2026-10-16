@@ -436,6 +436,11 @@ export const podcastEditing = {
   tools: ['ChatGPT', 'Claude', 'Canva', 'Google Drive', 'Google Suite', 'Riverside.fm', 'OpusClip'] as ToolName[],
   editing: {
     title: 'Featured Projects',
+    notice: {
+      tag: 'Client work',
+      title: 'These videos belong to my clients',
+      body: 'Every episode and clip here is client property, shown only as featured work from projects I edited. Please don\u2019t download, repost or reuse them.',
+    },
     items: [
       { image: '/va/work/podcast/episode-15-min.jpg', video: '/va/work/podcast/episode-15-min.mp4', label: '15 Min Episode (first minute)' },
       { image: '/va/work/podcast/intro.jpg', video: '/va/work/podcast/intro.mp4', label: 'Intro' },

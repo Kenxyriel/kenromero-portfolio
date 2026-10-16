@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from 'react'
+import { ShieldCheck } from 'lucide-react'
 import { podcastEditing as content } from '../../data/va'
 import VALayout, { ToolBadge, VACta, VAImg, VAPageHero, VASectionTitle } from './VALayout'
 
@@ -23,6 +25,7 @@ export default function VAPodcastEditing() {
           <p>Podcast Editing &amp; Content Management</p>
         </div>
         <div className="container">
+          <ClientNotice />
           <p className="va-kicker">Long-form episodes &amp; video</p>
           <div className="va-gallery va-gallery-wide">
             {content.editing.items
@@ -58,5 +61,43 @@ export default function VAPodcastEditing() {
 
       <VACta cta={content.cta} />
     </VALayout>
+  )
+}
+
+// Note that the samples are client property. It slides in the first time it
+// scrolls into view; visitors who prefer reduced motion just see it in place.
+function ClientNotice() {
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+  useEffect(() => {
+    const node = ref.current
+    if (!node || window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+      setVisible(true)
+      return
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.5 },
+    )
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
+  const { tag, title, body } = content.editing.notice
+  return (
+    <div ref={ref} className={`va-client-notice${visible ? ' is-visible' : ''}`} role="note">
+      <span className="va-client-notice-icon" aria-hidden="true">
+        <ShieldCheck size={22} />
+      </span>
+      <div>
+        <p className="va-client-notice-tag">{tag}</p>
+        <p className="va-client-notice-title">{title}</p>
+        <p className="va-client-notice-body">{body}</p>
+      </div>
+    </div>
   )
 }
