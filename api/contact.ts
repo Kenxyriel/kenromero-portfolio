@@ -121,8 +121,16 @@ export async function POST(request: Request) {
   })
 
   if (!response.ok) {
-    console.error('Resend error', response.status, await response.text())
-    return json({ success: false, message: 'The message could not be sent.' }, 502)
+    const detail = await response.text()
+    console.error('Resend error', response.status, detail)
+    // Pass Resend's reason along (e.g. an unverified domain) so failures can be diagnosed from the browser.
+    let reason = detail
+    try {
+      reason = (JSON.parse(detail) as { message?: string }).message ?? detail
+    } catch {
+      // keep the raw text
+    }
+    return json({ success: false, message: 'The message could not be sent.', reason }, 502)
   }
 
   return json({ success: true })
