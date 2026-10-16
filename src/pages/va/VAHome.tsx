@@ -1,11 +1,11 @@
 import {
   ArrowRight,
   Check,
-  Heart,
-  MessageCircle,
   Bot,
   Cloud,
   Palette,
+  Pause,
+  Play,
   Quote,
   Smartphone,
 } from 'lucide-react'
@@ -46,49 +46,80 @@ function useInView<T extends HTMLElement>(): [RefObject<T>, boolean] {
 // Same order as the tool groups in src/data/va.ts.
 const toolGroupIcons = [Palette, Bot, Smartphone, Cloud]
 
-// Typographic "covers" for each work category, drawn in CSS/SVG.
+// Covers for each work category, built from real samples (picked in src/data/va.ts).
+const previews = content.featured.previews
+
+// A clip that plays in place, with sound, when tapped. Starting one pauses the other.
+function PlayableClip({ clip, className }: { clip: { image: string; video: string; label: string }; className: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [playing, setPlaying] = useState(false)
+  const toggle = () => {
+    const video = videoRef.current
+    if (!video) return
+    if (video.paused) void video.play()
+    else video.pause()
+  }
+  return (
+    <div className={`va-cover-video ${className}${playing ? ' is-playing' : ''}`}>
+      <video
+        ref={videoRef}
+        src={clip.video}
+        poster={clip.image}
+        preload="none"
+        playsInline
+        onPlay={(event) => {
+          setPlaying(true)
+          document.querySelectorAll<HTMLVideoElement>('.va-cover-video video').forEach((other) => {
+            if (other !== event.currentTarget) other.pause()
+          })
+        }}
+        onPause={() => setPlaying(false)}
+        onEnded={() => setPlaying(false)}
+      />
+      <button
+        type="button"
+        className="va-cover-play"
+        onClick={toggle}
+        aria-label={playing ? `Pause ${clip.label}` : `Play ${clip.label}`}
+      >
+        {playing ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" />}
+      </button>
+    </div>
+  )
+}
+
 function WorkCover({ kind }: { kind: 'design' | 'podcast' | 'social' }) {
   if (kind === 'design') {
     return (
-      <div className="vx-cover va-cover-design" aria-hidden="true">
-        <span className="va-cover-type">Aa</span>
-        <div className="va-swatches">
-          <i />
-          <i />
-          <i />
-          <i />
+      <div className="vx-cover va-cover-design">
+        <div className="va-cover-fan">
+          {previews.design.map((item) => (
+            <img key={item.image} src={item.image} alt={item.label} loading="lazy" />
+          ))}
         </div>
-        <span className="va-cover-label">BRAND KIT</span>
+        <span className="va-cover-label">CLIENT GRAPHICS</span>
         <Sparkle className="va-cover-spark" />
       </div>
     )
   }
   if (kind === 'podcast') {
     return (
-      <div className="vx-cover va-cover-podcast" aria-hidden="true">
-        <Mic className="va-cover-mic" />
+      <div className="vx-cover va-cover-podcast">
+        <PlayableClip clip={previews.podcast.teaser} className="va-cover-thumb" />
+        <PlayableClip clip={previews.podcast.clip} className="va-cover-clip" />
         <Waveform className="va-cover-wave" />
-        <span className="va-cover-label">EP. 02 · CLIPS</span>
+        <span className="va-cover-label">EPISODES · CLIPS</span>
       </div>
     )
   }
   return (
-    <div className="vx-cover va-cover-social" aria-hidden="true">
-      <div className="va-mock-post">
-        <div className="va-mock-head">
-          <i />
-          <span />
-        </div>
-        <span className="va-mock-line" />
-        <span className="va-mock-line va-mock-line-short" />
-        <div className="va-mock-image">
-          <Sparkle />
-        </div>
-        <div className="va-mock-actions">
-          <Heart size={14} />
-          <MessageCircle size={14} />
-        </div>
+    <div className="vx-cover va-cover-social">
+      <div className="va-cover-phones">
+        {previews.social.map((item) => (
+          <img key={item.image} src={item.image} alt={item.label} loading="lazy" />
+        ))}
       </div>
+      <span className="va-cover-label">LIVE POSTS</span>
     </div>
   )
 }
@@ -227,16 +258,21 @@ export default function VAHome() {
           </div>
           <div className="vx-card-row">
             {work.map((item) => (
-              <Link className="vx-work-card" key={item.title} to={item.path}>
+              // The link stretches over the whole card so the clip's play button can sit above it.
+              <div className="vx-work-card" key={item.title}>
                 <WorkCover kind={item.kind} />
                 <div className="vx-work-meta">
                   <div>
-                    <h3>{item.title}</h3>
+                    <h3>
+                      <Link className="vx-work-link" to={item.path}>
+                        {item.title}
+                      </Link>
+                    </h3>
                     <span>{item.meta}</span>
                   </div>
                   <ArrowRight size={18} aria-hidden="true" />
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
