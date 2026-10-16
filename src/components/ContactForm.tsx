@@ -9,12 +9,30 @@ type ContactFormProps = {
 const defaultIntro =
   'Have a QA project, testing opportunity, or collaboration in mind? Send a message and introduce yourself.'
 
-export default function ContactForm({ intro = defaultIntro }: ContactFormProps) {
-  const [submitted, setSubmitted] = useState(false)
+type Status = 'idle' | 'sending' | 'sent' | 'error'
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+export default function ContactForm({ intro = defaultIntro }: ContactFormProps) {
+  const [status, setStatus] = useState<Status>('idle')
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setSubmitted(true)
+    const form = event.currentTarget
+    const data = Object.fromEntries(new FormData(form))
+
+    setStatus('sending')
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, page: window.location.href }),
+      })
+      const result = await response.json()
+      if (!response.ok || !result.success) throw new Error(result.message)
+      form.reset()
+      setStatus('sent')
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -72,20 +90,37 @@ export default function ContactForm({ intro = defaultIntro }: ContactFormProps) 
           </label>
         </div>
 
+        <input
+          type="checkbox"
+          name="botcheck"
+          className="contact-honeypot"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+        />
+
         <label>
           <span>Message</span>
           <textarea name="message" rows={6} placeholder="Write something..." required />
         </label>
 
         <div className="contact-form-footer">
-          <button className="button button-primary contact-submit" type="submit">
-            Send Message <Send size={16} />
+          <p className={`contact-form-status is-${status}`} role="status" aria-live="polite">
+            {status === 'sent' && 'Thanks! Your message was sent. I will get back to you soon.'}
+            {status === 'error' && (
+              <>
+                Sorry, the message could not be sent. Please email me at{' '}
+                <a href={`mailto:${profile.email}`}>{profile.email}</a> instead.
+              </>
+            )}
+          </p>
+          <button
+            className="button button-primary contact-submit"
+            type="submit"
+            disabled={status === 'sending'}
+          >
+            {status === 'sending' ? 'Sending...' : 'Send Message'} <Send size={16} />
           </button>
-          {submitted && (
-            <small className="contact-form-status">
-              Form UI is ready. A live email endpoint still needs to be connected before messages can be delivered.
-            </small>
-          )}
         </div>
       </form>
     </div>

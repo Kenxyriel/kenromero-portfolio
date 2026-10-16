@@ -77,7 +77,7 @@ Add each address under **Settings → Domains** of the creative Vercel project (
 
 ## Notes
 
-- The contact form UI does not deliver messages yet; a form/email endpoint still needs to be connected.
+- The contact form posts to `api/contact.ts`, a Vercel function that emails each message through [Resend](https://resend.com) from `contact@kenromerogoestdigital.space` to kenromero.digital@gmail.com, with reply-to set to the visitor. Set `RESEND_API_KEY` in Vercel (Project Settings > Environment Variables) and verify the domain in Resend. Optional overrides: `CONTACT_FROM`, `CONTACT_TO`. `npm run dev` does not serve `/api`; use `vercel dev` to test sending locally.
 
 ## Scripts
 
