@@ -1,15 +1,12 @@
 import {
   ArrowRight,
-  BarChart3,
-  ClipboardList,
-  Headphones,
+  Check,
   Heart,
   MessageCircle,
   Bot,
   Cloud,
   Palette,
   Quote,
-  Share2,
   Smartphone,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
@@ -18,8 +15,6 @@ import { profile } from '../../data/profile'
 import { vaHome as content, vaTestimonials } from '../../data/va'
 import { CurlArrow, DotGrid, Mic, RotatingBadge, Sparkle, Squiggle, Waveform } from './VAArt'
 import VALayout, { ToolBadge } from './VALayout'
-
-const serviceIcons = [Headphones, Share2, Palette, ClipboardList, BarChart3]
 
 // Same order as the tool groups in src/data/va.ts.
 const toolGroupIcons = [Palette, Bot, Smartphone, Cloud]
@@ -153,36 +148,37 @@ export default function VAHome() {
 
       {/* SERVICES */}
       <section id="services" className="vx-services">
-        <div className="container vx-services-grid">
-          <div className="vx-services-intro">
-            <p className="vx-eyebrow vx-eyebrow-amber">Services</p>
-            <h2 className="vx-serif">
-              How I can
-              <br />
-              <em>help you</em>
+        <div className="container">
+          <div className="vx-services-head">
+            <p className="vx-script">{content.services.eyebrow}</p>
+            <h2>
+              Creative support for <mark>bigger results</mark>
             </h2>
-            <Squiggle className="vx-amber" />
+            <p>{content.services.description}</p>
           </div>
-          {content.services.items.map((service, index) => {
-            const Icon = serviceIcons[index]
-            const body = (
-              <>
-                <Icon className="vx-service-icon" aria-hidden="true" />
-                <h3>{service.title}</h3>
-                <p>{service.items.join(' · ')}</p>
+          <div className="vx-service-cards">
+            {content.services.items.map((service) => (
+              <article className="vx-service-card" key={service.title}>
+                <span className="vx-service-num">{service.number}</span>
                 <span className="vx-service-tag">{service.tagline}</span>
-              </>
-            )
-            return service.path ? (
-              <Link className="vx-service" key={service.title} to={service.path}>
-                {body}
-              </Link>
-            ) : (
-              <div className="vx-service" key={service.title}>
-                {body}
-              </div>
-            )
-          })}
+                <h3>{service.title}</h3>
+                <ul>
+                  {service.items.map((item) => (
+                    <li key={item}>
+                      <Check size={12} strokeWidth={3} aria-hidden="true" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                {service.path && (
+                  <Link className="vx-service-btn" to={service.path}>
+                    View work <ArrowRight size={14} aria-hidden="true" />
+                  </Link>
+                )}
+                <img className="vx-service-art" src={service.image} alt="" loading="lazy" />
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

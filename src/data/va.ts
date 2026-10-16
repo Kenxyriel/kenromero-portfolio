@@ -91,6 +91,7 @@ export const vaHome = {
   },
   services: {
     eyebrow: 'My Services',
+    // Mascot illustrations (public/va/services) come from the Canva creative portfolio.
     title: 'Creative Support for Bigger Results',
     description: 'From editing to strategy, I help businesses turn ideas into impactful content.',
     items: [
@@ -100,6 +101,7 @@ export const vaHome = {
         tagline: 'Turn Conversations into Opportunities',
         items: ['Podcast Editing', 'Video Editing', 'Short-Form Content'],
         path: '/va/podcast-editing',
+        image: '/va/services/podcast.png',
       },
       {
         number: '02',
@@ -107,6 +109,7 @@ export const vaHome = {
         tagline: 'Create. Connect. Convert.',
         items: ['Content Management', 'Caption Writing', 'Hashtag Research'],
         path: '/va/social-media-content',
+        image: '/va/services/social.png',
       },
       {
         number: '03',
@@ -114,20 +117,23 @@ export const vaHome = {
         tagline: 'Ideas into Visuals',
         items: ['Brand Kit Design', 'Graphic Design', 'Thumbnail & Visuals'],
         path: '/va/design-branding',
+        image: '/va/services/design.png',
       },
       {
         number: '04',
         title: 'Content & Strategy',
         tagline: 'Clear Plan, Better Results',
-        items: ['Social Media Audit', 'Content Strategy', 'Recommendations'],
+        items: ['Engaging Stories', 'Social Media Audit', 'Content Strategy', 'Recommendations'],
+        image: '/va/services/strategy.png',
       },
       {
         number: '05',
         title: 'Report & Analytics',
         tagline: 'Track Record. Grow.',
         items: ['Monthly Report', 'Performance Insights', 'Growth Opportunities'],
+        image: '/va/services/report.png',
       },
-    ],
+    ] as { number: string; title: string; tagline: string; items: string[]; image: string; path?: string }[],
   },
   featured: {
     title: 'Featured Projects',

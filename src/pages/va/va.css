@@ -209,19 +209,94 @@
 .vx-numbers-row span { margin-top: 4px; color: var(--va-ink); font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
 .vx-numbers-row small { color: #4a3a12; font-size: 12px; }
 
-/* ---------- Services (dark band) ---------- */
+/* ---------- Services (cards with mascots) ---------- */
 
-.vx-services { padding: clamp(44px, 6vw, 64px) 0; background: var(--va-ink); color: #d8cfc3; }
-.vx-services h2, .vx-services h3 { color: white; }
-.vx-services .vx-serif em { color: var(--va-amber); }
-.vx-services-grid { display: grid; grid-template-columns: 1.1fr repeat(5, minmax(0, 1fr)); }
-.vx-services-intro { padding-right: 20px; }
-.vx-service { display: flex; flex-direction: column; padding: 4px 20px 8px; border-left: 1px solid rgba(255, 255, 255, .18); transition: background 160ms ease; }
-a.vx-service:hover { background: rgba(255, 255, 255, .05); }
-.vx-service-icon { width: 30px; height: 30px; color: var(--va-amber); }
-.vx-service h3 { margin: 14px 0 0; font-family: var(--va-serif); font-size: 21px; font-weight: 600; }
-.vx-service p { margin: 8px 0 0; font-size: 14px; line-height: 1.6; }
-.vx-service-tag { margin-top: auto; padding-top: 14px; color: var(--va-amber); font-family: var(--va-hand); font-size: 20px; font-weight: 700; }
+.vx-services { padding: clamp(60px, 7vw, 96px) 0; background: var(--va-paper); border-bottom: 2px solid var(--va-ink); }
+.vx-services-head { max-width: 720px; margin: 0 auto clamp(32px, 4vw, 48px); text-align: center; }
+.vx-script { margin: 0; font-family: var(--va-hand); font-size: clamp(40px, 5vw, 58px); font-weight: 700; line-height: 1; color: var(--va-ink); }
+.vx-services-head h2 { margin: 12px 0 0; font-size: clamp(22px, 2.6vw, 30px); font-weight: 800; letter-spacing: .02em; text-transform: uppercase; }
+.vx-services-head mark { padding: 0 .3em; color: var(--va-ink); background: var(--va-amber); border-radius: 6px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.vx-services-head p { margin: 14px 0 0; color: var(--va-text); line-height: 1.6; }
+
+/* 3 cards on top, 2 centered below (6-column grid, each card spans 2). */
+.vx-service-cards { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 24px; }
+.vx-service-card {
+  position: relative;
+  grid-column: span 2;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 24px 26px;
+  overflow: hidden;
+  background: #fde9a9;
+  border: 2px solid var(--va-ink);
+  border-radius: 26px;
+  box-shadow: 6px 6px 0 var(--va-ink);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.vx-service-card:nth-child(4) { grid-column: 2 / span 2; }
+.vx-service-card:hover { transform: translate(-2px, -3px); box-shadow: 8px 9px 0 var(--va-ink); }
+.vx-service-num { color: var(--va-ink); font-size: 14px; font-weight: 800; }
+.vx-service-tag {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  max-width: 46%;
+  color: var(--va-ink);
+  font-family: var(--va-hand);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.1;
+  text-align: right;
+  transform: rotate(6deg);
+}
+.vx-service-card h3 {
+  position: relative;
+  z-index: 1;
+  max-width: 56%;
+  margin: 14px 0 0;
+  font-size: clamp(24px, 2.2vw, 30px);
+  font-weight: 800;
+  font-stretch: 85%;
+  line-height: .98;
+  letter-spacing: -.01em;
+  text-transform: uppercase;
+}
+.vx-service-card ul { position: relative; z-index: 1; max-width: 54%; margin: 16px 0 0; padding: 0; list-style: none; }
+.vx-service-card li { display: flex; align-items: center; gap: 8px; padding: 3px 0; color: var(--va-ink); font-size: 14px; font-weight: 600; }
+.vx-service-card li svg { flex-shrink: 0; width: 18px; height: 18px; padding: 3px; color: var(--va-ink); background: var(--va-amber); border-radius: 50%; }
+.vx-service-btn {
+  position: relative;
+  z-index: 1;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding: 10px 18px;
+  color: var(--va-ink);
+  background: var(--va-amber);
+  border: 2px solid var(--va-ink);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--va-ink);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+.vx-service-btn:hover { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--va-ink); }
+.vx-service-art {
+  position: absolute;
+  right: -6px;
+  bottom: -4px;
+  width: 45%;
+  max-width: 220px;
+  height: auto;
+  pointer-events: none;
+  transition: transform 300ms ease;
+}
+.vx-service-card:hover .vx-service-art { transform: translateY(-6px) rotate(-2deg); }
 
 /* ---------- Selected work ---------- */
 
@@ -571,8 +646,10 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1100px) {
-  .vx-services-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 28px; }
-  .vx-services-intro { grid-column: 1 / -1; }
+  .vx-service-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .vx-service-card,
+  .vx-service-card:nth-child(4) { grid-column: auto; }
+  .vx-service-card:nth-child(5) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 12px); }
   .vx-numbers-row { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 20px; }
   .va-footer-grid { grid-template-columns: 1fr 1fr; }
   .va-footer-badge { display: none; }
@@ -608,8 +685,9 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
   .vx-about-photo { min-height: 360px; }
   .vx-about-photo::before { inset: 8% 12% 0; }
   .vx-sticker { position: static; width: 112px; margin-top: 20px; }
-  .vx-services-grid { grid-template-columns: 1fr; }
-  .vx-service { border-left: 0; border-top: 1px solid rgba(255, 255, 255, .18); padding: 18px 0 0; }
+  .vx-service-cards { grid-template-columns: 1fr; }
+  .vx-service-card:nth-child(5) { grid-column: auto; width: auto; }
+  .vx-service-card { min-height: 280px; }
   .vx-numbers-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .vx-quote-row { row-gap: 28px; }
   .vx-quote-row figure { padding: 0 0 0 16px; }
