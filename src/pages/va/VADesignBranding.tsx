@@ -1,6 +1,10 @@
 import { useState, type CSSProperties } from 'react'
 import { designBranding as content } from '../../data/va'
+import VAFoodShowcase from './VAFoodShowcase'
 import VALayout, { VACta, VAImg, VAPageHero } from './VALayout'
+
+// Columns that fill every row: 9 samples sit 3 × 3 rather than 4 + 4 + 1.
+const columnsFor = (count: number) => (count <= 4 ? count : count % 4 === 0 ? 4 : count % 3 === 0 ? 3 : 4)
 
 export default function VADesignBranding() {
   const [active, setActive] = useState<string>('All')
@@ -35,11 +39,15 @@ export default function VADesignBranding() {
               {section.galleries.map((gallery, index) => (
                 <div className="va-design-gallery" key={gallery.title || index}>
                   {gallery.title && <h3>{gallery.title}</h3>}
-                  <div className="va-design-grid" style={{ '--cols': Math.min(gallery.items.length, 4) } as CSSProperties}>
-                    {gallery.items.map((item) => (
-                      <VAImg key={item.label} item={item} />
-                    ))}
-                  </div>
+                  {gallery.showcase ? (
+                    <VAFoodShowcase items={gallery.items} />
+                  ) : (
+                    <div className="va-design-grid" style={{ '--cols': columnsFor(gallery.items.length) } as CSSProperties}>
+                      {gallery.items.map((item) => (
+                        <VAImg key={item.label} item={item} />
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

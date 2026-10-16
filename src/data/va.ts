@@ -8,9 +8,10 @@
 /**
  * A work sample. `image` is the still (or video poster); `video` is an MP4 in
  * public/va/work that plays in place of the still once added. `tall` marks a
- * vertical (9:16) sample such as a short-form clip.
+ * vertical (9:16) sample such as a short-form clip. `brand` names the client
+ * a sample was made for (shown in the animated food showcase).
  */
-export type VAImage = { image?: string; video?: string; label: string; tall?: boolean }
+export type VAImage = { image?: string; video?: string; label: string; tall?: boolean; brand?: string }
 
 export const vaLinks = {
   instagram: { label: '@heyitskhenn', href: 'https://www.instagram.com/heyitskhenn/' },
@@ -241,12 +242,28 @@ export const designBranding = {
       title: 'Graphic Design',
       detail: 'Social Posts • Carousels • Promotional Graphics',
       galleries: [
-        { title: 'Accounting Firm Graphics', items: [1, 2, 3].map((n) => ({ image: `/va/work/design/accounting-${n}.jpg`, label: `Accounting firm graphic ${n}` })) },
+        {
+          title: 'Accounting Firm Graphics',
+          items: [4, 5, 6, 7, 8, 9, 1, 2, 3].map((n) => ({ image: `/va/work/design/accounting-${n}.jpg`, label: `Accounting firm graphic ${n}` })),
+        },
         { title: 'Business Graphics', items: [1, 2, 3].map((n) => ({ image: `/va/work/design/business-${n}.jpg`, label: `Business graphic ${n}` })) },
         { title: 'Book and Podcast Graphics', items: [1, 2, 3].map((n) => ({ image: `/va/work/design/book-podcast-${n}.jpg`, label: `Book and podcast graphic ${n}` })) },
         { title: 'Game Graphics', items: [1, 2, 3].map((n) => ({ image: `/va/work/design/game-${n}.jpg`, label: `Game graphic ${n}` })) },
         { title: 'Promotional Graphics', items: [1, 2, 3].map((n) => ({ image: `/va/work/design/promo-${n}.jpg`, label: `Promotional graphic ${n}` })) },
-        { title: 'Food Graphics', items: [{ image: '/va/work/design/food-1.jpg', label: 'Food graphic' }] },
+        {
+          title: 'Food Graphics',
+          showcase: true,
+          items: [
+            { image: '/va/work/design/food-1.jpg', brand: 'Bun Riot', label: 'Build Your Own' },
+            { image: '/va/work/design/food-2.jpg', brand: 'Bun Riot', label: 'Triple Threat' },
+            { image: '/va/work/design/food-3.jpg', brand: 'Bun Riot', label: 'Riot Combo' },
+            { image: '/va/work/design/food-8.jpg', brand: 'Bun Riot', label: 'Weekend Burger Deal' },
+            { image: '/va/work/design/food-4.jpg', brand: 'Kape at Kuwento', label: 'Brown Sugar Latte' },
+            { image: '/va/work/design/food-5.jpg', brand: 'Kape at Kuwento', label: 'Matcha Latte' },
+            { image: '/va/work/design/food-6.jpg', brand: 'Kape at Kuwento', label: 'Hojicha Latte' },
+            { image: '/va/work/design/food-7.jpg', brand: 'Kape at Kuwento', label: 'Strawberry Matcha' },
+          ],
+        },
       ],
     },
     {
@@ -254,7 +271,7 @@ export const designBranding = {
       detail: 'Stories • Thumbnails • Branded Content',
       galleries: [{ title: '', items: [1, 2, 3, 4].map((n) => ({ image: `/va/work/design/content-visual-${n}.jpg`, label: `Content visual ${n}` })) }],
     },
-  ] as { title: string; detail: string; galleries: { title: string; items: VAImage[] }[] }[],
+  ] as { title: string; detail: string; galleries: { title: string; items: VAImage[]; showcase?: boolean }[] }[],
   cta: {
     eyebrow: 'Your brand has the vision.',
     title: 'Let’s Make It Worth Remembering.',
@@ -349,14 +366,16 @@ export const podcastEditing = {
   editing: {
     title: 'Featured Projects',
     items: [
-      { image: '/va/work/podcast/intro.jpg', label: 'Intro' },
-      { image: '/va/work/podcast/outro.jpg', label: 'Outro' },
-      { image: '/va/work/podcast/episode-15-min.jpg', label: '15 Min Episode' },
-      { image: '/va/work/podcast/ai-clip-1.jpg', label: 'AI Generated Clip', tall: true },
-      { image: '/va/work/podcast/ai-clip-2.jpg', label: 'AI Generated Clip 2', tall: true },
-      { image: '/va/work/podcast/intro-teaser.jpg', label: 'Intro Teaser Clip' },
-      { image: '/va/work/podcast/manual-clip-1.jpg', label: 'Manual Curated Clip', tall: true },
-      { image: '/va/work/podcast/manual-clip-2.jpg', label: 'Manual Curated Clip 2', tall: true },
+      { image: '/va/work/podcast/episode-15-min.jpg', video: '/va/work/podcast/episode-15-min.mp4', label: '15 Min Episode (first minute)' },
+      { image: '/va/work/podcast/intro.jpg', video: '/va/work/podcast/intro.mp4', label: 'Intro' },
+      { image: '/va/work/podcast/outro.jpg', video: '/va/work/podcast/outro.mp4', label: 'Outro' },
+      { image: '/va/work/podcast/intro-teaser.jpg', video: '/va/work/podcast/intro-teaser.mp4', label: 'Intro Teaser Clip' },
+      { image: '/va/work/podcast/ai-clip-1.jpg', video: '/va/work/podcast/ai-clip-1.mp4', label: 'AI Generated Clip', tall: true },
+      { image: '/va/work/podcast/ai-clip-2.jpg', video: '/va/work/podcast/ai-clip-2.mp4', label: 'AI Generated Clip 2', tall: true },
+      { image: '/va/work/podcast/manual-clip-1.jpg', video: '/va/work/podcast/manual-clip-1.mp4', label: 'Manual Curated Clip', tall: true },
+      { image: '/va/work/podcast/manual-clip-2.jpg', video: '/va/work/podcast/manual-clip-2.mp4', label: 'Manual Curated Clip 2', tall: true },
+      { image: '/va/work/podcast/manual-clip-3.jpg', video: '/va/work/podcast/manual-clip-3.mp4', label: 'Manual Curated Clip 3', tall: true },
+      { image: '/va/work/podcast/manual-clip-4.jpg', video: '/va/work/podcast/manual-clip-4.mp4', label: 'Manual Curated Clip 4', tall: true },
       { image: '/va/work/podcast/thumbnail.jpg', label: 'Thumbnail' },
     ] as VAImage[],
   },

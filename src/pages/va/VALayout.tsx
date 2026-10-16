@@ -1,5 +1,5 @@
 import { ArrowRight, Check, ImageIcon, Instagram, Linkedin, Mail, Maximize2, Smartphone, X } from 'lucide-react'
-import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import SiteHeader, { type NavItem } from '../../components/SiteHeader'
 import usePageMeta from '../../components/usePageMeta'
@@ -17,6 +17,9 @@ const navItems: NavItem[] = [
 
 // Full-screen viewer for work samples, so detailed screenshots can be read.
 const LightboxContext = createContext<(item: VAImage) => void>(() => {})
+
+/** Opens a work sample in the full-screen viewer. */
+export const useLightbox = () => useContext(LightboxContext)
 
 function Lightbox({ item, onClose }: { item: VAImage; onClose: () => void }) {
   useEffect(() => {
@@ -162,16 +165,15 @@ export function ToolBadge({ name, index = 0 }: { name: ToolName; index?: number 
   )
 }
 
-// Image from the creative portfolio, or a labelled placeholder until it is added.
 // Work sample (image or video) that opens full-screen on click, or a labelled
 // placeholder until the asset is added.
 export function VAImg({ item, className = '', caption = false }: { item: VAImage; className?: string; caption?: boolean }) {
-  const open = useContext(LightboxContext)
+  const open = useLightbox()
   if (item.image || item.video) {
     return (
       <figure className={`va-img ${className}${item.tall ? ' va-img-tall' : ''}`}>
         {item.video ? (
-          <video src={item.video} poster={item.image} muted loop playsInline autoPlay preload="metadata" aria-label={item.label} />
+          <InlineVideo src={item.video} poster={item.image} label={item.label} />
         ) : (
           <img src={item.image} alt={item.label} loading="lazy" />
         )}
@@ -188,6 +190,26 @@ export function VAImg({ item, className = '', caption = false }: { item: VAImage
       <figcaption>{item.label}</figcaption>
     </figure>
   )
+}
+
+// Muted preview loop that only plays while on screen, so a page of clips
+// doesn't download and decode every video at once. Sound plays in the viewer.
+function InlineVideo({ src, poster, label }: { src: string; poster?: string; label: string }) {
+  const ref = useRef<HTMLVideoElement>(null)
+  useEffect(() => {
+    const video = ref.current
+    if (!video || window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) video.play().catch(() => {})
+        else video.pause()
+      },
+      { threshold: 0.4 },
+    )
+    observer.observe(video)
+    return () => observer.disconnect()
+  }, [])
+  return <video ref={ref} src={src} poster={poster} muted loop playsInline preload="none" aria-label={label} />
 }
 
 export function VAPageHero({
