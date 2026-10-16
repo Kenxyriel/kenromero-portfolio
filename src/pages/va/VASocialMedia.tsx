@@ -72,21 +72,27 @@ export default function VASocialMedia() {
         <div className="container">
           <VASectionTitle title={content.captionsTitle} />
           <div className="va-posts">
-            {samplePosts.map((post) => (
-              <article className="va-post" key={post.account}>
-                <header>
-                  <span className="va-post-avatar" aria-hidden="true">
-                    {post.account[0]}
-                  </span>
-                  <div>
-                    <strong>{post.account}</strong>
-                    <small>1hr</small>
-                  </div>
-                </header>
-                <p>{post.caption}</p>
-                {post.image && <img src={post.image} alt={`${post.account} post`} loading="lazy" />}
-              </article>
-            ))}
+            {samplePosts.map((post) =>
+              post.image ? (
+                // The screenshot already shows the account and caption.
+                <figure className="va-post-shot" key={post.account}>
+                  <img src={post.image} alt={`${post.account} post: ${post.caption}`} loading="lazy" />
+                </figure>
+              ) : (
+                <article className="va-post" key={post.account}>
+                  <header>
+                    <span className="va-post-avatar" aria-hidden="true">
+                      {post.account[0]}
+                    </span>
+                    <div>
+                      <strong>{post.account}</strong>
+                      <small>1hr</small>
+                    </div>
+                  </header>
+                  <p>{post.caption}</p>
+                </article>
+              ),
+            )}
           </div>
         </div>
       </section>

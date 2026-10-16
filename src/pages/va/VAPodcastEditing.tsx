@@ -7,8 +7,8 @@ export default function VAPodcastEditing() {
       <VAPageHero title={content.title} subtitle={content.subtitle} intro={content.intro} />
 
       <section className="va-section va-section-tight">
-        <div className="container va-tools-row">
-          <p className="va-kicker">Tools:</p>
+        <div className="container va-podcast-tools">
+          <p className="va-kicker">Tools I use</p>
           <ul className="va-tool-row">
             {content.tools.map((tool, index) => (
               <ToolBadge key={tool} name={tool} index={index} />
@@ -23,10 +23,21 @@ export default function VAPodcastEditing() {
           <p>Podcast Editing &amp; Content Management</p>
         </div>
         <div className="container">
-          <div className="va-gallery">
-            {content.editing.items.map((item) => (
-              <VAImg key={item.label} item={item} />
-            ))}
+          <p className="va-kicker">Long-form episodes &amp; video</p>
+          <div className="va-gallery va-gallery-wide">
+            {content.editing.items
+              .filter((item) => !item.tall)
+              .map((item) => (
+                <VAImg key={item.label} item={item} caption />
+              ))}
+          </div>
+          <p className="va-kicker">Short-form clips</p>
+          <div className="va-gallery va-gallery-tall">
+            {content.editing.items
+              .filter((item) => item.tall)
+              .map((item) => (
+                <VAImg key={item.label} item={item} caption />
+              ))}
           </div>
         </div>
       </section>

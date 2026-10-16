@@ -1,5 +1,5 @@
-import { ArrowRight, Check, ImageIcon, Instagram, Linkedin, Mail, Smartphone } from 'lucide-react'
-import { useEffect, type ReactNode } from 'react'
+import { ArrowRight, Check, ImageIcon, Instagram, Linkedin, Mail, Maximize2, Smartphone, X } from 'lucide-react'
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import SiteHeader, { type NavItem } from '../../components/SiteHeader'
 import usePageMeta from '../../components/usePageMeta'
@@ -15,6 +15,41 @@ const navItems: NavItem[] = [
   { label: 'Podcast', href: '/va/podcast-editing' },
 ]
 
+// Full-screen viewer for work samples, so detailed screenshots can be read.
+const LightboxContext = createContext<(item: VAImage) => void>(() => {})
+
+/** Opens a work sample in the full-screen viewer. */
+export const useLightbox = () => useContext(LightboxContext)
+
+function Lightbox({ item, onClose }: { item: VAImage; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => event.key === 'Escape' && onClose()
+    document.addEventListener('keydown', onKey)
+    const overflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = overflow
+    }
+  }, [onClose])
+
+  return (
+    <div className="va-lightbox" role="dialog" aria-modal="true" aria-label={item.label} onClick={onClose}>
+      <button className="va-lightbox-close" type="button" aria-label="Close" autoFocus onClick={onClose}>
+        <X size={22} />
+      </button>
+      <figure onClick={(event) => event.stopPropagation()}>
+        {item.video ? (
+          <video src={item.video} poster={item.image} controls autoPlay playsInline />
+        ) : (
+          <img src={item.image} alt={item.label} />
+        )}
+        <figcaption>{item.label}</figcaption>
+      </figure>
+    </div>
+  )
+}
+
 type VALayoutProps = {
   meta: { title: string; description: string }
   children: ReactNode
@@ -25,6 +60,8 @@ type VALayoutProps = {
 // Shell for every /va page: creative-portfolio theme, navigation, contact footer.
 export default function VALayout({ meta, children, unlisted = false }: VALayoutProps) {
   usePageMeta(meta.title, meta.description)
+  const [viewing, setViewing] = useState<VAImage | null>(null)
+  const close = useCallback(() => setViewing(null), [])
 
   useEffect(() => {
     if (!unlisted) return
@@ -43,7 +80,10 @@ export default function VALayout({ meta, children, unlisted = false }: VALayoutP
         navItems={navItems}
         cta={{ label: "Let's Work Together", href: '/va#contact' }}
       />
-      <main id="top">{children}</main>
+      <LightboxContext.Provider value={setViewing}>
+        <main id="top">{children}</main>
+      </LightboxContext.Provider>
+      {viewing && <Lightbox item={viewing} onClose={close} />}
       <VAFooter />
     </div>
   )
@@ -125,12 +165,22 @@ export function ToolBadge({ name, index = 0 }: { name: ToolName; index?: number 
   )
 }
 
-// Image from the creative portfolio, or a labelled placeholder until it is added.
-export function VAImg({ item, className = '' }: { item: VAImage; className?: string }) {
-  if (item.image) {
+// Work sample (image or video) that opens full-screen on click, or a labelled
+// placeholder until the asset is added.
+export function VAImg({ item, className = '', caption = false }: { item: VAImage; className?: string; caption?: boolean }) {
+  const open = useLightbox()
+  if (item.image || item.video) {
     return (
-      <figure className={`va-img ${className}`}>
-        <img src={item.image} alt={item.label} loading="lazy" />
+      <figure className={`va-img ${className}${item.tall ? ' va-img-tall' : ''}`}>
+        {item.video ? (
+          <InlineVideo src={item.video} poster={item.image} label={item.label} />
+        ) : (
+          <img src={item.image} alt={item.label} loading="lazy" />
+        )}
+        <button className="va-img-open" type="button" aria-label={`View ${item.label} full size`} onClick={() => open(item)}>
+          <Maximize2 size={16} aria-hidden="true" />
+        </button>
+        {caption && <figcaption className="va-img-caption">{item.label}</figcaption>}
       </figure>
     )
   }
@@ -140,6 +190,26 @@ export function VAImg({ item, className = '' }: { item: VAImage; className?: str
       <figcaption>{item.label}</figcaption>
     </figure>
   )
+}
+
+// Muted preview loop that only plays while on screen, so a page of clips
+// doesn't download and decode every video at once. Sound plays in the viewer.
+function InlineVideo({ src, poster, label }: { src: string; poster?: string; label: string }) {
+  const ref = useRef<HTMLVideoElement>(null)
+  useEffect(() => {
+    const video = ref.current
+    if (!video || window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) video.play().catch(() => {})
+        else video.pause()
+      },
+      { threshold: 0.4 },
+    )
+    observer.observe(video)
+    return () => observer.disconnect()
+  }, [])
+  return <video ref={ref} src={src} poster={poster} muted loop playsInline preload="none" aria-label={label} />
 }
 
 export function VAPageHero({
