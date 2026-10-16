@@ -96,7 +96,6 @@ export const vaHome = {
     description: 'From editing to strategy, I help businesses turn ideas into impactful content.',
     items: [
       {
-        number: '01',
         title: 'Podcast & Video',
         tagline: 'Turn Conversations into Opportunities',
         items: ['Podcast Editing', 'Video Editing', 'Short-Form Content'],
@@ -104,7 +103,6 @@ export const vaHome = {
         image: '/va/services/podcast.png',
       },
       {
-        number: '02',
         title: 'Social Media',
         tagline: 'Create. Connect. Convert.',
         items: ['Content Management', 'Caption Writing', 'Hashtag Research'],
@@ -112,7 +110,6 @@ export const vaHome = {
         image: '/va/services/social.png',
       },
       {
-        number: '03',
         title: 'Design & Branding',
         tagline: 'Ideas into Visuals',
         items: ['Brand Kit Design', 'Graphic Design', 'Thumbnail & Visuals'],
@@ -120,20 +117,18 @@ export const vaHome = {
         image: '/va/services/design.png',
       },
       {
-        number: '04',
         title: 'Content & Strategy',
         tagline: 'Clear Plan, Better Results',
         items: ['Engaging Stories', 'Social Media Audit', 'Content Strategy', 'Recommendations'],
         image: '/va/services/strategy.png',
       },
       {
-        number: '05',
         title: 'Report & Analytics',
         tagline: 'Track Record. Grow.',
         items: ['Monthly Report', 'Performance Insights', 'Growth Opportunities'],
         image: '/va/services/report.png',
       },
-    ] as { number: string; title: string; tagline: string; items: string[]; image: string; path?: string }[],
+    ] as { title: string; tagline: string; items: string[]; image: string; path?: string }[],
   },
   featured: {
     title: 'Featured Projects',

@@ -9,12 +9,39 @@ import {
   Quote,
   Smartphone,
 } from 'lucide-react'
+import { useEffect, useRef, useState, type RefObject } from 'react'
 import { Link } from 'react-router-dom'
 import ContactForm from '../../components/ContactForm'
 import { profile } from '../../data/profile'
 import { vaHome as content, vaTestimonials } from '../../data/va'
 import { CurlArrow, DotGrid, Mic, RotatingBadge, Sparkle, Squiggle, Waveform } from './VAArt'
 import VALayout, { ToolBadge } from './VALayout'
+
+// True once the element has scrolled into view (immediately if motion is reduced).
+function useInView<T extends HTMLElement>(): [RefObject<T>, boolean] {
+  const ref = useRef<T>(null)
+  const [shown, setShown] = useState(false)
+  useEffect(() => {
+    const node = ref.current
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (!node || reduced || !('IntersectionObserver' in window)) {
+      setShown(true)
+      return
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShown(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '0px 0px -10% 0px' },
+    )
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
+  return [ref, shown]
+}
 
 // Same order as the tool groups in src/data/va.ts.
 const toolGroupIcons = [Palette, Bot, Smartphone, Cloud]
@@ -73,6 +100,7 @@ const work = [
 ]
 
 export default function VAHome() {
+  const [cardsRef, cardsShown] = useInView<HTMLDivElement>()
   return (
     <VALayout meta={content.meta}>
       {/* HERO */}
@@ -148,18 +176,23 @@ export default function VAHome() {
 
       {/* SERVICES */}
       <section id="services" className="vx-services">
+        <span className="vx-blob vx-blob-a" aria-hidden="true" />
+        <span className="vx-blob vx-blob-b" aria-hidden="true" />
+        <DotGrid className="vx-services-dots" />
         <div className="container">
           <div className="vx-services-head">
+            <Sparkle className="vx-head-spark vx-head-spark-a" />
+            <Sparkle className="vx-head-spark vx-head-spark-b" />
             <p className="vx-script">{content.services.eyebrow}</p>
+            <Squiggle className="vx-services-squiggle" />
             <h2>
               Creative support for <mark>bigger results</mark>
             </h2>
             <p>{content.services.description}</p>
           </div>
-          <div className="vx-service-cards">
+          <div ref={cardsRef} className={`vx-service-cards${cardsShown ? ' is-shown' : ''}`}>
             {content.services.items.map((service) => (
               <article className="vx-service-card" key={service.title}>
-                <span className="vx-service-num">{service.number}</span>
                 <span className="vx-service-tag">{service.tagline}</span>
                 <h3>{service.title}</h3>
                 <ul>
