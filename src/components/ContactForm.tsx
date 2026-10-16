@@ -9,8 +9,6 @@ type ContactFormProps = {
 const defaultIntro =
   'Have a QA project, testing opportunity, or collaboration in mind? Send a message and introduce yourself.'
 
-const accessKey = import.meta.env.VITE_WEB3FORMS_KEY
-
 type Status = 'idle' | 'sending' | 'sent' | 'error'
 
 export default function ContactForm({ intro = defaultIntro }: ContactFormProps) {
@@ -19,24 +17,14 @@ export default function ContactForm({ intro = defaultIntro }: ContactFormProps) 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const form = event.currentTarget
-
-    if (!accessKey) {
-      setStatus('error')
-      return
-    }
-
-    const data = new FormData(form)
-    data.append('access_key', accessKey)
-    data.append('subject', `New portfolio message from ${data.get('name')}`)
-    data.append('from_name', 'Ken Romero Portfolio')
-    data.append('page', window.location.href)
+    const data = Object.fromEntries(new FormData(form))
 
     setStatus('sending')
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: data,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, page: window.location.href }),
       })
       const result = await response.json()
       if (!response.ok || !result.success) throw new Error(result.message)
