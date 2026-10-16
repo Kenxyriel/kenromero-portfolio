@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import SiteHeader, { type NavItem } from '../../components/SiteHeader'
 import usePageMeta from '../../components/usePageMeta'
 import { profile } from '../../data/profile'
-import { vaLinks, type VAImage } from '../../data/va'
+import { toolIcons, vaLinks, type ToolName, type VAImage } from '../../data/va'
 import { RotatingBadge, Sparkle, Squiggle } from './VAArt'
 import './va.css'
 
@@ -105,6 +105,19 @@ function VAFooter() {
         <span>© {new Date().getFullYear()} {profile.name}. All rights reserved.</span>
       </div>
     </footer>
+  )
+}
+
+// Circular tool logo that bobs and tilts; `index` staggers the motion so a
+// row of badges moves like a wave. Hovering spins it.
+export function ToolBadge({ name, index = 0 }: { name: ToolName; index?: number }) {
+  return (
+    <li className="va-tool-badge" style={{ animationDelay: `${(index % 8) * -0.35}s` }}>
+      <span className="va-tool-circle">
+        <img src={toolIcons[name]} alt="" loading="lazy" />
+      </span>
+      <span className="va-tool-name">{name}</span>
+    </li>
   )
 }
 

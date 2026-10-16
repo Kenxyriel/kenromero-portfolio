@@ -13,6 +13,28 @@ export const vaLinks = {
   handle: 'kenromero.goesdigital_',
 }
 
+// Official tool logos, cropped to circles, in public/va/tools.
+export const toolIcons = {
+  'CapCut Pro': '/va/tools/capcut-pro.png',
+  OpusClip: '/va/tools/opusclip.png',
+  Canva: '/va/tools/canva.png',
+  'Riverside.fm': '/va/tools/riverside.png',
+  ChatGPT: '/va/tools/chatgpt.png',
+  Claude: '/va/tools/claude.png',
+  ElevenLabs: '/va/tools/elevenlabs.svg',
+  'Gemini AI': '/va/tools/gemini.svg',
+  'Meta Business': '/va/tools/meta.png',
+  Buffer: '/va/tools/buffer.png',
+  Metricool: '/va/tools/metricool.png',
+  Notion: '/va/tools/notion.svg',
+  'Google Drive': '/va/tools/google-drive.png',
+  'Google Suite': '/va/tools/google.png',
+  Asana: '/va/tools/asana.svg',
+  Trello: '/va/tools/trello.svg',
+}
+
+export type ToolName = keyof typeof toolIcons
+
 export const vaHome = {
   meta: {
     title: 'Ken Romero | Social Media Manager, Podcast Editor & Graphic Designer',
@@ -60,20 +82,12 @@ export const vaHome = {
     title: 'Tools I Use',
     description:
       'A curated collection of tools and platforms that power my workflow and help me deliver high-quality work.',
-    items: [
-      'ChatGPT',
-      'Claude',
-      'Canva',
-      'Google Drive',
-      'Google Suite',
-      'Riverside.fm',
-      'CapCut Pro',
-      'OpusClip',
-      'Slack',
-      'Buffer',
-      'Meta Business',
-      'Metricool',
-    ],
+    groups: [
+      { title: 'Content Creation', emoji: '🎨', tools: ['CapCut Pro', 'OpusClip', 'Canva', 'Riverside.fm'] },
+      { title: 'AI & Content Strategy', emoji: '🤖', tools: ['ChatGPT', 'Claude', 'ElevenLabs', 'Gemini AI'] },
+      { title: 'Social Media Management', emoji: '📱', tools: ['Meta Business', 'Buffer', 'Metricool', 'Notion'] },
+      { title: 'Workflow & Collaboration', emoji: '☁️', tools: ['Google Drive', 'Google Suite', 'Asana', 'Trello'] },
+    ] as { title: string; emoji: string; tools: ToolName[] }[],
   },
   services: {
     eyebrow: 'My Services',
@@ -320,7 +334,7 @@ export const podcastEditing = {
   title: 'Podcast Editing',
   subtitle: '& Content Management',
   intro: 'From raw recordings to content that gets people watching.',
-  tools: ['ChatGPT', 'Claude', 'Canva', 'Google Drive', 'Google Suite', 'Riverside.fm', 'OpusClip'],
+  tools: ['ChatGPT', 'Claude', 'Canva', 'Google Drive', 'Google Suite', 'Riverside.fm', 'OpusClip'] as ToolName[],
   editing: {
     title: 'Featured Projects',
     items: [

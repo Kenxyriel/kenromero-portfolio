@@ -282,9 +282,43 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
 
 /* ---------- Tools ---------- */
 
-.vx-tool-list { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 0; padding: 0; list-style: none; }
-.vx-tool-list li { padding: 9px 16px; background: white; border: 2px solid var(--va-ink); border-radius: 999px; color: var(--va-ink); font-size: 14px; font-weight: 700; }
-.vx-tool-list li:nth-child(3n + 1) { background: var(--va-amber); }
+.vx-tool-groups { display: grid; gap: 26px; margin-top: 26px; }
+.vx-tool-group { display: grid; grid-template-columns: 260px 1fr; align-items: center; gap: 16px; }
+.vx-tool-group h3 { margin: 0; color: var(--va-ink); font-size: 19px; font-weight: 700; }
+
+/* Circular official logos that bob and tilt; hover spins one. */
+.va-tool-row { display: flex; flex-wrap: wrap; gap: 18px 20px; margin: 0; padding: 0; list-style: none; }
+.va-tool-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 92px;
+  animation: va-tool-bob 3.2s ease-in-out infinite;
+}
+.va-tool-circle {
+  display: grid;
+  place-items: center;
+  width: 78px;
+  height: 78px;
+  overflow: hidden;
+  background: white;
+  border: 4px solid #fbf7ee;
+  border-radius: 50%;
+  box-shadow: 0 6px 16px rgba(21, 18, 17, .16), 0 0 0 1px var(--va-line);
+  transition: transform 700ms cubic-bezier(.34, 1.56, .64, 1);
+}
+.va-tool-circle img { width: 100%; height: 100%; object-fit: cover; }
+/* SVG logos have no background of their own: show them smaller on white. */
+.va-tool-circle img[src$=".svg"] { width: 56%; height: 56%; object-fit: contain; }
+.va-tool-badge:hover .va-tool-circle { transform: rotate(360deg) scale(1.08); }
+.va-tool-name { color: var(--va-ink); font-size: 12px; font-weight: 700; line-height: 1.25; text-align: center; }
+@keyframes va-tool-bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-9px) rotate(-6deg); }
+  50% { transform: translateY(0) rotate(0deg); }
+  75% { transform: translateY(-4px) rotate(5deg); }
+}
 
 /* ---------- Packages teaser ---------- */
 
@@ -462,7 +496,7 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
 .va-post p { margin: 14px 0 0; font-size: 13px; line-height: 1.65; }
 .va-post img { margin-top: 12px; }
 
-.va-tools-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+.va-tools-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
 .va-tools-row .va-kicker { margin: 0; }
 
 .va-cta { padding: clamp(56px, 8vw, 92px) 0; background: var(--va-amber); text-align: center; border-bottom: 2px solid var(--va-ink); }
@@ -544,6 +578,7 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
   .vx-split-grid { grid-template-columns: 1fr; }
   .vx-cta-grid { grid-template-columns: 1fr 1fr; }
   .vx-cta-art { display: none; }
+  .vx-tool-group { grid-template-columns: 1fr; }
   .va-platforms { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .va-posts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .va-packages,
@@ -585,6 +620,11 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
   .va-hooks,
   .va-retainer { grid-template-columns: 1fr; }
   .va-page-hero { padding-top: 108px; }
+  /* Four logos per row on phones. */
+  .va-tool-row { gap: 14px 6px; justify-content: space-between; }
+  .va-tool-badge { width: 76px; }
+  .va-tool-circle { width: 62px; height: 62px; border-width: 3px; }
+  .va-tool-name { font-size: 11px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -592,5 +632,8 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
   .vx-pill,
   .va-button,
   .vx-cover,
-  .vx-package-card { transition: none; }
+  .vx-package-card,
+  .va-tool-circle { transition: none; }
+  .va-tool-badge { animation: none; }
+  .va-tool-badge:hover .va-tool-circle { transform: none; }
 }

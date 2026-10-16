@@ -14,7 +14,7 @@ import ContactForm from '../../components/ContactForm'
 import { profile } from '../../data/profile'
 import { vaHome as content, vaTestimonials } from '../../data/va'
 import { CurlArrow, DotGrid, Mic, RotatingBadge, Sparkle, Squiggle, Waveform } from './VAArt'
-import VALayout from './VALayout'
+import VALayout, { ToolBadge } from './VALayout'
 
 const serviceIcons = [Headphones, Share2, Palette, ClipboardList, BarChart3]
 
@@ -266,11 +266,20 @@ export default function VAHome() {
           </div>
           <div>
             <p className="vx-side-note">{content.tools.description}</p>
-            <ul className="vx-tool-list">
-              {content.tools.items.map((tool) => (
-                <li key={tool}>{tool}</li>
+            <div className="vx-tool-groups">
+              {content.tools.groups.map((group, groupIndex) => (
+                <div className="vx-tool-group" key={group.title}>
+                  <h3>
+                    <span aria-hidden="true">{group.emoji}</span> {group.title}
+                  </h3>
+                  <ul className="va-tool-row">
+                    {group.tools.map((tool, index) => (
+                      <ToolBadge key={tool} name={tool} index={groupIndex * 4 + index} />
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </section>
