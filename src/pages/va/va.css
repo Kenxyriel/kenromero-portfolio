@@ -226,8 +226,7 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
 /* ---------- Selected work ---------- */
 
 .vx-work,
-.vx-tools,
-.vx-packages { padding: clamp(56px, 7vw, 88px) 0; border-bottom: 2px solid var(--va-ink); }
+.vx-tools { padding: clamp(56px, 7vw, 88px) 0; border-bottom: 2px solid var(--va-ink); }
 .vx-work-card { display: flex; flex-direction: column; color: var(--va-ink); }
 .vx-work-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 14px; }
 .vx-work-meta h3 { margin: 0; font-size: 15px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
@@ -340,15 +339,6 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
   50% { transform: translateY(0) rotate(0deg); }
   75% { transform: translateY(-4px) rotate(5deg); }
 }
-
-/* ---------- Packages teaser ---------- */
-
-.vx-packages { background: var(--va-paper-2); }
-.vx-package-card { display: flex; flex-direction: column; min-height: 230px; padding: 24px; background: var(--va-paper); border: 2px solid var(--va-ink); transition: transform 160ms ease, box-shadow 160ms ease; }
-.vx-package-card:hover { transform: translateY(-4px); box-shadow: 6px 8px 0 var(--va-ink); }
-.vx-package-card h3 { margin: 0; font-family: var(--va-serif); font-size: 24px; font-weight: 600; line-height: 1.15; }
-.vx-package-card strong { margin-top: 12px; color: var(--va-ink); font-size: 18px; font-weight: 800; }
-.vx-more { display: inline-flex; align-items: center; gap: 6px; margin-top: auto; padding-top: 18px; color: var(--va-teal); font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
 
 /* ---------- CTA band ---------- */
 
@@ -658,7 +648,6 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
   .vx-pill,
   .va-button,
   .vx-cover,
-  .vx-package-card,
   .va-tool-circle { transition: none; }
   .va-tool-badge { animation: none; }
   .va-tool-badge:hover .va-tool-circle { transform: none; }

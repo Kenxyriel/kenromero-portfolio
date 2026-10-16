@@ -249,7 +249,7 @@ export const designBranding = {
     title: 'Let’s Make It Worth Remembering.',
     description: 'Your brand deserves visuals that are consistent, professional, and built to connect.',
     button: 'Let’s Build Your Brand',
-    path: '/va/smm-packages',
+    path: '/va#contact',
     points: ['Strategic Design', 'Consistent Branding', 'Made to Connect'],
   },
 }
@@ -321,7 +321,7 @@ export const socialMedia = {
     description:
       'From content planning to publishing, I turn your ideas into consistent, platform-ready content built to reach and engage your audience.',
     button: 'Let’s Grow Your Content',
-    path: '/va/smm-packages',
+    path: '/va#contact',
     points: ['Plan', 'Create', 'Publish', 'Optimize'],
   },
 }
@@ -362,8 +362,8 @@ export const podcastEditing = {
     eyebrow: 'Your podcast has the content.',
     title: 'Let’s Make It Worth Watching.',
     description: 'From raw recordings to polished, engaging content that helps you grow your audience.',
-    button: 'View Packages & Services',
-    path: '/va/podcast-packages',
+    button: 'Let’s Talk About Your Podcast',
+    path: '/va#contact',
     points: ['Engaging Edits', 'Audience-Focused', 'Made for Growth'],
   },
 }

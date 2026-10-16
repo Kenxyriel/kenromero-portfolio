@@ -9,7 +9,7 @@ Visitors only see navigation for the portfolio they were sent to.
 | `/qa/projects/authentication-testing`, `/qa/projects/api-testing` | QA case studies |
 | `/va` | Creative / VA portfolio home |
 | `/va/design-branding`, `/va/social-media-content`, `/va/podcast-editing` | VA work pages |
-| `/va/smm-packages`, `/va/podcast-packages` | VA pricing (USD / PHP toggle) |
+| `/va/smm-packages`, `/va/podcast-packages` | VA pricing (USD / PHP toggle). Unlisted: not linked from the portfolio and marked `noindex`; share the link directly with a client. |
 
 The former `/it` portfolio is merged into `/qa`; `/it` redirects there. Old `/projects/*` case-study URLs redirect to `/qa/projects/*`. Unknown URLs show a 404 page.
 

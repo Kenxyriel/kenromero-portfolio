@@ -54,12 +54,14 @@ function PackagesNav({ active }: { active: 'smm' | 'podcast' }) {
   )
 }
 
+// Package pages are not linked from the portfolio; Ken shares them directly
+// with the clients they apply to.
 export function VASmmPackages() {
   const [currency, setCurrency] = useState<'usd' | 'php'>('usd')
   const { packages, addOns } = getSmmPackages(currency)
 
   return (
-    <VALayout meta={smmPackages.meta}>
+    <VALayout meta={smmPackages.meta} unlisted>
       <VAPageHero title={smmPackages.title} tagline={smmPackages.tagline} intro={smmPackages.pillars.join(' | ')} />
 
       <section className="va-section va-section-tight">
@@ -131,7 +133,7 @@ export function VAPodcastPackages() {
   const { retainer } = content
 
   return (
-    <VALayout meta={content.meta}>
+    <VALayout meta={content.meta} unlisted>
       <VAPageHero title={content.title} />
 
       <section className="va-section va-section-tight">

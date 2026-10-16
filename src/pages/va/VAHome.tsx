@@ -24,27 +24,6 @@ const serviceIcons = [Headphones, Share2, Palette, ClipboardList, BarChart3]
 // Same order as the tool groups in src/data/va.ts.
 const toolGroupIcons = [Palette, Bot, Smartphone, Cloud]
 
-const packageTeasers = [
-  {
-    kicker: 'Social Media',
-    title: 'Social Media Management Packages',
-    price: 'From $450 / month',
-    path: '/va/smm-packages',
-  },
-  {
-    kicker: 'Podcast',
-    title: 'Podcast Editing per Episode',
-    price: 'From $45 / episode',
-    path: '/va/podcast-packages',
-  },
-  {
-    kicker: 'Retainer',
-    title: 'Podcast Management Retainer',
-    price: '$800 / month',
-    path: '/va/podcast-packages',
-  },
-]
-
 // Typographic "covers" for each work category, drawn in CSS/SVG.
 function WorkCover({ kind }: { kind: 'design' | 'podcast' | 'social' }) {
   if (kind === 'design') {
@@ -292,34 +271,6 @@ export default function VAHome() {
                 </article>
               )
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* PACKAGES TEASER */}
-      <section className="vx-packages">
-        <div className="container vx-split-grid">
-          <div className="vx-side">
-            <p className="vx-eyebrow">Packages</p>
-            <h2 className="vx-serif">
-              Ways to <em>work</em> together
-            </h2>
-            <Squiggle />
-            <Link className="vx-pill" to="/va/smm-packages">
-              View all packages <ArrowRight size={16} aria-hidden="true" />
-            </Link>
-          </div>
-          <div className="vx-card-row">
-            {packageTeasers.map((item) => (
-              <Link className="vx-package-card" key={item.title} to={item.path}>
-                <span className="vx-eyebrow">{item.kicker}</span>
-                <h3>{item.title}</h3>
-                <strong>{item.price}</strong>
-                <span className="vx-more">
-                  See details <ArrowRight size={15} aria-hidden="true" />
-                </span>
-              </Link>
-            ))}
           </div>
         </div>
       </section>

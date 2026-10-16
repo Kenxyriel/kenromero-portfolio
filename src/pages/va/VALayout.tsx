@@ -1,5 +1,5 @@
 import { ArrowRight, Check, ImageIcon, Instagram, Linkedin, Mail, Smartphone } from 'lucide-react'
-import type { ReactNode } from 'react'
+import { useEffect, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import SiteHeader, { type NavItem } from '../../components/SiteHeader'
 import usePageMeta from '../../components/usePageMeta'
@@ -13,17 +13,27 @@ const navItems: NavItem[] = [
   { label: 'Design', href: '/va/design-branding' },
   { label: 'Social Media', href: '/va/social-media-content' },
   { label: 'Podcast', href: '/va/podcast-editing' },
-  { label: 'Packages', href: '/va/smm-packages' },
 ]
 
 type VALayoutProps = {
   meta: { title: string; description: string }
   children: ReactNode
+  /** Keep the page out of search results (pages shared only by direct link). */
+  unlisted?: boolean
 }
 
 // Shell for every /va page: creative-portfolio theme, navigation, contact footer.
-export default function VALayout({ meta, children }: VALayoutProps) {
+export default function VALayout({ meta, children, unlisted = false }: VALayoutProps) {
   usePageMeta(meta.title, meta.description)
+
+  useEffect(() => {
+    if (!unlisted) return
+    const tag = document.createElement('meta')
+    tag.name = 'robots'
+    tag.content = 'noindex, nofollow'
+    document.head.appendChild(tag)
+    return () => tag.remove()
+  }, [unlisted])
 
   return (
     <div className="site-shell va-theme">
@@ -71,17 +81,11 @@ function VAFooter() {
           </ul>
         </div>
         <div>
-          <p className="va-footer-head">Packages</p>
+          <p className="va-footer-head">Services</p>
           <ul>
-            <li>
-              <Link to="/va/smm-packages">Social Media Management</Link>
-            </li>
-            <li>
-              <Link to="/va/podcast-packages">Podcast Editing</Link>
-            </li>
-            <li>
-              <Link to="/va/podcast-packages">Podcast Retainer</Link>
-            </li>
+            <li>Social Media Management</li>
+            <li>Podcast Editing</li>
+            <li>Design &amp; Branding</li>
           </ul>
         </div>
         <div>
