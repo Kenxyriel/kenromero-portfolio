@@ -17,8 +17,8 @@
   --va-ink: #151211;
   --va-text: #3a3431;
   --va-muted: #6d6460;
-  --va-display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
-  --va-serif: Fraunces, Georgia, serif;
+  --va-display: "Bricolage Grotesque Variable", "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  --va-serif: "Fraunces Variable", Fraunces, Georgia, serif;
   --va-hand: Caveat, cursive;
   /* Shared components (contact form, testimonials) read these. */
   --blue: #151211;

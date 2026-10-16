@@ -4,6 +4,44 @@
 const FROM = process.env.CONTACT_FROM ?? 'Ken Romero Portfolio <contact@kenromerogoestdigital.space>'
 const TO = process.env.CONTACT_TO ?? 'kenromero.digital@gmail.com'
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const MAX_BODY_BYTES = 20_000
+// Bots submit instantly; people take at least a few seconds to fill the form.
+const MIN_FILL_MS = 3_000
+
+// Best-effort rate limit per visitor IP: 5 messages per 10 minutes. It lives in
+// the function's memory, so it resets when Vercel starts a fresh instance; the
+// honeypot and fill-time check catch most bots on their own.
+const RATE_LIMIT = 5
+const RATE_WINDOW_MS = 10 * 60_000
+const recentByIp = new Map<string, number[]>()
+
+export function isRateLimited(ip: string, now = Date.now()) {
+  const recent = (recentByIp.get(ip) ?? []).filter((time) => now - time < RATE_WINDOW_MS)
+  const limited = recent.length >= RATE_LIMIT
+  if (!limited) recent.push(now)
+  recentByIp.set(ip, recent)
+  if (recentByIp.size > 5_000) recentByIp.clear()
+  return limited
+}
+
+/** Only accept posts sent by a page on this same site. */
+export function isSameOrigin(request: Request) {
+  const origin = request.headers.get('origin')
+  const host = request.headers.get('x-forwarded-host') ?? request.headers.get('host')
+  if (!origin || !host) return false
+  try {
+    return new URL(origin).host === host
+  } catch {
+    return false
+  }
+}
+
+// Drops control characters (keeping line breaks in the message) from visitor input.
+const clean = (value: unknown, max: number, keepNewlines = false) =>
+  String(value ?? '')
+    .replace(keepNewlines ? /[\u0000-\u0009\u000B\u000C\u000E-\u001F\u007F]/g : /[\u0000-\u001F\u007F]/g, '')
+    .trim()
+    .slice(0, max)
 
 const json = (body: Record<string, unknown>, status = 200) =>
   Response.json(body, { status })
@@ -90,20 +128,36 @@ export async function POST(request: Request) {
   const apiKey = process.env.RESEND_API_KEY
   if (!apiKey) return json({ success: false, message: 'Email is not configured.' }, 500)
 
+  if (!isSameOrigin(request)) return json({ success: false, message: 'Invalid request.' }, 403)
+  if (!request.headers.get('content-type')?.includes('application/json')) {
+    return json({ success: false, message: 'Invalid request.' }, 415)
+  }
+
+  const ip = request.headers.get('x-real-ip') ?? request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
+  if (isRateLimited(ip)) {
+    return json({ success: false, message: 'Too many messages. Please try again in a few minutes.' }, 429)
+  }
+
   let data: Record<string, unknown>
   try {
-    data = (await request.json()) as Record<string, unknown>
+    const raw = await request.text()
+    if (raw.length > MAX_BODY_BYTES) return json({ success: false, message: 'Message is too long.' }, 413)
+    data = JSON.parse(raw) as Record<string, unknown>
+    if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('not an object')
   } catch {
     return json({ success: false, message: 'Invalid request.' }, 400)
   }
 
-  // Honeypot: real visitors never fill this hidden field, so pretend success for bots.
+  // Honeypot and fill-time checks: pretend success so bots don't retry.
   if (data.botcheck) return json({ success: true })
+  if (!(Number(data.elapsed) >= MIN_FILL_MS)) return json({ success: true })
 
-  const name = String(data.name ?? '').trim().slice(0, 200)
-  const email = String(data.email ?? '').trim().slice(0, 200)
-  const message = String(data.message ?? '').trim().slice(0, 5000)
-  const page = String(data.page ?? '').slice(0, 500)
+  const name = clean(data.name, 200)
+  const email = clean(data.email, 200)
+  const message = clean(data.message, 5000, true)
+  const rawPage = clean(data.page, 500)
+  // The page link goes into the email as a link, so only accept web addresses.
+  const page = /^https?:\/\//i.test(rawPage) ? rawPage : ''
 
   if (!name || !message || !EMAIL_PATTERN.test(email)) {
     return json({ success: false, message: 'Please fill in your name, a valid email and a message.' }, 400)
@@ -121,16 +175,9 @@ export async function POST(request: Request) {
   })
 
   if (!response.ok) {
-    const detail = await response.text()
-    console.error('Resend error', response.status, detail)
-    // Pass Resend's reason along (e.g. an unverified domain) so failures can be diagnosed from the browser.
-    let reason = detail
-    try {
-      reason = (JSON.parse(detail) as { message?: string }).message ?? detail
-    } catch {
-      // keep the raw text
-    }
-    return json({ success: false, message: 'The message could not be sent.', reason }, 502)
+    // The reason (e.g. an unverified domain) stays in the Vercel function logs, not the browser.
+    console.error('Resend error', response.status, await response.text())
+    return json({ success: false, message: 'The message could not be sent.' }, 502)
   }
 
   return json({ success: true })

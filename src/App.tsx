@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import LegalPage from "./components/LegalPage";
 import NotFound from "./components/NotFound";
 import ScrollManager from "./components/ScrollManager";
 import ViewSwitcher from "./components/ViewSwitcher";
@@ -26,6 +27,7 @@ const VAPodcastEditing = HAS_VA ? lazy(() => import("./pages/va/VAPodcastEditing
 const VAPodcastPackages = HAS_VA
   ? lazy(() => import("./pages/va/VAPackages").then((m) => ({ default: m.VAPodcastPackages })))
   : null;
+const VALegal = HAS_VA ? lazy(() => import("./pages/va/VALegal")) : null;
 const VASmmPackages = HAS_VA
   ? lazy(() => import("./pages/va/VAPackages").then((m) => ({ default: m.VASmmPackages })))
   : null;
@@ -51,6 +53,19 @@ function App() {
         <Routes>
           <Route path="/" element={rootElement()} />
 
+          {/* Legal pages. The VA-only site keeps them inside the creative theme. */}
+          {mode === "va" ? (
+            <>
+              <Route path="/privacy" element={<Navigate to="/va/privacy" replace />} />
+              <Route path="/terms" element={<Navigate to="/va/terms" replace />} />
+            </>
+          ) : (
+            <>
+              <Route path="/privacy" element={<LegalPage slug="privacy" />} />
+              <Route path="/terms" element={<LegalPage slug="terms" />} />
+            </>
+          )}
+
           {QAHome && AuthenticationCaseStudy && ApiTestingCaseStudy && (
             <>
               <Route path="/qa" element={<QAHome />} />
@@ -68,7 +83,7 @@ function App() {
             </>
           )}
 
-          {VAHome && VADesignBranding && VASocialMedia && VAPodcastEditing && VAPodcastPackages && VASmmPackages && (
+          {VAHome && VADesignBranding && VASocialMedia && VAPodcastEditing && VAPodcastPackages && VASmmPackages && VALegal && (
             <>
               <Route path="/va" element={<VAHome />} />
               <Route path="/va/design-branding" element={<VADesignBranding />} />
@@ -77,6 +92,8 @@ function App() {
               <Route path="/va/podcast-packages" element={<VAPodcastPackages />} />
               <Route path="/va/smm-packages" element={<VASmmPackages currency="usd" />} />
               <Route path="/va/smm-local-packages" element={<VASmmPackages currency="php" />} />
+              <Route path="/va/privacy" element={<VALegal slug="privacy" />} />
+              <Route path="/va/terms" element={<VALegal slug="terms" />} />
             </>
           )}
 

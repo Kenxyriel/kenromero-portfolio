@@ -120,7 +120,7 @@ export default function ApiTestingCaseStudy() {
       subtitle="CASHLESS POINT OF SALE SYSTEM"
       lead="An anonymized QA case study demonstrating API testing using Postman."
       heroImage={{
-        src: '/case-study-preview/case-study-two.png',
+        src: '/case-study-preview/case-study-two.webp',
         alt: 'API testing and validation case study preview',
       }}
       tags={['API Testing', 'GET · POST · PUT · DELETE', 'Postman', 'Azure DevOps']}

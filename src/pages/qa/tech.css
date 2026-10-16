@@ -12,7 +12,7 @@
   --t-text: #c7d2e3;
   --t-muted: #8a97ad;
   --t-white: #f8fafc;
-  --t-blue: #3b82f6;
+  --t-blue: #2563eb;
   --t-blue-2: #60a5fa;
   --t-cyan: #22d3ee;
   --t-lime: #a3e635;
@@ -21,8 +21,8 @@
   --t-light: #f4f7fb;
   --t-light-ink: #0b1220;
   --t-light-text: #475569;
-  --t-display: "Space Grotesk", Inter, system-ui, sans-serif;
-  --t-mono: "JetBrains Mono", ui-monospace, monospace;
+  --t-display: "Space Grotesk", "Inter Variable", Inter, system-ui, sans-serif;
+  --t-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
 
   background: var(--t-bg);
   color: var(--t-text);

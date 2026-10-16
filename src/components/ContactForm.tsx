@@ -1,4 +1,5 @@
-import { useState, type FormEvent } from 'react'
+import { useRef, useState, type FormEvent } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { Linkedin, Mail, MapPin, Send, Smartphone } from 'lucide-react'
 import { profile } from '../data/profile'
 
@@ -13,6 +14,10 @@ type Status = 'idle' | 'sending' | 'sent' | 'error'
 
 export default function ContactForm({ intro = defaultIntro }: ContactFormProps) {
   const [status, setStatus] = useState<Status>('idle')
+  const [errorText, setErrorText] = useState('')
+  // When the form appeared; the server ignores submissions made faster than a person could type.
+  const shownAt = useRef(Date.now())
+  const privacyPath = useLocation().pathname.startsWith('/va') ? '/va/privacy' : '/privacy'
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -24,11 +29,15 @@ export default function ContactForm({ intro = defaultIntro }: ContactFormProps) 
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, page: window.location.href }),
+        body: JSON.stringify({ ...data, page: window.location.href, elapsed: Date.now() - shownAt.current }),
       })
-      const result = await response.json()
-      if (!response.ok || !result.success) throw new Error(result.message)
+      const result = await response.json().catch(() => ({}))
+      if (!response.ok || !result.success) {
+        setErrorText(response.status === 429 || response.status === 400 ? result.message ?? '' : '')
+        throw new Error(result.message)
+      }
       form.reset()
+      shownAt.current = Date.now()
       setStatus('sent')
     } catch {
       setStatus('error')
@@ -82,11 +91,20 @@ export default function ContactForm({ intro = defaultIntro }: ContactFormProps) 
         <div className="contact-form-grid">
           <label>
             <span>Name</span>
-            <input name="name" type="text" placeholder="Your full name" required />
+            <input name="name" type="text" placeholder="Your full name" autoComplete="name" maxLength={200} required />
           </label>
           <label>
             <span>Email address</span>
-            <input name="email" type="email" placeholder="Your email address" required />
+            <input
+              name="email"
+              type="email"
+              placeholder="Your email address"
+              autoComplete="email"
+              maxLength={200}
+              pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+              title="Enter an email address like name@example.com"
+              required
+            />
           </label>
         </div>
 
@@ -101,15 +119,19 @@ export default function ContactForm({ intro = defaultIntro }: ContactFormProps) 
 
         <label>
           <span>Message</span>
-          <textarea name="message" rows={6} placeholder="Write something..." required />
+          <textarea name="message" rows={6} placeholder="Write something..." minLength={10} maxLength={5000} required />
         </label>
+
+        <p className="contact-privacy-note">
+          I only use your details to reply. See the <Link to={privacyPath}>Privacy Policy</Link>.
+        </p>
 
         <div className="contact-form-footer">
           <p className={`contact-form-status is-${status}`} role="status" aria-live="polite">
             {status === 'sent' && 'Thanks! Your message was sent. I will get back to you soon.'}
             {status === 'error' && (
               <>
-                Sorry, the message could not be sent. Please email me at{' '}
+                {errorText ? `${errorText} ` : 'Sorry, the message could not be sent. '}You can also email me at{' '}
                 <a href={`mailto:${profile.email}`}>{profile.email}</a> instead.
               </>
             )}
