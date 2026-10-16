@@ -4,6 +4,7 @@ import {
   Bot,
   Cloud,
   Palette,
+  Pause,
   Play,
   Quote,
   Smartphone,
@@ -48,6 +49,41 @@ const toolGroupIcons = [Palette, Bot, Smartphone, Cloud]
 // Covers for each work category, built from real samples (picked in src/data/va.ts).
 const previews = content.featured.previews
 
+// Vertical clip that plays in place, with sound, when tapped.
+function PlayableClip() {
+  const { clip } = previews.podcast
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [playing, setPlaying] = useState(false)
+  const toggle = () => {
+    const video = videoRef.current
+    if (!video) return
+    if (video.paused) void video.play()
+    else video.pause()
+  }
+  return (
+    <div className={`va-cover-clip${playing ? ' is-playing' : ''}`}>
+      <video
+        ref={videoRef}
+        src={clip.video}
+        poster={clip.image}
+        preload="none"
+        playsInline
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        onEnded={() => setPlaying(false)}
+      />
+      <button
+        type="button"
+        className="va-cover-play"
+        onClick={toggle}
+        aria-label={playing ? `Pause ${clip.label}` : `Play ${clip.label}`}
+      >
+        {playing ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" />}
+      </button>
+    </div>
+  )
+}
+
 function WorkCover({ kind }: { kind: 'design' | 'podcast' | 'social' }) {
   if (kind === 'design') {
     return (
@@ -68,12 +104,7 @@ function WorkCover({ kind }: { kind: 'design' | 'podcast' | 'social' }) {
         <div className="va-cover-thumb">
           <img src={previews.podcast.thumbnail.image} alt={previews.podcast.thumbnail.label} loading="lazy" />
         </div>
-        <div className="va-cover-clip">
-          <img src={previews.podcast.clip.image} alt={previews.podcast.clip.label} loading="lazy" />
-          <span className="va-cover-play" aria-hidden="true">
-            <Play size={16} fill="currentColor" />
-          </span>
-        </div>
+        <PlayableClip />
         <Waveform className="va-cover-wave" />
         <span className="va-cover-label">EPISODES · CLIPS</span>
       </div>
@@ -225,16 +256,21 @@ export default function VAHome() {
           </div>
           <div className="vx-card-row">
             {work.map((item) => (
-              <Link className="vx-work-card" key={item.title} to={item.path}>
+              // The link stretches over the whole card so the clip's play button can sit above it.
+              <div className="vx-work-card" key={item.title}>
                 <WorkCover kind={item.kind} />
                 <div className="vx-work-meta">
                   <div>
-                    <h3>{item.title}</h3>
+                    <h3>
+                      <Link className="vx-work-link" to={item.path}>
+                        {item.title}
+                      </Link>
+                    </h3>
                     <span>{item.meta}</span>
                   </div>
                   <ArrowRight size={18} aria-hidden="true" />
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>

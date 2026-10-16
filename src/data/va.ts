@@ -150,7 +150,7 @@ export const vaHome = {
       ],
       podcast: {
         thumbnail: { image: '/va/work/podcast/thumbnail.jpg', label: 'Podcast episode thumbnail' },
-        clip: { image: '/va/work/podcast/ai-clip-1.jpg', label: 'Short-form podcast clip' },
+        clip: { image: '/va/work/podcast/ai-clip-1.jpg', video: '/va/work/podcast/ai-clip-1.mp4', label: 'short-form podcast clip' },
       },
       social: [
         { image: '/va/work/social/post-kr.jpg', label: 'KR Digital Solutions post' },

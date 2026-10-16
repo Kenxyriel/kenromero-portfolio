@@ -289,7 +289,14 @@
 
 .vx-work,
 .vx-tools { padding: clamp(56px, 7vw, 88px) 0; border-bottom: 2px solid var(--va-ink); }
-.vx-work-card { display: flex; flex-direction: column; color: var(--va-ink); }
+.vx-work-card { position: relative; display: flex; flex-direction: column; color: var(--va-ink); }
+.vx-work-link { color: inherit; }
+.vx-work-link::after { content: ''; position: absolute; inset: 0; z-index: 4; }
+.vx-work-link:focus-visible { outline: none; }
+/* The cover sits above the link but lets taps through, except on the clip's play button. */
+.vx-work-card .vx-cover { z-index: 5; pointer-events: none; }
+.vx-work-card .va-cover-play { pointer-events: auto; }
+.vx-work-card:has(.vx-work-link:focus-visible) .vx-cover { outline: 3px solid var(--va-teal); outline-offset: 3px; }
 .vx-work-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 14px; }
 .vx-work-meta h3 { margin: 0; font-size: 15px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
 .vx-work-meta span { color: var(--va-muted); font-size: 13px; }
@@ -343,7 +350,14 @@
   transition: transform 220ms ease;
 }
 .vx-work-card:hover .va-cover-clip { transform: translateY(-6px) rotate(2deg); }
+.va-cover-clip video { display: block; width: 100%; height: 100%; object-fit: cover; background: var(--va-ink); }
+/* Sits above the card's stretched link so tapping it plays the clip instead of opening the page. */
 .va-cover-play {
+  z-index: 5;
+  padding: 0;
+  border: 2px solid var(--va-ink);
+  cursor: pointer;
+  transition: opacity 160ms ease, transform 160ms ease;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -356,6 +370,10 @@
   border-radius: 50%;
   transform: translate(-50%, -50%);
 }
+.va-cover-play:hover { transform: translate(-50%, -50%) scale(1.08); }
+.va-cover-play:focus-visible { outline: 3px solid var(--va-paper); outline-offset: 2px; }
+/* While playing, the pause button drops to the corner so it doesn't cover the video. */
+.va-cover-clip.is-playing .va-cover-play { left: auto; right: 6px; top: auto; bottom: 6px; width: 28px; height: 28px; transform: none; opacity: .85; }
 .va-cover-wave { position: absolute; left: 7%; bottom: 9%; width: 36%; color: var(--va-amber); }
 
 /* Social: two real posts in phone frames, tilted on teal. */
