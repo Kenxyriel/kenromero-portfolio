@@ -6,6 +6,7 @@ import usePageMeta from '../../components/usePageMeta'
 import { profile } from '../../data/profile'
 import { toolIcons, vaLinks, type ToolName, type VAImage } from '../../data/va'
 import { RotatingBadge, Sparkle, Squiggle } from './VAArt'
+import VAChibi from './VAChibi'
 import './va.css'
 
 const navItems: NavItem[] = [
@@ -85,6 +86,7 @@ export default function VALayout({ meta, children, unlisted = false }: VALayoutP
       </LightboxContext.Provider>
       {viewing && <Lightbox item={viewing} onClose={close} />}
       <VAFooter />
+      <VAChibi />
     </div>
   )
 }

@@ -858,3 +858,154 @@
   .va-reel-brand,
   .va-reel-title { animation: none; }
 }
+
+/* ---------- Walking chibi ---------- */
+
+/* Decorative and click-through: it never blocks links, buttons or forms. */
+.va-chibi {
+  position: fixed;
+  z-index: 45;
+  left: 0;
+  bottom: 4px;
+  width: 72px;
+  pointer-events: none;
+  transition-property: transform;
+  transition-timing-function: linear;
+  will-change: transform;
+}
+.va-chibi-svg { display: block; width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 1px 0 rgba(246, 241, 231, .9)); }
+.va-chibi-svg.is-left { transform: scaleX(-1); }
+.va-chibi-svg * { transform-box: view-box; }
+
+.va-chibi-bubble {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% - 4px);
+  padding: 3px 10px 4px;
+  color: var(--va-ink);
+  background: #fffdf8;
+  border: 1.5px solid var(--va-ink);
+  border-radius: 12px;
+  font-family: var(--va-hand);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.1;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, 4px) scale(.92);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.va-chibi-bubble::after {
+  content: "";
+  position: absolute;
+  left: calc(50% - 5px);
+  bottom: -6px;
+  width: 9px;
+  height: 9px;
+  background: inherit;
+  border: inherit;
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+}
+.va-chibi-bubble.is-shown { opacity: 1; transform: translate(-50%, 0) scale(1); }
+.va-chibi-bubble:empty { visibility: hidden; }
+
+.va-chibi .cb-shadow { fill: rgba(21, 18, 17, .14); }
+.va-chibi .cb-leg line { stroke: #2b3a3c; stroke-width: 6; stroke-linecap: round; }
+.va-chibi .cb-leg rect { fill: #fffdf8; stroke: var(--va-ink); stroke-width: 1.2; }
+.va-chibi .cb-tee { fill: #1b1716; }
+.va-chibi .cb-tee-heart { fill: none; stroke: var(--va-amber); stroke-width: 1; }
+.va-chibi .cb-sleeve { stroke: #1b1716; stroke-width: 6; stroke-linecap: round; }
+.va-chibi .cb-skin-line { stroke: #f2c29b; stroke-width: 4.4; stroke-linecap: round; }
+.va-chibi .cb-skin { fill: #f6cba5; }
+.va-chibi .cb-hair { fill: #1b1716; }
+.va-chibi .cb-eyes { fill: #1b1716; transform-origin: 36px 28.5px; }
+.va-chibi .cb-cheek { fill: #f08a7e; opacity: .45; }
+.va-chibi .cb-smile { fill: none; stroke: #6b2f26; stroke-width: 1.4; stroke-linecap: round; }
+.va-chibi .cb-talk { fill: #6b2f26; display: none; transform-origin: 36px 35px; }
+.va-chibi .cb-headphones path { fill: none; stroke: var(--va-ink); stroke-width: 2.6; }
+.va-chibi .cb-headphones rect { fill: var(--va-amber); stroke: var(--va-ink); stroke-width: 1.2; }
+.va-chibi .cb-mug rect { fill: var(--va-teal); }
+.va-chibi .cb-mug-handle { fill: none; stroke: var(--va-teal); stroke-width: 1.6; }
+.va-chibi .cb-steam { fill: none; stroke: var(--va-muted); stroke-width: 1; stroke-linecap: round; opacity: .7; }
+.va-chibi .cb-mic-handle { stroke: var(--va-ink); stroke-width: 2.6; stroke-linecap: round; }
+.va-chibi .cb-mic-head { fill: #3a3431; stroke: var(--va-ink); stroke-width: 1; }
+.va-chibi .cb-waves { fill: none; stroke: var(--va-amber-2); stroke-width: 1.6; stroke-linecap: round; }
+.va-chibi .cb-phone { fill: var(--va-ink); }
+.va-chibi .cb-phone-screen { fill: var(--va-amber); }
+.va-chibi .cb-like { fill: #e9574a; }
+.va-chibi .cb-lid { fill: #d6d8dc; stroke: #aeb2b9; stroke-width: 1; }
+.va-chibi .cb-lid-heart { fill: none; stroke: var(--va-amber-2); stroke-width: 1.2; }
+.va-chibi .cb-base { fill: #aeb2b9; }
+
+/* Which props show for each pose. */
+.va-chibi .cb-prop { display: none; }
+.va-chibi[data-mode="laptop"] .cb-laptop,
+.va-chibi[data-mode="podcast"] .cb-headphones,
+.va-chibi[data-mode="podcast"] .cb-arm-mic,
+.va-chibi[data-mode="coffee"] .cb-arm-coffee,
+.va-chibi[data-mode="phone"] .cb-arms-phone,
+.va-chibi[data-mode="wave"] .cb-arm-wave { display: inline; }
+.va-chibi:is([data-mode="podcast"], [data-mode="coffee"], [data-mode="phone"], [data-mode="wave"]) .cb-arm-r,
+.va-chibi[data-mode="phone"] .cb-arm-l { display: none; }
+.va-chibi[data-mode="podcast"] .cb-smile { display: none; }
+.va-chibi[data-mode="podcast"] .cb-talk { display: inline; }
+/* At the laptop it sits down behind the lid. */
+.va-chibi[data-mode="laptop"] .cb-figure { transform: translateY(5px); }
+.va-chibi[data-mode="laptop"] .cb-legs,
+.va-chibi[data-mode="laptop"] .cb-shadow { display: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .va-chibi .cb-figure { transition: transform .3s ease; }
+  .va-chibi .cb-eyes { animation: cb-blink 4.2s infinite; }
+
+  .va-chibi[data-mode="walk"] .cb-leg-a { transform-origin: 32px 57px; animation: cb-step .62s ease-in-out infinite; }
+  .va-chibi[data-mode="walk"] .cb-leg-b { transform-origin: 40px 57px; animation: cb-step .62s ease-in-out infinite reverse; }
+  .va-chibi[data-mode="walk"] .cb-arm-l { transform-origin: 27px 45px; animation: cb-swing .62s ease-in-out infinite reverse; }
+  .va-chibi[data-mode="walk"] .cb-arm-r { transform-origin: 45px 45px; animation: cb-swing .62s ease-in-out infinite; }
+  .va-chibi[data-mode="walk"] .cb-upper { animation: cb-bob .31s ease-in-out infinite alternate; }
+
+  .va-chibi[data-mode="laptop"] .cb-head { transform-origin: 36px 42px; animation: cb-nod 1.6s ease-in-out infinite; }
+  .va-chibi[data-mode="laptop"] .cb-arm-l,
+  .va-chibi[data-mode="laptop"] .cb-arm-r { animation: cb-type .28s ease-in-out infinite alternate; }
+  .va-chibi[data-mode="laptop"] .cb-arm-r { animation-delay: -.14s; }
+
+  .va-chibi[data-mode="podcast"] .cb-talk { animation: cb-talk .36s ease-in-out infinite alternate; }
+  .va-chibi[data-mode="podcast"] .cb-waves { animation: cb-pulse .9s ease-in-out infinite; }
+  .va-chibi[data-mode="podcast"] .cb-head { transform-origin: 36px 42px; animation: cb-groove 1.2s ease-in-out infinite; }
+
+  .va-chibi[data-mode="coffee"] .cb-mug { animation: cb-sip 3s ease-in-out infinite; }
+  .va-chibi[data-mode="coffee"] .cb-steam { animation: cb-steam 1.5s ease-in-out infinite; }
+
+  .va-chibi[data-mode="phone"] .cb-like { transform-origin: 56px 33px; animation: cb-like 1.8s ease-out infinite; }
+  .va-chibi[data-mode="phone"] .cb-head { transform-origin: 36px 42px; transform: rotate(4deg) translateY(1px); }
+
+  .va-chibi[data-mode="wave"] .cb-arm-wave { transform-origin: 45px 45px; animation: cb-wave .5s ease-in-out infinite alternate; }
+}
+
+@keyframes cb-step { 0%, 100% { transform: rotate(22deg); } 50% { transform: rotate(-22deg); } }
+@keyframes cb-swing { 0%, 100% { transform: rotate(18deg); } 50% { transform: rotate(-18deg); } }
+@keyframes cb-bob { to { transform: translateY(-1.4px); } }
+@keyframes cb-blink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(.1); } }
+@keyframes cb-nod { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(3deg); } }
+@keyframes cb-type { to { transform: translateY(-1.5px); } }
+@keyframes cb-talk { from { transform: scaleY(.35); } to { transform: scaleY(1); } }
+@keyframes cb-pulse { 0%, 100% { opacity: .2; } 50% { opacity: 1; } }
+@keyframes cb-groove { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+@keyframes cb-sip { 0%, 55%, 100% { transform: translate(0, 0); } 70%, 85% { transform: translate(-2px, -6px) rotate(-10deg); } }
+@keyframes cb-steam { 0%, 100% { opacity: .2; transform: translateY(0); } 50% { opacity: .8; transform: translateY(-1.5px); } }
+@keyframes cb-like { 0% { opacity: 0; transform: translateY(4px) scale(.5); } 25% { opacity: 1; transform: translateY(0) scale(1.1); } 70% { opacity: 1; transform: translateY(-6px) scale(1); } 100% { opacity: 0; transform: translateY(-10px) scale(.9); } }
+@keyframes cb-wave { from { transform: rotate(-8deg); } to { transform: rotate(14deg); } }
+
+/* Smaller on phones, and the note sits closer. */
+@media (max-width: 640px) {
+  .va-chibi { width: 54px; bottom: 2px; }
+  .va-chibi-bubble { font-size: 15px; padding: 2px 8px 3px; }
+}
+@media print { .va-chibi { display: none; } }
+.va-chibi-bubble.is-start { left: 0; transform: translate(0, 4px) scale(.92); }
+.va-chibi-bubble.is-start.is-shown { transform: none; }
+.va-chibi-bubble.is-start::after { left: 26px; }
+.va-chibi-bubble.is-end { left: auto; right: 0; transform: translate(0, 4px) scale(.92); }
+.va-chibi-bubble.is-end.is-shown { transform: none; }
+.va-chibi-bubble.is-end::after { left: auto; right: 26px; }
