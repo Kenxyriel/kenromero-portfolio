@@ -69,11 +69,13 @@ export default function SiteHeader({ brandRole, navItems, cta, brandHref = '#top
         </button>
 
         <nav className={`nav-links ${menuOpen ? 'nav-links-open' : ''}`}>
-          {navItems.map((item) => (
-            <NavLink key={item.href} href={item.href} onClick={closeMenu}>
-              {item.label}
-            </NavLink>
-          ))}
+          <div className="nav-menu">
+            {navItems.map((item) => (
+              <NavLink key={item.href} href={item.href} onClick={closeMenu}>
+                {item.label}
+              </NavLink>
+            ))}
+          </div>
           <NavLink className="nav-cta" href={cta.href} onClick={closeMenu}>
             {cta.label}
           </NavLink>

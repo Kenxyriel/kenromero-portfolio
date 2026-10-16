@@ -111,13 +111,16 @@ function VAFooter() {
           </div>
         </div>
         <div>
-          <p className="va-footer-head">Navigation</p>
+          <p className="va-footer-head">Availability</p>
           <ul>
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <Link to={item.href}>{item.label}</Link>
-              </li>
-            ))}
+            <li className="va-footer-status">Open for new projects</li>
+            <li>Monday to Friday</li>
+            <li>Based in the Philippines (GMT+8)</li>
+            <li>
+              <Link className="va-footer-start" to="/va#contact">
+                Start a project <ArrowRight size={14} aria-hidden="true" />
+              </Link>
+            </li>
           </ul>
         </div>
         <div>
