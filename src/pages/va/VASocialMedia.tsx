@@ -1,4 +1,5 @@
 import { samplePosts, socialMedia as content } from '../../data/va'
+import JJJCalendar from './JJJCalendar'
 import VALayout, { VACta, VAImg, VAPageHero, VASectionTitle } from './VALayout'
 
 export default function VASocialMedia() {
@@ -25,6 +26,9 @@ export default function VASocialMedia() {
           <VAImg item={planning.image} className="va-img-wide" />
         </div>
       </section>
+
+      {/* JJJ CASE STUDY: real calendar from Notion */}
+      <JJJCalendar />
 
       {/* RESEARCH + HOOKS */}
       <section className="va-section va-section-cream">

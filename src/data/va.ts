@@ -371,6 +371,60 @@ export const socialMedia = {
   },
 }
 
+/**
+ * JJJ Tax & Accounting, October 2026 campaign. Copied from Ken's Notion
+ * content calendar (post titles, dates, pillar, format, platforms, status
+ * only; scripts, captions and internal notes stay in Notion).
+ */
+export type JJJPillar = 'tax' | 'books' | 'myths' | 'trust'
+export type JJJPost = {
+  date: string
+  title: string
+  pillar: JJJPillar
+  format: 'Static' | 'Reel' | 'Carousel'
+  status: 'Scheduled' | 'For Review' | 'Idea'
+}
+
+export const jjjCalendar = {
+  eyebrow: 'Case study · JJJ Tax & Accounting',
+  title: 'October 2026 Content Calendar',
+  description:
+    'A month of educational posts for an accounting firm, planned in Notion: every post tagged by content pillar, format, platform, and production status.',
+  platforms: ['Facebook', 'Instagram', 'TikTok'],
+  pillars: [
+    { id: 'tax', name: 'Tax & Compliance' },
+    { id: 'books', name: 'Bookkeeping & Business Finance' },
+    { id: 'myths', name: 'FAQs, Myths & Mistakes' },
+    { id: 'trust', name: 'Services, Process & Trust' },
+  ] as { id: JJJPillar; name: string }[],
+  statuses: ['Scheduled', 'For Review', 'Idea'] as JJJPost['status'][],
+  // Monday of each week shown, Monday to Friday.
+  weeks: ['2026-09-28', '2026-10-05', '2026-10-12', '2026-10-19', '2026-10-26'],
+  posts: [
+    { date: '2026-09-30', title: 'Q4 Is Here', pillar: 'books', format: 'Static', status: 'Scheduled' },
+    { date: '2026-10-02', title: 'Your Business Is Growing. Your Accounting Should Keep Up.', pillar: 'books', format: 'Static', status: 'Scheduled' },
+    { date: '2026-10-05', title: 'Teachers’ Day', pillar: 'trust', format: 'Static', status: 'Scheduled' },
+    { date: '2026-10-06', title: 'Before You File, Let JJJ Handle the Details', pillar: 'tax', format: 'Static', status: 'Scheduled' },
+    { date: '2026-10-07', title: 'Your Books Shouldn’t Be a Mystery', pillar: 'books', format: 'Static', status: 'Scheduled' },
+    { date: '2026-10-09', title: 'Revenue Is Not the Same as Profit', pillar: 'books', format: 'Reel', status: 'Scheduled' },
+    { date: '2026-10-12', title: 'More Than Numbers. Business Support.', pillar: 'books', format: 'Static', status: 'Idea' },
+    { date: '2026-10-14', title: 'When Your Numbers Start Getting Complicated', pillar: 'books', format: 'Static', status: 'For Review' },
+    { date: '2026-10-16', title: 'When Your Accountant Asks for the Receipts', pillar: 'books', format: 'Reel', status: 'Idea' },
+    { date: '2026-10-19', title: 'Growing Business? Get the Right Financial Support.', pillar: 'tax', format: 'Static', status: 'Idea' },
+    { date: '2026-10-21', title: 'Trust Starts Behind the Scenes', pillar: 'trust', format: 'Static', status: 'Idea' },
+    { date: '2026-10-23', title: 'What JJJ Can Actually Help With', pillar: 'trust', format: 'Reel', status: 'Idea' },
+    { date: '2026-10-26', title: 'Your Business Needs More Than Tax Filing', pillar: 'myths', format: 'Static', status: 'Idea' },
+    { date: '2026-10-27', title: 'Don’t Wait Until You Need the Documents', pillar: 'tax', format: 'Static', status: 'Idea' },
+    { date: '2026-10-28', title: 'Busy Business? You Still Need Financial Clarity.', pillar: 'books', format: 'Static', status: 'Idea' },
+    { date: '2026-10-30', title: 'Don’t Let the Accounting Side Haunt You', pillar: 'tax', format: 'Reel', status: 'Idea' },
+  ] as JJJPost[],
+  notes: [
+    'Mon · Wed · Fri posting rhythm',
+    'A Reel every Friday',
+    'Hooks, scripts, and captions drafted per post in Notion',
+  ],
+}
+
 export const podcastEditing = {
   meta: {
     title: 'Podcast Editing & Content Management | Ken Romero',
