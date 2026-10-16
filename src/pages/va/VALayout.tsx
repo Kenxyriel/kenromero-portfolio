@@ -126,11 +126,12 @@ export function ToolBadge({ name, index = 0 }: { name: ToolName; index?: number 
 }
 
 // Image from the creative portfolio, or a labelled placeholder until it is added.
-export function VAImg({ item, className = '' }: { item: VAImage; className?: string }) {
+export function VAImg({ item, className = '', caption = false }: { item: VAImage; className?: string; caption?: boolean }) {
   if (item.image) {
     return (
       <figure className={`va-img ${className}`}>
         <img src={item.image} alt={item.label} loading="lazy" />
+        {caption && <figcaption className="va-img-caption">{item.label}</figcaption>}
       </figure>
     )
   }

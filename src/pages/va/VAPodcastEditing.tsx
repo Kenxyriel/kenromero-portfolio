@@ -23,10 +23,21 @@ export default function VAPodcastEditing() {
           <p>Podcast Editing &amp; Content Management</p>
         </div>
         <div className="container">
-          <div className="va-gallery">
-            {content.editing.items.map((item) => (
-              <VAImg key={item.label} item={item} />
-            ))}
+          <p className="va-kicker">Long-form episodes &amp; video</p>
+          <div className="va-gallery va-gallery-wide">
+            {content.editing.items
+              .filter((item) => !item.tall)
+              .map((item) => (
+                <VAImg key={item.label} item={item} caption />
+              ))}
+          </div>
+          <p className="va-kicker">Short-form clips</p>
+          <div className="va-gallery va-gallery-tall">
+            {content.editing.items
+              .filter((item) => item.tall)
+              .map((item) => (
+                <VAImg key={item.label} item={item} caption />
+              ))}
           </div>
         </div>
       </section>
