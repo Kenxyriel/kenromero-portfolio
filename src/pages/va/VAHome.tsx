@@ -283,7 +283,6 @@ export default function VAHome() {
                       <Icon size={18} aria-hidden="true" />
                     </span>
                     <h3>{group.title}</h3>
-                    <span className="vx-tool-group-num">{String(groupIndex + 1).padStart(2, '0')}</span>
                   </header>
                   <ul className="va-tool-row">
                     {group.tools.map((tool, index) => (

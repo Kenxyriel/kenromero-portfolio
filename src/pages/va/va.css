@@ -301,7 +301,6 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
 .vx-tool-group header { display: flex; align-items: center; gap: 12px; padding-bottom: 16px; margin-bottom: 20px; border-bottom: 1px dashed var(--va-line); }
 .vx-tool-group-icon { display: grid; place-items: center; width: 36px; height: 36px; color: var(--va-ink); background: var(--va-amber); border: 2px solid var(--va-ink); border-radius: 50%; }
 .vx-tool-group h3 { flex: 1; margin: 0; color: var(--va-ink); font-family: var(--va-serif); font-size: 22px; font-weight: 600; line-height: 1.15; }
-.vx-tool-group-num { color: var(--va-teal); font-family: var(--va-serif); font-size: 22px; font-style: italic; font-weight: 600; }
 .vx-tool-group .va-tool-row { justify-content: space-between; }
 /* Badges grow with wide screens so the cards stay full. */
 .vx-tool-group .va-tool-badge { width: clamp(92px, 7vw, 124px); }
