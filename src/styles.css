@@ -73,6 +73,8 @@ img { max-width: 100%; display: block; }
 .brand-role { color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
 
 .nav-links { display: flex; align-items: center; justify-content: flex-end; gap: 28px; margin-left: auto; font-size: 14px; font-weight: 600; }
+/* Groups the page links so a theme can lay them out apart from the CTA. */
+.nav-menu { display: contents; }
 .nav-links a:not(.nav-cta) { color: var(--slate); transition: color 150ms ease; }
 .nav-links a:not(.nav-cta):hover { color: var(--blue); }
 .nav-cta {
