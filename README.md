@@ -77,7 +77,12 @@ Add each address under **Settings → Domains** of the creative Vercel project (
 
 ## Notes
 
-- The contact form posts to `api/contact.ts`, a Vercel function that emails each message through [Resend](https://resend.com) from `contact@kenromerogoestdigital.space` to kenromero.digital@gmail.com, with reply-to set to the visitor. Set `RESEND_API_KEY` in Vercel (Project Settings > Environment Variables) and verify the domain in Resend. Optional overrides: `CONTACT_FROM`, `CONTACT_TO`. `npm run dev` does not serve `/api`; use `vercel dev` to test sending locally.
+- Legal pages: `/privacy` and `/terms` (tech and combined site) and `/va/privacy`, `/va/terms` (creative). Text lives in `src/data/legal.ts`; update it when the site starts collecting anything new.
+- Analytics: Vercel Web Analytics (`<Analytics />` in `src/main.tsx`). It sets no cookies, so the site needs no cookie banner. Turn it on per project under **Analytics** in Vercel.
+- SEO and link previews: each build writes `sitemap.xml`, `robots.txt`, `favicon.ico`, and Open Graph tags with a share image from `public/brand/<tech|creative>/`. Absolute URLs use the Vercel production domain; set `SITE_URL` to override.
+- Security headers (HTTPS-only, Content Security Policy, no framing) are set in `vercel.json`. If you add a third-party script, font, or embed, allow its host in the `Content-Security-Policy` header or the browser will block it.
+- Fonts are self-hosted through `@fontsource` packages, so pages make no requests to Google.
+- The contact form posts to `api/contact.ts`, a Vercel function that emails each message through [Resend](https://resend.com) from `contact@kenromerogoestdigital.space` to kenromero.digital@gmail.com, with reply-to set to the visitor. Set `RESEND_API_KEY` in Vercel (Project Settings > Environment Variables) and verify the domain in Resend. Optional overrides: `CONTACT_FROM`, `CONTACT_TO`. Spam and abuse protection: a hidden honeypot field, a minimum fill time, a same-site origin check, input size limits, and a per-visitor rate limit (5 messages per 10 minutes). `npm run dev` does not serve `/api`; use `vercel dev` to test sending locally.
 
 ## Scripts
 

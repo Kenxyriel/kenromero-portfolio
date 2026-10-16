@@ -78,7 +78,7 @@ export const techContent = {
         'Authentication behavior, failed attempts, and proactive lockout: test design, execution, defect reporting, retesting, and regression.',
       tags: ['Authentication', 'Lockout', 'Defects', 'Regression'],
       visual: 'image' as const,
-      image: '/case-study-preview/case-study-one.png',
+      image: '/case-study-preview/case-study-one.webp',
       link: { label: 'Read case study', to: '/qa/projects/authentication-testing' },
     },
     {
@@ -90,7 +90,7 @@ export const techContent = {
       tags: ['Postman', 'REST API', 'Negative Testing', 'Regression'],
       // Shows sample test cases from this case study instead of a picture.
       visual: 'tests' as const,
-      image: '/case-study-preview/case-study-two.png',
+      image: '/case-study-preview/case-study-two.webp',
       link: { label: 'Read case study', to: '/qa/projects/api-testing' },
     },
     {

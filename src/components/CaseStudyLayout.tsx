@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import type { ReactNode } from 'react'
+import LegalLinks from './LegalLinks'
 import usePageMeta from './usePageMeta'
 
 type CaseStudyLayoutProps = {
@@ -70,6 +71,11 @@ export default function CaseStudyLayout({
           </div>
         </section>
       </main>
+      <footer className="legal-footer">
+        <div className="container">
+          <LegalLinks />
+        </div>
+      </footer>
     </div>
   )
 }

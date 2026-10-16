@@ -7,6 +7,10 @@ import usePageMeta from "../../components/usePageMeta";
 import { profile } from "../../data/profile";
 import { techContent as content } from "../../data/tech";
 import { testimonials } from "../../data/testimonials";
+// Self-hosted fonts: no request to Google servers, so no visitor data goes to a third party.
+import "@fontsource/space-grotesk/500.css";
+import "@fontsource/space-grotesk/600.css";
+import "@fontsource/space-grotesk/700.css";
 import "./tech.css";
 
 const navItems: NavItem[] = [
@@ -177,7 +181,7 @@ export default function QAHome() {
 
             <div className="tx-hero-visual">
               <div className="tx-orbit" aria-hidden="true" />
-              <img className="tx-hero-photo" src="/ken-romero.JPG" alt={profile.name} />
+              <img className="tx-hero-photo" src="/ken-romero.webp" alt={profile.name} />
             </div>
           </div>
         </section>
@@ -198,7 +202,7 @@ export default function QAHome() {
         <section id="about" className="tx-section tx-light">
           <div className="container tx-about">
             <Reveal className="tx-about-photo">
-              <img src="/ken-romero-hero.JPG" alt={`${profile.name}, casual portrait`} />
+              <img src="/ken-romero-hero.webp" alt={`${profile.name}, casual portrait`} />
               <span className="tx-tag-float">QA mindset · developer hands</span>
             </Reveal>
             <Reveal className="tx-about-copy" delay={120}>
@@ -423,6 +427,8 @@ export default function QAHome() {
               GitHub
             </a>
             <a href={`mailto:${profile.email}`}>{profile.email}</a>
+            <Link to="/privacy">Privacy</Link>
+            <Link to="/terms">Terms</Link>
           </div>
           <span>© {new Date().getFullYear()} {profile.name}</span>
         </div>

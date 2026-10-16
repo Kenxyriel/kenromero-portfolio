@@ -1,11 +1,18 @@
 import { ArrowRight, Check, ImageIcon, Instagram, Linkedin, Mail, Maximize2, Smartphone, X } from 'lucide-react'
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
+import LegalLinks from '../../components/LegalLinks'
 import SiteHeader, { type NavItem } from '../../components/SiteHeader'
 import usePageMeta from '../../components/usePageMeta'
 import { profile } from '../../data/profile'
 import { toolIcons, vaLinks, type ToolName, type VAImage } from '../../data/va'
 import { RotatingBadge, Sparkle, Squiggle } from './VAArt'
+// Self-hosted fonts: no request to Google servers, so no visitor data goes to a third party.
+import '@fontsource-variable/bricolage-grotesque/standard.css'
+import '@fontsource-variable/fraunces/standard.css'
+import '@fontsource-variable/fraunces/standard-italic.css'
+import '@fontsource/caveat/600.css'
+import '@fontsource/caveat/700.css'
 import './va.css'
 
 const navItems: NavItem[] = [
@@ -149,6 +156,7 @@ function VAFooter() {
       </div>
       <div className="container va-footer-bottom">
         <span>{vaLinks.handle}</span>
+        <LegalLinks base="/va" />
         <span>© {new Date().getFullYear()} {profile.name}. All rights reserved.</span>
       </div>
     </footer>

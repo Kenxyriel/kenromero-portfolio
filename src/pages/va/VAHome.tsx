@@ -159,7 +159,7 @@ export default function VAHome() {
 
           <div className="vx-hero-art">
             <div className="vx-hero-block" />
-            <img className="vx-hero-photo" src="/ken-romero.JPG" alt={profile.name} />
+            <img className="vx-hero-photo" src="/ken-romero.webp" alt={profile.name} />
             <RotatingBadge className="vx-hero-badge" text="PLAN • CREATE • PUBLISH • OPTIMIZE • " />
             <Waveform className="vx-hero-wave" />
             <DotGrid className="vx-hero-dots" />
@@ -171,7 +171,7 @@ export default function VAHome() {
       {/* ABOUT */}
       <section id="about" className="vx-about">
         <div className="vx-about-photo">
-          <img src="/ken-romero-hero.JPG" alt={`${profile.name}, casual portrait`} />
+          <img src="/ken-romero-hero.webp" alt={`${profile.name}, casual portrait`} />
           <Mic className="vx-about-mic" />
         </div>
         <div className="vx-about-copy">

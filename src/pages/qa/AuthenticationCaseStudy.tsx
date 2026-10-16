@@ -108,7 +108,7 @@ export default function AuthenticationCaseStudy() {
       title="Authentication & Proactive Lockout Testing"
       lead="A QA case study focused on validating authentication behavior, failed authentication attempts, proactive lockout handling, test execution, defect reporting, retesting, and regression."
       heroImage={{
-        src: "/case-study-preview/case-study-one.png",
+        src: "/case-study-preview/case-study-one.webp",
         alt: "Authentication and proactive lockout testing case study preview",
       }}
       tags={[
@@ -278,7 +278,7 @@ export default function AuthenticationCaseStudy() {
               <div className="project-panel-heading">
                 <h2>EXPECTED LOCKOUT MATRIX</h2>
               </div>
-              <div className="lockout-table-wrapper">
+              <div className="lockout-table-wrapper" tabIndex={0}>
                 <table className="lockout-table">
                   <thead>
                     <tr>
@@ -502,7 +502,7 @@ export default function AuthenticationCaseStudy() {
               <div className="case-panel-heading">
                 <h2>PROGRESSIVE LOCKOUT TEST SCENARIOS</h2>
               </div>
-              <div className="qa-table-wrapper">
+              <div className="qa-table-wrapper" tabIndex={0}>
                 <table className="qa-table">
                   <thead>
                     <tr>
@@ -654,7 +654,7 @@ export default function AuthenticationCaseStudy() {
                 <h2>DEFECT LIFECYCLE</h2>
                 <p>From detection to release validation.</p>
               </div>
-              <div className="defect-lifecycle">
+              <div className="defect-lifecycle" tabIndex={0}>
                 {[
                   ["01", "TEST"],
                   ["02", "DEFECT\nIDENTIFIED"],
@@ -768,7 +768,7 @@ export default function AuthenticationCaseStudy() {
                   level.
                 </p>
               </div>
-              <div className="qa-table-wrapper">
+              <div className="qa-table-wrapper" tabIndex={0}>
                 <table className="qa-table qa-table-retest">
                   <thead>
                     <tr>
@@ -846,7 +846,7 @@ export default function AuthenticationCaseStudy() {
                   negatively affect existing authentication functionality.
                 </p>
               </div>
-              <div className="qa-table-wrapper">
+              <div className="qa-table-wrapper" tabIndex={0}>
                 <table className="qa-table qa-table-regression">
                   <thead>
                     <tr>

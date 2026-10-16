@@ -1,8 +1,18 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import usePageMeta from './usePageMeta'
 
 export default function NotFound() {
   usePageMeta('Page not found | Ken Romero', 'The requested page could not be found.')
+
+  // Every URL returns the app, so tell search engines this one is not a real page.
+  useEffect(() => {
+    const tag = document.createElement('meta')
+    tag.name = 'robots'
+    tag.content = 'noindex'
+    document.head.appendChild(tag)
+    return () => tag.remove()
+  }, [])
 
   return (
     <main className="placeholder-page">
