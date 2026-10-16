@@ -144,9 +144,9 @@ export const vaHome = {
     // Swap any path for another file in public/va/work/ to change a preview.
     previews: {
       design: [
-        { image: '/va/work/design/promo-2.jpg', label: 'Nova & Co. new arrivals' },
+        { image: '/va/work/design/brand-kit-1.jpg', label: 'JJJ Tax and Accounting brand kit' },
+        { image: '/va/work/design/accounting-7.jpg', label: 'JJJ Tax and Accounting Q4 graphic' },
         { image: '/va/work/design/food-3.jpg', label: 'Bun Riot combo poster' },
-        { image: '/va/work/design/food-5.jpg', label: 'Kape at Kuwento matcha latte' },
       ],
       podcast: {
         thumbnail: { image: '/va/work/podcast/thumbnail.jpg', label: 'Podcast episode thumbnail' },
