@@ -1,7 +1,6 @@
-import { useState } from 'react'
 import { Check } from 'lucide-react'
-import { Link } from 'react-router-dom'
 import { getSmmPackages, podcastPackages, smmPackages, type Package } from '../../data/va'
+import { portfolioUrl } from '../../packageHosts'
 import VALayout, { VAPageHero, VASectionTitle } from './VALayout'
 
 function PackageCard({ pkg }: { pkg: Package }) {
@@ -34,45 +33,33 @@ function PackageCard({ pkg }: { pkg: Package }) {
         </>
       )}
       {pkg.note && <p className="va-note">{pkg.note}</p>}
-      <Link className="va-button" to="/va#contact">
+      <a className="va-button" href={portfolioUrl('/va#contact')}>
         Let’s Work Together
-      </Link>
+      </a>
     </article>
   )
 }
 
-function PackagesNav({ active }: { active: 'smm' | 'podcast' }) {
-  return (
-    <nav className="va-tabs" aria-label="Package type">
-      <Link className={active === 'smm' ? 'is-active' : ''} to="/va/smm-packages">
-        Social Media Management
-      </Link>
-      <Link className={active === 'podcast' ? 'is-active' : ''} to="/va/podcast-packages">
-        Podcast Editing
-      </Link>
-    </nav>
-  )
-}
+const currencyLabel = { usd: 'Prices in USD', php: 'Prices in PHP · Philippines' }
 
-export function VASmmPackages() {
-  const [currency, setCurrency] = useState<'usd' | 'php'>('usd')
+// Package pages are not linked from the portfolio; Ken shares them directly
+// with the clients they apply to (see src/packageHosts.ts). Each page shows a
+// single currency so international and local clients only see their prices.
+export function VASmmPackages({ currency = 'usd' }: { currency?: 'usd' | 'php' }) {
   const { packages, addOns } = getSmmPackages(currency)
 
   return (
-    <VALayout meta={smmPackages.meta}>
-      <VAPageHero title={smmPackages.title} tagline={smmPackages.tagline} intro={smmPackages.pillars.join(' | ')} />
+    <VALayout meta={smmPackages.meta} unlisted>
+      <VAPageHero
+        title={smmPackages.title}
+        tagline={smmPackages.tagline}
+        intro={smmPackages.pillars.join(' | ')}
+        backHref={portfolioUrl('/va')}
+      />
 
       <section className="va-section va-section-tight">
         <div className="container">
-          <PackagesNav active="smm" />
-          <div className="va-currency" role="group" aria-label="Currency">
-            <button className={currency === 'usd' ? 'is-active' : ''} onClick={() => setCurrency('usd')} aria-pressed={currency === 'usd'}>
-              USD
-            </button>
-            <button className={currency === 'php' ? 'is-active' : ''} onClick={() => setCurrency('php')} aria-pressed={currency === 'php'}>
-              PHP (PH Local)
-            </button>
-          </div>
+          <p className="va-currency-note">{currencyLabel[currency]}</p>
           <div className="va-packages">
             {packages.map((pkg) => (
               <PackageCard key={pkg.name} pkg={{ ...pkg, bestFor: pkg.tagline, intro: `Best for: ${pkg.bestFor}` }} />
@@ -131,12 +118,11 @@ export function VAPodcastPackages() {
   const { retainer } = content
 
   return (
-    <VALayout meta={content.meta}>
-      <VAPageHero title={content.title} />
+    <VALayout meta={content.meta} unlisted>
+      <VAPageHero title={content.title} backHref={portfolioUrl('/va')} />
 
       <section className="va-section va-section-tight">
         <div className="container">
-          <PackagesNav active="podcast" />
           <VASectionTitle title="Per Episode" />
           <div className="va-packages va-packages-2">
             {content.perEpisode.map((pkg) => (
@@ -255,9 +241,9 @@ export function VAPodcastPackages() {
           </div>
           <p className="va-note va-centered">{retainer.note}</p>
           <p className="va-centered">
-            <Link className="va-button" to="/va#contact">
+            <a className="va-button" href={portfolioUrl('/va#contact')}>
               {content.custom}
-            </Link>
+            </a>
           </p>
         </div>
       </section>

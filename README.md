@@ -9,7 +9,7 @@ Visitors only see navigation for the portfolio they were sent to.
 | `/qa/projects/authentication-testing`, `/qa/projects/api-testing` | QA case studies |
 | `/va` | Creative / VA portfolio home |
 | `/va/design-branding`, `/va/social-media-content`, `/va/podcast-editing` | VA work pages |
-| `/va/smm-packages`, `/va/podcast-packages` | VA pricing (USD / PHP toggle) |
+| `/va/smm-packages` (USD), `/va/smm-local-packages` (PHP), `/va/podcast-packages` | VA pricing, one currency per page. Unlisted: not linked from the portfolio and marked `noindex`; share directly with a client (see Package subdomains). |
 
 The former `/it` portfolio is merged into `/qa`; `/it` redirects there. Old `/projects/*` case-study URLs redirect to `/qa/projects/*`. Unknown URLs show a 404 page.
 
@@ -60,6 +60,20 @@ Local check: `VITE_PORTFOLIO=va npm run build && npm run preview`.
 On the `all` build, a floating **Tech | Creative** switcher (bottom-left) jumps between portfolios.
 It shows on `localhost` and Vercel preview URLs; on a production domain add `?switcher=on` once
 to enable it in your browser (`?switcher=off` to hide). Single-portfolio builds never include it.
+
+## Package subdomains
+
+Each price list can also be shared on its own subdomain of the creative site. The first part
+of the hostname picks the page (`src/packageHosts.ts`), so the same deployment serves them:
+
+| Address | Page |
+| --- | --- |
+| `smm-packages.creative.kenromerogoestdigital.space` | Social media packages, USD |
+| `smm-local-packages.creative.kenromerogoestdigital.space` | Social media packages, PHP (local) |
+| `podcast-packages.creative.kenromerogoestdigital.space` | Podcast packages and retainer |
+
+Add each address under **Settings → Domains** of the creative Vercel project (`VITE_PORTFOLIO=va`).
+"Back to portfolio" and contact buttons on these pages link to the main creative site.
 
 ## Notes
 

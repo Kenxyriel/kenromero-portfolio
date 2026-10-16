@@ -13,6 +13,28 @@ export const vaLinks = {
   handle: 'kenromero.goesdigital_',
 }
 
+// Official tool logos, cropped to circles, in public/va/tools.
+export const toolIcons = {
+  'CapCut Pro': '/va/tools/capcut-pro.png',
+  OpusClip: '/va/tools/opusclip.png',
+  Canva: '/va/tools/canva.png',
+  'Riverside.fm': '/va/tools/riverside.png',
+  ChatGPT: '/va/tools/chatgpt.png',
+  Claude: '/va/tools/claude.png',
+  ElevenLabs: '/va/tools/elevenlabs.svg',
+  'Gemini AI': '/va/tools/gemini.svg',
+  'Meta Business': '/va/tools/meta.png',
+  Buffer: '/va/tools/buffer.png',
+  Metricool: '/va/tools/metricool.png',
+  Notion: '/va/tools/notion.svg',
+  'Google Drive': '/va/tools/google-drive.png',
+  'Google Suite': '/va/tools/google.png',
+  Asana: '/va/tools/asana.svg',
+  Trello: '/va/tools/trello.svg',
+}
+
+export type ToolName = keyof typeof toolIcons
+
 export const vaHome = {
   meta: {
     title: 'Ken Romero | Social Media Manager, Podcast Editor & Graphic Designer',
@@ -60,20 +82,12 @@ export const vaHome = {
     title: 'Tools I Use',
     description:
       'A curated collection of tools and platforms that power my workflow and help me deliver high-quality work.',
-    items: [
-      'ChatGPT',
-      'Claude',
-      'Canva',
-      'Google Drive',
-      'Google Suite',
-      'Riverside.fm',
-      'CapCut Pro',
-      'OpusClip',
-      'Slack',
-      'Buffer',
-      'Meta Business',
-      'Metricool',
-    ],
+    groups: [
+      { title: 'Content Creation', tools: ['CapCut Pro', 'OpusClip', 'Canva', 'Riverside.fm'] },
+      { title: 'AI & Content Strategy', tools: ['ChatGPT', 'Claude', 'ElevenLabs', 'Gemini AI'] },
+      { title: 'Social Media Management', tools: ['Meta Business', 'Buffer', 'Metricool', 'Notion'] },
+      { title: 'Workflow & Collaboration', tools: ['Google Drive', 'Google Suite', 'Asana', 'Trello'] },
+    ] as { title: string; tools: ToolName[] }[],
   },
   services: {
     eyebrow: 'My Services',
@@ -235,7 +249,7 @@ export const designBranding = {
     title: 'Let’s Make It Worth Remembering.',
     description: 'Your brand deserves visuals that are consistent, professional, and built to connect.',
     button: 'Let’s Build Your Brand',
-    path: '/va/smm-packages',
+    path: '/va#contact',
     points: ['Strategic Design', 'Consistent Branding', 'Made to Connect'],
   },
 }
@@ -307,7 +321,7 @@ export const socialMedia = {
     description:
       'From content planning to publishing, I turn your ideas into consistent, platform-ready content built to reach and engage your audience.',
     button: 'Let’s Grow Your Content',
-    path: '/va/smm-packages',
+    path: '/va#contact',
     points: ['Plan', 'Create', 'Publish', 'Optimize'],
   },
 }
@@ -320,7 +334,7 @@ export const podcastEditing = {
   title: 'Podcast Editing',
   subtitle: '& Content Management',
   intro: 'From raw recordings to content that gets people watching.',
-  tools: ['ChatGPT', 'Claude', 'Canva', 'Google Drive', 'Google Suite', 'Riverside.fm', 'OpusClip'],
+  tools: ['ChatGPT', 'Claude', 'Canva', 'Google Drive', 'Google Suite', 'Riverside.fm', 'OpusClip'] as ToolName[],
   editing: {
     title: 'Featured Projects',
     items: [
@@ -348,8 +362,8 @@ export const podcastEditing = {
     eyebrow: 'Your podcast has the content.',
     title: 'Let’s Make It Worth Watching.',
     description: 'From raw recordings to polished, engaging content that helps you grow your audience.',
-    button: 'View Packages & Services',
-    path: '/va/podcast-packages',
+    button: 'Let’s Talk About Your Podcast',
+    path: '/va#contact',
     points: ['Engaging Edits', 'Audience-Focused', 'Made for Growth'],
   },
 }

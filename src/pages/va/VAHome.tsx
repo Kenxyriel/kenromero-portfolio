@@ -5,39 +5,24 @@ import {
   Headphones,
   Heart,
   MessageCircle,
+  Bot,
+  Cloud,
   Palette,
   Quote,
   Share2,
+  Smartphone,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import ContactForm from '../../components/ContactForm'
 import { profile } from '../../data/profile'
 import { vaHome as content, vaTestimonials } from '../../data/va'
 import { CurlArrow, DotGrid, Mic, RotatingBadge, Sparkle, Squiggle, Waveform } from './VAArt'
-import VALayout from './VALayout'
+import VALayout, { ToolBadge } from './VALayout'
 
 const serviceIcons = [Headphones, Share2, Palette, ClipboardList, BarChart3]
 
-const packageTeasers = [
-  {
-    kicker: 'Social Media',
-    title: 'Social Media Management Packages',
-    price: 'From $450 / month',
-    path: '/va/smm-packages',
-  },
-  {
-    kicker: 'Podcast',
-    title: 'Podcast Editing per Episode',
-    price: 'From $45 / episode',
-    path: '/va/podcast-packages',
-  },
-  {
-    kicker: 'Retainer',
-    title: 'Podcast Management Retainer',
-    price: '$800 / month',
-    path: '/va/podcast-packages',
-  },
-]
+// Same order as the tool groups in src/data/va.ts.
+const toolGroupIcons = [Palette, Bot, Smartphone, Cloud]
 
 // Typographic "covers" for each work category, drawn in CSS/SVG.
 function WorkCover({ kind }: { kind: 'design' | 'podcast' | 'social' }) {
@@ -256,49 +241,36 @@ export default function VAHome() {
 
       {/* TOOLS */}
       <section className="vx-tools">
-        <div className="container vx-split-grid">
-          <div className="vx-side">
-            <p className="vx-eyebrow">My toolkit</p>
-            <h2 className="vx-serif">
-              Tools I <em>use</em>
-            </h2>
-            <Squiggle />
-          </div>
-          <div>
+        <div className="container">
+          <div className="vx-tools-head">
+            <div>
+              <p className="vx-eyebrow">My toolkit</p>
+              <h2 className="vx-serif">
+                Tools I <em>use</em>
+              </h2>
+              <Squiggle />
+            </div>
             <p className="vx-side-note">{content.tools.description}</p>
-            <ul className="vx-tool-list">
-              {content.tools.items.map((tool) => (
-                <li key={tool}>{tool}</li>
-              ))}
-            </ul>
           </div>
-        </div>
-      </section>
-
-      {/* PACKAGES TEASER */}
-      <section className="vx-packages">
-        <div className="container vx-split-grid">
-          <div className="vx-side">
-            <p className="vx-eyebrow">Packages</p>
-            <h2 className="vx-serif">
-              Ways to <em>work</em> together
-            </h2>
-            <Squiggle />
-            <Link className="vx-pill" to="/va/smm-packages">
-              View all packages <ArrowRight size={16} aria-hidden="true" />
-            </Link>
-          </div>
-          <div className="vx-card-row">
-            {packageTeasers.map((item) => (
-              <Link className="vx-package-card" key={item.title} to={item.path}>
-                <span className="vx-eyebrow">{item.kicker}</span>
-                <h3>{item.title}</h3>
-                <strong>{item.price}</strong>
-                <span className="vx-more">
-                  See details <ArrowRight size={15} aria-hidden="true" />
-                </span>
-              </Link>
-            ))}
+          <div className="vx-tool-groups">
+            {content.tools.groups.map((group, groupIndex) => {
+              const Icon = toolGroupIcons[groupIndex]
+              return (
+                <article className="vx-tool-group" key={group.title}>
+                  <header>
+                    <span className="vx-tool-group-icon">
+                      <Icon size={18} aria-hidden="true" />
+                    </span>
+                    <h3>{group.title}</h3>
+                  </header>
+                  <ul className="va-tool-row">
+                    {group.tools.map((tool, index) => (
+                      <ToolBadge key={tool} name={tool} index={groupIndex * 4 + index} />
+                    ))}
+                  </ul>
+                </article>
+              )
+            })}
           </div>
         </div>
       </section>

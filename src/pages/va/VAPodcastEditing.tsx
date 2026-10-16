@@ -1,5 +1,5 @@
 import { podcastEditing as content } from '../../data/va'
-import VALayout, { VACta, VAImg, VAPageHero, VASectionTitle } from './VALayout'
+import VALayout, { ToolBadge, VACta, VAImg, VAPageHero, VASectionTitle } from './VALayout'
 
 export default function VAPodcastEditing() {
   return (
@@ -9,9 +9,9 @@ export default function VAPodcastEditing() {
       <section className="va-section va-section-tight">
         <div className="container va-tools-row">
           <p className="va-kicker">Tools:</p>
-          <ul className="va-chip-grid">
-            {content.tools.map((tool) => (
-              <li key={tool}>{tool}</li>
+          <ul className="va-tool-row">
+            {content.tools.map((tool, index) => (
+              <ToolBadge key={tool} name={tool} index={index} />
             ))}
           </ul>
         </div>

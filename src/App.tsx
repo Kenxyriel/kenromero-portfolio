@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import NotFound from "./components/NotFound";
 import ScrollManager from "./components/ScrollManager";
 import ViewSwitcher from "./components/ViewSwitcher";
+import { packagePageForHost } from "./packageHosts";
 
 // One codebase, separate entry points per audience. VITE_PORTFOLIO decides
 // which portfolios a deployment contains: "all" (default), "qa" (QA + development),
@@ -32,6 +33,12 @@ const VASmmPackages = HAS_VA
 // The root URL shows the QA portfolio on the combined site, or the only
 // portfolio a single-audience site serves.
 function rootElement() {
+  // Package subdomains (smm-packages.creative..., etc.) show one price list.
+  const packagePage = HAS_VA ? packagePageForHost() : null;
+  if (packagePage === "smm-usd" && VASmmPackages) return <VASmmPackages currency="usd" />;
+  if (packagePage === "smm-php" && VASmmPackages) return <VASmmPackages currency="php" />;
+  if (packagePage === "podcast" && VAPodcastPackages) return <VAPodcastPackages />;
+
   if (mode === "va") return <Navigate to="/va" replace />;
   return QAHome ? <QAHome /> : <NotFound />;
 }
@@ -68,7 +75,8 @@ function App() {
               <Route path="/va/social-media-content" element={<VASocialMedia />} />
               <Route path="/va/podcast-editing" element={<VAPodcastEditing />} />
               <Route path="/va/podcast-packages" element={<VAPodcastPackages />} />
-              <Route path="/va/smm-packages" element={<VASmmPackages />} />
+              <Route path="/va/smm-packages" element={<VASmmPackages currency="usd" />} />
+              <Route path="/va/smm-local-packages" element={<VASmmPackages currency="php" />} />
             </>
           )}
 

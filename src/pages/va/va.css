@@ -226,8 +226,7 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
 /* ---------- Selected work ---------- */
 
 .vx-work,
-.vx-tools,
-.vx-packages { padding: clamp(56px, 7vw, 88px) 0; border-bottom: 2px solid var(--va-ink); }
+.vx-tools { padding: clamp(56px, 7vw, 88px) 0; border-bottom: 2px solid var(--va-ink); }
 .vx-work-card { display: flex; flex-direction: column; color: var(--va-ink); }
 .vx-work-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 14px; }
 .vx-work-meta h3 { margin: 0; font-size: 15px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
@@ -282,18 +281,64 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
 
 /* ---------- Tools ---------- */
 
-.vx-tool-list { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 0; padding: 0; list-style: none; }
-.vx-tool-list li { padding: 9px 16px; background: white; border: 2px solid var(--va-ink); border-radius: 999px; color: var(--va-ink); font-size: 14px; font-weight: 700; }
-.vx-tool-list li:nth-child(3n + 1) { background: var(--va-amber); }
+.vx-tools-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 48px; margin-bottom: 36px; }
+.vx-tools-head .vx-side-note { max-width: 440px; }
+.vx-tools-head .va-squiggle { margin-top: 10px; }
 
-/* ---------- Packages teaser ---------- */
+/* 2 x 2 grid of tool group cards. */
+.vx-tool-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.vx-tool-group {
+  padding: 22px 26px 26px;
+  background: white;
+  border: 2px solid var(--va-ink);
+  box-shadow: 6px 6px 0 var(--va-ink);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.vx-tool-group:nth-child(2) { box-shadow: 6px 6px 0 var(--va-teal); }
+.vx-tool-group:nth-child(3) { box-shadow: 6px 6px 0 var(--va-amber); }
+.vx-tool-group:hover { transform: translate(-2px, -2px); }
+.vx-tool-group header { display: flex; align-items: center; gap: 12px; padding-bottom: 16px; margin-bottom: 20px; border-bottom: 1px dashed var(--va-line); }
+.vx-tool-group-icon { display: grid; place-items: center; width: 36px; height: 36px; color: var(--va-ink); background: var(--va-amber); border: 2px solid var(--va-ink); border-radius: 50%; }
+.vx-tool-group h3 { flex: 1; margin: 0; color: var(--va-ink); font-family: var(--va-serif); font-size: 22px; font-weight: 600; line-height: 1.15; }
+.vx-tool-group .va-tool-row { justify-content: space-between; }
+/* Badges grow with wide screens so the cards stay full. */
+.vx-tool-group .va-tool-badge { width: clamp(92px, 7vw, 124px); }
+.vx-tool-group .va-tool-circle { width: clamp(78px, 5.4vw, 104px); height: clamp(78px, 5.4vw, 104px); }
+.vx-tool-group .va-tool-name { font-size: clamp(12px, .8vw, 14px); }
 
-.vx-packages { background: var(--va-paper-2); }
-.vx-package-card { display: flex; flex-direction: column; min-height: 230px; padding: 24px; background: var(--va-paper); border: 2px solid var(--va-ink); transition: transform 160ms ease, box-shadow 160ms ease; }
-.vx-package-card:hover { transform: translateY(-4px); box-shadow: 6px 8px 0 var(--va-ink); }
-.vx-package-card h3 { margin: 0; font-family: var(--va-serif); font-size: 24px; font-weight: 600; line-height: 1.15; }
-.vx-package-card strong { margin-top: 12px; color: var(--va-ink); font-size: 18px; font-weight: 800; }
-.vx-more { display: inline-flex; align-items: center; gap: 6px; margin-top: auto; padding-top: 18px; color: var(--va-teal); font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+/* Circular official logos that bob and tilt; hover spins one. */
+.va-tool-row { display: flex; flex-wrap: wrap; gap: 18px 20px; margin: 0; padding: 0; list-style: none; }
+.va-tool-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 92px;
+  animation: va-tool-bob 3.2s ease-in-out infinite;
+}
+.va-tool-circle {
+  display: grid;
+  place-items: center;
+  width: 78px;
+  height: 78px;
+  overflow: hidden;
+  background: white;
+  border: 4px solid #fbf7ee;
+  border-radius: 50%;
+  box-shadow: 0 6px 16px rgba(21, 18, 17, .16), 0 0 0 1px var(--va-line);
+  transition: transform 700ms cubic-bezier(.34, 1.56, .64, 1);
+}
+.va-tool-circle img { width: 100%; height: 100%; object-fit: cover; }
+/* SVG logos have no background of their own: show them smaller on white. */
+.va-tool-circle img[src$=".svg"] { width: 56%; height: 56%; object-fit: contain; }
+.va-tool-badge:hover .va-tool-circle { transform: rotate(360deg) scale(1.08); }
+.va-tool-name { color: var(--va-ink); font-size: 12px; font-weight: 700; line-height: 1.25; text-align: center; }
+@keyframes va-tool-bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-9px) rotate(-6deg); }
+  50% { transform: translateY(0) rotate(0deg); }
+  75% { transform: translateY(-4px) rotate(5deg); }
+}
 
 /* ---------- CTA band ---------- */
 
@@ -462,7 +507,7 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
 .va-post p { margin: 14px 0 0; font-size: 13px; line-height: 1.65; }
 .va-post img { margin-top: 12px; }
 
-.va-tools-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+.va-tools-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
 .va-tools-row .va-kicker { margin: 0; }
 
 .va-cta { padding: clamp(56px, 8vw, 92px) 0; background: var(--va-amber); text-align: center; border-bottom: 2px solid var(--va-ink); }
@@ -474,14 +519,7 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
 .va-cta-points { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; margin: 28px 0 0; padding: 0; list-style: none; font-weight: 800; color: var(--va-ink); }
 .va-cta-points li { display: inline-flex; align-items: center; gap: 6px; }
 
-.va-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-.va-tabs a { padding: 10px 18px; border: 2px solid var(--va-ink); border-radius: 999px; font-size: 13px; font-weight: 800; }
-.va-tabs a.is-active,
-.va-tabs a:hover { background: var(--va-ink); color: white; }
-
-.va-currency { display: flex; justify-content: center; gap: 4px; width: fit-content; margin: 0 auto 36px; padding: 4px; background: var(--va-paper-2); border: 2px solid var(--va-ink); border-radius: 999px; }
-.va-currency button { padding: 8px 18px; background: transparent; border-radius: 999px; font-size: 13px; font-weight: 800; color: var(--va-ink); cursor: pointer; }
-.va-currency button.is-active { background: var(--va-amber); }
+.va-currency-note { width: fit-content; margin: 0 auto 32px; padding: 7px 16px; color: var(--va-ink); background: var(--va-paper-2); border: 2px solid var(--va-ink); border-radius: 999px; font-size: 13px; font-weight: 800; letter-spacing: .04em; }
 
 .va-packages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; align-items: stretch; }
 .va-packages-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 900px; margin: 0 auto; }
@@ -544,6 +582,7 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
   .vx-split-grid { grid-template-columns: 1fr; }
   .vx-cta-grid { grid-template-columns: 1fr 1fr; }
   .vx-cta-art { display: none; }
+  .vx-tool-groups { grid-template-columns: 1fr; }
   .va-platforms { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .va-posts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .va-packages,
@@ -585,6 +624,16 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
   .va-hooks,
   .va-retainer { grid-template-columns: 1fr; }
   .va-page-hero { padding-top: 108px; }
+  /* Four logos per row on phones. */
+  .va-tool-row { gap: 14px 6px; justify-content: space-between; }
+  .va-tool-badge { width: 76px; }
+  .va-tool-circle { width: 62px; height: 62px; border-width: 3px; }
+  .va-tool-name { font-size: 11px; }
+  .vx-tool-group { padding: 18px 16px 20px; }
+  .vx-tool-group h3 { font-size: 19px; }
+  .vx-tool-group .va-tool-badge { width: 70px; }
+  .vx-tool-group .va-tool-circle { width: 58px; height: 58px; }
+  .vx-tool-group .va-tool-name { font-size: 11px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -592,5 +641,7 @@ a.vx-service:hover { background: rgba(255, 255, 255, .05); }
   .vx-pill,
   .va-button,
   .vx-cover,
-  .vx-package-card { transition: none; }
+  .va-tool-circle { transition: none; }
+  .va-tool-badge { animation: none; }
+  .va-tool-badge:hover .va-tool-circle { transform: none; }
 }

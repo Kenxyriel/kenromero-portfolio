@@ -1,10 +1,10 @@
 import { ArrowRight, Check, ImageIcon, Instagram, Linkedin, Mail, Smartphone } from 'lucide-react'
-import type { ReactNode } from 'react'
+import { useEffect, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import SiteHeader, { type NavItem } from '../../components/SiteHeader'
 import usePageMeta from '../../components/usePageMeta'
 import { profile } from '../../data/profile'
-import { vaLinks, type VAImage } from '../../data/va'
+import { toolIcons, vaLinks, type ToolName, type VAImage } from '../../data/va'
 import { RotatingBadge, Sparkle, Squiggle } from './VAArt'
 import './va.css'
 
@@ -13,17 +13,27 @@ const navItems: NavItem[] = [
   { label: 'Design', href: '/va/design-branding' },
   { label: 'Social Media', href: '/va/social-media-content' },
   { label: 'Podcast', href: '/va/podcast-editing' },
-  { label: 'Packages', href: '/va/smm-packages' },
 ]
 
 type VALayoutProps = {
   meta: { title: string; description: string }
   children: ReactNode
+  /** Keep the page out of search results (pages shared only by direct link). */
+  unlisted?: boolean
 }
 
 // Shell for every /va page: creative-portfolio theme, navigation, contact footer.
-export default function VALayout({ meta, children }: VALayoutProps) {
+export default function VALayout({ meta, children, unlisted = false }: VALayoutProps) {
   usePageMeta(meta.title, meta.description)
+
+  useEffect(() => {
+    if (!unlisted) return
+    const tag = document.createElement('meta')
+    tag.name = 'robots'
+    tag.content = 'noindex, nofollow'
+    document.head.appendChild(tag)
+    return () => tag.remove()
+  }, [unlisted])
 
   return (
     <div className="site-shell va-theme">
@@ -71,17 +81,11 @@ function VAFooter() {
           </ul>
         </div>
         <div>
-          <p className="va-footer-head">Packages</p>
+          <p className="va-footer-head">Services</p>
           <ul>
-            <li>
-              <Link to="/va/smm-packages">Social Media Management</Link>
-            </li>
-            <li>
-              <Link to="/va/podcast-packages">Podcast Editing</Link>
-            </li>
-            <li>
-              <Link to="/va/podcast-packages">Podcast Retainer</Link>
-            </li>
+            <li>Social Media Management</li>
+            <li>Podcast Editing</li>
+            <li>Design &amp; Branding</li>
           </ul>
         </div>
         <div>
@@ -108,6 +112,19 @@ function VAFooter() {
   )
 }
 
+// Circular tool logo that bobs and tilts; `index` staggers the motion so a
+// row of badges moves like a wave. Hovering spins it.
+export function ToolBadge({ name, index = 0 }: { name: ToolName; index?: number }) {
+  return (
+    <li className="va-tool-badge" style={{ animationDelay: `${(index % 8) * -0.35}s` }}>
+      <span className="va-tool-circle">
+        <img src={toolIcons[name]} alt="" loading="lazy" />
+      </span>
+      <span className="va-tool-name">{name}</span>
+    </li>
+  )
+}
+
 // Image from the creative portfolio, or a labelled placeholder until it is added.
 export function VAImg({ item, className = '' }: { item: VAImage; className?: string }) {
   if (item.image) {
@@ -130,18 +147,26 @@ export function VAPageHero({
   subtitle,
   tagline,
   intro,
+  backHref = '/va',
 }: {
   title: string
   subtitle?: string
   tagline?: string
   intro?: string
+  backHref?: string
 }) {
   return (
     <section className="va-page-hero">
       <div className="container va-narrow">
-        <Link className="va-back" to="/va">
-          ← Back to portfolio
-        </Link>
+        {backHref.startsWith('/') ? (
+          <Link className="va-back" to={backHref}>
+            ← Back to portfolio
+          </Link>
+        ) : (
+          <a className="va-back" href={backHref}>
+            ← Back to portfolio
+          </a>
+        )}
         <h1>
           {title}
           {subtitle && <span>{subtitle}</span>}
