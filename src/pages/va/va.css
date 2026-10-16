@@ -925,3 +925,73 @@
   .va-reel-brand,
   .va-reel-title { animation: none; }
 }
+
+/* ---------- JJJ content calendar case study (Social Media page) ---------- */
+
+.va-theme {
+  --jjj-tax: #1b4c9b;
+  --jjj-books: #4f8edb;
+  --jjj-myths: #e09a0b;
+  --jjj-trust: #12534f;
+}
+
+.jjj-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 0 0 28px; padding: 0; list-style: none; }
+.jjj-stats li { padding: 18px 20px; background: var(--va-paper-2); border: 2px solid var(--va-ink); }
+.jjj-stats strong { display: block; color: var(--va-ink); font-family: var(--va-serif); font-size: clamp(26px, 3.4vw, 38px); font-weight: 600; line-height: 1; }
+.jjj-stats span { display: block; margin-top: 8px; color: var(--va-muted); font-size: 13px; font-weight: 700; }
+
+.jjj-board { padding: clamp(18px, 3vw, 32px); background: white; border: 2px solid var(--va-ink); box-shadow: 6px 6px 0 var(--va-ink); }
+.jjj-board-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 8px 20px; }
+.jjj-board-head .va-kicker { margin: 0 0 4px; }
+.jjj-board-head h3 { margin: 0; font-family: var(--va-serif); font-size: clamp(24px, 3vw, 32px); font-weight: 600; }
+.jjj-platforms { margin: 0; color: var(--va-muted); font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+
+.jjj-legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 18px 0 20px; padding: 0; list-style: none; font-size: 13px; font-weight: 700; color: var(--va-ink); }
+.jjj-legend li { display: inline-flex; align-items: center; gap: 8px; }
+.jjj-legend li::before { content: ""; width: 12px; height: 12px; border-radius: 3px; background: var(--jjj-c); }
+
+.jjj-pillar-tax { --jjj-c: var(--jjj-tax); }
+.jjj-pillar-books { --jjj-c: var(--jjj-books); }
+.jjj-pillar-myths { --jjj-c: var(--jjj-myths); }
+.jjj-pillar-trust { --jjj-c: var(--jjj-trust); }
+
+.jjj-grid { display: grid; gap: 8px; }
+.jjj-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+.jjj-row-head span { padding: 0 4px; color: var(--va-teal); font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+
+.jjj-cell { display: flex; flex-direction: column; gap: 8px; min-height: 128px; padding: 10px 12px 12px; background: var(--va-paper); border: 1px solid var(--va-line); border-left: 5px solid var(--jjj-c); border-radius: 6px; }
+.jjj-cell-empty { background: transparent; border: 1px dashed var(--va-line); }
+.jjj-date { color: var(--va-muted); font-size: 12px; font-weight: 700; }
+.jjj-dow { display: none; }
+.jjj-title { margin: 0; color: var(--va-ink); font-size: 14px; font-weight: 700; line-height: 1.35; }
+.jjj-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+.jjj-format,
+.jjj-status { padding: 3px 8px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+.jjj-format { background: white; border: 1px solid var(--va-ink); color: var(--va-ink); }
+.jjj-format-reel { background: var(--va-amber); }
+.jjj-status { display: inline-flex; align-items: center; gap: 5px; color: var(--va-text); background: var(--va-paper-2); }
+.jjj-status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.jjj-status.is-scheduled { color: #1d6b3a; background: #e1f1e5; }
+.jjj-status.is-for-review { color: #6b3fa0; background: #efe5f8; }
+.jjj-status.is-idea { color: #9a5b00; background: #fbedd0; }
+
+.jjj-notes { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 0; padding: 0; list-style: none; }
+.jjj-notes li { padding: 8px 14px; border: 2px solid var(--va-ink); border-radius: 999px; color: var(--va-ink); font-size: 13px; font-weight: 700; }
+
+@media (max-width: 1023px) {
+  .jjj-title { font-size: 13px; }
+  .jjj-cell { padding: 8px 9px 10px; }
+}
+
+/* Phones: an agenda list of posting days instead of a 5-column grid. */
+@media (max-width: 767px) {
+  .jjj-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .jjj-stats li { padding: 14px 16px; }
+  .jjj-board { box-shadow: 4px 4px 0 var(--va-ink); }
+  .jjj-row-head,
+  .jjj-cell-empty { display: none; }
+  .jjj-row { grid-template-columns: 1fr; }
+  .jjj-cell { min-height: 0; }
+  .jjj-dow { display: inline; }
+  .jjj-title { font-size: 15px; }
+}
