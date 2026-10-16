@@ -117,14 +117,7 @@ export default function ContactForm({ intro = defaultIntro }: ContactFormProps) 
         </label>
 
         <div className="contact-form-footer">
-          <button
-            className="button button-primary contact-submit"
-            type="submit"
-            disabled={status === 'sending'}
-          >
-            {status === 'sending' ? 'Sending...' : 'Send Message'} <Send size={16} />
-          </button>
-          <small className="contact-form-status" role="status" aria-live="polite">
+          <p className={`contact-form-status is-${status}`} role="status" aria-live="polite">
             {status === 'sent' && 'Thanks! Your message was sent. I will get back to you soon.'}
             {status === 'error' && (
               <>
@@ -132,7 +125,14 @@ export default function ContactForm({ intro = defaultIntro }: ContactFormProps) 
                 <a href={`mailto:${profile.email}`}>{profile.email}</a> instead.
               </>
             )}
-          </small>
+          </p>
+          <button
+            className="button button-primary contact-submit"
+            type="submit"
+            disabled={status === 'sending'}
+          >
+            {status === 'sending' ? 'Sending...' : 'Send Message'} <Send size={16} />
+          </button>
         </div>
       </form>
     </div>
