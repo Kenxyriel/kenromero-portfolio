@@ -302,31 +302,78 @@
   border: 2px solid var(--va-ink);
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
-.va-cover-design { display: grid; place-items: center; background: var(--va-amber); }
-.va-cover-type { font-family: var(--va-serif); font-size: clamp(64px, 8vw, 110px); font-style: italic; color: var(--va-ink); line-height: 1; }
-.va-swatches { position: absolute; left: 18px; bottom: 18px; display: flex; gap: 8px; }
-.va-swatches i { width: 26px; height: 26px; border: 2px solid var(--va-ink); border-radius: 50%; }
-.va-swatches i:nth-child(1) { background: var(--va-ink); }
-.va-swatches i:nth-child(2) { background: var(--va-teal); }
-.va-swatches i:nth-child(3) { background: var(--va-paper); }
-.va-swatches i:nth-child(4) { background: #c8462e; }
-.va-cover-label { position: absolute; right: 16px; top: 14px; color: var(--va-ink); font-size: 11px; font-weight: 800; letter-spacing: .14em; }
+.vx-cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.va-cover-label { position: absolute; right: 16px; top: 14px; z-index: 3; color: var(--va-ink); font-size: 11px; font-weight: 800; letter-spacing: .14em; }
 .va-cover-spark { position: absolute; right: 18px; bottom: 16px; font-size: 30px; color: var(--va-teal); }
 
-.va-cover-podcast { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; background: var(--va-ink); }
-.va-cover-podcast .va-cover-label { color: var(--va-amber); }
-.va-cover-mic { width: 54px; color: var(--va-paper); }
-.va-cover-wave { width: 70%; color: var(--va-amber); }
+/* Design: three posters fanned out on amber; they spread on hover. */
+.va-cover-design { background: var(--va-amber); }
+.va-cover-fan { position: absolute; inset: 12% 0 6%; }
+.va-cover-fan img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: auto;
+  height: 82%;
+  aspect-ratio: 4 / 5;
+  border: 2px solid var(--va-ink);
+  box-shadow: 4px 4px 0 var(--va-ink);
+  transition: transform 220ms ease;
+}
+.va-cover-fan img:nth-child(1) { transform: translate(-108%, -48%) rotate(-9deg); }
+.va-cover-fan img:nth-child(2) { z-index: 2; transform: translate(-50%, -54%); }
+.va-cover-fan img:nth-child(3) { transform: translate(8%, -48%) rotate(9deg); }
+.vx-work-card:hover .va-cover-fan img:nth-child(1) { transform: translate(-116%, -48%) rotate(-12deg); }
+.vx-work-card:hover .va-cover-fan img:nth-child(3) { transform: translate(16%, -48%) rotate(12deg); }
 
-.va-cover-social { display: grid; place-items: center; background: var(--va-teal); }
-.va-mock-post { width: 62%; padding: 12px; background: var(--va-paper); border: 2px solid var(--va-ink); border-radius: 10px; transform: rotate(-4deg); box-shadow: 6px 6px 0 var(--va-ink); }
-.va-mock-head { display: flex; align-items: center; gap: 8px; }
-.va-mock-head i { width: 20px; height: 20px; background: var(--va-amber); border-radius: 50%; }
-.va-mock-head span { width: 50%; height: 7px; background: var(--va-ink); border-radius: 4px; }
-.va-mock-line { display: block; height: 6px; margin-top: 8px; background: var(--va-line); border-radius: 4px; }
-.va-mock-line-short { width: 60%; }
-.va-mock-image { display: grid; place-items: center; aspect-ratio: 16 / 10; margin-top: 10px; background: var(--va-amber); border-radius: 6px; font-size: 28px; color: var(--va-ink); }
-.va-mock-actions { display: flex; gap: 8px; margin-top: 8px; color: var(--va-ink); }
+/* Podcast: episode thumbnail with a vertical clip on top, on ink. */
+.va-cover-podcast { background: var(--va-ink); }
+.va-cover-podcast .va-cover-label { color: var(--va-amber); }
+.va-cover-thumb { position: absolute; left: 7%; top: 18%; width: 70%; aspect-ratio: 16 / 9; border: 2px solid var(--va-paper); }
+.va-cover-clip {
+  position: absolute;
+  right: 7%;
+  bottom: 8%;
+  width: 28%;
+  aspect-ratio: 9 / 16;
+  border: 2px solid var(--va-amber);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: -6px 6px 0 rgba(0, 0, 0, .45);
+  transition: transform 220ms ease;
+}
+.vx-work-card:hover .va-cover-clip { transform: translateY(-6px) rotate(2deg); }
+.va-cover-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  color: var(--va-ink);
+  background: var(--va-amber);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.va-cover-wave { position: absolute; left: 7%; bottom: 9%; width: 36%; color: var(--va-amber); }
+
+/* Social: two real posts in phone frames, tilted on teal. */
+.va-cover-social { background: var(--va-teal); }
+.va-cover-social .va-cover-label { color: var(--va-amber); }
+.va-cover-phones { position: absolute; inset: 14% 0 4%; display: flex; justify-content: center; align-items: center; }
+.va-cover-phones img {
+  width: auto;
+  height: 92%;
+  aspect-ratio: 27 / 50;
+  border-radius: 13% / 7%;
+  box-shadow: 6px 6px 0 var(--va-ink);
+  transition: transform 220ms ease;
+}
+.va-cover-phones img:nth-child(1) { transform: translateX(8%) rotate(-6deg); }
+.va-cover-phones img:nth-child(2) { z-index: 2; transform: translate(-8%, 4%) rotate(5deg); }
+.vx-work-card:hover .va-cover-phones img:nth-child(1) { transform: translateX(2%) rotate(-9deg); }
+.vx-work-card:hover .va-cover-phones img:nth-child(2) { transform: translate(-2%, 2%) rotate(8deg); }
 
 /* ---------- Testimonials (teal band) ---------- */
 

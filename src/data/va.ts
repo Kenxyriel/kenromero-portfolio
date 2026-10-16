@@ -140,6 +140,23 @@ export const vaHome = {
   featured: {
     title: 'Featured Projects',
     tagline: 'Crafted with strategy, built with purpose.',
+    // Real samples shown inside the "Selected work" cards on the home page.
+    // Swap any path for another file in public/va/work/ to change a preview.
+    previews: {
+      design: [
+        { image: '/va/work/design/promo-2.jpg', label: 'Nova & Co. new arrivals' },
+        { image: '/va/work/design/food-3.jpg', label: 'Bun Riot combo poster' },
+        { image: '/va/work/design/food-5.jpg', label: 'Kape at Kuwento matcha latte' },
+      ],
+      podcast: {
+        thumbnail: { image: '/va/work/podcast/thumbnail.jpg', label: 'Podcast episode thumbnail' },
+        clip: { image: '/va/work/podcast/ai-clip-1.jpg', label: 'Short-form podcast clip' },
+      },
+      social: [
+        { image: '/va/work/social/post-kr.jpg', label: 'KR Digital Solutions post' },
+        { image: '/va/work/social/post-yuki.jpg', label: 'Yuki Plays post' },
+      ],
+    },
     groups: [
       {
         title: 'Design & Branding',
