@@ -1288,6 +1288,9 @@ img { max-width: 100%; display: block; }
 .contact-form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 .contact-form-footer { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .contact-form-status { color: var(--muted); line-height: 1.5; max-width: 520px; }
+.contact-form-status:empty { display: none; }
+.contact-honeypot { display: none; }
+.contact-submit:disabled { opacity: 0.7; cursor: wait; }
 .contact-submit { width: 100%; color: #fff; background: #111; }
 .contact-submit:hover { background: #333; }
 

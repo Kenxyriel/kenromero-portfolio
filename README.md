@@ -77,7 +77,7 @@ Add each address under **Settings → Domains** of the creative Vercel project (
 
 ## Notes
 
-- The contact form UI does not deliver messages yet; a form/email endpoint still needs to be connected.
+- The contact form sends messages through [Web3Forms](https://web3forms.com). Set `VITE_WEB3FORMS_KEY` to your Web3Forms access key (in Vercel: Project Settings > Environment Variables, then redeploy). Without it, the form shows an error that points visitors to the email address.
 
 ## Scripts
 
