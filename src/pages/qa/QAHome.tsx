@@ -296,7 +296,7 @@ export default function QAHome() {
                       {project.visual === "tests" && <TestWindow />}
                       {project.visual === "browser" && <BrowserMock />}
                       {project.visual === "image" && <img src={project.image} alt={`${project.title} preview`} loading="lazy" />}
-                      <div className="tx-project-stack" aria-hidden="true">
+                      <div className="tx-project-stack">
                         <span className="tx-mono">Tech stack</span>
                         <ul>
                           {project.tags.map((tag, i) => (
@@ -314,11 +314,6 @@ export default function QAHome() {
                       </span>
                       <h3>{project.title}</h3>
                       <p>{project.description}</p>
-                      <ul className="tx-tags tx-project-tags">
-                        {project.tags.map((tag) => (
-                          <li key={tag}>{tag}</li>
-                        ))}
-                      </ul>
                       <span className="tx-link">
                         {project.link.label}{" "}
                         {"to" in project.link ? <ArrowRight size={16} aria-hidden="true" /> : <ArrowUpRight size={16} aria-hidden="true" />}

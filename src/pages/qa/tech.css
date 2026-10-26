@@ -295,7 +295,7 @@
 .tx-project-visual { position: relative; display: grid; place-items: center; aspect-ratio: 16 / 10; padding: 0; background: #eef4ff; overflow: hidden; }
 .tx-project-tests,
 .tx-project-browser { padding: 18px; background: linear-gradient(140deg, var(--t-bg), #172554); }
-.tx-project-tests > *,
+.tx-project-tests > :not(.tx-project-stack),
 .tx-project-browser > :not(.tx-project-stack) { transform: scale(.82); transition: transform 400ms ease; }
 .tx-project-visual img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 500ms ease, filter 300ms ease; }
 .tx-project:hover .tx-project-visual img,
@@ -337,11 +337,10 @@
 .tx-project-cat { color: var(--t-blue); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
 .tx-project-status { margin-left: 10px; padding: 2px 8px; color: #92400e; background: #fef3c7; border-radius: 999px; font-size: 11px; letter-spacing: .04em; }
 .tx-project-body h3 { margin: 8px 0 0; font-family: var(--t-display); font-size: clamp(19px, 1.7vw, 22px); line-height: 1.2; letter-spacing: -.02em; }
-.tx-project-body p { display: -webkit-box; margin: 10px 0 0; overflow: hidden; font-size: 15px; line-height: 1.6; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.tx-project-body p { margin: 10px 0 0; font-size: 15px; line-height: 1.6; }
 .tx-project-body .tx-link { margin-top: auto; padding-top: 16px; }
-/* Mouse users get the hover panel; touch screens keep the tags under the text. */
-@media (hover: hover) { .tx-project-tags { display: none; } }
-@media (hover: none) { .tx-project-stack { display: none; } }
+/* Touch screens can't hover; the stack is listed on each case study page instead. */
+@media (hover: none) and (pointer: coarse) { .tx-project-stack { display: none; } }
 .tx-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; }
 .tx-tags li { padding: 5px 10px; color: var(--t-light-ink); background: #f1f5f9; border-radius: 6px; font-family: var(--t-mono); font-size: 12px; }
 .tx-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 24px; color: var(--t-blue); font-weight: 700; }
@@ -436,7 +435,7 @@
   .tx-process { grid-template-columns: 1fr; }
   .tx-process li > div::after { display: none; }
   .tx-projects { grid-template-columns: 1fr; }
-  .tx-project-tests > * { transform: scale(.66); }
+  .tx-project-tests > :not(.tx-project-stack) { transform: scale(.66); }
 }
 
 @media (prefers-reduced-motion: reduce) {
