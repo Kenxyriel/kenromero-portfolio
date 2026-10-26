@@ -14,7 +14,7 @@ export type LegalDoc = {
   sections: LegalSection[]
 }
 
-const updated = '16 October 2026'
+const updated = '26 October 2026'
 
 export const privacyPolicy: LegalDoc = {
   slug: 'privacy',
@@ -36,9 +36,10 @@ export const privacyPolicy: LegalDoc = {
         'Messages you send directly by email or WhatsApp.',
         'Basic technical data: like every website, the hosting provider (Vercel) receives your IP address, browser type, and the pages you request. It is used to deliver the site and protect it from abuse.',
         'Anonymous visit statistics through Vercel Web Analytics: page views, the site that referred you, country, and device type. It uses no cookies and does not identify you personally.',
+        'Visit statistics through Google Analytics: pages viewed, how you reached the site, approximate location (city or country), device and browser type. It sets cookies to tell repeat visits apart, and IP addresses are not logged or stored.',
       ],
       after: [
-        'The site has no user accounts, takes no payments, and does not use advertising or tracking cookies. I do not sell or rent your information to anyone.',
+        'The site has no user accounts, takes no payments, and does not use advertising cookies. The only cookies are the Google Analytics ones above, which you can block in your browser settings or with the Google Analytics opt-out add-on (tools.google.com/dlpage/gaoptout). I do not sell or rent your information to anyone.',
       ],
     },
     {
@@ -61,7 +62,7 @@ export const privacyPolicy: LegalDoc = {
       list: [
         'Vercel Inc. (website hosting and analytics).',
         'Resend (delivers contact form messages to my inbox).',
-        'Google (my Gmail inbox, where messages are received).',
+        'Google (Google Analytics visit statistics, and my Gmail inbox, where messages are received).',
       ],
     },
     {
