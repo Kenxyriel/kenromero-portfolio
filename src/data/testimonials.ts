@@ -13,7 +13,7 @@ export const testimonials: Testimonial[] = [
     name: 'Jeffrey James',
     role: 'Business Owner, Founder of JJJ Accounting and Tax Services',
     rating: 5,
-    quote: 'Ken consistently showed initiative, professionalism, and strong attention to detail throughout our work together. He approached tasks thoughtfully, communicated clearly, and took the time to understand requirements before delivering his work.His organized approach, reliability, and willingness to improve made the overall experience smooth and efficient. He consistently delivered quality work and was someone I could trust to handle tasks with care and accountability.Job well done, Ken.',
+    quote: 'Ken consistently showed initiative, professionalism, and strong attention to detail throughout our work together. He approached tasks thoughtfully, communicated clearly, and took the time to understand requirements before delivering his work. His organized approach, reliability, and willingness to improve made the overall experience smooth and efficient. He consistently delivered quality work and was someone I could trust to handle tasks with care and accountability.Job well done, Ken.',
   },
   {
     id: 'bethany',
