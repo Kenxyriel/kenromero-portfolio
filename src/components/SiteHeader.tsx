@@ -1,6 +1,7 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { Menu, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import LogoMark from './LogoMark'
 
 export type NavItem = { label: string; href: string }
 
@@ -55,8 +56,11 @@ export default function SiteHeader({ brandRole, navItems, cta, brandHref = '#top
     <header className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
       <div className="container nav-inner">
         <NavLink className="brand" href={brandHref} onClick={closeMenu}>
-          <span className="brand-name">KEN ROMERO</span>
-          <span className="brand-role">{brandRole}</span>
+          <LogoMark />
+          <span className="brand-text">
+            <span className="brand-name">KEN ROMERO</span>
+            <span className="brand-role">{brandRole}</span>
+          </span>
         </NavLink>
 
         <button

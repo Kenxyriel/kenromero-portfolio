@@ -480,3 +480,4 @@
   .tx-reveal.is-shown .tx-window-body li { animation: none; opacity: 1; }
   .tx-marquee { overflow-x: auto; }
 }
+.tech-theme .logo-mark { --mark-blue: #60a5fa; --mark-middle: #f8fafc; }
