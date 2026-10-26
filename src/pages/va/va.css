@@ -483,6 +483,13 @@
 .vx-cta-art .va-sparkle { position: absolute; left: 30%; top: 6px; font-size: 30px; color: var(--va-teal); }
 
 .vx-contact { padding: clamp(56px, 7vw, 88px) 0; background: var(--va-paper-2); }
+/* Discovery call booking, inside the closing call-to-action. */
+.vx-cta .vx-book .vx-script { margin-bottom: 8px; font-size: clamp(32px, 3.4vw, 42px); transform: rotate(-3deg); transform-origin: left; }
+.vx-cta .vx-book p:not(.vx-script) { margin-bottom: 18px; }
+.vx-book-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+.vx-book-alt { color: var(--va-ink); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.vx-book-alt:hover { color: var(--va-teal); }
+
 .va-theme .contact-form-card { border: 2px solid var(--va-ink); border-radius: 0; box-shadow: 8px 8px 0 var(--va-ink); }
 .va-theme .contact-submit { border-radius: 999px; }
 

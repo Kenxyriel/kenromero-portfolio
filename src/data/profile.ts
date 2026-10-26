@@ -10,4 +10,12 @@ export const profile = {
     href: 'https://www.linkedin.com/in/kenxyrielromero/',
   },
   github: { label: 'github.com/kenxyriel', href: 'https://github.com/kenxyriel' },
+  // Public booking page for the free discovery call (a Google Calendar
+  // appointment schedule link). Until it is set, the button opens an email.
+  bookingUrl: '',
 }
+
+/** Where the "book a discovery call" buttons go, and whether it opens a new tab. */
+export const bookingLink = profile.bookingUrl
+  ? { href: profile.bookingUrl, external: true }
+  : { href: `mailto:${profile.email}?subject=${encodeURIComponent('Discovery call request')}`, external: false }
