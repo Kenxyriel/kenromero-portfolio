@@ -19,6 +19,9 @@ const SINGLE = mode === "qa" || mode === "it" || mode === "va";
 const QAHome = HAS_QA ? lazy(() => import("./pages/qa/QAHome")) : null;
 const AuthenticationCaseStudy = HAS_QA ? lazy(() => import("./pages/qa/AuthenticationCaseStudy")) : null;
 const ApiTestingCaseStudy = HAS_QA ? lazy(() => import("./pages/qa/ApiTestingCaseStudy")) : null;
+const SaripointCaseStudy = HAS_QA ? lazy(() => import("./pages/qa/SaripointCaseStudy")) : null;
+const JjjWebsiteCaseStudy = HAS_QA ? lazy(() => import("./pages/qa/JjjWebsiteCaseStudy")) : null;
+const SalinLibroCaseStudy = HAS_QA ? lazy(() => import("./pages/qa/SalinLibroCaseStudy")) : null;
 
 const VAHome = HAS_VA ? lazy(() => import("./pages/va/VAHome")) : null;
 const VADesignBranding = HAS_VA ? lazy(() => import("./pages/va/VADesignBranding")) : null;
@@ -66,11 +69,14 @@ function App() {
             </>
           )}
 
-          {QAHome && AuthenticationCaseStudy && ApiTestingCaseStudy && (
+          {QAHome && AuthenticationCaseStudy && ApiTestingCaseStudy && SaripointCaseStudy && JjjWebsiteCaseStudy && SalinLibroCaseStudy && (
             <>
               <Route path="/qa" element={<QAHome />} />
               <Route path="/qa/projects/authentication-testing" element={<AuthenticationCaseStudy />} />
               <Route path="/qa/projects/api-testing" element={<ApiTestingCaseStudy />} />
+              <Route path="/qa/projects/saripoint" element={<SaripointCaseStudy />} />
+              <Route path="/qa/projects/jjj-website" element={<JjjWebsiteCaseStudy />} />
+              <Route path="/qa/projects/salinlibro-cms" element={<SalinLibroCaseStudy />} />
 
               {/* Legacy case-study URLs that may already have been shared. */}
               <Route

@@ -32,7 +32,7 @@ const pageMeta = {
 const techOnlyFiles = ['documents', 'case-study-preview', 'icons', 'brand/tech']
 
 // Public pages listed in sitemap.xml. Unlisted package pages are left out on purpose.
-const techPages = ['/', '/qa/projects/authentication-testing', '/qa/projects/api-testing', '/privacy', '/terms']
+const techPages = ['/', '/qa/projects/authentication-testing', '/qa/projects/api-testing', '/qa/projects/saripoint', '/qa/projects/jjj-website', '/qa/projects/salinlibro-cms', '/privacy', '/terms']
 const vaPages = ['/va', '/va/design-branding', '/va/social-media-content', '/va/podcast-editing', '/va/privacy', '/va/terms']
 
 // Absolute address of the site, needed for the sitemap and link-preview image.

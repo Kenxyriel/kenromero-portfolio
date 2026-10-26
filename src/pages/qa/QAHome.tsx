@@ -296,16 +296,24 @@ export default function QAHome() {
                       {project.visual === "tests" && <TestWindow />}
                       {project.visual === "browser" && <BrowserMock />}
                       {project.visual === "image" && <img src={project.image} alt={`${project.title} preview`} loading="lazy" />}
+                      <div className="tx-project-stack">
+                        <span className="tx-mono">Tech stack</span>
+                        <ul>
+                          {project.tags.map((tag, i) => (
+                            <li key={tag} style={{ transitionDelay: `${80 + i * 50}ms` }}>
+                              {tag}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                     <div className="tx-project-body">
-                      <span className="tx-mono tx-project-cat">{project.category}</span>
+                      <span className="tx-mono tx-project-cat">
+                        {project.category}
+                        {"status" in project && project.status && <span className="tx-project-status">{project.status}</span>}
+                      </span>
                       <h3>{project.title}</h3>
                       <p>{project.description}</p>
-                      <ul className="tx-tags">
-                        {project.tags.map((tag) => (
-                          <li key={tag}>{tag}</li>
-                        ))}
-                      </ul>
                       <span className="tx-link">
                         {project.link.label}{" "}
                         {"to" in project.link ? <ArrowRight size={16} aria-hidden="true" /> : <ArrowUpRight size={16} aria-hidden="true" />}

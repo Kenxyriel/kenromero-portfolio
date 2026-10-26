@@ -6,13 +6,11 @@ import { ArrowRight, Check, type LucideIcon } from 'lucide-react'
 
 export function Chapter({
   id,
-  number,
   title,
   intro,
   children,
 }: {
   id: string
-  number: string
   title: string
   intro?: ReactNode
   children: ReactNode
@@ -20,9 +18,7 @@ export function Chapter({
   return (
     <section className="cs-chapter" id={id} aria-labelledby={`${id}-title`}>
       <header className="cs-chapter-head">
-        <p className="cs-kicker">
-          {number} / {id}
-        </p>
+        <p className="cs-kicker">{id}</p>
         <h2 id={`${id}-title`}>{title}</h2>
         {intro && <p className="cs-chapter-intro">{intro}</p>}
       </header>
@@ -168,6 +164,8 @@ export type Defect = {
   expected: string
   actual?: string
   impact: string
+  severity?: string
+  priority?: string
 }
 
 export function DefectCard({ defect }: { defect: Defect }) {
@@ -175,8 +173,8 @@ export function DefectCard({ defect }: { defect: Defect }) {
     <article className="cs-defect">
       <div className="cs-defect-head">
         <span className="cs-defect-id">{defect.id}</span>
-        <span className="cs-chip cs-chip-red">Severity: High</span>
-        <span className="cs-chip cs-chip-red">Priority: High</span>
+        <span className="cs-chip cs-chip-red">Severity: {defect.severity ?? 'High'}</span>
+        <span className="cs-chip cs-chip-red">Priority: {defect.priority ?? 'High'}</span>
       </div>
       <h4>{defect.title}</h4>
       <p>{defect.summary}</p>
@@ -257,6 +255,27 @@ export function BugReport({
         </div>
       </div>
     </article>
+  )
+}
+
+// Screenshots with captions. "phones" lays out tall mobile shots side by side.
+export function Gallery({
+  items,
+  layout = 'wide',
+}: {
+  items: { src: string; alt: string; caption: string }[]
+  /** paired: desktop and phone shots alternate, each phone beside a desktop shot. */
+  layout?: 'wide' | 'phones' | 'paired'
+}) {
+  return (
+    <div className={`cs-gallery cs-gallery-${layout}`}>
+      {items.map((item) => (
+        <figure key={item.src}>
+          <img src={item.src} alt={item.alt} loading="lazy" />
+          <figcaption>{item.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
   )
 }
 

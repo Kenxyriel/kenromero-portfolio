@@ -27,6 +27,9 @@ type CaseStudyPageProps = {
   heroImage: { src: string; alt: string }
   stats: { value: string; label: string }[]
   summary: { problem: string; role: string; approach: string; result: string }
+  // Projects still in progress say where they stand instead of claiming a result.
+  resultLabel?: string
+  status?: string
   chapters: CaseStudyChapter[]
   pdf?: string
   next: { title: string; to: string }
@@ -68,6 +71,8 @@ export default function CaseStudyPage({
   chapters,
   pdf,
   next,
+  resultLabel = 'Result',
+  status,
   children,
 }: CaseStudyPageProps) {
   usePageMeta(`${title} | Ken Romero QA Case Study`, lead)
@@ -76,7 +81,7 @@ export default function CaseStudyPage({
     ['Problem', summary.problem],
     ['My role', summary.role],
     ['Approach', summary.approach],
-    ['Result', summary.result],
+    [resultLabel, summary.result],
   ]
 
   return (
@@ -95,7 +100,10 @@ export default function CaseStudyPage({
               <Link className="cs-back" to="/qa#projects">
                 <ArrowLeft aria-hidden="true" /> All projects
               </Link>
-              <p className="cs-kicker">{kicker}</p>
+              <p className="cs-kicker">
+                {kicker}
+                {status && <span className="cs-status">{status}</span>}
+              </p>
               <h1>{title}</h1>
               <p className="cs-system">{system}</p>
               <p className="cs-lead">{lead}</p>
@@ -134,7 +142,7 @@ export default function CaseStudyPage({
             </h2>
             <div className="cs-summary-grid">
               {summaryItems.map(([label, text]) => (
-                <div key={label} className={label === 'Result' ? 'is-result' : undefined}>
+                <div key={label} className={label === resultLabel ? 'is-result' : undefined}>
                   <h3>{label}</h3>
                   <p>{text}</p>
                 </div>
@@ -148,14 +156,13 @@ export default function CaseStudyPage({
             <nav className="cs-toc" aria-label="On this page">
               <p>On this page</p>
               <ol>
-                {chapters.map((chapter, index) => (
+                {chapters.map((chapter) => (
                   <li key={chapter.id}>
                     <a
                       href={`#${chapter.id}`}
                       className={active === chapter.id ? 'is-active' : undefined}
                       aria-current={active === chapter.id ? 'location' : undefined}
                     >
-                      <span>{String(index + 1).padStart(2, '0')}</span>
                       {chapter.label}
                     </a>
                   </li>
