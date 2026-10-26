@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import LegalLinks from '../../../components/LegalLinks'
 import { imageProps } from '../../../components/responsiveImage'
 import SiteHeader, { type NavItem } from '../../../components/SiteHeader'
+import { bookingLink } from '../../../data/profile'
 import usePageMeta from '../../../components/usePageMeta'
 import '@fontsource/space-grotesk/500.css'
 import '@fontsource/space-grotesk/600.css'
@@ -91,7 +92,7 @@ export default function CaseStudyPage({
         brandRole="QA & Software Development"
         brandHref="/qa"
         navItems={navItems}
-        cta={{ label: "Let's Connect", href: '/qa#contact' }}
+        cta={{ label: 'Book a Discovery Call', href: bookingLink.href }}
       />
 
       <main id="top">

@@ -139,7 +139,7 @@ export default function QAHome() {
 
   return (
     <div className="site-shell tech-theme">
-      <SiteHeader brandRole="QA & SOFTWARE DEVELOPMENT" navItems={navItems} cta={{ label: "Let's Connect", href: "#contact" }} />
+      <SiteHeader brandRole="QA & SOFTWARE DEVELOPMENT" navItems={navItems} cta={{ label: "Book a Discovery Call", href: bookingLink.href }} />
 
       <main id="top">
         {/* HERO */}

@@ -20,7 +20,8 @@ type SiteHeaderProps = {
   brandHref?: string
 }
 
-// Paths ("/va/...") navigate client-side; hashes ("#about") scroll on the page.
+// Paths ("/va/...") navigate client-side; hashes ("#about") scroll on the page;
+// full URLs (the booking page) open in a new tab.
 function NavLink({
   href,
   className,
@@ -32,6 +33,13 @@ function NavLink({
   onClick: () => void
   children: ReactNode
 }) {
+  if (href.startsWith('http')) {
+    return (
+      <a className={className} href={href} target="_blank" rel="noreferrer" onClick={onClick}>
+        {children}
+      </a>
+    )
+  }
   if (href.startsWith('/')) {
     return (
       <Link className={className} to={href} onClick={onClick}>
