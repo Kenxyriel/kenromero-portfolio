@@ -416,8 +416,9 @@
 }
 
 /* Working with me: the shared onboarding timeline in the tech colours. */
-.tx-working-head { margin-top: clamp(64px, 8vw, 96px); }
-.tx-working-intro { max-width: 620px; margin: 14px 0 0; line-height: 1.7; }
+.tx-working-head { margin-top: clamp(56px, 7vw, 80px); }
+.tx-working-head .tx-h2 { font-size: clamp(28px, 3.2vw, 40px); }
+.tx-working-intro { max-width: 620px; margin: 10px 0 0; line-height: 1.6; }
 .tl-tech {
   --tl-rail: var(--t-line);
   --tl-accent: var(--t-lime);
@@ -428,10 +429,9 @@
   --tl-muted: var(--t-muted);
   --tl-time-font: var(--t-mono);
   --tl-title-font: var(--t-display);
-  margin-top: 40px;
+  margin-top: 32px;
 }
-.tl-tech .tl-card:hover { box-shadow: 0 16px 34px rgba(0, 0, 0, .4); }
-.tl-tech .tl-step.is-reached .tl-dot::after { content: "✓"; position: absolute; inset: 0; display: grid; place-items: center; color: var(--t-bg); font-size: 9px; font-weight: 800; line-height: 1; }
+.tl-tech .tl-list.is-shown .tl-card:hover { box-shadow: 0 14px 30px rgba(0, 0, 0, .4); }
 
 @media (max-width: 1023px) {
   .tx-hero-grid { grid-template-columns: 1fr; min-height: 0; }

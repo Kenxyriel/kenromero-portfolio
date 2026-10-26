@@ -1088,8 +1088,8 @@
   --tl-title-font: var(--va-serif);
   --tl-time-font: var(--va-display);
 }
-.tl-va .tl-card { border-width: 2px; box-shadow: 4px 4px 0 var(--va-line); }
-.tl-va .tl-step.is-reached .tl-card { box-shadow: 4px 4px 0 var(--va-ink); }
-.tl-va .tl-step.is-current .tl-card { border-color: var(--va-ink); box-shadow: 4px 4px 0 var(--va-amber); }
-.tl-va .tl-card:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--va-amber); }
-.tl-va .tl-card h3 { font-size: 20px; font-weight: 600; }
+.tl-va .tl-card { border-width: 2px; box-shadow: 3px 3px 0 var(--va-line); }
+.tl-va .tl-list.is-shown .tl-card { box-shadow: 3px 3px 0 var(--va-ink); }
+.tl-va .tl-list.is-shown .tl-step:last-child .tl-card { box-shadow: 3px 3px 0 var(--va-amber); }
+.tl-va .tl-list.is-shown .tl-card:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--va-amber); }
+.tl-va .tl-card h3 { font-size: 17px; font-weight: 600; }
