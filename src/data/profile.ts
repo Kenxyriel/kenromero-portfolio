@@ -12,7 +12,7 @@ export const profile = {
   github: { label: 'github.com/kenxyriel', href: 'https://github.com/kenxyriel' },
   // Public booking page for the free discovery call (a Google Calendar
   // appointment schedule link). Until it is set, the button opens an email.
-  bookingUrl: '',
+  bookingUrl: 'https://calendar.app.google/YN5Yk5U9oER1PLXF7',
 }
 
 /** Where the "book a discovery call" buttons go, and whether it opens a new tab. */
