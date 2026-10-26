@@ -4,22 +4,15 @@ import react from '@vitejs/plugin-react'
 
 // Title and description baked into index.html, which is what link previews
 // (Messenger, LinkedIn, email) read. Each single-portfolio build gets its own.
+const techMeta = {
+  title: 'Ken Romero | QA Engineer & Web Developer',
+  description:
+    'Ken Romero - QA and software development portfolio: manual and automation testing, API testing, and web applications built with React and TypeScript.',
+}
 const pageMeta = {
-  all: {
-    title: 'Ken Romero | QA Engineer & Web Developer',
-    description:
-      'Ken Romero - QA and software development portfolio: manual and automation testing, API testing, and web applications built with React and TypeScript.',
-  },
-  qa: {
-    title: 'Ken Romero | QA Engineer & Web Developer',
-    description:
-      'Ken Romero - QA and software development portfolio: manual and automation testing, API testing, and web applications built with React and TypeScript.',
-  },
-  it: {
-    title: 'Ken Romero | QA Engineer & Web Developer',
-    description:
-      'Ken Romero - QA and software development portfolio: manual and automation testing, API testing, and web applications built with React and TypeScript.',
-  },
+  all: techMeta,
+  qa: techMeta,
+  it: techMeta,
   va: {
     title: 'Ken Romero | Social Media Manager, Podcast Editor & Graphic Designer',
     description:
