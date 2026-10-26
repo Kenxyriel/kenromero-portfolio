@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowRight, ArrowUpRight, Code2, FileText, Github, Linkedin, ShieldCheck } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CalendarClock, Code2, FileText, Github, Linkedin, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import ContactForm from "../../components/ContactForm";
 import SiteHeader, { type NavItem } from "../../components/SiteHeader";
+import Timeline from "../../components/Timeline";
 import usePageMeta from "../../components/usePageMeta";
-import { profile } from "../../data/profile";
+import { bookingLink, profile } from "../../data/profile";
 import { techContent as content } from "../../data/tech";
 import { testimonials } from "../../data/testimonials";
 // Self-hosted fonts: no request to Google servers, so no visitor data goes to a third party.
@@ -359,6 +360,15 @@ export default function QAHome() {
                 </li>
               ))}
             </ol>
+
+            <Reveal className="tx-heading tx-working-head">
+              <p className="tx-kicker">{content.workingWithMe.kicker}</p>
+              <h2 className="tx-h2">
+                From first message <span className="tx-hl">to handover.</span>
+              </h2>
+              <p className="tx-working-intro">{content.workingWithMe.description}</p>
+            </Reveal>
+            <Timeline className="tl-tech" steps={content.workingWithMe.steps} />
           </div>
         </section>
 
@@ -413,6 +423,23 @@ export default function QAHome() {
                   <FileText size={16} aria-hidden="true" /> Request my resume
                 </a>
               </div>
+            </Reveal>
+            <Reveal className="tx-book">
+              <span className="tx-book-icon" aria-hidden="true">
+                <CalendarClock size={22} />
+              </span>
+              <div>
+                <p className="tx-mono tx-book-kicker">skip the queue</p>
+                <h3>Book a free 30-minute discovery call</h3>
+                <p>Talk through your project or role directly, at a time that works for you.</p>
+              </div>
+              <a
+                className="tx-btn tx-btn-primary"
+                href={bookingLink.href}
+                {...(bookingLink.external ? { target: "_blank", rel: "noreferrer" } : {})}
+              >
+                Book a call <ArrowUpRight size={16} aria-hidden="true" />
+              </a>
             </Reveal>
             <ContactForm intro={content.contactIntro} />
           </div>

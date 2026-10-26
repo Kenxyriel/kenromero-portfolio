@@ -1,0 +1,88 @@
+/* Shared onboarding timeline. Each site sets the --tl-* colours on .tl. */
+.tl {
+  --tl-rail: rgba(0, 0, 0, .12);
+  --tl-accent: #2563eb;
+  --tl-card: white;
+  --tl-card-line: rgba(0, 0, 0, .1);
+  --tl-ink: #0f172a;
+  --tl-text: #475569;
+  --tl-muted: #94a3b8;
+  --tl-time-font: inherit;
+  --tl-title-font: inherit;
+  --tl-gap: 14px;
+  --tl-step-delay: 220ms;
+}
+.tl-list { display: grid; grid-template-columns: repeat(var(--tl-count), minmax(0, 1fr)); gap: var(--tl-gap); margin: 0; padding: 0; list-style: none; }
+.tl-step { position: relative; display: flex; flex-direction: column; }
+.tl-time { min-height: 18px; color: var(--tl-muted); font-family: var(--tl-time-font); font-size: 12px; font-weight: 700; letter-spacing: .02em; }
+.tl-dot {
+  position: relative;
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  margin: 8px 0 12px 14px;
+  background: var(--tl-card);
+  border: 3px solid var(--tl-rail);
+  border-radius: 50%;
+  transition: background 250ms ease, border-color 250ms ease, transform 250ms ease;
+  transition-delay: calc(var(--i) * var(--tl-step-delay));
+}
+/* The line from each dot to the next one, filled in as the steps light up. */
+.tl-step:not(:last-child)::before,
+.tl-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 37px;
+  left: 28px;
+  width: calc(100% + var(--tl-gap) - 14px);
+  height: 3px;
+  border-radius: 3px;
+  background: var(--tl-rail);
+}
+.tl-step:not(:last-child)::after {
+  background: var(--tl-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--tl-step-delay) linear;
+  transition-delay: calc(var(--i) * var(--tl-step-delay) + 120ms);
+}
+.tl-card {
+  flex: 1;
+  padding: 14px 14px 16px;
+  background: var(--tl-card);
+  border: 1px solid var(--tl-card-line);
+  border-radius: 14px;
+  opacity: .5;
+  transform: translateY(8px);
+  transition: opacity 350ms ease, transform 350ms ease, box-shadow 250ms ease;
+  transition-delay: calc(var(--i) * var(--tl-step-delay));
+}
+.tl-card h3 { margin: 0; color: var(--tl-ink); font-family: var(--tl-title-font); font-size: 16px; line-height: 1.25; }
+.tl-card p { margin: 6px 0 0; color: var(--tl-text); font-size: 13.5px; line-height: 1.5; }
+
+.tl-list.is-shown .tl-time { color: var(--tl-ink); }
+.tl-list.is-shown .tl-dot { background: var(--tl-accent); border-color: var(--tl-accent); }
+.tl-list.is-shown .tl-step::after { transform: none; }
+.tl-list.is-shown .tl-card { opacity: 1; transform: none; }
+.tl-list.is-shown .tl-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0, 0, 0, .12); transition-delay: 0s; }
+
+.tl-footer { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 28px; text-align: center; }
+
+/* Narrow screens: one column, the line runs down the left edge. */
+@media (max-width: 899px) {
+  .tl-list { grid-template-columns: minmax(0, 1fr); --tl-gap: 12px; }
+  .tl-step { display: grid; grid-template-columns: 26px minmax(0, 1fr); grid-template-areas: "dot time" "dot card"; row-gap: 4px; }
+  .tl-time { grid-area: time; padding-left: 10px; }
+  .tl-dot { grid-area: dot; margin: 2px 0 0 6px; }
+  .tl-card { grid-area: card; margin-left: 10px; padding: 12px 14px; }
+  .tl-step:not(:last-child)::before,
+  .tl-step:not(:last-child)::after { top: 16px; left: 12px; width: 3px; height: calc(100% + var(--tl-gap) - 16px); }
+  .tl-step:not(:last-child)::after { transform: scaleY(0); transform-origin: top; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tl-time,
+  .tl-dot,
+  .tl-card,
+  .tl-step::after { transition: none; }
+}

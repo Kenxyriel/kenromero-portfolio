@@ -1,5 +1,6 @@
 import {
   ArrowRight,
+  CalendarHeart,
   Check,
   Bot,
   Cloud,
@@ -12,8 +13,9 @@ import {
 import { useEffect, useRef, useState, type RefObject } from 'react'
 import { Link } from 'react-router-dom'
 import ContactForm from '../../components/ContactForm'
-import { profile } from '../../data/profile'
-import { vaHome as content, vaTestimonials } from '../../data/va'
+import Timeline from '../../components/Timeline'
+import { bookingLink, profile } from '../../data/profile'
+import { vaHome as content, vaOnboarding, vaTestimonials } from '../../data/va'
 import { CurlArrow, DotGrid, Mic, RotatingBadge, Sparkle, Squiggle, Waveform } from './VAArt'
 import VALayout, { ToolBadge } from './VALayout'
 
@@ -339,6 +341,21 @@ export default function VAHome() {
         </div>
       </section>
 
+      {/* PROCESS */}
+      <section id="process" className="vx-process">
+        <div className="container">
+          <div className="vx-services-head">
+            <p className="vx-script">{vaOnboarding.eyebrow}</p>
+            <Squiggle className="vx-services-squiggle" />
+            <h2>
+              From first message to <mark>your first posts</mark>
+            </h2>
+            <p>{vaOnboarding.description}</p>
+          </div>
+          <Timeline className="tl-va" steps={vaOnboarding.steps} />
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="vx-cta">
         <div className="container vx-cta-grid">
@@ -351,11 +368,24 @@ export default function VAHome() {
             </h2>
             <Squiggle />
           </div>
-          <div>
-            <p>Tell me about your brand, your podcast, or your content goals, and let’s find the right plan.</p>
-            <a className="vx-pill vx-pill-dark" href="#contact">
-              Start a project <ArrowRight size={16} aria-hidden="true" />
-            </a>
+          <div className="vx-book">
+            <p className="vx-script">Let’s cut the line!</p>
+            <p>
+              Book your <strong>free 30-minute discovery call</strong> and tell me about your brand, your podcast, or
+              your content goals. We’ll find the right plan together.
+            </p>
+            <div className="vx-book-actions">
+              <a
+                className="vx-pill vx-pill-dark"
+                href={bookingLink.href}
+                {...(bookingLink.external ? { target: '_blank', rel: 'noreferrer' } : {})}
+              >
+                <CalendarHeart size={16} aria-hidden="true" /> Book my free call
+              </a>
+              <a className="vx-book-alt" href="#contact">
+                or send a message
+              </a>
+            </div>
           </div>
           <div className="vx-cta-art" aria-hidden="true">
             <Mic />
