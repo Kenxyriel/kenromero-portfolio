@@ -69,9 +69,7 @@ function Lightbox({ item, onClose }: { item: VAImage; onClose: () => void }) {
       </button>
       <figure onClick={(event) => event.stopPropagation()}>
         {item.video ? (
-          <video src={item.video} poster={item.image} controls autoPlay playsInline>
-            {item.captions && <track kind="captions" src={item.captions} srcLang="en" label="English" default />}
-          </video>
+          <video src={item.video} poster={item.image} controls autoPlay playsInline />
         ) : (
           <img {...imageProps(item.image)} alt={item.label} />
         )}
@@ -208,7 +206,7 @@ export function VAImg({ item, className = '', caption = false }: { item: VAImage
     return (
       <figure className={`va-img ${className}${item.tall ? ' va-img-tall' : ''}`}>
         {item.video ? (
-          <InlineVideo src={item.video} poster={item.image} label={item.label} captions={item.captions} />
+          <InlineVideo src={item.video} poster={item.image} label={item.label} />
         ) : (
           <img {...imageProps(item.image, '(max-width: 760px) 90vw, 400px')} alt={item.label} loading="lazy" />
         )}
@@ -229,7 +227,7 @@ export function VAImg({ item, className = '', caption = false }: { item: VAImage
 
 // Muted preview loop that only plays while on screen, so a page of clips
 // doesn't download and decode every video at once. Sound plays in the viewer.
-function InlineVideo({ src, poster, label, captions }: { src: string; poster?: string; label: string; captions?: string }) {
+function InlineVideo({ src, poster, label }: { src: string; poster?: string; label: string }) {
   const ref = useRef<HTMLVideoElement>(null)
   useEffect(() => {
     const video = ref.current
@@ -244,12 +242,7 @@ function InlineVideo({ src, poster, label, captions }: { src: string; poster?: s
     observer.observe(video)
     return () => observer.disconnect()
   }, [])
-  // Muted previews show captions so the speech still comes across.
-  return (
-    <video ref={ref} src={src} poster={poster} muted loop playsInline preload="none" aria-label={label}>
-      {captions && <track kind="captions" src={captions} srcLang="en" label="English" default />}
-    </video>
-  )
+  return <video ref={ref} src={src} poster={poster} muted loop playsInline preload="none" aria-label={label} />
 }
 
 export function VAPageHero({
