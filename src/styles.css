@@ -69,7 +69,7 @@ img { max-width: 100%; display: block; }
 }
 .brand { display: flex; align-items: center; gap: 10px; }
 .brand-text { display: flex; flex-direction: column; gap: 4px; }
-.logo-mark { --mark-blue: #2563eb; --mark-amber: #f2b124; --mark-middle: #111827; flex: none; width: 40px; height: 40px; }
+.logo-mark { --mark-ink: #262626; --mark-accent: #f2b124; --mark-ring: #d9d9d9; --mark-ring-strong: #4b4b4b; flex: none; width: 40px; height: 40px; }
 .brand-name { font-size: 17px; font-weight: 700; letter-spacing: -.02em; }
 .brand-role { color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
 

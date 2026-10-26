@@ -1100,4 +1100,4 @@
 .tl-va .tl-list.is-shown .tl-step:last-child .tl-card { box-shadow: 3px 3px 0 var(--va-amber); }
 .tl-va .tl-list.is-shown .tl-card:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--va-amber); }
 .tl-va .tl-card h3 { font-size: 17px; font-weight: 600; }
-.va-theme .logo-mark { --mark-middle: #151211; }
+.va-theme .logo-mark { --mark-ink: #151211; --mark-ring: #ddd0b8; }
