@@ -12,8 +12,9 @@ import {
 import { useEffect, useRef, useState, type RefObject } from 'react'
 import { Link } from 'react-router-dom'
 import ContactForm from '../../components/ContactForm'
+import Timeline from '../../components/Timeline'
 import { profile } from '../../data/profile'
-import { vaHome as content, vaTestimonials } from '../../data/va'
+import { vaHome as content, vaOnboarding, vaTestimonials } from '../../data/va'
 import { CurlArrow, DotGrid, Mic, RotatingBadge, Sparkle, Squiggle, Waveform } from './VAArt'
 import VALayout, { ToolBadge } from './VALayout'
 
@@ -336,6 +337,29 @@ export default function VAHome() {
               )
             })}
           </div>
+        </div>
+      </section>
+
+      {/* PROCESS */}
+      <section id="process" className="vx-process">
+        <div className="container">
+          <div className="vx-services-head">
+            <p className="vx-script">{vaOnboarding.eyebrow}</p>
+            <Squiggle className="vx-services-squiggle" />
+            <h2>
+              From first message to <mark>your first posts</mark>
+            </h2>
+            <p>{vaOnboarding.description}</p>
+          </div>
+          <Timeline
+            className="tl-va"
+            steps={vaOnboarding.steps}
+            footer={
+              <a className="vx-pill vx-pill-dark" href="#contact">
+                {vaOnboarding.cta} <ArrowRight size={16} aria-hidden="true" />
+              </a>
+            }
+          />
         </div>
       </section>
 

@@ -1,0 +1,87 @@
+/* Shared onboarding timeline. Each site sets the --tl-* colours on .tl. */
+.tl {
+  --tl-time-w: 132px;
+  --tl-gap: 36px;
+  --tl-rail: rgba(0, 0, 0, .12);
+  --tl-accent: #2563eb;
+  --tl-card: white;
+  --tl-card-line: rgba(0, 0, 0, .1);
+  --tl-ink: #0f172a;
+  --tl-text: #475569;
+  --tl-muted: #94a3b8;
+  --tl-time-font: inherit;
+  --tl-title-font: inherit;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.tl-list { position: relative; display: grid; gap: 18px; margin: 0; padding: 0; list-style: none; }
+/* The rail, then its filled part, which grows with --tl-fill (0 to 1). */
+.tl-list::before,
+.tl-list::after {
+  content: "";
+  position: absolute;
+  top: 28px;
+  bottom: 28px;
+  left: calc(var(--tl-time-w) + var(--tl-gap) / 2 - 2px);
+  width: 4px;
+  border-radius: 4px;
+  background: var(--tl-rail);
+}
+.tl-list::after { background: var(--tl-accent); transform: scaleY(var(--tl-fill, 0)); transform-origin: top; }
+
+.tl-step { display: grid; grid-template-columns: var(--tl-time-w) var(--tl-gap) minmax(0, 1fr); align-items: center; }
+.tl-time { padding-right: 16px; color: var(--tl-muted); font-family: var(--tl-time-font); font-size: 13px; font-weight: 600; text-align: right; transition: color 300ms ease; }
+.tl-dot {
+  position: relative;
+  z-index: 1;
+  justify-self: center;
+  width: 16px;
+  height: 16px;
+  background: var(--tl-card);
+  border: 3px solid var(--tl-rail);
+  border-radius: 50%;
+  transition: background 300ms ease, border-color 300ms ease, transform 300ms ease;
+}
+.tl-card {
+  padding: 18px 22px;
+  background: var(--tl-card);
+  border: 1px solid var(--tl-card-line);
+  border-radius: 16px;
+  opacity: .55;
+  transform: translateX(14px);
+  transition: opacity 400ms ease, transform 400ms ease, border-color 300ms ease, box-shadow 300ms ease;
+}
+.tl-card h3 { margin: 0; color: var(--tl-ink); font-family: var(--tl-title-font); font-size: 18px; line-height: 1.25; }
+.tl-card p { margin: 6px 0 0; color: var(--tl-text); font-size: 15px; line-height: 1.6; }
+
+.tl-step.is-reached .tl-time { color: var(--tl-ink); }
+.tl-step.is-reached .tl-dot { background: var(--tl-accent); border-color: var(--tl-accent); }
+.tl-step.is-reached .tl-card { opacity: 1; transform: none; }
+.tl-step.is-current .tl-dot { transform: scale(1.25); box-shadow: 0 0 0 6px color-mix(in srgb, var(--tl-accent) 22%, transparent); animation: tl-pulse 1.8s ease-out infinite; }
+.tl-step.is-current .tl-card { border-color: var(--tl-accent); }
+.tl-card:hover { transform: translateY(-3px); box-shadow: 0 16px 34px rgba(0, 0, 0, .12); }
+
+@keyframes tl-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--tl-accent) 40%, transparent); }
+  100% { box-shadow: 0 0 0 12px transparent; }
+}
+
+.tl-footer { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 32px; text-align: center; }
+
+/* Phones: rail at the left edge, the time sits above each card. */
+@media (max-width: 640px) {
+  .tl { --tl-gap: 28px; }
+  .tl-list::before,
+  .tl-list::after { top: 12px; left: calc(var(--tl-gap) / 2 - 2px); }
+  .tl-step { grid-template-columns: var(--tl-gap) minmax(0, 1fr); grid-template-areas: "dot time" "dot card"; row-gap: 6px; }
+  .tl-time { grid-area: time; padding: 0 0 0 12px; text-align: left; }
+  .tl-dot { grid-area: dot; align-self: start; margin-top: 4px; }
+  .tl-card { grid-area: card; margin-left: 12px; padding: 16px 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tl-time,
+  .tl-dot,
+  .tl-card { transition: none; }
+  .tl-step.is-current .tl-dot { animation: none; }
+}

@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight, Code2, FileText, Github, Linkedin, ShieldChec
 import { Link } from "react-router-dom";
 import ContactForm from "../../components/ContactForm";
 import SiteHeader, { type NavItem } from "../../components/SiteHeader";
+import Timeline from "../../components/Timeline";
 import usePageMeta from "../../components/usePageMeta";
 import { profile } from "../../data/profile";
 import { techContent as content } from "../../data/tech";
@@ -359,6 +360,23 @@ export default function QAHome() {
                 </li>
               ))}
             </ol>
+
+            <Reveal className="tx-heading tx-working-head">
+              <p className="tx-kicker">{content.workingWithMe.kicker}</p>
+              <h2 className="tx-h2">
+                From first message <span className="tx-hl">to handover.</span>
+              </h2>
+              <p className="tx-working-intro">{content.workingWithMe.description}</p>
+            </Reveal>
+            <Timeline
+              className="tl-tech"
+              steps={content.workingWithMe.steps}
+              footer={
+                <a className="tx-btn tx-btn-primary" href="#contact">
+                  Start a conversation <ArrowRight size={16} aria-hidden="true" />
+                </a>
+              }
+            />
           </div>
         </section>
 

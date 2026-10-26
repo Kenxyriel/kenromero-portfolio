@@ -415,6 +415,24 @@
   .tx-process li:nth-child(4) > div::after { display: none; }
 }
 
+/* Working with me: the shared onboarding timeline in the tech colours. */
+.tx-working-head { margin-top: clamp(64px, 8vw, 96px); }
+.tx-working-intro { max-width: 620px; margin: 14px 0 0; line-height: 1.7; }
+.tl-tech {
+  --tl-rail: var(--t-line);
+  --tl-accent: var(--t-lime);
+  --tl-card: var(--t-bg-2);
+  --tl-card-line: var(--t-line);
+  --tl-ink: var(--t-white);
+  --tl-text: var(--t-text);
+  --tl-muted: var(--t-muted);
+  --tl-time-font: var(--t-mono);
+  --tl-title-font: var(--t-display);
+  margin-top: 40px;
+}
+.tl-tech .tl-card:hover { box-shadow: 0 16px 34px rgba(0, 0, 0, .4); }
+.tl-tech .tl-step.is-reached .tl-dot::after { content: "✓"; position: absolute; inset: 0; display: grid; place-items: center; color: var(--t-bg); font-size: 9px; font-weight: 800; line-height: 1; }
+
 @media (max-width: 1023px) {
   .tx-hero-grid { grid-template-columns: 1fr; min-height: 0; }
   .tx-hero-copy { padding-bottom: 0; }

@@ -1,5 +1,6 @@
-import { Check } from 'lucide-react'
-import { getSmmPackages, podcastPackages, smmPackages, type Package } from '../../data/va'
+import { ArrowRight, Check } from 'lucide-react'
+import Timeline from '../../components/Timeline'
+import { getSmmPackages, podcastPackages, smmPackages, vaOnboarding, type Package } from '../../data/va'
 import { portfolioUrl } from '../../packageHosts'
 import VALayout, { VAPageHero, VASectionTitle } from './VALayout'
 
@@ -37,6 +38,26 @@ function PackageCard({ pkg }: { pkg: Package }) {
         Let’s Work Together
       </a>
     </article>
+  )
+}
+
+// What happens after a client picks a package; the same steps as the home page.
+function OnboardingSection({ cream = false }: { cream?: boolean }) {
+  return (
+    <section className={`va-section${cream ? ' va-section-cream' : ''}`}>
+      <div className="container">
+        <VASectionTitle eyebrow={vaOnboarding.eyebrow} title={vaOnboarding.title} />
+        <Timeline
+          className="tl-va"
+          steps={vaOnboarding.steps}
+          footer={
+            <a className="va-button" href={portfolioUrl('/va#contact')}>
+              {vaOnboarding.cta} <ArrowRight size={16} aria-hidden="true" />
+            </a>
+          }
+        />
+      </div>
+    </section>
   )
 }
 
@@ -87,6 +108,8 @@ export function VASmmPackages({ currency = 'usd' }: { currency?: 'usd' | 'php' }
           </ul>
         </div>
       </section>
+
+      <OnboardingSection />
 
       <section className="va-section">
         <div className="container">
@@ -178,6 +201,8 @@ export function VAPodcastPackages() {
           </div>
         </div>
       </section>
+
+      <OnboardingSection cream />
 
       <section className="va-section va-section-dark">
         <div className="container">

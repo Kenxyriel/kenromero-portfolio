@@ -1074,3 +1074,22 @@
   .va-filter { display: grid; grid-template-columns: 1fr 1fr; width: 100%; border-radius: 24px; }
   .va-filter button { min-height: 44px; padding: 9px 10px; font-size: 12px; }
 }
+
+/* ---------- Onboarding timeline ---------- */
+.vx-process { padding: clamp(56px, 6vw, 84px) 0; background: var(--va-paper-2); border-bottom: 2px solid var(--va-ink); }
+.tl-va {
+  --tl-rail: var(--va-line);
+  --tl-accent: var(--va-teal);
+  --tl-card: var(--va-paper);
+  --tl-card-line: var(--va-ink);
+  --tl-ink: var(--va-ink);
+  --tl-text: var(--va-text);
+  --tl-muted: var(--va-muted);
+  --tl-title-font: var(--va-serif);
+  --tl-time-font: var(--va-display);
+}
+.tl-va .tl-card { border-width: 2px; box-shadow: 4px 4px 0 var(--va-line); }
+.tl-va .tl-step.is-reached .tl-card { box-shadow: 4px 4px 0 var(--va-ink); }
+.tl-va .tl-step.is-current .tl-card { border-color: var(--va-ink); box-shadow: 4px 4px 0 var(--va-amber); }
+.tl-va .tl-card:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--va-amber); }
+.tl-va .tl-card h3 { font-size: 20px; font-weight: 600; }

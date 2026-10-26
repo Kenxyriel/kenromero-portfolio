@@ -191,6 +191,22 @@ export const vaHome = {
   },
 }
 
+// Client onboarding timeline, shown on the home page and the package pages.
+export const vaOnboarding = {
+  eyebrow: 'How we work',
+  title: 'From first message to your first posts',
+  description: 'What happens after you reach out, and roughly how long each step takes.',
+  steps: [
+    { time: 'Day 0', title: 'Inquiry', text: 'Send a message through the contact form. I reply within 24 hours.' },
+    { time: 'Days 1–2', title: 'Free discovery call', text: 'A free 30-minute call about your brand, goals, platforms and audience.' },
+    { time: 'Days 2–3', title: 'Proposal and package', text: 'I recommend a package, then we confirm the scope, price and terms.' },
+    { time: 'Days 3–5', title: 'Onboarding kit', text: 'You share your brand assets, access and a short questionnaire. I set up our shared folder and content calendar.' },
+    { time: 'Week 2', title: 'First draft and approval', text: 'Your first batch of posts, graphics or edits comes to you for feedback. Revision rounds depend on your package.' },
+    { time: 'Week 2 onward', title: 'Launch and monthly rhythm', text: 'Content goes live on schedule, with a monthly recap and a planning check-in.' },
+  ],
+  cta: 'Book a discovery call',
+}
+
 // Client testimonials as shown on the creative portfolio.
 export const vaTestimonials = [
   {

@@ -150,6 +150,17 @@ export const techContent = {
     { title: 'Retest', text: 'Verify the fix' },
     { title: 'Regression', text: 'Nothing else broke' },
   ],
+  workingWithMe: {
+    kicker: '// working with me',
+    description: 'For a testing or development project, or a role on your team: what happens after you reach out.',
+    steps: [
+      { time: 'day 0', title: 'Intro message', text: 'Send a project brief or a role through the contact form. I reply within 24 hours.' },
+      { time: 'days 1–3', title: 'Scoping call', text: 'We go over the product, the risks, the test environment and what “done” means.' },
+      { time: 'week 1', title: 'Test plan or build plan', text: 'A short written plan with scope, test cases or features, tools and dates, for you to approve.' },
+      { time: 'weeks 1–4', title: 'Execution with weekly updates', text: 'I test or build, log defects with steps and evidence, and send a status update every week.' },
+      { time: 'handover', title: 'Handover', text: 'A test summary report, open defects and a regression checklist, or the code and its docs.' },
+    ],
+  },
   contactIntro:
     'Hiring for QA or development, or have a project that needs testing or building? Send a message and introduce yourself.',
 }
