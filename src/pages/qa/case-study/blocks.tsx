@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { ArrowRight, Check, type LucideIcon } from 'lucide-react'
+import { imageProps } from '../../../components/responsiveImage'
 
 // Building blocks shared by the QA case study pages. Each page composes these
 // inside <CaseStudyPage>, so both case studies read and look the same.
@@ -74,7 +75,8 @@ export function DataTable({
   caption?: string
 }) {
   return (
-    <div className="cs-table-wrap">
+    // Focusable so keyboard users can scroll a wide table sideways.
+    <div className="cs-table-wrap" tabIndex={0} role="region" aria-label={caption ?? columns.join(', ')}>
       <table className="cs-table">
         {caption && <caption className="tx-sr-only">{caption}</caption>}
         <thead>
@@ -176,7 +178,7 @@ export function DefectCard({ defect }: { defect: Defect }) {
         <span className="cs-chip cs-chip-red">Severity: {defect.severity ?? 'High'}</span>
         <span className="cs-chip cs-chip-red">Priority: {defect.priority ?? 'High'}</span>
       </div>
-      <h4>{defect.title}</h4>
+      <h3>{defect.title}</h3>
       <p>{defect.summary}</p>
       <dl className="cs-defect-compare">
         <div>
@@ -271,7 +273,7 @@ export function Gallery({
     <div className={`cs-gallery cs-gallery-${layout}`}>
       {items.map((item) => (
         <figure key={item.src}>
-          <img src={item.src} alt={item.alt} loading="lazy" />
+          <img {...imageProps(item.src)} alt={item.alt} loading="lazy" />
           <figcaption>{item.caption}</figcaption>
         </figure>
       ))}

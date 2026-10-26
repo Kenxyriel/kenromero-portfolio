@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, ArrowUpRight, CalendarClock, Code2, FileText, Github, Linkedin, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import ContactForm from "../../components/ContactForm";
+import { imageProps } from "../../components/responsiveImage";
 import SiteHeader, { type NavItem } from "../../components/SiteHeader";
 import Timeline from "../../components/Timeline";
 import usePageMeta from "../../components/usePageMeta";
@@ -182,28 +183,28 @@ export default function QAHome() {
 
             <div className="tx-hero-visual">
               <div className="tx-orbit" aria-hidden="true" />
-              <img className="tx-hero-photo" src="/ken-romero.webp" alt={profile.name} />
+              <img className="tx-hero-photo" {...imageProps("/ken-romero.webp", "(max-width: 760px) 80vw, 520px")} alt={profile.name} />
             </div>
           </div>
         </section>
 
-        {/* TOOL MARQUEE */}
-        <section className="tx-marquee" aria-label="Tools">
-          <div className="tx-marquee-track">
-            {[...content.tools, ...content.tools].map((tool, index) => (
-              <span className="tx-tool" key={`${tool.name}-${index}`} aria-hidden={index >= content.tools.length}>
+        {/* TOOLS */}
+        <section className="tx-tools" aria-label="Tools">
+          <ul className="container tx-tools-list">
+            {content.tools.map((tool) => (
+              <li className="tx-tool" key={tool.name}>
                 <img src={tool.icon} alt="" />
                 {tool.name}
-              </span>
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
 
         {/* ABOUT */}
         <section id="about" className="tx-section tx-light">
           <div className="container tx-about">
             <Reveal className="tx-about-photo">
-              <img src="/ken-romero-hero.webp" alt={`${profile.name}, casual portrait`} />
+              <img {...imageProps("/ken-romero-hero.webp", "(max-width: 760px) 80vw, 440px")} alt={`${profile.name}, casual portrait`} />
               <span className="tx-tag-float">QA mindset · developer hands</span>
             </Reveal>
             <Reveal className="tx-about-copy" delay={120}>
@@ -296,7 +297,7 @@ export default function QAHome() {
                     <div className={`tx-project-visual tx-project-${project.visual}`}>
                       {project.visual === "tests" && <TestWindow />}
                       {project.visual === "browser" && <BrowserMock />}
-                      {project.visual === "image" && <img src={project.image} alt={`${project.title} preview`} loading="lazy" />}
+                      {project.visual === "image" && <img {...imageProps(project.image)} alt={`${project.title} preview`} loading="lazy" />}
                       <div className="tx-project-stack">
                         <span className="tx-mono">Tech stack</span>
                         <ul>

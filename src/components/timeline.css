@@ -84,5 +84,5 @@
   .tl-time,
   .tl-dot,
   .tl-card,
-  .tl-step::after { transition: none; }
+  .tl-step:not(:last-child)::after { transition: none; }
 }

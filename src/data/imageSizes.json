@@ -1,0 +1,390 @@
+{
+  "/case-study-preview/case-study-one.webp": [
+    1672,
+    941
+  ],
+  "/case-study-preview/case-study-two.webp": [
+    1609,
+    977
+  ],
+  "/ken-romero-hero.webp": [
+    1086,
+    1448
+  ],
+  "/ken-romero.webp": [
+    1073,
+    1465
+  ],
+  "/projects/jjj-website/contact.webp": [
+    1600,
+    1000
+  ],
+  "/projects/jjj-website/home.webp": [
+    1600,
+    1000
+  ],
+  "/projects/jjj-website/mobile-home.webp": [
+    780,
+    1688
+  ],
+  "/projects/jjj-website/mobile-services.webp": [
+    780,
+    1688
+  ],
+  "/projects/jjj-website/services.webp": [
+    1600,
+    1000
+  ],
+  "/projects/salinlibro/clients.webp": [
+    1600,
+    1000
+  ],
+  "/projects/salinlibro/dashboard.webp": [
+    1600,
+    1000
+  ],
+  "/projects/salinlibro/detail.webp": [
+    1600,
+    1000
+  ],
+  "/projects/salinlibro/form.webp": [
+    1600,
+    1000
+  ],
+  "/projects/salinlibro/search-bug.webp": [
+    1600,
+    1000
+  ],
+  "/projects/saripoint/login.webp": [
+    1440,
+    900
+  ],
+  "/projects/saripoint/overview.webp": [
+    1440,
+    900
+  ],
+  "/projects/saripoint/pos.webp": [
+    1600,
+    1000
+  ],
+  "/projects/saripoint/receipt.webp": [
+    1600,
+    1000
+  ],
+  "/projects/saripoint/reports.webp": [
+    1440,
+    900
+  ],
+  "/projects/saripoint/stock.webp": [
+    1440,
+    900
+  ],
+  "/va/services/design.webp": [
+    200,
+    200
+  ],
+  "/va/services/podcast.webp": [
+    200,
+    200
+  ],
+  "/va/services/report.webp": [
+    200,
+    200
+  ],
+  "/va/services/social.webp": [
+    200,
+    200
+  ],
+  "/va/services/strategy.webp": [
+    200,
+    200
+  ],
+  "/va/tools/buffer.png": [
+    192,
+    192
+  ],
+  "/va/tools/canva.png": [
+    192,
+    192
+  ],
+  "/va/tools/capcut-pro.png": [
+    192,
+    192
+  ],
+  "/va/tools/chatgpt.png": [
+    192,
+    192
+  ],
+  "/va/tools/claude.png": [
+    192,
+    192
+  ],
+  "/va/tools/google-drive.png": [
+    192,
+    192
+  ],
+  "/va/tools/google.png": [
+    192,
+    192
+  ],
+  "/va/tools/meta.png": [
+    192,
+    192
+  ],
+  "/va/tools/metricool.png": [
+    192,
+    192
+  ],
+  "/va/tools/opusclip.png": [
+    192,
+    192
+  ],
+  "/va/tools/riverside.png": [
+    192,
+    192
+  ],
+  "/va/work/design/accounting-1.webp": [
+    1060,
+    1324
+  ],
+  "/va/work/design/accounting-2.webp": [
+    1048,
+    1308
+  ],
+  "/va/work/design/accounting-3.webp": [
+    1040,
+    1296
+  ],
+  "/va/work/design/accounting-4.webp": [
+    1080,
+    1350
+  ],
+  "/va/work/design/accounting-5.webp": [
+    1080,
+    1350
+  ],
+  "/va/work/design/accounting-6.webp": [
+    1080,
+    1350
+  ],
+  "/va/work/design/accounting-7.webp": [
+    1080,
+    1350
+  ],
+  "/va/work/design/accounting-8.webp": [
+    1080,
+    1350
+  ],
+  "/va/work/design/accounting-9.webp": [
+    1080,
+    1350
+  ],
+  "/va/work/design/book-podcast-1.webp": [
+    1060,
+    1324
+  ],
+  "/va/work/design/book-podcast-2.webp": [
+    1048,
+    1304
+  ],
+  "/va/work/design/book-podcast-3.webp": [
+    1048,
+    1304
+  ],
+  "/va/work/design/brand-kit-1.webp": [
+    1154,
+    1316
+  ],
+  "/va/work/design/brand-kit-2.webp": [
+    1154,
+    1316
+  ],
+  "/va/work/design/brand-kit-3.webp": [
+    1154,
+    1316
+  ],
+  "/va/work/design/brand-kit-4.webp": [
+    1154,
+    1316
+  ],
+  "/va/work/design/business-1.webp": [
+    1060,
+    1324
+  ],
+  "/va/work/design/business-2.webp": [
+    1048,
+    1304
+  ],
+  "/va/work/design/business-3.webp": [
+    1048,
+    1304
+  ],
+  "/va/work/design/content-visual-1.webp": [
+    974,
+    1400
+  ],
+  "/va/work/design/content-visual-2.webp": [
+    974,
+    1400
+  ],
+  "/va/work/design/content-visual-3.webp": [
+    974,
+    1400
+  ],
+  "/va/work/design/content-visual-4.webp": [
+    974,
+    1400
+  ],
+  "/va/work/design/food-1.webp": [
+    1080,
+    1350
+  ],
+  "/va/work/design/food-2.webp": [
+    1080,
+    1350
+  ],
+  "/va/work/design/food-3.webp": [
+    1080,
+    1350
+  ],
+  "/va/work/design/food-4.webp": [
+    1080,
+    1350
+  ],
+  "/va/work/design/food-5.webp": [
+    1080,
+    1350
+  ],
+  "/va/work/design/food-6.webp": [
+    1080,
+    1350
+  ],
+  "/va/work/design/food-7.webp": [
+    1080,
+    1350
+  ],
+  "/va/work/design/food-8.webp": [
+    1080,
+    1350
+  ],
+  "/va/work/design/game-1.webp": [
+    1060,
+    1324
+  ],
+  "/va/work/design/game-2.webp": [
+    1048,
+    1304
+  ],
+  "/va/work/design/game-3.webp": [
+    1048,
+    1304
+  ],
+  "/va/work/design/promo-1.webp": [
+    1121,
+    1400
+  ],
+  "/va/work/design/promo-2.webp": [
+    1121,
+    1400
+  ],
+  "/va/work/design/promo-3.webp": [
+    1121,
+    1400
+  ],
+  "/va/work/podcast/ai-clip-1.webp": [
+    720,
+    1280
+  ],
+  "/va/work/podcast/ai-clip-2.webp": [
+    720,
+    1280
+  ],
+  "/va/work/podcast/caption-bank.webp": [
+    1600,
+    768
+  ],
+  "/va/work/podcast/episode-15-min.webp": [
+    1280,
+    720
+  ],
+  "/va/work/podcast/episode-details.webp": [
+    1600,
+    757
+  ],
+  "/va/work/podcast/intro-teaser.webp": [
+    1280,
+    720
+  ],
+  "/va/work/podcast/intro.webp": [
+    1280,
+    720
+  ],
+  "/va/work/podcast/manual-clip-1.webp": [
+    720,
+    1280
+  ],
+  "/va/work/podcast/manual-clip-2.webp": [
+    720,
+    1280
+  ],
+  "/va/work/podcast/manual-clip-3.webp": [
+    720,
+    1280
+  ],
+  "/va/work/podcast/manual-clip-4.webp": [
+    720,
+    1280
+  ],
+  "/va/work/podcast/outro.webp": [
+    1280,
+    720
+  ],
+  "/va/work/podcast/posting-calendar.webp": [
+    1600,
+    738
+  ],
+  "/va/work/podcast/posting-strategy.webp": [
+    1600,
+    601
+  ],
+  "/va/work/podcast/production-calendar.webp": [
+    1600,
+    762
+  ],
+  "/va/work/podcast/thumbnail.webp": [
+    1600,
+    901
+  ],
+  "/va/work/social/caption-bank.webp": [
+    1600,
+    626
+  ],
+  "/va/work/social/content-calendar.webp": [
+    1600,
+    1261
+  ],
+  "/va/work/social/content-distribution.webp": [
+    1600,
+    378
+  ],
+  "/va/work/social/post-husay.webp": [
+    1080,
+    2000
+  ],
+  "/va/work/social/post-jjj.webp": [
+    1080,
+    2000
+  ],
+  "/va/work/social/post-kr.webp": [
+    1080,
+    2000
+  ],
+  "/va/work/social/post-yuki.webp": [
+    1080,
+    2000
+  ],
+  "/va/work/social/publishing-strategy.webp": [
+    1600,
+    783
+  ]
+}

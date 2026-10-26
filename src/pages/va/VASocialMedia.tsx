@@ -1,3 +1,4 @@
+import { imageProps } from '../../components/responsiveImage'
 import { samplePosts, socialMedia as content } from '../../data/va'
 import JJJCalendar from './JJJCalendar'
 import VALayout, { VACta, VAImg, VAPageHero, VASectionTitle } from './VALayout'
@@ -80,7 +81,7 @@ export default function VASocialMedia() {
               post.image ? (
                 // The screenshot already shows the account and caption.
                 <figure className="va-post-shot" key={post.account}>
-                  <img src={post.image} alt={`${post.account} post: ${post.caption}`} loading="lazy" />
+                  <img {...imageProps(post.image, '(max-width: 760px) 45vw, 260px')} alt={`${post.account} post: ${post.caption}`} loading="lazy" />
                 </figure>
               ) : (
                 <article className="va-post" key={post.account}>

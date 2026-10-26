@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState, type CSSProperties } from 're
 import type { VAImage } from '../../data/va'
 import { RotatingBadge } from './VAArt'
 import { useLightbox } from './VALayout'
+import { imageProps } from '../../components/responsiveImage'
 
 const SLIDE_MS = 3600
 
@@ -124,7 +125,7 @@ export default function VAFoodShowcase({ items }: { items: VAImage[] }) {
               aria-label={offset === 0 ? `View ${item.brand} ${item.label} full size` : undefined}
               onClick={() => (offset === 0 ? open(item) : go(index))}
             >
-              <img src={item.image} alt={offset === 0 ? `${item.brand} – ${item.label}` : ''} loading="lazy" />
+              <img {...imageProps(item.image, '(max-width: 760px) 60vw, 320px')} alt={offset === 0 ? `${item.brand} – ${item.label}` : ''} loading="lazy" />
               {offset === 0 && (
                 <span className="va-reel-zoom" aria-hidden="true">
                   <Maximize2 size={15} />
