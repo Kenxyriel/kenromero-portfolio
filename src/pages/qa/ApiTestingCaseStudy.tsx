@@ -150,7 +150,6 @@ export default function ApiTestingCaseStudy() {
     >
       <Chapter
         id="context"
-        number="01"
         title="The system"
         intro="The Cashless POS system manages product information through REST APIs that support core product-management operations."
       >
@@ -177,7 +176,6 @@ export default function ApiTestingCaseStudy() {
 
       <Chapter
         id="plan"
-        number="02"
         title="Scope and strategy"
         intro="I used Postman to validate requests and responses, including status codes, headers, authentication, request data, and returned product information, then checked the result in the POS UI."
       >
@@ -202,7 +200,6 @@ export default function ApiTestingCaseStudy() {
 
       <Chapter
         id="execution"
-        number="03"
         title="Test coverage"
         intro="Nine cases covered every method, including invalid data and checking the result in the UI."
       >
@@ -217,7 +214,6 @@ export default function ApiTestingCaseStudy() {
 
       <Chapter
         id="defects"
-        number="04"
         title="Defects found"
         intro="Both defects passed at the API level but broke the business result, which is why I always checked the UI too."
       >
@@ -266,7 +262,6 @@ export default function ApiTestingCaseStudy() {
 
       <Chapter
         id="verification"
-        number="05"
         title="Retest and regression"
         intro="Retests confirmed the PUT fix; regression confirmed the rest of the product workflow still worked."
       >
@@ -294,7 +289,7 @@ export default function ApiTestingCaseStudy() {
         </div>
       </Chapter>
 
-      <Chapter id="outcome" number="06" title="Outcome">
+      <Chapter id="outcome" title="Outcome">
         <Callout title="Key QA insight">
           A successful API response does not always mean the business operation succeeded. Validate the actual outcome
           and data consistency in the application.

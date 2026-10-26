@@ -79,7 +79,6 @@ export default function SalinLibroCaseStudy() {
     >
       <Chapter
         id="context"
-        number="01"
         title="The idea"
         intro="Salin libro is Filipino for transferring the books. The app is meant to move an accounting firm's client records out of spreadsheets, with room to add documents, billing and BIR forms later."
       >
@@ -89,7 +88,7 @@ export default function SalinLibroCaseStudy() {
         </Callout>
       </Chapter>
 
-      <Chapter id="build" number="02" title="What I built">
+      <Chapter id="build" title="What I built">
         <Block>
           <IconCards items={features} />
         </Block>
@@ -105,7 +104,7 @@ export default function SalinLibroCaseStudy() {
         </Block>
       </Chapter>
 
-      <Chapter id="architecture" number="03" title="How it fits together">
+      <Chapter id="architecture" title="How it fits together">
         <Block>
           <Steps steps={architecture} />
         </Block>
@@ -117,7 +116,6 @@ export default function SalinLibroCaseStudy() {
 
       <Chapter
         id="testing"
-        number="04"
         title="End-to-end tests"
         intro="Playwright starts the API in test mode against a separate test database, starts the Vue app, and drives the real screens. A cleanup script removes the clients each run creates."
       >
@@ -143,7 +141,7 @@ export default function SalinLibroCaseStudy() {
         </Callout>
       </Chapter>
 
-      <Chapter id="next" number="05" title="Where it stands">
+      <Chapter id="next" title="Where it stands">
         <div className="cs-grid-2">
           <Block title="Done" icon={ListChecks}>
             <Checklist

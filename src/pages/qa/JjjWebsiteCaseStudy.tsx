@@ -92,7 +92,6 @@ export default function JjjWebsiteCaseStudy() {
     >
       <Chapter
         id="context"
-        number="01"
         title="The brief"
         intro="JJJ Tax and Accounting Services helps individuals and businesses with bookkeeping, tax, business registration and advisory. The site had to carry the firm's tagline, Optimize your growing business with us, and make inquiries easy."
       >
@@ -102,7 +101,7 @@ export default function JjjWebsiteCaseStudy() {
         </Callout>
       </Chapter>
 
-      <Chapter id="build" number="02" title="What I built">
+      <Chapter id="build" title="What I built">
         <Block>
           <IconCards items={features} />
         </Block>
@@ -121,7 +120,6 @@ export default function JjjWebsiteCaseStudy() {
 
       <Chapter
         id="contact"
-        number="03"
         title="The contact form"
         intro="The form is the point of the site, so it gets the most protection: checks in the browser, the same checks again on the server, and several layers against spam."
       >
@@ -135,7 +133,6 @@ export default function JjjWebsiteCaseStudy() {
 
       <Chapter
         id="quality"
-        number="04"
         title="Pre-launch checks"
         intro="Before calling it ready, every page was measured on a production build. These are the numbers from the October 2026 pre-launch report."
       >
@@ -148,7 +145,7 @@ export default function JjjWebsiteCaseStudy() {
         </Callout>
       </Chapter>
 
-      <Chapter id="next" number="05" title="Where it stands">
+      <Chapter id="next" title="Where it stands">
         <div className="cs-grid-2">
           <Block title="Done" icon={BadgeCheck}>
             <Checklist

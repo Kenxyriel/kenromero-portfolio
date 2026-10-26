@@ -197,7 +197,6 @@ export default function AuthenticationCaseStudy() {
     >
       <Chapter
         id="context"
-        number="01"
         title="The change"
         intro="The HR & Payroll system already locked accounts after repeated invalid logins. The team replaced the fixed lockout with a progressive model, where the lockout gets longer as failed attempts continue."
       >
@@ -234,7 +233,6 @@ export default function AuthenticationCaseStudy() {
 
       <Chapter
         id="plan"
-        number="02"
         title="Challenge and plan"
         intro="The system had to keep five things consistent at every step of the ladder."
       >
@@ -273,7 +271,6 @@ export default function AuthenticationCaseStudy() {
 
       <Chapter
         id="execution"
-        number="03"
         title="Test execution"
         intro="Twelve scenarios covered every threshold, plus logging in during a lockout and session timeout."
       >
@@ -287,7 +284,7 @@ export default function AuthenticationCaseStudy() {
         <Callout title="Boundary testing was prioritized">because each threshold changed the expected behavior.</Callout>
       </Chapter>
 
-      <Chapter id="defects" number="04" title="Defects found" intro="Execution surfaced two high-severity issues, both about what the user was told.">
+      <Chapter id="defects" title="Defects found" intro="Execution surfaced two high-severity issues, both about what the user was told.">
         <div className="cs-grid-2">
           <DefectCard
             defect={{
@@ -331,7 +328,6 @@ export default function AuthenticationCaseStudy() {
 
       <Chapter
         id="verification"
-        number="05"
         title="Retest and regression"
         intro="Retests confirmed each fix; regression confirmed nothing else broke."
       >
@@ -373,7 +369,6 @@ export default function AuthenticationCaseStudy() {
 
       <Chapter
         id="outcome"
-        number="06"
         title="Outcome"
         intro="The team simplified two lockout configurations into one mechanism while keeping the progressive behavior, and QA revalidated the complete authentication flow."
       >

@@ -87,7 +87,6 @@ export default function SaripointCaseStudy() {
     >
       <Chapter
         id="context"
-        number="01"
         title="The idea"
         intro="Sari-sari stores and minimarts need to record sales, keep track of who owes them, and know when to restock. SARIPOINT is my attempt at a low-cost, browser-based tool for that."
       >
@@ -100,7 +99,6 @@ export default function SaripointCaseStudy() {
 
       <Chapter
         id="build"
-        number="02"
         title="What I built"
         intro="The app covers a full store day: open a shift, sell, take payment, print a receipt, and close out with reports."
       >
@@ -121,7 +119,6 @@ export default function SaripointCaseStudy() {
 
       <Chapter
         id="architecture"
-        number="03"
         title="How it fits together"
         intro="One frontend and one API in a single repository. Every request is checked against the user's organization, branch and role on the server."
       >
@@ -136,7 +133,6 @@ export default function SaripointCaseStudy() {
 
       <Chapter
         id="quality"
-        number="04"
         title="Quality and security"
         intro="Money and stock data need care, so the safeguards were built in from the start rather than added at the end."
       >
@@ -145,7 +141,7 @@ export default function SaripointCaseStudy() {
         </Block>
       </Chapter>
 
-      <Chapter id="next" number="05" title="Where it stands">
+      <Chapter id="next" title="Where it stands">
         <div className="cs-grid-2">
           <Block title="Working now" icon={Users}>
             <Checklist

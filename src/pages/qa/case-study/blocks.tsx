@@ -6,13 +6,11 @@ import { ArrowRight, Check, type LucideIcon } from 'lucide-react'
 
 export function Chapter({
   id,
-  number,
   title,
   intro,
   children,
 }: {
   id: string
-  number: string
   title: string
   intro?: ReactNode
   children: ReactNode
@@ -20,9 +18,7 @@ export function Chapter({
   return (
     <section className="cs-chapter" id={id} aria-labelledby={`${id}-title`}>
       <header className="cs-chapter-head">
-        <p className="cs-kicker">
-          {number} / {id}
-        </p>
+        <p className="cs-kicker">{id}</p>
         <h2 id={`${id}-title`}>{title}</h2>
         {intro && <p className="cs-chapter-intro">{intro}</p>}
       </header>

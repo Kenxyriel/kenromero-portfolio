@@ -156,14 +156,13 @@ export default function CaseStudyPage({
             <nav className="cs-toc" aria-label="On this page">
               <p>On this page</p>
               <ol>
-                {chapters.map((chapter, index) => (
+                {chapters.map((chapter) => (
                   <li key={chapter.id}>
                     <a
                       href={`#${chapter.id}`}
                       className={active === chapter.id ? 'is-active' : undefined}
                       aria-current={active === chapter.id ? 'location' : undefined}
                     >
-                      <span>{String(index + 1).padStart(2, '0')}</span>
                       {chapter.label}
                     </a>
                   </li>
