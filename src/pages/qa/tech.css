@@ -215,12 +215,18 @@
 .tx-test-expected { grid-column: 3; color: var(--t-muted); font-size: 11px; }
 .tx-window-foot { display: flex; align-items: center; gap: 8px; padding: 10px 14px; color: var(--t-lime); border-top: 1px solid var(--t-line); font-size: 11px; }
 
-/* ---------- Tools ---------- */
+/* ---------- Marquee ---------- */
 
-.tx-tools { padding: 22px 0; background: var(--t-bg-2); border-block: 1px solid var(--t-line); }
-.tx-tools-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px 40px; margin: 0 auto; list-style: none; }
+.tx-marquee { position: relative; overflow: hidden; padding: 22px 0; background: var(--t-bg-2); border-block: 1px solid var(--t-line); }
+.tx-marquee-track { display: flex; gap: 48px; width: max-content; animation: tx-marquee 38s linear infinite; }
+.tx-marquee:hover .tx-marquee-track,
+.tx-marquee.is-paused .tx-marquee-track { animation-play-state: paused; }
+.tx-marquee-toggle { position: absolute; z-index: 1; top: 50%; right: 12px; display: grid; place-items: center; width: 32px; height: 32px; padding: 0; color: var(--t-text); background: var(--t-bg-2); border: 1px solid var(--t-line); border-radius: 50%; cursor: pointer; transform: translateY(-50%); }
+.tx-marquee-toggle:hover { color: var(--t-white); border-color: var(--t-muted); }
+.tx-marquee-toggle:focus-visible { outline: 2px solid var(--t-blue-2); outline-offset: 2px; }
 .tx-tool { display: inline-flex; align-items: center; gap: 10px; color: var(--t-text); font-weight: 600; white-space: nowrap; }
 .tx-tool img { width: 22px; height: 22px; filter: invert(1) brightness(.85); }
+@keyframes tx-marquee { to { transform: translateX(-50%); } }
 
 /* ---------- About ---------- */
 
@@ -459,10 +465,13 @@
   .tx-project-stack li { transition: none; }
   .tx-reveal,
   .tx-reveal.is-shown { opacity: 1; transform: none; transition: none; }
+  .tx-marquee-track,
   .tx-cursor,
   .tx-dot,
   .tx-rotating-word { animation: none; }
   .tx-window-body li,
   .tx-reveal.is-shown .tx-window-body li { animation: none; opacity: 1; }
+  .tx-marquee { overflow-x: auto; }
+  .tx-marquee-toggle { display: none; }
 }
 .tech-theme .logo-mark { --mark-ink: #f8fafc; --mark-ring: #334155; --mark-ring-strong: #94a3b8; }

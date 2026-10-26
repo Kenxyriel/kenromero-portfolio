@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowRight, ArrowUpRight, CalendarClock, Code2, FileText, Github, Linkedin, ShieldCheck } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CalendarClock, Code2, FileText, Github, Linkedin, Pause, Play, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import ContactForm from "../../components/ContactForm";
 import { imageProps } from "../../components/responsiveImage";
@@ -134,6 +134,7 @@ type Filter = "all" | "qa" | "dev";
 export default function QAHome() {
   usePageMeta(content.meta.title, content.meta.description);
   const [filter, setFilter] = useState<Filter>("all");
+  const [toolsPaused, setToolsPaused] = useState(false);
   const projects = content.projects.filter((project) => filter === "all" || project.type === filter);
 
   return (
@@ -188,16 +189,25 @@ export default function QAHome() {
           </div>
         </section>
 
-        {/* TOOLS */}
-        <section className="tx-tools" aria-label="Tools">
-          <ul className="container tx-tools-list">
-            {content.tools.map((tool) => (
-              <li className="tx-tool" key={tool.name}>
+        {/* TOOL MARQUEE */}
+        <section className={`tx-marquee${toolsPaused ? " is-paused" : ""}`} aria-label="Tools">
+          {/* Moving content needs a pause control for keyboard and touch users (WCAG 2.2.2). */}
+          <button
+            className="tx-marquee-toggle"
+            type="button"
+            aria-label={toolsPaused ? "Play tools animation" : "Pause tools animation"}
+            onClick={() => setToolsPaused((paused) => !paused)}
+          >
+            {toolsPaused ? <Play size={14} aria-hidden="true" /> : <Pause size={14} aria-hidden="true" />}
+          </button>
+          <div className="tx-marquee-track">
+            {[...content.tools, ...content.tools].map((tool, index) => (
+              <span className="tx-tool" key={`${tool.name}-${index}`} aria-hidden={index >= content.tools.length}>
                 <img src={tool.icon} alt="" />
                 {tool.name}
-              </li>
+              </span>
             ))}
-          </ul>
+          </div>
         </section>
 
         {/* ABOUT */}
