@@ -298,7 +298,10 @@ export default function QAHome() {
                       {project.visual === "image" && <img src={project.image} alt={`${project.title} preview`} loading="lazy" />}
                     </div>
                     <div className="tx-project-body">
-                      <span className="tx-mono tx-project-cat">{project.category}</span>
+                      <span className="tx-mono tx-project-cat">
+                        {project.category}
+                        {"status" in project && project.status && <span className="tx-project-status">{project.status}</span>}
+                      </span>
                       <h3>{project.title}</h3>
                       <p>{project.description}</p>
                       <ul className="tx-tags">

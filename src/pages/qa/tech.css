@@ -295,6 +295,7 @@
 .tx-project:hover .tx-project-visual img { transform: scale(1.03); }
 .tx-project-body { display: flex; flex-direction: column; justify-content: center; padding: clamp(26px, 4vw, 44px); }
 .tx-project-cat { color: var(--t-blue); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+.tx-project-status { margin-left: 10px; padding: 2px 8px; color: #92400e; background: #fef3c7; border-radius: 999px; font-size: 11px; letter-spacing: .04em; }
 .tx-project-body h3 { margin: 10px 0 0; font-family: var(--t-display); font-size: clamp(24px, 2.8vw, 32px); line-height: 1.15; letter-spacing: -.02em; }
 .tx-project-body p { margin: 14px 0 0; line-height: 1.7; }
 .tx-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; }

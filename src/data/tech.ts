@@ -94,6 +94,42 @@ export const techContent = {
       link: { label: 'Read case study', to: '/qa/projects/api-testing' },
     },
     {
+      type: 'qa' as const,
+      category: 'Full-stack / Test Automation',
+      title: 'SalinLibro-CMS Client Management',
+      status: 'Paused',
+      description:
+        'Client records for accounting firms in Vue, Express and MySQL, with a Playwright suite that runs on its own test database and caught a real search bug.',
+      tags: ['Vue 3', 'Express', 'MySQL', 'Playwright'],
+      visual: 'image' as const,
+      image: '/projects/salinlibro/dashboard.webp',
+      link: { label: 'Read case study', to: '/qa/projects/salinlibro-cms' },
+    },
+    {
+      type: 'dev' as const,
+      category: 'Full-stack Development',
+      title: 'SARIPOINT Point of Sale',
+      status: 'In progress',
+      description:
+        'A point of sale for sari-sari stores and minimarts: checkout, receipts, shifts, store credit, stock and reports, on React, Express and MySQL.',
+      tags: ['React', 'TypeScript', 'Express', 'MySQL'],
+      visual: 'image' as const,
+      image: '/projects/saripoint/pos.webp',
+      link: { label: 'Read case study', to: '/qa/projects/saripoint' },
+    },
+    {
+      type: 'dev' as const,
+      category: 'Client Website',
+      title: 'JJJ Tax and Accounting Website',
+      status: 'Pre-launch',
+      description:
+        'A 15-page Next.js site for an accounting firm, with a protected contact form, 37 automated tests, and zero accessibility violations before launch.',
+      tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Resend'],
+      visual: 'image' as const,
+      image: '/projects/jjj-website/home.webp',
+      link: { label: 'Read case study', to: '/qa/projects/jjj-website' },
+    },
+    {
       type: 'dev' as const,
       category: 'Web Development',
       title: 'Multi-Audience Portfolio Platform',

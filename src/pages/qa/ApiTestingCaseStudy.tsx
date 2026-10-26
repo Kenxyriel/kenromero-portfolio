@@ -146,7 +146,7 @@ export default function ApiTestingCaseStudy() {
       }}
       chapters={chapters}
       pdf="/documents/case-study-two.pdf"
-      next={{ title: 'Authentication & Proactive Lockout Testing', to: '/qa/projects/authentication-testing' }}
+      next={{ title: 'SARIPOINT Point of Sale', to: '/qa/projects/saripoint' }}
     >
       <Chapter
         id="context"

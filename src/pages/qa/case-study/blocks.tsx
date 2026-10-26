@@ -168,6 +168,8 @@ export type Defect = {
   expected: string
   actual?: string
   impact: string
+  severity?: string
+  priority?: string
 }
 
 export function DefectCard({ defect }: { defect: Defect }) {
@@ -175,8 +177,8 @@ export function DefectCard({ defect }: { defect: Defect }) {
     <article className="cs-defect">
       <div className="cs-defect-head">
         <span className="cs-defect-id">{defect.id}</span>
-        <span className="cs-chip cs-chip-red">Severity: High</span>
-        <span className="cs-chip cs-chip-red">Priority: High</span>
+        <span className="cs-chip cs-chip-red">Severity: {defect.severity ?? 'High'}</span>
+        <span className="cs-chip cs-chip-red">Priority: {defect.priority ?? 'High'}</span>
       </div>
       <h4>{defect.title}</h4>
       <p>{defect.summary}</p>
@@ -257,6 +259,26 @@ export function BugReport({
         </div>
       </div>
     </article>
+  )
+}
+
+// Screenshots with captions. "phones" lays out tall mobile shots side by side.
+export function Gallery({
+  items,
+  layout = 'wide',
+}: {
+  items: { src: string; alt: string; caption: string }[]
+  layout?: 'wide' | 'phones'
+}) {
+  return (
+    <div className={`cs-gallery cs-gallery-${layout}`}>
+      {items.map((item) => (
+        <figure key={item.src}>
+          <img src={item.src} alt={item.alt} loading="lazy" />
+          <figcaption>{item.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
   )
 }
 
