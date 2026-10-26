@@ -20,6 +20,7 @@ const navItems: NavItem[] = [
   { label: 'Design', href: '/va/design-branding' },
   { label: 'Social Media', href: '/va/social-media-content' },
   { label: 'Podcast', href: '/va/podcast-editing' },
+  { label: 'How I Work', href: '/va#process' },
 ]
 
 // Full-screen viewer for work samples, so detailed screenshots can be read.

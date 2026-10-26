@@ -397,6 +397,16 @@
 
 .tx-contact { overflow: hidden; isolation: isolate; }
 .tx-contact .tx-heading { margin-inline: auto; text-align: center; }
+/* Discovery call banner above the contact form. */
+.tx-book { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 20px; margin-bottom: 20px; padding: 22px 26px; background: linear-gradient(120deg, rgba(37, 99, 235, .18), rgba(34, 211, 238, .06)); border: 1px solid rgba(96, 165, 250, .35); border-radius: 22px; }
+.tx-book-icon { display: grid; place-items: center; width: 48px; height: 48px; color: var(--t-blue-2); background: rgba(37, 99, 235, .16); border-radius: 14px; }
+.tx-book-kicker { margin: 0; color: var(--t-lime); font-size: 12px; letter-spacing: .06em; }
+.tx-book h3 { margin: 4px 0 0; color: var(--t-white); font-family: var(--t-display); font-size: clamp(19px, 2vw, 22px); }
+.tx-book p:not(.tx-book-kicker) { margin: 4px 0 0; font-size: 14.5px; line-height: 1.5; }
+@media (max-width: 767px) {
+  .tx-book { grid-template-columns: auto minmax(0, 1fr); padding: 20px; }
+  .tx-book .tx-btn { grid-column: 1 / -1; justify-content: center; }
+}
 .tech-theme .contact-form-card { border-radius: 22px; border-color: transparent; }
 .tech-theme .contact-section { background: transparent; }
 
@@ -414,6 +424,24 @@
   .tx-process { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .tx-process li:nth-child(4) > div::after { display: none; }
 }
+
+/* Working with me: the shared onboarding timeline in the tech colours. */
+.tx-working-head { margin-top: clamp(56px, 7vw, 80px); }
+.tx-working-head .tx-h2 { font-size: clamp(28px, 3.2vw, 40px); }
+.tx-working-intro { max-width: 620px; margin: 10px 0 0; line-height: 1.6; }
+.tl-tech {
+  --tl-rail: var(--t-line);
+  --tl-accent: var(--t-lime);
+  --tl-card: var(--t-bg-2);
+  --tl-card-line: var(--t-line);
+  --tl-ink: var(--t-white);
+  --tl-text: var(--t-text);
+  --tl-muted: var(--t-muted);
+  --tl-time-font: var(--t-mono);
+  --tl-title-font: var(--t-display);
+  margin-top: 32px;
+}
+.tl-tech .tl-list.is-shown .tl-card:hover { box-shadow: 0 14px 30px rgba(0, 0, 0, .4); }
 
 @media (max-width: 1023px) {
   .tx-hero-grid { grid-template-columns: 1fr; min-height: 0; }
