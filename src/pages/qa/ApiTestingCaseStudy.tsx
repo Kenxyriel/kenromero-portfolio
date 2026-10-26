@@ -145,6 +145,7 @@ export default function ApiTestingCaseStudy() {
           'Found 2 high-severity defects, including a PUT request that created duplicate products. After the fixes, all retests and regression checks passed.',
       }}
       chapters={chapters}
+      pdf="/documents/case-study-two.pdf"
       next={{ title: 'Authentication & Proactive Lockout Testing', to: '/qa/projects/authentication-testing' }}
     >
       <Chapter
