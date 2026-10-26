@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import type { ReactNode } from 'react'
 import LegalLinks from './LegalLinks'
 import usePageMeta from './usePageMeta'
+import useScrollHints from './useScrollHints'
 
 type CaseStudyLayoutProps = {
   category: string
@@ -24,6 +25,7 @@ export default function CaseStudyLayout({
   children,
 }: CaseStudyLayoutProps) {
   usePageMeta(`${title} | Ken Romero QA Case Study`, lead)
+  useScrollHints()
 
   return (
     <div className="case-study-page">
