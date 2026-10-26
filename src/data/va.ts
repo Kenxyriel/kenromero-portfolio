@@ -107,33 +107,33 @@ export const vaHome = {
         tagline: 'Turn Conversations into Opportunities',
         items: ['Podcast Editing', 'Video Editing', 'Short-Form Content'],
         path: '/va/podcast-editing',
-        image: '/va/services/podcast.png',
+        image: '/va/services/podcast.webp',
       },
       {
         title: 'Social Media',
         tagline: 'Create. Connect. Convert.',
         items: ['Content Management', 'Caption Writing', 'Hashtag Research'],
         path: '/va/social-media-content',
-        image: '/va/services/social.png',
+        image: '/va/services/social.webp',
       },
       {
         title: 'Design & Branding',
         tagline: 'Ideas into Visuals',
         items: ['Brand Kit Design', 'Graphic Design', 'Thumbnail & Visuals'],
         path: '/va/design-branding',
-        image: '/va/services/design.png',
+        image: '/va/services/design.webp',
       },
       {
         title: 'Content & Strategy',
         tagline: 'Clear Plan, Better Results',
         items: ['Engaging Stories', 'Social Media Audit', 'Content Strategy', 'Recommendations'],
-        image: '/va/services/strategy.png',
+        image: '/va/services/strategy.webp',
       },
       {
         title: 'Report & Analytics',
         tagline: 'Track Record. Grow.',
         items: ['Monthly Report', 'Performance Insights', 'Growth Opportunities'],
-        image: '/va/services/report.png',
+        image: '/va/services/report.webp',
       },
     ] as { title: string; tagline: string; items: string[]; image: string; path?: string }[],
   },
@@ -144,17 +144,17 @@ export const vaHome = {
     // Swap any path for another file in public/va/work/ to change a preview.
     previews: {
       design: [
-        { image: '/va/work/design/brand-kit-1.jpg', label: 'JJJ Tax and Accounting brand kit' },
-        { image: '/va/work/design/accounting-7.jpg', label: 'JJJ Tax and Accounting Q4 graphic' },
-        { image: '/va/work/design/food-3.jpg', label: 'Bun Riot combo poster' },
+        { image: '/va/work/design/brand-kit-1.webp', label: 'JJJ Tax and Accounting brand kit' },
+        { image: '/va/work/design/accounting-7.webp', label: 'JJJ Tax and Accounting Q4 graphic' },
+        { image: '/va/work/design/food-3.webp', label: 'Bun Riot combo poster' },
       ],
       podcast: {
-        teaser: { image: '/va/work/podcast/intro-teaser.jpg', video: '/va/work/podcast/intro-teaser.mp4', label: 'intro teaser clip' },
-        clip: { image: '/va/work/podcast/ai-clip-1.jpg', video: '/va/work/podcast/ai-clip-1.mp4', label: 'short-form podcast clip' },
+        teaser: { image: '/va/work/podcast/intro-teaser.webp', video: '/va/work/podcast/intro-teaser.mp4', label: 'intro teaser clip' },
+        clip: { image: '/va/work/podcast/ai-clip-1.webp', video: '/va/work/podcast/ai-clip-1.mp4', label: 'short-form podcast clip' },
       },
       social: [
-        { image: '/va/work/social/post-kr.jpg', label: 'KR Digital Solutions post' },
-        { image: '/va/work/social/post-yuki.jpg', label: 'Yuki Plays post' },
+        { image: '/va/work/social/post-kr.webp', label: 'KR Digital Solutions post' },
+        { image: '/va/work/social/post-yuki.webp', label: 'Yuki Plays post' },
       ],
     },
     groups: [
@@ -162,25 +162,25 @@ export const vaHome = {
         title: 'Design & Branding',
         path: '/va/design-branding',
         items: [
-          { image: '/va/work/design/brand-kit-1.jpg', label: 'Brand Kit' },
-          { image: '/va/work/design/promo-2.jpg', label: 'Graphic Design' },
-          { image: '/va/work/design/content-visual-4.jpg', label: 'Content Visuals' },
+          { image: '/va/work/design/brand-kit-1.webp', label: 'Brand Kit' },
+          { image: '/va/work/design/promo-2.webp', label: 'Graphic Design' },
+          { image: '/va/work/design/content-visual-4.webp', label: 'Content Visuals' },
         ] as VAImage[],
       },
       {
         title: 'Podcast Editing',
         path: '/va/podcast-editing',
         items: [
-          { image: '/va/work/podcast/thumbnail.jpg', label: 'Podcast Thumbnail' },
-          { image: '/va/work/podcast/intro-teaser.jpg', label: 'Intro Teaser' },
+          { image: '/va/work/podcast/thumbnail.webp', label: 'Podcast Thumbnail' },
+          { image: '/va/work/podcast/intro-teaser.webp', label: 'Intro Teaser' },
         ] as VAImage[],
       },
       {
         title: 'Social Media Content',
         path: '/va/social-media-content',
         items: [
-          { image: '/va/work/social/post-jjj.jpg', label: 'Caption Writing' },
-          { image: '/va/work/social/content-calendar.jpg', label: 'Content Management and Caption Research' },
+          { image: '/va/work/social/post-jjj.webp', label: 'Caption Writing' },
+          { image: '/va/work/social/content-calendar.webp', label: 'Content Management and Caption Research' },
         ] as VAImage[],
       },
     ],
@@ -232,25 +232,25 @@ export type SamplePost = { account: string; caption: string; image?: string }
 export const samplePosts: SamplePost[] = [
   {
     account: 'JJJ Tax Services',
-    image: '/va/work/social/post-jjj.jpg',
+    image: '/va/work/social/post-jjj.webp',
     caption:
       'Why did you start your business? ❤️🚀 Paperwork and tax deadlines can drain your time and energy. This Love Month, let JJJ Accounting Services handle compliance so you can focus on growing your business and doing what you love. Happy Friday and Happy Valentine’s Day in advance! 🌹✨ Ready to bring the spark back? Let’s talk. 📩 #JJJAccountingServices #LoveYourBusiness #EntrepreneurLife #TaxSupport #BusinessGrowth #FridayVibes',
   },
   {
     account: 'Yuki Plays',
-    image: '/va/work/social/post-yuki.jpg',
+    image: '/va/work/social/post-yuki.webp',
     caption:
       'Are you ready? ⚔️🔥 The fight begins now. We’re diving into Valheim tonight. Build, survive, and conquer together. Going live at 8PM PH time. Join the fun on Discord. See you in Valhalla. 🎮✨ #Valheim #GamingNight #LiveStreamPH #GamerLife #DiscordGaming #FridayGameNight',
   },
   {
     account: 'KR Digital Solutions',
-    image: '/va/work/social/post-kr.jpg',
+    image: '/va/work/social/post-kr.webp',
     caption:
       'Innovation is what sets leaders apart. 💡🚀 True growth doesn’t come from following trends. It comes from building smarter systems, creating better solutions, and making forward-thinking decisions. At KR Digital Solutions, we help brands move ahead with purpose and strategy. Lead with innovation. Grow with confidence. ✨📈 #KRDigitalSolutions #InnovationDriven #LeadershipMindset #DigitalSolutions #BusinessGrowth #StartupThinking',
   },
   {
     account: 'Husay Coaching Co.',
-    image: '/va/work/social/post-husay.jpg',
+    image: '/va/work/social/post-husay.webp',
     caption:
       'Clarity before confidence. ✨ Progress does not start with motivation. It starts with direction. When you understand where you are going, confidence follows naturally. In Podcast Episode 2, we talk about how clarity creates momentum and why knowing your next step matters more than having everything figured out. Listen, reflect, and move forward with purpose. 🎧🤍 #PodcastEpisode #ClarityBeforeConfidence #PurposeDriven #MindsetGrowth #PersonalDevelopment #CoachingJourney',
   },
@@ -269,7 +269,7 @@ export const designBranding = {
     {
       title: 'Brand Kit',
       detail: 'Colors • Typography • Visual Direction',
-      galleries: [{ title: '', items: [1, 2, 3, 4].map((n) => ({ image: `/va/work/design/brand-kit-${n}.jpg`, label: `Brand Kit ${n}` })) }],
+      galleries: [{ title: '', items: [1, 2, 3, 4].map((n) => ({ image: `/va/work/design/brand-kit-${n}.webp`, label: `Brand Kit ${n}` })) }],
     },
     {
       title: 'Graphic Design',
@@ -277,24 +277,24 @@ export const designBranding = {
       galleries: [
         {
           title: 'Accounting Firm Graphics',
-          items: [4, 5, 6, 7, 8, 9, 1, 2, 3].map((n) => ({ image: `/va/work/design/accounting-${n}.jpg`, label: `Accounting firm graphic ${n}` })),
+          items: [4, 5, 6, 7, 8, 9, 1, 2, 3].map((n) => ({ image: `/va/work/design/accounting-${n}.webp`, label: `Accounting firm graphic ${n}` })),
         },
-        { title: 'Business Graphics', items: [1, 2, 3].map((n) => ({ image: `/va/work/design/business-${n}.jpg`, label: `Business graphic ${n}` })) },
-        { title: 'Book and Podcast Graphics', items: [1, 2, 3].map((n) => ({ image: `/va/work/design/book-podcast-${n}.jpg`, label: `Book and podcast graphic ${n}` })) },
-        { title: 'Game Graphics', items: [1, 2, 3].map((n) => ({ image: `/va/work/design/game-${n}.jpg`, label: `Game graphic ${n}` })) },
-        { title: 'Promotional Graphics', items: [1, 2, 3].map((n) => ({ image: `/va/work/design/promo-${n}.jpg`, label: `Promotional graphic ${n}` })) },
+        { title: 'Business Graphics', items: [1, 2, 3].map((n) => ({ image: `/va/work/design/business-${n}.webp`, label: `Business graphic ${n}` })) },
+        { title: 'Book and Podcast Graphics', items: [1, 2, 3].map((n) => ({ image: `/va/work/design/book-podcast-${n}.webp`, label: `Book and podcast graphic ${n}` })) },
+        { title: 'Game Graphics', items: [1, 2, 3].map((n) => ({ image: `/va/work/design/game-${n}.webp`, label: `Game graphic ${n}` })) },
+        { title: 'Promotional Graphics', items: [1, 2, 3].map((n) => ({ image: `/va/work/design/promo-${n}.webp`, label: `Promotional graphic ${n}` })) },
         {
           title: 'Food Graphics',
           showcase: true,
           items: [
-            { image: '/va/work/design/food-1.jpg', brand: 'Bun Riot', label: 'Build Your Own' },
-            { image: '/va/work/design/food-2.jpg', brand: 'Bun Riot', label: 'Triple Threat' },
-            { image: '/va/work/design/food-3.jpg', brand: 'Bun Riot', label: 'Riot Combo' },
-            { image: '/va/work/design/food-8.jpg', brand: 'Bun Riot', label: 'Weekend Burger Deal' },
-            { image: '/va/work/design/food-4.jpg', brand: 'Kape at Kuwento', label: 'Brown Sugar Latte' },
-            { image: '/va/work/design/food-5.jpg', brand: 'Kape at Kuwento', label: 'Matcha Latte' },
-            { image: '/va/work/design/food-6.jpg', brand: 'Kape at Kuwento', label: 'Hojicha Latte' },
-            { image: '/va/work/design/food-7.jpg', brand: 'Kape at Kuwento', label: 'Strawberry Matcha' },
+            { image: '/va/work/design/food-1.webp', brand: 'Bun Riot', label: 'Build Your Own' },
+            { image: '/va/work/design/food-2.webp', brand: 'Bun Riot', label: 'Triple Threat' },
+            { image: '/va/work/design/food-3.webp', brand: 'Bun Riot', label: 'Riot Combo' },
+            { image: '/va/work/design/food-8.webp', brand: 'Bun Riot', label: 'Weekend Burger Deal' },
+            { image: '/va/work/design/food-4.webp', brand: 'Kape at Kuwento', label: 'Brown Sugar Latte' },
+            { image: '/va/work/design/food-5.webp', brand: 'Kape at Kuwento', label: 'Matcha Latte' },
+            { image: '/va/work/design/food-6.webp', brand: 'Kape at Kuwento', label: 'Hojicha Latte' },
+            { image: '/va/work/design/food-7.webp', brand: 'Kape at Kuwento', label: 'Strawberry Matcha' },
           ],
         },
       ],
@@ -302,7 +302,7 @@ export const designBranding = {
     {
       title: 'Content Visuals',
       detail: 'Stories • Thumbnails • Branded Content',
-      galleries: [{ title: '', items: [1, 2, 3, 4].map((n) => ({ image: `/va/work/design/content-visual-${n}.jpg`, label: `Content visual ${n}` })) }],
+      galleries: [{ title: '', items: [1, 2, 3, 4].map((n) => ({ image: `/va/work/design/content-visual-${n}.webp`, label: `Content visual ${n}` })) }],
     },
   ] as { title: string; detail: string; galleries: { title: string; items: VAImage[]; showcase?: boolean }[] }[],
   cta: {
@@ -328,7 +328,7 @@ export const socialMedia = {
     subtitle: 'Content Calendar',
     description:
       'I organize content schedules, coordinate publishing, and keep social media activity consistent across platforms.',
-    image: { image: '/va/work/social/content-calendar.jpg', label: 'Content calendar' } as VAImage,
+    image: { image: '/va/work/social/content-calendar.webp', label: 'Content calendar' } as VAImage,
     organizeTitle: 'How I Organize Content',
     organize: ['Content Pillar', 'Content Status', 'Design and Description', 'Design Type'],
   },
@@ -365,7 +365,7 @@ export const socialMedia = {
     title: 'Content Publishing and Strategy',
     description:
       'I organize content around platform behavior, audience engagement, and a consistent publishing rhythm to make every piece of content work harder.',
-    distributionImage: { image: '/va/work/social/caption-bank.jpg', label: 'Caption bank & content research' } as VAImage,
+    distributionImage: { image: '/va/work/social/caption-bank.webp', label: 'Caption bank & content research' } as VAImage,
     platforms: [
       { name: 'YouTube', role: 'Long-form authority', detail: 'Full podcast episodes and Shorts.' },
       { name: 'Instagram', role: 'Reach & engagement', detail: 'Reels and visual content designed for discovery.' },
@@ -458,28 +458,28 @@ export const podcastEditing = {
       body: 'Every episode and clip here is client property, shown only as featured work from projects I edited. Please don\u2019t download, repost or reuse them.',
     },
     items: [
-      { image: '/va/work/podcast/episode-15-min.jpg', video: '/va/work/podcast/episode-15-min.mp4', label: '15 Min Episode (first minute)' },
-      { image: '/va/work/podcast/intro.jpg', video: '/va/work/podcast/intro.mp4', label: 'Intro' },
-      { image: '/va/work/podcast/outro.jpg', video: '/va/work/podcast/outro.mp4', label: 'Outro' },
-      { image: '/va/work/podcast/intro-teaser.jpg', video: '/va/work/podcast/intro-teaser.mp4', label: 'Intro Teaser Clip' },
-      { image: '/va/work/podcast/ai-clip-1.jpg', video: '/va/work/podcast/ai-clip-1.mp4', label: 'AI Generated Clip', tall: true },
-      { image: '/va/work/podcast/ai-clip-2.jpg', video: '/va/work/podcast/ai-clip-2.mp4', label: 'AI Generated Clip 2', tall: true },
-      { image: '/va/work/podcast/manual-clip-1.jpg', video: '/va/work/podcast/manual-clip-1.mp4', label: 'Manual Curated Clip', tall: true },
-      { image: '/va/work/podcast/manual-clip-2.jpg', video: '/va/work/podcast/manual-clip-2.mp4', label: 'Manual Curated Clip 2', tall: true },
-      { image: '/va/work/podcast/manual-clip-3.jpg', video: '/va/work/podcast/manual-clip-3.mp4', label: 'Manual Curated Clip 3', tall: true },
-      { image: '/va/work/podcast/manual-clip-4.jpg', video: '/va/work/podcast/manual-clip-4.mp4', label: 'Manual Curated Clip 4', tall: true },
-      { image: '/va/work/podcast/thumbnail.jpg', label: 'Thumbnail' },
+      { image: '/va/work/podcast/episode-15-min.webp', video: '/va/work/podcast/episode-15-min.mp4', label: '15 Min Episode (first minute)' },
+      { image: '/va/work/podcast/intro.webp', video: '/va/work/podcast/intro.mp4', label: 'Intro' },
+      { image: '/va/work/podcast/outro.webp', video: '/va/work/podcast/outro.mp4', label: 'Outro' },
+      { image: '/va/work/podcast/intro-teaser.webp', video: '/va/work/podcast/intro-teaser.mp4', label: 'Intro Teaser Clip' },
+      { image: '/va/work/podcast/ai-clip-1.webp', video: '/va/work/podcast/ai-clip-1.mp4', label: 'AI Generated Clip', tall: true },
+      { image: '/va/work/podcast/ai-clip-2.webp', video: '/va/work/podcast/ai-clip-2.mp4', label: 'AI Generated Clip 2', tall: true },
+      { image: '/va/work/podcast/manual-clip-1.webp', video: '/va/work/podcast/manual-clip-1.mp4', label: 'Manual Curated Clip', tall: true },
+      { image: '/va/work/podcast/manual-clip-2.webp', video: '/va/work/podcast/manual-clip-2.mp4', label: 'Manual Curated Clip 2', tall: true },
+      { image: '/va/work/podcast/manual-clip-3.webp', video: '/va/work/podcast/manual-clip-3.mp4', label: 'Manual Curated Clip 3', tall: true },
+      { image: '/va/work/podcast/manual-clip-4.webp', video: '/va/work/podcast/manual-clip-4.mp4', label: 'Manual Curated Clip 4', tall: true },
+      { image: '/va/work/podcast/thumbnail.webp', label: 'Thumbnail' },
     ] as VAImage[],
   },
   management: {
     title: 'More than editing.',
     description: 'I help turn your podcast into content that gets seen.',
     items: [
-      { image: '/va/work/podcast/episode-details.jpg', label: 'Episode Details' },
-      { image: '/va/work/podcast/production-calendar.jpg', label: 'Production Calendar' },
-      { image: '/va/work/podcast/caption-bank.jpg', label: 'Caption Bank' },
-      { image: '/va/work/podcast/posting-calendar.jpg', label: 'Posting Calendar' },
-      { image: '/va/work/podcast/posting-strategy.jpg', label: 'Posting Strategy / Summary' },
+      { image: '/va/work/podcast/episode-details.webp', label: 'Episode Details' },
+      { image: '/va/work/podcast/production-calendar.webp', label: 'Production Calendar' },
+      { image: '/va/work/podcast/caption-bank.webp', label: 'Caption Bank' },
+      { image: '/va/work/podcast/posting-calendar.webp', label: 'Posting Calendar' },
+      { image: '/va/work/podcast/posting-strategy.webp', label: 'Posting Strategy / Summary' },
     ] as VAImage[],
   },
   cta: {

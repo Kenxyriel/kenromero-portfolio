@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowRight, ArrowUpRight, CalendarClock, Code2, FileText, Github, Linkedin, ShieldCheck } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CalendarClock, Code2, FileText, Github, Linkedin, Pause, Play, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import ContactForm from "../../components/ContactForm";
+import { imageProps } from "../../components/responsiveImage";
 import SiteHeader, { type NavItem } from "../../components/SiteHeader";
 import Timeline from "../../components/Timeline";
 import usePageMeta from "../../components/usePageMeta";
@@ -133,6 +134,7 @@ type Filter = "all" | "qa" | "dev";
 export default function QAHome() {
   usePageMeta(content.meta.title, content.meta.description);
   const [filter, setFilter] = useState<Filter>("all");
+  const [toolsPaused, setToolsPaused] = useState(false);
   const projects = content.projects.filter((project) => filter === "all" || project.type === filter);
 
   return (
@@ -182,13 +184,22 @@ export default function QAHome() {
 
             <div className="tx-hero-visual">
               <div className="tx-orbit" aria-hidden="true" />
-              <img className="tx-hero-photo" src="/ken-romero.webp" alt={profile.name} />
+              <img className="tx-hero-photo" {...imageProps("/ken-romero.webp", "(max-width: 760px) 80vw, 520px")} alt={profile.name} />
             </div>
           </div>
         </section>
 
         {/* TOOL MARQUEE */}
-        <section className="tx-marquee" aria-label="Tools">
+        <section className={`tx-marquee${toolsPaused ? " is-paused" : ""}`} aria-label="Tools">
+          {/* Moving content needs a pause control for keyboard and touch users (WCAG 2.2.2). */}
+          <button
+            className="tx-marquee-toggle"
+            type="button"
+            aria-label={toolsPaused ? "Play tools animation" : "Pause tools animation"}
+            onClick={() => setToolsPaused((paused) => !paused)}
+          >
+            {toolsPaused ? <Play size={14} aria-hidden="true" /> : <Pause size={14} aria-hidden="true" />}
+          </button>
           <div className="tx-marquee-track">
             {[...content.tools, ...content.tools].map((tool, index) => (
               <span className="tx-tool" key={`${tool.name}-${index}`} aria-hidden={index >= content.tools.length}>
@@ -203,7 +214,7 @@ export default function QAHome() {
         <section id="about" className="tx-section tx-light">
           <div className="container tx-about">
             <Reveal className="tx-about-photo">
-              <img src="/ken-romero-hero.webp" alt={`${profile.name}, casual portrait`} />
+              <img {...imageProps("/ken-romero-hero.webp", "(max-width: 760px) 80vw, 440px")} alt={`${profile.name}, casual portrait`} />
               <span className="tx-tag-float">QA mindset · developer hands</span>
             </Reveal>
             <Reveal className="tx-about-copy" delay={120}>
@@ -296,7 +307,7 @@ export default function QAHome() {
                     <div className={`tx-project-visual tx-project-${project.visual}`}>
                       {project.visual === "tests" && <TestWindow />}
                       {project.visual === "browser" && <BrowserMock />}
-                      {project.visual === "image" && <img src={project.image} alt={`${project.title} preview`} loading="lazy" />}
+                      {project.visual === "image" && <img {...imageProps(project.image)} alt={`${project.title} preview`} loading="lazy" />}
                       <div className="tx-project-stack">
                         <span className="tx-mono">Tech stack</span>
                         <ul>

@@ -81,6 +81,7 @@ export function VASmmPackages({ currency = 'usd' }: { currency?: 'usd' | 'php' }
       <section className="va-section va-section-tight">
         <div className="container">
           <p className="va-currency-note">{currencyLabel[currency]}</p>
+          <h2 className="sr-only">Packages</h2>
           <div className="va-packages">
             {packages.map((pkg) => (
               <PackageCard key={pkg.name} pkg={{ ...pkg, bestFor: pkg.tagline, intro: `Best for: ${pkg.bestFor}` }} />

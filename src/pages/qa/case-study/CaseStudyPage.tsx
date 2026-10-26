@@ -2,6 +2,7 @@ import { useEffect, useState, type ReactNode } from 'react'
 import { ArrowLeft, ArrowRight, FileText } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import LegalLinks from '../../../components/LegalLinks'
+import { imageProps } from '../../../components/responsiveImage'
 import SiteHeader, { type NavItem } from '../../../components/SiteHeader'
 import usePageMeta from '../../../components/usePageMeta'
 import '@fontsource/space-grotesk/500.css'
@@ -93,7 +94,7 @@ export default function CaseStudyPage({
         cta={{ label: "Let's Connect", href: '/qa#contact' }}
       />
 
-      <main>
+      <main id="top">
         <section className="cs-hero">
           <div className="container cs-hero-grid">
             <div>
@@ -119,7 +120,7 @@ export default function CaseStudyPage({
                 <span />
                 <span />
               </div>
-              <img src={heroImage.src} alt={heroImage.alt} />
+              <img {...imageProps(heroImage.src)} alt={heroImage.alt} />
             </figure>
           </div>
 

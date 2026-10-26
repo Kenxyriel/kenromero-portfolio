@@ -6,8 +6,6 @@ import App from './App'
 // Self-hosted fonts shared by every page: no request to Google servers.
 import '@fontsource-variable/inter/wght.css'
 import '@fontsource-variable/jetbrains-mono/wght.css'
-import '@fontsource/dm-serif-display/400.css'
-import '@fontsource/dm-serif-display/400-italic.css'
 import './styles.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

@@ -13,6 +13,7 @@ import {
 import { useEffect, useRef, useState, type RefObject } from 'react'
 import { Link } from 'react-router-dom'
 import ContactForm from '../../components/ContactForm'
+import { imageProps } from '../../components/responsiveImage'
 import Timeline from '../../components/Timeline'
 import { bookingLink, profile } from '../../data/profile'
 import { vaHome as content, vaOnboarding, vaTestimonials } from '../../data/va'
@@ -96,7 +97,7 @@ function WorkCover({ kind }: { kind: 'design' | 'podcast' | 'social' }) {
       <div className="vx-cover va-cover-design">
         <div className="va-cover-fan">
           {previews.design.map((item) => (
-            <img key={item.image} src={item.image} alt={item.label} loading="lazy" />
+            <img key={item.image} {...imageProps(item.image, '200px')} alt={item.label} loading="lazy" />
           ))}
         </div>
         <span className="va-cover-label">CLIENT GRAPHICS</span>
@@ -118,7 +119,7 @@ function WorkCover({ kind }: { kind: 'design' | 'podcast' | 'social' }) {
     <div className="vx-cover va-cover-social">
       <div className="va-cover-phones">
         {previews.social.map((item) => (
-          <img key={item.image} src={item.image} alt={item.label} loading="lazy" />
+          <img key={item.image} {...imageProps(item.image, '200px')} alt={item.label} loading="lazy" />
         ))}
       </div>
       <span className="va-cover-label">LIVE POSTS</span>
@@ -161,7 +162,7 @@ export default function VAHome() {
 
           <div className="vx-hero-art">
             <div className="vx-hero-block" />
-            <img className="vx-hero-photo" src="/ken-romero.webp" alt={profile.name} />
+            <img className="vx-hero-photo" {...imageProps('/ken-romero.webp', '(max-width: 760px) 80vw, 520px')} alt={profile.name} />
             <RotatingBadge className="vx-hero-badge" text="PLAN • CREATE • PUBLISH • OPTIMIZE • " />
             <Waveform className="vx-hero-wave" />
             <DotGrid className="vx-hero-dots" />
@@ -173,7 +174,7 @@ export default function VAHome() {
       {/* ABOUT */}
       <section id="about" className="vx-about">
         <div className="vx-about-photo">
-          <img src="/ken-romero-hero.webp" alt={`${profile.name}, casual portrait`} />
+          <img {...imageProps('/ken-romero-hero.webp', '(max-width: 760px) 80vw, 440px')} alt={`${profile.name}, casual portrait`} />
           <Mic className="vx-about-mic" />
         </div>
         <div className="vx-about-copy">
@@ -224,7 +225,7 @@ export default function VAHome() {
             {content.services.items.map((service) => (
               <article className="vx-svc" key={service.title}>
                 <div className="vx-svc-art">
-                  <img src={service.image} alt="" loading="lazy" />
+                  <img {...imageProps(service.image, '260px')} alt="" loading="lazy" />
                 </div>
                 <h3>{service.title}</h3>
                 <p className="vx-svc-tag">{service.tagline}</p>

@@ -1,9 +1,17 @@
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useState, type MouseEvent, type ReactNode } from 'react'
 import { Menu, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import LogoMark from './LogoMark'
 
 export type NavItem = { label: string; href: string }
+
+function skipToMain(event: MouseEvent<HTMLAnchorElement>) {
+  const main = document.querySelector('main')
+  if (!main) return
+  event.preventDefault()
+  main.setAttribute('tabindex', '-1')
+  main.focus()
+}
 
 type SiteHeaderProps = {
   brandRole: string
@@ -54,6 +62,10 @@ export default function SiteHeader({ brandRole, navItems, cta, brandHref = '#top
 
   return (
     <header className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
+      {/* Keyboard users can jump past the navigation straight to the page content. */}
+      <a className="skip-link" href="#top" onClick={skipToMain}>
+        Skip to content
+      </a>
       <div className="container nav-inner">
         <NavLink className="brand" href={brandHref} onClick={closeMenu}>
           <LogoMark />
