@@ -268,7 +268,8 @@ export function Gallery({
   layout = 'wide',
 }: {
   items: { src: string; alt: string; caption: string }[]
-  layout?: 'wide' | 'phones'
+  /** paired: desktop and phone shots alternate, each phone beside a desktop shot. */
+  layout?: 'wide' | 'phones' | 'paired'
 }) {
   return (
     <div className={`cs-gallery cs-gallery-${layout}`}>

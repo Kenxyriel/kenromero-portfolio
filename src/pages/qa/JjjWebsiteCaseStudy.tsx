@@ -108,16 +108,12 @@ export default function JjjWebsiteCaseStudy() {
         </Block>
         <Block title="Screens" note="From the local build, before the firm's domain is connected.">
           <Gallery
+            layout="paired"
             items={[
               { src: '/projects/jjj-website/services.webp', alt: 'Services page listing tax services and accounting and assurance', caption: 'Services overview, grouped into clear service areas.' },
-              { src: '/projects/jjj-website/contact.webp', alt: 'Contact page with an inquiry form', caption: 'Contact page with a short, guided inquiry form.' },
-            ]}
-          />
-          <Gallery
-            layout="phones"
-            items={[
-              { src: '/projects/jjj-website/mobile-home.webp', alt: 'Home page on a phone', caption: 'Home on a phone.' },
               { src: '/projects/jjj-website/mobile-services.webp', alt: 'Services page on a phone', caption: 'Services on a phone.' },
+              { src: '/projects/jjj-website/contact.webp', alt: 'Contact page with an inquiry form', caption: 'Contact page with a short, guided inquiry form.' },
+              { src: '/projects/jjj-website/mobile-home.webp', alt: 'Home page on a phone', caption: 'Home on a phone.' },
             ]}
           />
         </Block>

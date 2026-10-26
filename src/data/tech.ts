@@ -94,8 +94,8 @@ export const techContent = {
       link: { label: 'Read case study', to: '/qa/projects/api-testing' },
     },
     {
-      type: 'qa' as const,
-      category: 'Full-stack / Test Automation',
+      type: 'dev' as const,
+      category: 'Full-stack Development',
       title: 'SalinLibro-CMS Client Management',
       status: 'Paused',
       description:

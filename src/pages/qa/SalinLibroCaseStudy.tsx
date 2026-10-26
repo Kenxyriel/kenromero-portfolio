@@ -48,7 +48,7 @@ const e2eRuns = [
 export default function SalinLibroCaseStudy() {
   return (
     <CaseStudyPage
-      kicker="// project · full-stack + test automation"
+      kicker="// project · full-stack development"
       status="Paused"
       title="SalinLibro-CMS Client Management"
       system="Client management system for accounting firms"
