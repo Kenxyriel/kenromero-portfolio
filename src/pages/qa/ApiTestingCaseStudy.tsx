@@ -1,44 +1,73 @@
 import {
   Activity,
-  ArrowRight,
   Braces,
   Bug,
   CheckCircle2,
   CircleSlash,
   ClipboardCheck,
   Database,
-  Eye,
   FileText,
   GitBranch,
-  Layers,
   Monitor,
-  Plus,
   RefreshCw,
-  Search,
-  ShieldCheck,
-  Trash2,
-  UserRound,
-  X,
 } from 'lucide-react'
-import CaseStudyLayout from '../../components/CaseStudyLayout'
+import CaseStudyPage from './case-study/CaseStudyPage'
+import {
+  Block,
+  BugReport,
+  Callout,
+  Chapter,
+  Checklist,
+  DataTable,
+  DefectCard,
+  IconCards,
+  Id,
+  Method,
+  Pass,
+  Steps,
+} from './case-study/blocks'
+
+const chapters = [
+  { id: 'context', label: 'The system' },
+  { id: 'plan', label: 'Scope and strategy' },
+  { id: 'execution', label: 'Test coverage' },
+  { id: 'defects', label: 'Defects found' },
+  { id: 'verification', label: 'Retest and regression' },
+  { id: 'outcome', label: 'Outcome' },
+]
+
+const methods = [
+  ['GET', 'Retrieve product information'],
+  ['POST', 'Add new products'],
+  ['PUT', 'Update existing products'],
+  ['DELETE', 'Delete products'],
+]
 
 const objectives = [
-  ['API FUNCTIONALITY', 'Verify GET, POST, PUT, and DELETE operations.', ClipboardCheck],
-  ['DATA ACCURACY', 'Validate request payloads and returned product data.', Database],
-  ['RESPONSE VALIDATION', 'Verify status codes and response content.', Braces],
-  ['UI CONSISTENCY', 'Confirm API changes are reflected in the POS application.', Monitor],
-  ['REGRESSION', 'Ensure existing workflows remain unaffected.', RefreshCw],
-] as const
+  'API functionality: GET, POST, PUT, and DELETE operations',
+  'Data accuracy: request payloads and returned product data',
+  'Response validation: status codes and response content',
+  'UI consistency: API changes reflected in the POS application',
+  'Regression: existing workflows remain unaffected',
+]
 
 const contributions = [
-  ['API TESTING', 'Executed GET, POST, PUT, and DELETE requests using Postman.', Braces],
-  ['REQUEST VALIDATION', 'Validated request bodies, headers, and payloads.', ClipboardCheck],
-  ['RESPONSE VALIDATION', 'Checked status codes, response bodies, and product data.', CheckCircle2],
-  ['NEGATIVE TESTING', 'Tested invalid requests and unexpected inputs.', CircleSlash],
-  ['API / UI VALIDATION', 'Compared API results with product behavior in the POS UI.', Monitor],
-  ['DEFECT MANAGEMENT', 'Logged, retested, and collaborated with developers on defects.', Bug],
-  ['REGRESSION TESTING', 'Validated related product workflows after changes and fixes.', RefreshCw],
-] as const
+  { title: 'API testing', text: 'Executed GET, POST, PUT, and DELETE requests using Postman.', icon: Braces },
+  { title: 'Request validation', text: 'Validated request bodies, headers, and payloads.', icon: ClipboardCheck },
+  { title: 'Response validation', text: 'Checked status codes, response bodies, and product data.', icon: CheckCircle2 },
+  { title: 'Negative testing', text: 'Tested invalid requests and unexpected inputs.', icon: CircleSlash },
+  { title: 'API / UI validation', text: 'Compared API results with product behavior in the POS UI.', icon: Monitor },
+  { title: 'Defect management', text: 'Logged, retested, and collaborated with developers on defects.', icon: Bug },
+  { title: 'Regression testing', text: 'Validated related product workflows after changes and fixes.', icon: RefreshCw },
+]
+
+const strategy = [
+  { title: 'Functional', text: 'Validated that each endpoint performed its intended operation.', icon: CheckCircle2 },
+  { title: 'Negative', text: 'Tested invalid inputs and unsuccessful request scenarios.', icon: CircleSlash },
+  { title: 'Data validation', text: 'Verified product information against expected values.', icon: Database },
+  { title: 'Regression', text: 'Ensured API changes did not break existing product workflows.', icon: RefreshCw },
+  { title: 'API / UI consistency', text: 'Confirmed API results were reflected correctly in the POS UI.', icon: Monitor },
+]
 
 const testCases = [
   ['API-001', 'GET', 'Retrieve products', 'Product list returned'],
@@ -52,14 +81,14 @@ const testCases = [
   ['API-009', 'DELETE', 'Delete and verify UI', 'Product no longer appears'],
 ]
 
-const retestCases = [
+const retests = [
   ['RT-API-001', 'Update existing product', 'Existing product updated'],
   ['RT-API-002', 'Retrieve updated product', 'Updated data returned'],
   ['RT-API-003', 'Verify product in UI', 'Updated product displayed'],
   ['RT-API-004', 'Check duplicate record', 'No duplicate created'],
 ]
 
-const regressionCases = [
+const regression = [
   ['REG-API-001', 'Retrieve products', 'Product list loads'],
   ['REG-API-002', 'Add product', 'Product created'],
   ['REG-API-003', 'Update product', 'Existing product updated'],
@@ -69,270 +98,210 @@ const regressionCases = [
 ]
 
 const lifecycle = [
-  'TEST',
-  'DEFECT IDENTIFIED',
-  'AZURE DEVOPS',
-  'DEVELOPER INVESTIGATION',
-  'FIX IMPLEMENTED',
-  'RETEST',
-  'REGRESSION',
-  'RELEASE VALIDATION',
+  'Test',
+  'Defect identified',
+  'Azure DevOps',
+  'Developer investigation',
+  'Fix implemented',
+  'Retest',
+  'Regression',
+  'Release validation',
 ]
 
-const strategies = [
-  ['FUNCTIONAL', 'Validated that each endpoint performed its intended operation.', CheckCircle2],
-  ['NEGATIVE', 'Tested invalid inputs and unsuccessful request scenarios.', CircleSlash],
-  ['DATA VALIDATION', 'Verified product information against expected values.', Database],
-  ['REGRESSION', 'Ensured API changes did not break existing product workflows.', RefreshCw],
-  ['API / UI CONSISTENCY', 'Confirmed API results were reflected correctly in the POS UI.', Monitor],
-] as const
-
-function DataTable({
-  headers,
-  rows,
-  className = '',
-}: {
-  headers: string[]
-  rows: string[][]
-  className?: string
-}) {
-  return (
-    <div className="api-table-scroll">
-      <table className={`api-data-table ${className}`}>
-        <thead><tr>{headers.map((header) => <th key={header}>{header}</th>)}</tr></thead>
-        <tbody>
-          {rows.map((row) => (
-            <tr key={row[0]}>
-              {row.map((cell, index) => <td key={`${row[0]}-${index}`}>{cell}</td>)}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )
-}
+const demonstrates = [
+  { title: 'REST API testing', text: 'Validated product APIs using Postman.', icon: Braces },
+  { title: 'HTTP methods', text: 'GET · POST · PUT · DELETE', icon: GitBranch },
+  { title: 'Validation', text: 'Request, response, status codes, and data.', icon: CheckCircle2 },
+  { title: 'Negative testing', text: 'Invalid inputs and error handling.', icon: CircleSlash },
+  { title: 'API / UI consistency', text: 'Verified API results in the POS UI.', icon: Monitor },
+  { title: 'Defect lifecycle', text: 'Found defects, worked with Dev, retested.', icon: Bug },
+  { title: 'Regression', text: 'Ensured no impact to existing workflows.', icon: RefreshCw },
+]
 
 export default function ApiTestingCaseStudy() {
   return (
-    <CaseStudyLayout
-      category="QA CASE STUDY"
+    <CaseStudyPage
+      kicker="// case study 02 · API testing"
       title="API Testing and Validation"
-      subtitle="CASHLESS POINT OF SALE SYSTEM"
-      lead="An anonymized QA case study demonstrating API testing using Postman."
+      system="Cashless point of sale system"
+      lead="An anonymized case study of testing product APIs in Postman and checking that every change showed up correctly in the POS app."
+      tags={['API testing', 'GET · POST · PUT · DELETE', 'Postman', 'Azure DevOps']}
       heroImage={{
         src: '/case-study-preview/case-study-two.webp',
-        alt: 'API testing and validation case study preview',
+        alt: 'Diagram of a POS terminal and laptop calling an authentication API',
       }}
-      tags={['API Testing', 'GET · POST · PUT · DELETE', 'Postman', 'Azure DevOps']}
+      stats={[
+        { value: '9', label: 'API test cases' },
+        { value: '2', label: 'High-severity defects' },
+        { value: '4/4', label: 'Retests passed' },
+        { value: '6/6', label: 'Regression checks passed' },
+      ]}
+      summary={{
+        problem:
+          'A cashless POS system manages its products through REST APIs. Each API call had to do the right thing and the POS screen had to show the same data.',
+        role: 'QA Analyst: tested requests and responses in Postman, compared results with the POS UI, and logged, retested, and regression tested defects.',
+        approach: 'Functional, negative, data validation, regression, and API/UI consistency testing across GET, POST, PUT, and DELETE.',
+        result:
+          'Found 2 high-severity defects, including a PUT request that created duplicate products. After the fixes, all retests and regression checks passed.',
+      }}
+      chapters={chapters}
+      next={{ title: 'Authentication & Proactive Lockout Testing', to: '/qa/projects/authentication-testing' }}
     >
-      <div className="api-case-study-content">
-        <section className="section section-muted">
-          <div className="container api-overview-grid">
-            <article className="api-summary-panel">
-              <h2><FileText aria-hidden="true" /> PROJECT OVERVIEW</h2>
-              <p>The Cashless POS system manages product information through REST APIs that support core product-management operations.</p>
-              <h3>The API layer handles:</h3>
-              <ul className="api-method-list">
-                <li><strong className="method-get">GET</strong><span>Retrieve product information</span></li>
-                <li><strong className="method-post">POST</strong><span>Add new products</span></li>
-                <li><strong className="method-put">PUT</strong><span>Update existing products</span></li>
-                <li><strong className="method-delete">DELETE</strong><span>Delete products</span></li>
-              </ul>
-              <p>As a QA Analyst, I used Postman to validate requests and responses, including status codes, headers, authentication, request data, and returned product information. I also compared API results with the POS UI to verify backend operations were reflected correctly.</p>
-            </article>
+      <Chapter
+        id="context"
+        number="01"
+        title="The system"
+        intro="The Cashless POS system manages product information through REST APIs that support core product-management operations."
+      >
+        <div className="cs-grid-2">
+          <Block title="The API layer handles" icon={GitBranch}>
+            <ul className="cs-methods">
+              {methods.map(([method, text]) => (
+                <li key={method}>
+                  <Method name={method} />
+                  <span>{text}</span>
+                </li>
+              ))}
+            </ul>
+          </Block>
+          <Block
+            title="QA objective"
+            icon={Activity}
+            note="Validate that product APIs process requests correctly, return the expected responses, and keep data consistent between the API and the app."
+          >
+            <Checklist columns={1} items={objectives} />
+          </Block>
+        </div>
+      </Chapter>
 
-            <article className="api-summary-panel">
-              <h2 className="api-accent-heading"><Activity aria-hidden="true" /> QA OBJECTIVE</h2>
-              <p>Validate that product-related APIs correctly process requests, return expected responses, and maintain data consistency between the API and application UI.</p>
-              <ul className="api-check-list">
-                {objectives.map(([title, description, Icon]) => (
-                  <li key={title}>
-                    <CheckCircle2 aria-hidden="true" />
-                    <div><strong>{title}</strong><span>{description}</span></div>
-                  </li>
-                ))}
-              </ul>
-            </article>
+      <Chapter
+        id="plan"
+        number="02"
+        title="Scope and strategy"
+        intro="I used Postman to validate requests and responses, including status codes, headers, authentication, request data, and returned product information, then checked the result in the POS UI."
+      >
+        <Block title="From request to screen">
+          <Steps
+            steps={[
+              { label: 'Request', detail: 'Send API request', icon: Braces },
+              { label: 'API process', detail: 'Process request', icon: Activity },
+              { label: 'Response', detail: 'Status code and response body', icon: FileText },
+              { label: 'Data validation', detail: 'Validate product data', icon: Database },
+              { label: 'UI validation', detail: 'Verify in POS UI', icon: Monitor },
+            ]}
+          />
+        </Block>
+        <Block title="What I did">
+          <IconCards items={contributions} />
+        </Block>
+        <Block title="Test strategy" note="A combination of test approaches was used to ensure quality.">
+          <IconCards items={strategy} />
+        </Block>
+      </Chapter>
 
-            <article className="api-summary-panel api-contributions-panel">
-              <h2 className="api-accent-heading"><UserRound aria-hidden="true" /> MY QA CONTRIBUTIONS</h2>
-              <ul className="api-contribution-list">
-                {contributions.map(([title, description, Icon]) => (
-                  <li key={title}>
-                    <Icon aria-hidden="true" />
-                    <div><strong>{title}</strong><span>{description}</span></div>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </div>
-        </section>
+      <Chapter
+        id="execution"
+        number="03"
+        title="Test coverage"
+        intro="Nine cases covered every method, including invalid data and checking the result in the UI."
+      >
+        <Block title="Sample API test coverage">
+          <DataTable
+            caption="API test coverage"
+            columns={['ID', 'Method', 'Scenario', 'Expected result']}
+            rows={testCases.map(([id, method, scenario, expected]) => [<Id>{id}</Id>, <Method name={method} />, scenario, expected])}
+          />
+        </Block>
+      </Chapter>
 
-        <section className="section">
-          <div className="container api-two-column">
-            <article className="api-panel api-scope-panel">
-              <h2><GitBranch aria-hidden="true" /> API TEST SCOPE</h2>
-              <div className="api-method-flow">
-                {[
-                  ['GET', 'Retrieve products', Search],
-                  ['POST', 'Add product', Plus],
-                  ['PUT', 'Update product', RefreshCw],
-                  ['DELETE', 'Delete product', Trash2],
-                ].map(([method, label, Icon]) => {
-                  const MethodIcon = Icon as typeof Search
-                  return <div className={`api-method-step method-${String(method).toLowerCase()}`} key={String(method)}><strong>{String(method)}</strong><MethodIcon aria-hidden="true" /><span>{String(label)}</span></div>
-                })}
-              </div>
-              <div className="api-process-flow">
-                {[
-                  ['REQUEST', 'Send API request', Braces],
-                  ['API PROCESS', 'Process request', Activity],
-                  ['RESPONSE', 'Status code and response body', FileText],
-                  ['DATA VALIDATION', 'Validate product data', Database],
-                  ['UI VALIDATION', 'Verify in POS UI', Monitor],
-                ].map(([title, description, Icon], index) => {
-                  const StepIcon = Icon as typeof Braces
-                  return <div className="api-process-step" key={String(title)}><span className="api-process-icon"><StepIcon aria-hidden="true" /></span><strong>{String(title)}</strong><small>{String(description)}</small>{index < 4 && <ArrowRight className="api-process-arrow" aria-hidden="true" />}</div>
-                })}
-              </div>
-            </article>
+      <Chapter
+        id="defects"
+        number="04"
+        title="Defects found"
+        intro="Both defects passed at the API level but broke the business result, which is why I always checked the UI too."
+      >
+        <div className="cs-grid-2">
+          <DefectCard
+            defect={{
+              id: 'Defect 01',
+              title: 'Product not displayed correctly',
+              summary: 'After successful product creation, the product did not appear in the POS application.',
+              expected: 'Product information is correctly displayed in the POS UI.',
+              actual: 'The product was not shown as expected.',
+              impact: 'Product information could become inconsistent between the API and application UI.',
+            }}
+          />
+          <DefectCard
+            defect={{
+              id: 'Defect 02',
+              title: 'PUT created a new product instead of updating',
+              summary:
+                'When updating an existing product using a PUT request, the system created a new product instead of updating the existing one.',
+              expected: 'The existing product is updated with the submitted values.',
+              actual: 'A new product was created instead of updating the existing product.',
+              impact: 'Duplicate products and inconsistent product information could result.',
+            }}
+          />
+        </div>
+        <Callout title="QA actions">
+          Reproduce the issue, validate the API response, verify the POS UI, and discuss findings with the team.
+        </Callout>
+        <BugReport
+          id="BUG-001"
+          title="PUT request creates a new product instead of updating the existing product"
+          steps={['Select the PUT endpoint.', 'Send a request with a product ID.', 'Verify the API response.', 'Verify the product in the POS UI.']}
+          expected="The existing product is updated with the submitted information."
+          actual="A new product is created instead of updating the existing product."
+          acceptance="The PUT request updates the existing product, creates no duplicate, and displays updated information in the POS UI."
+        />
+        <Block title="Defect lifecycle" note="From detection to release validation.">
+          <Steps steps={lifecycle.map((label) => ({ label }))} />
+          <Callout>
+            A defect was not complete after the initial fix. The affected scenario was retested, followed by regression
+            testing of related functionality.
+          </Callout>
+        </Block>
+      </Chapter>
 
-            <article className="api-panel api-strategy-panel">
-              <h2 className="api-accent-heading"><ShieldCheck aria-hidden="true" /> TEST STRATEGY</h2>
-              <p>A combination of test approaches was used to ensure quality.</p>
-              <div className="api-strategy-grid">
-                {strategies.map(([title, description, Icon]) => (
-                  <div className="api-strategy-card" key={title}>
-                    <Icon aria-hidden="true" />
-                    <strong>{title}</strong>
-                    <span>{description}</span>
-                  </div>
-                ))}
-              </div>
-            </article>
-          </div>
-        </section>
+      <Chapter
+        id="verification"
+        number="05"
+        title="Retest and regression"
+        intro="Retests confirmed the PUT fix; regression confirmed the rest of the product workflow still worked."
+      >
+        <div className="cs-grid-2">
+          <Block title="Sample retest task" note="Verify the reported product-update defect was resolved.">
+            <DataTable
+              caption="Retest results"
+              columns={['ID', 'Retest', 'Expected result', 'Result']}
+              rows={retests.map(([id, test, expected]) => [<Id>{id}</Id>, test, expected, <Pass />])}
+            />
+            <Callout tone="pass" title="Retest result">
+              The PUT request correctly updated the existing product without creating a duplicate record.
+            </Callout>
+          </Block>
+          <Block title="Sample regression" note="Verify the API changes did not affect existing functionality.">
+            <DataTable
+              caption="Regression results"
+              columns={['ID', 'Regression test', 'Expected result', 'Result']}
+              rows={regression.map(([id, test, expected]) => [<Id>{id}</Id>, test, expected, <Pass />])}
+            />
+            <Callout tone="pass" title="Regression result">
+              The updated product APIs kept supporting expected operations without breaking related workflows.
+            </Callout>
+          </Block>
+        </div>
+      </Chapter>
 
-        <section className="section section-muted">
-          <div className="container api-two-column">
-            <article className="api-panel">
-              <h2><ClipboardCheck aria-hidden="true" /> SAMPLE API TEST COVERAGE</h2>
-              <DataTable
-                className="api-coverage-table"
-                headers={['ID', 'Method', 'Scenario', 'Expected Result']}
-                rows={testCases}
-              />
-            </article>
-
-            <article className="api-panel">
-              <h2 className="api-defect-heading"><Bug aria-hidden="true" /> TOP DEFECTS IDENTIFIED</h2>
-              <div className="api-defect-grid">
-                <div className="api-defect-card">
-                  <span className="api-defect-id">DEFECT 01</span>
-                  <h3>Product Not Displayed Correctly</h3>
-                  <div className="api-defect-meta"><span>Severity: High</span><span>Priority: High</span></div>
-                  <p>After successful product creation, the product did not appear in the POS application.</p>
-                  <strong>EXPECTED</strong><p>Product information is correctly displayed in the POS UI.</p>
-                  <strong>ACTUAL</strong><p>The product was not shown as expected.</p>
-                  <strong>IMPACT</strong><p>Product information could become inconsistent between the API and application UI.</p>
-                </div>
-                <div className="api-defect-card">
-                  <span className="api-defect-id">DEFECT 02</span>
-                  <h3>PUT Created a New Product Instead of Updating</h3>
-                  <div className="api-defect-meta"><span>Severity: High</span><span>Priority: High</span></div>
-                  <p>When updating an existing product using a PUT request, the system created a new product instead of updating the existing one.</p>
-                  <strong>EXPECTED</strong><p>The existing product is updated with the submitted values.</p>
-                  <strong>ACTUAL</strong><p>A new product was created instead of updating the existing product.</p>
-                  <strong>IMPACT</strong><p>Duplicate products and inconsistent product information could result.</p>
-                </div>
-              </div>
-              <div className="api-defect-actions"><strong>QA ACTIONS</strong><span>Reproduce the issue, validate the API response, verify the POS UI, and discuss findings with the team.</span></div>
-            </article>
-          </div>
-        </section>
-
-        <section className="section">
-          <div className="container api-two-column">
-            <article className="api-panel">
-              <h2><RefreshCw aria-hidden="true" /> DEFECT LIFECYCLE</h2>
-              <p>From detection to release validation.</p>
-              <div className="api-lifecycle">
-                {lifecycle.map((step, index) => (
-                  <div className="api-lifecycle-step" key={step}>
-                    <span>{String(index + 1).padStart(2, '0')}</span>
-                    <strong>{step}</strong>
-                    {index < lifecycle.length - 1 && <ArrowRight aria-hidden="true" />}
-                  </div>
-                ))}
-              </div>
-              <div className="api-insight-callout"><ShieldCheck aria-hidden="true" /><span>A defect was not complete after the initial fix. The affected scenario was retested, followed by regression testing of related functionality.</span></div>
-            </article>
-
-            <article className="api-panel">
-              <h2><FileText aria-hidden="true" /> SAMPLE BUG REPORT <span>(AZURE DEVOPS TICKET)</span></h2>
-              <div className="api-bug-report">
-                <div className="api-bug-title"><strong>BUG-001</strong><span>PUT request creates a new product instead of updating existing product</span></div>
-                <div className="api-bug-meta"><span>Severity: High</span><span>Priority: High</span><span>Environment: UAT</span><span>Initial Test: Failed</span><span>Retest: Passed</span><span>Status: Resolved</span></div>
-                <div className="api-bug-grid">
-                  <div><strong>REPRODUCTION STEPS</strong><ol><li>Select the PUT endpoint.</li><li>Send a request with a product ID.</li><li>Verify the API response.</li><li>Verify the product in the POS UI.</li></ol></div>
-                  <div><strong>EXPECTED RESULTS</strong><p>The existing product is updated with the submitted information.</p><strong>ACTUAL RESULTS</strong><p>A new product is created instead of updating the existing product.</p></div>
-                  <div><strong>ACCEPTANCE CRITERIA</strong><p>The PUT request updates the existing product, creates no duplicate, and displays updated information in the POS UI.</p></div>
-                </div>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <section className="section section-muted">
-          <div className="container api-two-column">
-            <article className="api-panel">
-              <h2><CheckCircle2 aria-hidden="true" /> SAMPLE RETEST TASK</h2>
-              <p className="api-panel-intro">Verify that the reported product-update defect was resolved.</p>
-              <DataTable
-                className="api-result-table"
-                headers={['ID', 'Retest', 'Expected Result', 'Result']}
-                rows={retestCases.map((row) => [...row, '✓ Pass'])}
-              />
-              <div className="api-result-callout"><strong>RETEST RESULT</strong><span>The PUT request correctly updated the existing product without creating a duplicate record.</span></div>
-            </article>
-
-            <article className="api-panel">
-              <h2><RefreshCw aria-hidden="true" /> SAMPLE REGRESSION</h2>
-              <p className="api-panel-intro">Verify that the API changes did not affect existing functionality.</p>
-              <DataTable
-                className="api-result-table"
-                headers={['ID', 'Regression Test', 'Expected Result', 'Result']}
-                rows={regressionCases.map((row) => [...row, '✓ Pass'])}
-              />
-              <div className="api-result-callout"><strong>REGRESSION RESULT</strong><span>The updated product APIs continued to support expected operations without breaking related workflows.</span></div>
-            </article>
-          </div>
-        </section>
-
-        <section className="section">
-          <div className="container api-demonstrates-panel">
-            <h2>WHAT THIS CASE STUDY DEMONSTRATES</h2>
-            <div className="api-demonstrates-grid">
-              {[
-                ['REST API TESTING', 'Validated product APIs using Postman.', Braces],
-                ['HTTP METHODS', 'GET · POST · PUT · DELETE', GitBranch],
-                ['VALIDATION', 'Request, response, status codes, and data.', CheckCircle2],
-                ['NEGATIVE TESTING', 'Invalid inputs and error handling.', CircleSlash],
-                ['API / UI CONSISTENCY', 'Verified API results in the POS UI.', Monitor],
-                ['DEFECT LIFECYCLE', 'Found defects, worked with Dev, retested.', Bug],
-                ['REGRESSION', 'Ensured no impact to existing workflows.', RefreshCw],
-              ].map(([title, description, Icon]) => {
-                const DemonstrationIcon = Icon as typeof Braces
-                return <div className="api-demonstrates-card" key={String(title)}><DemonstrationIcon aria-hidden="true" /><strong>{String(title)}</strong><span>{String(description)}</span></div>
-              })}
-            </div>
-            <div className="api-key-insight">
-              <div><Activity aria-hidden="true" /><strong>KEY QA INSIGHT</strong><p>A successful API response does not always mean the business operation succeeded. Validate the actual outcome and data consistency in the application.</p></div>
-              <a href="/documents/case-study-one.pdf" target="_blank" rel="noreferrer"><FileText aria-hidden="true" /><span><strong>QA ARTIFACT</strong><small>View Full Case Study in PDF</small></span><ArrowRight aria-hidden="true" /></a>
-            </div>
-          </div>
-        </section>
-      </div>
-    </CaseStudyLayout>
+      <Chapter id="outcome" number="06" title="Outcome">
+        <Callout title="Key QA insight">
+          A successful API response does not always mean the business operation succeeded. Validate the actual outcome
+          and data consistency in the application.
+        </Callout>
+        <Block title="What this case study demonstrates">
+          <IconCards items={demonstrates} />
+        </Block>
+      </Chapter>
+    </CaseStudyPage>
   )
 }
