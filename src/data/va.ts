@@ -11,7 +11,8 @@
  * vertical (9:16) sample such as a short-form clip. `brand` names the client
  * a sample was made for (shown in the animated food showcase).
  */
-export type VAImage = { image?: string; video?: string; label: string; tall?: boolean; brand?: string }
+// `captions` is a WebVTT file for a video with speech or sound worth describing.
+export type VAImage = { image?: string; video?: string; captions?: string; label: string; tall?: boolean; brand?: string }
 
 export const vaLinks = {
   instagram: { label: '@heyitskhenn', href: 'https://www.instagram.com/heyitskhenn/' },
@@ -458,9 +459,9 @@ export const podcastEditing = {
       body: 'Every episode and clip here is client property, shown only as featured work from projects I edited. Please don\u2019t download, repost or reuse them.',
     },
     items: [
-      { image: '/va/work/podcast/episode-15-min.webp', video: '/va/work/podcast/episode-15-min.mp4', label: '15 Min Episode (first minute)' },
-      { image: '/va/work/podcast/intro.webp', video: '/va/work/podcast/intro.mp4', label: 'Intro' },
-      { image: '/va/work/podcast/outro.webp', video: '/va/work/podcast/outro.mp4', label: 'Outro' },
+      { image: '/va/work/podcast/episode-15-min.webp', video: '/va/work/podcast/episode-15-min.mp4', captions: '/va/work/podcast/episode-15-min.vtt', label: '15 Min Episode (first minute)' },
+      { image: '/va/work/podcast/intro.webp', video: '/va/work/podcast/intro.mp4', captions: '/va/work/podcast/intro.vtt', label: 'Intro' },
+      { image: '/va/work/podcast/outro.webp', video: '/va/work/podcast/outro.mp4', captions: '/va/work/podcast/outro.vtt', label: 'Outro' },
       { image: '/va/work/podcast/intro-teaser.webp', video: '/va/work/podcast/intro-teaser.mp4', label: 'Intro Teaser Clip' },
       { image: '/va/work/podcast/ai-clip-1.webp', video: '/va/work/podcast/ai-clip-1.mp4', label: 'AI Generated Clip', tall: true },
       { image: '/va/work/podcast/ai-clip-2.webp', video: '/va/work/podcast/ai-clip-2.mp4', label: 'AI Generated Clip 2', tall: true },
