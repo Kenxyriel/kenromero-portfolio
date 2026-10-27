@@ -11,7 +11,7 @@
  * vertical (9:16) sample such as a short-form clip. `brand` names the client
  * a sample was made for (shown in the animated food showcase).
  */
-export type VAImage = { image?: string; video?: string; label: string; tall?: boolean; brand?: string }
+export type VAImage = { image?: string; video?: string; label: string; tall?: boolean; brand?: string; long?: boolean }
 
 export const vaLinks = {
   instagram: { label: '@heyitskhenn', href: 'https://www.instagram.com/heyitskhenn/' },
@@ -304,7 +304,27 @@ export const designBranding = {
       detail: 'Stories • Thumbnails • Branded Content',
       galleries: [{ title: '', items: [1, 2, 3, 4].map((n) => ({ image: `/va/work/design/content-visual-${n}.webp`, label: `Content visual ${n}` })) }],
     },
-  ] as { title: string; detail: string; galleries: { title: string; items: VAImage[]; showcase?: boolean }[] }[],
+    {
+      title: 'Email Newsletters',
+      detail: 'Newsletters • Welcome Emails • Promos • Re-engagement',
+      galleries: [
+        {
+          title: '',
+          emails: true,
+          items: [
+            { image: '/va/work/design/email-jjj-newsletter.webp', brand: 'JJJ Tax and Accounting', label: 'Monthly newsletter' },
+            { image: '/va/work/design/email-jjj-promo.webp', brand: 'JJJ Tax and Accounting', label: 'Tax season promo' },
+            { image: '/va/work/design/email-kk-welcome.webp', brand: 'KK’s Skin Solutions', label: 'Welcome email' },
+            { image: '/va/work/design/email-kk-launch.webp', brand: 'KK’s Skin Solutions', label: 'Product launch' },
+            { image: '/va/work/design/email-kr-welcome.webp', brand: 'KR Husay', label: 'Welcome email' },
+            { image: '/va/work/design/email-kr-reengage.webp', brand: 'KR Husay', label: 'We miss you' },
+            { image: '/va/work/design/email-sf-welcome.webp', brand: 'SaiFit', label: 'Welcome email' },
+            { image: '/va/work/design/email-sf-cart.webp', brand: 'SaiFit', label: 'Abandoned cart' },
+          ].map((item) => ({ ...item, long: true })),
+        },
+      ],
+    },
+  ] as { title: string; detail: string; galleries: { title: string; items: VAImage[]; showcase?: boolean; emails?: boolean }[] }[],
   cta: {
     eyebrow: 'Your brand has the vision.',
     title: 'Let’s Make It Worth Remembering.',
