@@ -5,7 +5,7 @@ import LegalLinks from '../../components/LegalLinks'
 import { imageProps } from '../../components/responsiveImage'
 import SiteHeader, { type NavItem } from '../../components/SiteHeader'
 import usePageMeta from '../../components/usePageMeta'
-import { profile } from '../../data/profile'
+import { bookingLink, profile } from '../../data/profile'
 import { toolIcons, vaLinks, type ToolName, type VAImage } from '../../data/va'
 import { RotatingBadge, Sparkle, Squiggle } from './VAArt'
 // Self-hosted fonts: no request to Google servers, so no visitor data goes to a third party.
@@ -107,7 +107,7 @@ export default function VALayout({ meta, children, unlisted = false }: VALayoutP
         brandRole="CREATIVE PORTFOLIO"
         brandHref="/va"
         navItems={navItems}
-        cta={{ label: "Let's Work Together", href: '/va#contact' }}
+        cta={{ label: 'Book a Discovery Call', href: bookingLink.href }}
       />
       <LightboxContext.Provider value={setViewing}>
         <main id="top">{children}</main>
