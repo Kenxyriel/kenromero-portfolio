@@ -825,6 +825,29 @@
 .va-design-grid .va-img { border-radius: 14px; box-shadow: 0 14px 30px -18px rgba(21, 18, 17, .45); transition: transform 200ms ease, box-shadow 200ms ease; }
 .va-design-grid .va-img:hover { transform: translateY(-5px); box-shadow: 6px 8px 0 var(--va-ink); }
 
+/* Email newsletters: a window onto each long email that scrolls on hover. */
+.va-email-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(14px, 2vw, 24px); margin: 0; padding: 0; list-style: none; }
+.va-email-card { display: flex; flex-direction: column; gap: 12px; width: 100%; padding: 0; text-align: left; color: inherit; background: none; border: 0; cursor: zoom-in; }
+.va-email-window { position: relative; display: block; aspect-ratio: 3 / 4; overflow: hidden; background: white; border: 1px solid var(--va-line); border-radius: 14px; box-shadow: 0 14px 30px -18px rgba(21, 18, 17, .45); transition: transform 200ms ease, box-shadow 200ms ease; }
+.va-email-window img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; transition: object-position 900ms ease; }
+.va-email-card:hover .va-email-window,
+.va-email-card:focus-visible .va-email-window { transform: translateY(-5px); box-shadow: 6px 8px 0 var(--va-ink); }
+.va-email-card:hover img,
+.va-email-card:focus-visible img { object-position: 50% 100%; transition-duration: 7s; transition-timing-function: linear; }
+.va-email-zoom { position: absolute; top: 10px; right: 10px; display: grid; place-items: center; width: 32px; height: 32px; color: white; background: rgba(21, 18, 17, .72); border-radius: 50%; }
+.va-email-meta { display: flex; flex-direction: column; gap: 2px; font-size: 14px; color: var(--va-muted); }
+.va-email-meta strong { font-family: var(--va-display); font-size: 16px; color: var(--va-ink); }
+.va-lightbox-long { place-items: start center; overflow-y: auto; }
+.va-lightbox-long figure { max-height: none; width: min(600px, 100%); }
+.va-lightbox-long img { width: 100%; max-height: none; }
+@media (max-width: 1023px) { .va-email-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (prefers-reduced-motion: reduce) {
+  .va-email-window,
+  .va-email-window img { transition: none; }
+  .va-email-card:hover img,
+  .va-email-card:focus-visible img { object-position: 50% 0; }
+}
+
 /* ---------- Food showcase reel ---------- */
 
 .va-reel {
@@ -1068,10 +1091,12 @@
   .jjj-title { font-size: 15px; }
 }
 
-/* Phones: the four filter tabs sit in an even 2 x 2 grid instead of wrapping unevenly. */
+/* Phones: the filter tabs sit in an even two-column grid instead of wrapping unevenly. */
 @media (max-width: 600px) {
   .va-filter { display: grid; grid-template-columns: 1fr 1fr; width: 100%; border-radius: 24px; }
   .va-filter button { min-height: 44px; padding: 9px 10px; font-size: 12px; }
+  /* An odd button count leaves the last one alone on its row: let it fill the row. */
+  .va-filter button:last-child:nth-child(odd) { grid-column: 1 / -1; }
 }
 
 /* ---------- Onboarding timeline ---------- */

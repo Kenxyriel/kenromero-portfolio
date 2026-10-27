@@ -63,7 +63,7 @@ function Lightbox({ item, onClose }: { item: VAImage; onClose: () => void }) {
   }, [onClose])
 
   return (
-    <div ref={dialogRef} className="va-lightbox" role="dialog" aria-modal="true" aria-label={item.label} onClick={onClose}>
+    <div ref={dialogRef} className={`va-lightbox${item.long ? ' va-lightbox-long' : ''}`} role="dialog" aria-modal="true" aria-label={item.label} onClick={onClose}>
       <button className="va-lightbox-close" type="button" aria-label="Close" autoFocus onClick={onClose}>
         <X size={22} />
       </button>

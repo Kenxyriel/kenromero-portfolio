@@ -1,5 +1,6 @@
 import { useState, type CSSProperties } from 'react'
 import { designBranding as content } from '../../data/va'
+import VAEmailShowcase from './VAEmailShowcase'
 import VAFoodShowcase from './VAFoodShowcase'
 import VALayout, { VACta, VAImg, VAPageHero } from './VALayout'
 
@@ -41,6 +42,8 @@ export default function VADesignBranding() {
                   {gallery.title && <h3>{gallery.title}</h3>}
                   {gallery.showcase ? (
                     <VAFoodShowcase items={gallery.items} />
+                  ) : gallery.emails ? (
+                    <VAEmailShowcase items={gallery.items} />
                   ) : (
                     <div className="va-design-grid" style={{ '--cols': columnsFor(gallery.items.length) } as CSSProperties}>
                       {gallery.items.map((item) => (
