@@ -3,6 +3,7 @@ import Timeline from '../../components/Timeline'
 import { getSmmPackages, podcastPackages, smmPackages, vaOnboarding, type Package } from '../../data/va'
 import { portfolioUrl } from '../../packageHosts'
 import VALayout, { VAPageHero, VASectionTitle } from './VALayout'
+import { vaPath } from '../../vaPath'
 
 function PackageCard({ pkg }: { pkg: Package }) {
   return (
@@ -34,7 +35,7 @@ function PackageCard({ pkg }: { pkg: Package }) {
         </>
       )}
       {pkg.note && <p className="va-note">{pkg.note}</p>}
-      <a className="va-button" href={portfolioUrl('/va#contact')}>
+      <a className="va-button" href={portfolioUrl(vaPath('/va#contact'))}>
         Let’s Work Together
       </a>
     </article>
@@ -51,7 +52,7 @@ function OnboardingSection({ cream = false }: { cream?: boolean }) {
           className="tl-va"
           steps={vaOnboarding.steps}
           footer={
-            <a className="va-button" href={portfolioUrl('/va#contact')}>
+            <a className="va-button" href={portfolioUrl(vaPath('/va#contact'))}>
               {vaOnboarding.cta} <ArrowRight size={16} aria-hidden="true" />
             </a>
           }
@@ -75,7 +76,7 @@ export function VASmmPackages({ currency = 'usd' }: { currency?: 'usd' | 'php' }
         title={smmPackages.title}
         tagline={smmPackages.tagline}
         intro={smmPackages.pillars.join(' | ')}
-        backHref={portfolioUrl('/va')}
+        backHref={portfolioUrl(vaPath('/va'))}
       />
 
       <section className="va-section va-section-tight">
@@ -143,7 +144,7 @@ export function VAPodcastPackages() {
 
   return (
     <VALayout meta={content.meta} unlisted>
-      <VAPageHero title={content.title} backHref={portfolioUrl('/va')} />
+      <VAPageHero title={content.title} backHref={portfolioUrl(vaPath('/va'))} />
 
       <section className="va-section va-section-tight">
         <div className="container">
@@ -267,7 +268,7 @@ export function VAPodcastPackages() {
           </div>
           <p className="va-note va-centered">{retainer.note}</p>
           <p className="va-centered">
-            <a className="va-button" href={portfolioUrl('/va#contact')}>
+            <a className="va-button" href={portfolioUrl(vaPath('/va#contact'))}>
               {content.custom}
             </a>
           </p>

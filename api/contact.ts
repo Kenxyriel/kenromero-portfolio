@@ -53,7 +53,7 @@ type Submission = { name: string; email: string; message: string; page: string }
 
 /** Which portfolio the message came from, based on the page URL. */
 export function portfolioLabel(page: string) {
-  return /creative\.|\/va(\/|$|\?|#)/.test(page) ? 'Creative' : 'Tech'
+  return /creative[.-]|\/va(\/|$|\?|#)/.test(page) ? 'Creative' : 'Tech'
 }
 
 export function buildEmail({ name, email, message, page }: Submission, sentAt = new Date()) {

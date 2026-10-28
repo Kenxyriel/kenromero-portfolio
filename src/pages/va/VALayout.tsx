@@ -14,13 +14,14 @@ import '@fontsource-variable/fraunces/standard.css'
 import '@fontsource-variable/fraunces/standard-italic.css'
 import '@fontsource/caveat/700.css'
 import './va.css'
+import { VA_BASE, vaPath } from '../../vaPath'
 
 const navItems: NavItem[] = [
-  { label: 'Home', href: '/va' },
-  { label: 'Design', href: '/va/design-branding' },
-  { label: 'Social Media', href: '/va/social-media-content' },
-  { label: 'Podcast', href: '/va/podcast-editing' },
-  { label: 'How I Work', href: '/va#process' },
+  { label: 'Home', href: vaPath('/va') },
+  { label: 'Design', href: vaPath('/va/design-branding') },
+  { label: 'Social Media', href: vaPath('/va/social-media-content') },
+  { label: 'Podcast', href: vaPath('/va/podcast-editing') },
+  { label: 'How I Work', href: vaPath('/va#process') },
 ]
 
 // Full-screen viewer for work samples, so detailed screenshots can be read.
@@ -105,7 +106,7 @@ export default function VALayout({ meta, children, unlisted = false }: VALayoutP
     <div className="site-shell va-theme">
       <SiteHeader
         brandRole="CREATIVE PORTFOLIO"
-        brandHref="/va"
+        brandHref={vaPath('/va')}
         navItems={navItems}
         cta={{ label: 'Book a Discovery Call', href: bookingLink.href }}
       />
@@ -146,7 +147,7 @@ function VAFooter() {
             <li>Monday to Friday</li>
             <li>Based in the Philippines (GMT+8)</li>
             <li>
-              <Link className="va-footer-start" to="/va#contact">
+              <Link className="va-footer-start" to={vaPath('/va#contact')}>
                 Start a project <ArrowRight size={14} aria-hidden="true" />
               </Link>
             </li>
@@ -178,7 +179,7 @@ function VAFooter() {
       </div>
       <div className="container va-footer-bottom">
         <span>{vaLinks.handle}</span>
-        <LegalLinks base="/va" />
+        <LegalLinks base={VA_BASE} />
         <span>© {new Date().getFullYear()} {profile.name}. All rights reserved.</span>
       </div>
     </footer>
@@ -250,7 +251,7 @@ export function VAPageHero({
   subtitle,
   tagline,
   intro,
-  backHref = '/va',
+  backHref = vaPath('/va'),
 }: {
   title: string
   subtitle?: string

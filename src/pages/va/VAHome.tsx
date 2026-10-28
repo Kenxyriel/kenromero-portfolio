@@ -19,6 +19,7 @@ import { bookingLink, profile } from '../../data/profile'
 import { vaHome as content, vaOnboarding, vaTestimonials } from '../../data/va'
 import { CurlArrow, DotGrid, Mic, RotatingBadge, Sparkle, Squiggle, Waveform } from './VAArt'
 import VALayout, { ToolBadge } from './VALayout'
+import { vaPath } from '../../vaPath'
 
 // True once the element has scrolled into view (immediately if motion is reduced).
 function useInView<T extends HTMLElement>(): [RefObject<T>, boolean] {
@@ -128,9 +129,9 @@ function WorkCover({ kind }: { kind: 'design' | 'podcast' | 'social' }) {
 }
 
 const work = [
-  { kind: 'design' as const, title: 'Design & Branding', meta: 'Brand Kits, Graphic Design', path: '/va/design-branding' },
-  { kind: 'podcast' as const, title: 'Podcast Editing', meta: 'Episodes, Clips, Thumbnails', path: '/va/podcast-editing' },
-  { kind: 'social' as const, title: 'Social Media Content', meta: 'Captions, Calendars, Strategy', path: '/va/social-media-content' },
+  { kind: 'design' as const, title: 'Design & Branding', meta: 'Brand Kits, Graphic Design', path: vaPath('/va/design-branding') },
+  { kind: 'podcast' as const, title: 'Podcast Editing', meta: 'Episodes, Clips, Thumbnails', path: vaPath('/va/podcast-editing') },
+  { kind: 'social' as const, title: 'Social Media Content', meta: 'Captions, Calendars, Strategy', path: vaPath('/va/social-media-content') },
 ]
 
 export default function VAHome() {

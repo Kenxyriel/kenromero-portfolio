@@ -5,6 +5,8 @@
 // from the Canva creative portfolio). Leave `image` empty to show a labelled
 // placeholder until the real asset is added.
 
+import { vaPath } from '../vaPath'
+
 /**
  * A work sample. `image` is the still (or video poster); `video` is an MP4 in
  * public/va/work that plays in place of the still once added. `tall` marks a
@@ -106,21 +108,21 @@ export const vaHome = {
         title: 'Podcast & Video',
         tagline: 'Turn Conversations into Opportunities',
         items: ['Podcast Editing', 'Video Editing', 'Short-Form Content'],
-        path: '/va/podcast-editing',
+        path: vaPath('/va/podcast-editing'),
         image: '/va/services/podcast.webp',
       },
       {
         title: 'Social Media',
         tagline: 'Create. Connect. Convert.',
         items: ['Content Management', 'Caption Writing', 'Hashtag Research'],
-        path: '/va/social-media-content',
+        path: vaPath('/va/social-media-content'),
         image: '/va/services/social.webp',
       },
       {
         title: 'Design & Branding',
         tagline: 'Ideas into Visuals',
         items: ['Brand Kit Design', 'Graphic Design', 'Thumbnail & Visuals'],
-        path: '/va/design-branding',
+        path: vaPath('/va/design-branding'),
         image: '/va/services/design.webp',
       },
       {
@@ -160,7 +162,7 @@ export const vaHome = {
     groups: [
       {
         title: 'Design & Branding',
-        path: '/va/design-branding',
+        path: vaPath('/va/design-branding'),
         items: [
           { image: '/va/work/design/brand-kit-1.webp', label: 'Brand Kit' },
           { image: '/va/work/design/promo-2.webp', label: 'Graphic Design' },
@@ -169,7 +171,7 @@ export const vaHome = {
       },
       {
         title: 'Podcast Editing',
-        path: '/va/podcast-editing',
+        path: vaPath('/va/podcast-editing'),
         items: [
           { image: '/va/work/podcast/thumbnail.webp', label: 'Podcast Thumbnail' },
           { image: '/va/work/podcast/intro-teaser.webp', label: 'Intro Teaser' },
@@ -177,7 +179,7 @@ export const vaHome = {
       },
       {
         title: 'Social Media Content',
-        path: '/va/social-media-content',
+        path: vaPath('/va/social-media-content'),
         items: [
           { image: '/va/work/social/post-jjj.webp', label: 'Caption Writing' },
           { image: '/va/work/social/content-calendar.webp', label: 'Content Management and Caption Research' },
@@ -330,7 +332,7 @@ export const designBranding = {
     title: 'Let’s Make It Worth Remembering.',
     description: 'Your brand deserves visuals that are consistent, professional, and built to connect.',
     button: 'Let’s Build Your Brand',
-    path: '/va#contact',
+    path: vaPath('/va#contact'),
     points: ['Strategic Design', 'Consistent Branding', 'Made to Connect'],
   },
 }
@@ -402,7 +404,7 @@ export const socialMedia = {
     description:
       'From content planning to publishing, I turn your ideas into consistent, platform-ready content built to reach and engage your audience.',
     button: 'Let’s Grow Your Content',
-    path: '/va#contact',
+    path: vaPath('/va#contact'),
     points: ['Plan', 'Create', 'Publish', 'Optimize'],
   },
 }
@@ -507,7 +509,7 @@ export const podcastEditing = {
     title: 'Let’s Make It Worth Watching.',
     description: 'From raw recordings to polished, engaging content that helps you grow your audience.',
     button: 'Let’s Talk About Your Podcast',
-    path: '/va#contact',
+    path: vaPath('/va#contact'),
     points: ['Engaging Edits', 'Audience-Focused', 'Made for Growth'],
   },
 }
