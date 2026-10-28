@@ -1,4 +1,8 @@
 {
+  "redirects": [
+    { "source": "/va", "has": [{ "type": "host", "value": "creative.kenromerogoestdigital.space" }], "destination": "/", "permanent": true },
+    { "source": "/va/:page(design-branding|social-media-content|podcast-editing|podcast-packages|smm-packages|smm-local-packages|privacy|terms)", "has": [{ "type": "host", "value": "creative.kenromerogoestdigital.space" }], "destination": "/:page", "permanent": true }
+  ],
   "rewrites": [
     {
       "source": "/((?!api/).*)",

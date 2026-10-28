@@ -7,7 +7,7 @@ Visitors only see navigation for the portfolio they were sent to.
 | --- | --- |
 | `/` and `/qa` | QA + software development portfolio (tech) |
 | `/qa/projects/authentication-testing`, `/qa/projects/api-testing` | QA case studies |
-| `/va` | Creative / VA portfolio home |
+| `/va` | Creative / VA portfolio home (`/` on the creative-only site, where every `/va` page drops the prefix) |
 | `/va/design-branding`, `/va/social-media-content`, `/va/podcast-editing` | VA work pages |
 | `/va/smm-packages` (USD), `/va/smm-local-packages` (PHP), `/va/podcast-packages` | VA pricing, one currency per page. Unlisted: not linked from the portfolio and marked `noindex`; share directly with a client (see Package subdomains). |
 
@@ -39,7 +39,7 @@ publish claims that are supported by real work.
 | --- | --- | --- |
 | `all` (default) | Tech and creative portfolios, plus the owner-only view switcher | Tech portfolio |
 | `qa` (or `it`) | Tech portfolio (QA + development) and case studies only | Tech portfolio |
-| `va` | VA / creative portfolio only | redirects to `/va` |
+| `va` | VA / creative portfolio only, served from the root (`/design-branding`, not `/va/design-branding`); old `/va/...` links redirect | Creative portfolio |
 
 A single-portfolio build does not include the other portfolios at all: their pages, text,
 and portfolio-specific files in `public/` are left out, and their URLs show "Page not found".
@@ -77,7 +77,7 @@ Add each address under **Settings → Domains** of the creative Vercel project (
 
 ## Notes
 
-- Legal pages: `/privacy` and `/terms` (tech and combined site) and `/va/privacy`, `/va/terms` (creative). Text lives in `src/data/legal.ts`; update it when the site starts collecting anything new.
+- Legal pages: `/privacy` and `/terms` on every site; the combined site also has the creative copies at `/va/privacy`, `/va/terms`. Text lives in `src/data/legal.ts`; update it when the site starts collecting anything new.
 - Analytics: Vercel Web Analytics (`<Analytics />` in `src/main.tsx`). It sets no cookies, so the site needs no cookie banner. Turn it on per project under **Analytics** in Vercel.
 - SEO and link previews: each build writes `sitemap.xml`, `robots.txt`, `favicon.ico`, and Open Graph tags with a share image from `public/brand/<tech|creative>/`. Absolute URLs use the Vercel production domain; set `SITE_URL` to override.
 - Security headers (HTTPS-only, Content Security Policy, no framing) are set in `vercel.json`. If you add a third-party script, font, or embed, allow its host in the `Content-Security-Policy` header or the browser will block it.

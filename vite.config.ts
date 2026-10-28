@@ -26,7 +26,9 @@ const techOnlyFiles = ['documents', 'case-study-preview', 'icons', 'brand/tech']
 
 // Public pages listed in sitemap.xml. Unlisted package pages are left out on purpose.
 const techPages = ['/', '/qa/projects/authentication-testing', '/qa/projects/api-testing', '/qa/projects/saripoint', '/qa/projects/jjj-website', '/qa/projects/salinlibro-cms', '/privacy', '/terms']
+// The creative-only build serves these from the root (see src/vaPath.ts).
 const vaPages = ['/va', '/va/design-branding', '/va/social-media-content', '/va/podcast-editing', '/va/privacy', '/va/terms']
+const vaRootPages = vaPages.map((path) => path.replace(/^\/va/, '') || '/')
 
 // Absolute address of the site, needed for the sitemap and link-preview image.
 // On Vercel this is the project's production domain; SITE_URL overrides it.
@@ -43,7 +45,7 @@ export default defineConfig(({ mode }) => {
   const meta = pageMeta[portfolio] ?? pageMeta.all
   const brand = portfolio === 'va' ? 'creative' : 'tech'
   const site = siteUrl(portfolio)
-  const pages = portfolio === 'va' ? vaPages : portfolio === 'all' ? [...techPages, ...vaPages] : techPages
+  const pages = portfolio === 'va' ? vaRootPages : portfolio === 'all' ? [...techPages, ...vaPages] : techPages
 
   // Favicon and link-preview tags (Messenger, LinkedIn, Facebook, X, Slack).
   const headTags = `

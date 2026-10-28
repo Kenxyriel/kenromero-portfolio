@@ -1,10 +1,11 @@
 import { lazy, Suspense } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import LegalPage from "./components/LegalPage";
 import NotFound from "./components/NotFound";
 import ScrollManager from "./components/ScrollManager";
 import ViewSwitcher from "./components/ViewSwitcher";
 import { packagePageForHost } from "./packageHosts";
+import { VA_AT_ROOT, vaPath } from "./vaPath";
 
 // One codebase, separate entry points per audience. VITE_PORTFOLIO decides
 // which portfolios a deployment contains: "all" (default), "qa" (QA + development),
@@ -44,8 +45,16 @@ function rootElement() {
   if (packagePage === "smm-php" && VASmmPackages) return <VASmmPackages currency="php" />;
   if (packagePage === "podcast" && VAPodcastPackages) return <VAPodcastPackages />;
 
-  if (mode === "va") return <Navigate to="/va" replace />;
+  if (VA_AT_ROOT && VAHome) return <VAHome />;
   return QAHome ? <QAHome /> : <NotFound />;
+}
+
+// Old creative links (/va/design-branding) on the creative-only site, which now
+// serves those pages from the root. The server answers these with a 301 on the
+// live domain (vercel.json); this covers preview and package addresses.
+function LegacyVaRedirect() {
+  const { pathname, search, hash } = useLocation();
+  return <Navigate to={vaPath(pathname) + search + hash} replace />;
 }
 
 function App() {
@@ -56,13 +65,8 @@ function App() {
         <Routes>
           <Route path="/" element={rootElement()} />
 
-          {/* Legal pages. The VA-only site keeps them inside the creative theme. */}
-          {mode === "va" ? (
-            <>
-              <Route path="/privacy" element={<Navigate to="/va/privacy" replace />} />
-              <Route path="/terms" element={<Navigate to="/va/terms" replace />} />
-            </>
-          ) : (
+          {/* Legal pages. The VA-only site serves its creative-theme copies here (below). */}
+          {!VA_AT_ROOT && (
             <>
               <Route path="/privacy" element={<LegalPage slug="privacy" />} />
               <Route path="/terms" element={<LegalPage slug="terms" />} />
@@ -91,15 +95,16 @@ function App() {
 
           {VAHome && VADesignBranding && VASocialMedia && VAPodcastEditing && VAPodcastPackages && VASmmPackages && VALegal && (
             <>
-              <Route path="/va" element={<VAHome />} />
-              <Route path="/va/design-branding" element={<VADesignBranding />} />
-              <Route path="/va/social-media-content" element={<VASocialMedia />} />
-              <Route path="/va/podcast-editing" element={<VAPodcastEditing />} />
-              <Route path="/va/podcast-packages" element={<VAPodcastPackages />} />
-              <Route path="/va/smm-packages" element={<VASmmPackages currency="usd" />} />
-              <Route path="/va/smm-local-packages" element={<VASmmPackages currency="php" />} />
-              <Route path="/va/privacy" element={<VALegal slug="privacy" />} />
-              <Route path="/va/terms" element={<VALegal slug="terms" />} />
+              {/* On the VA-only site "/" is the creative home (see rootElement). */}
+              {VA_AT_ROOT ? <Route path="/va/*" element={<LegacyVaRedirect />} /> : <Route path="/va" element={<VAHome />} />}
+              <Route path={vaPath("/va/design-branding")} element={<VADesignBranding />} />
+              <Route path={vaPath("/va/social-media-content")} element={<VASocialMedia />} />
+              <Route path={vaPath("/va/podcast-editing")} element={<VAPodcastEditing />} />
+              <Route path={vaPath("/va/podcast-packages")} element={<VAPodcastPackages />} />
+              <Route path={vaPath("/va/smm-packages")} element={<VASmmPackages currency="usd" />} />
+              <Route path={vaPath("/va/smm-local-packages")} element={<VASmmPackages currency="php" />} />
+              <Route path={vaPath("/va/privacy")} element={<VALegal slug="privacy" />} />
+              <Route path={vaPath("/va/terms")} element={<VALegal slug="terms" />} />
             </>
           )}
 

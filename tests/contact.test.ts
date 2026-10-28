@@ -28,6 +28,7 @@ test('allows 5 messages per visitor in 10 minutes', () => {
 test('labels the portfolio a message came from', () => {
   assert.equal(portfolioLabel('https://creative.kenromerogoestdigital.space/'), 'Creative')
   assert.equal(portfolioLabel('https://kenromerogoestdigital.space/va/podcast-editing'), 'Creative')
+  assert.equal(portfolioLabel('https://kenromero-creative-portfolio.vercel.app/podcast-editing'), 'Creative')
   assert.equal(portfolioLabel('https://kenromerogoestdigital.space/qa/projects/api-testing'), 'Tech')
 })
 
