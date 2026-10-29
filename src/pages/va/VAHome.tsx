@@ -17,7 +17,7 @@ import { imageProps } from '../../components/responsiveImage'
 import Timeline from '../../components/Timeline'
 import { bookingLink, profile } from '../../data/profile'
 import { vaHome as content, vaOnboarding, vaTestimonials } from '../../data/va'
-import { CurlArrow, DotGrid, Mic, RotatingBadge, Sparkle, Squiggle, Waveform } from './VAArt'
+import { DotGrid, Mic, RotatingBadge, Sparkle, Squiggle, Waveform } from './VAArt'
 import VALayout, { ToolBadge } from './VALayout'
 import { vaPath } from '../../vaPath'
 
@@ -164,10 +164,44 @@ export default function VAHome() {
           <div className="vx-hero-art">
             <div className="vx-hero-block" />
             <img className="vx-hero-photo" {...imageProps('/ken-romero.webp', '(max-width: 760px) 80vw, 520px')} alt={profile.name} />
-            <RotatingBadge className="vx-hero-badge" text="PLAN • CREATE • PUBLISH • OPTIMIZE • " />
+            <RotatingBadge className="vx-hero-badge" text="OPEN FOR PROJECTS • OPEN FOR PROJECTS • " />
             <Waveform className="vx-hero-wave" />
             <DotGrid className="vx-hero-dots" />
             <Sparkle className="vx-hero-spark" />
+          </div>
+        </div>
+      </section>
+
+      {/* SELECTED WORK: straight after the hero, so the real samples are the first proof. */}
+      <section id="work" className="vx-work">
+        <div className="container">
+          <div className="vx-section-head">
+            <div>
+              <p className="vx-eyebrow">Featured projects</p>
+              <h2 className="vx-serif">
+                Selected <em>work</em>
+              </h2>
+            </div>
+            <p className="vx-side-note">{content.featured.tagline}</p>
+          </div>
+          <div className="vx-card-row">
+            {work.map((item) => (
+              // The link stretches over the whole card so the clip's play button can sit above it.
+              <div className="vx-work-card" key={item.title}>
+                <WorkCover kind={item.kind} />
+                <div className="vx-work-meta">
+                  <div>
+                    <h3>
+                      <Link className="vx-work-link" to={item.path}>
+                        {item.title}
+                      </Link>
+                    </h3>
+                    <span>{item.meta}</span>
+                  </div>
+                  <ArrowRight size={18} aria-hidden="true" />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -185,7 +219,6 @@ export default function VAHome() {
             <br />
             Strategic <em>execution.</em>
           </h2>
-          <Squiggle className="vx-about-squiggle" />
           <p className="vx-greeting">{content.about.greeting}</p>
           <p>{content.about.body}</p>
           <p className="vx-signature">{profile.name}</p>
@@ -211,16 +244,15 @@ export default function VAHome() {
 
       {/* SERVICES */}
       <section id="services" className="vx-services">
-        <span className="vx-blob" aria-hidden="true" />
         <div className="container">
-          <div className="vx-services-head">
-            <Sparkle className="vx-head-spark" />
-            <p className="vx-script">{content.services.eyebrow}</p>
-            <Squiggle className="vx-services-squiggle" />
-            <h2>
-              Creative support for <mark>bigger results</mark>
-            </h2>
-            <p>{content.services.description}</p>
+          <div className="vx-section-head">
+            <div>
+              <p className="vx-eyebrow">{content.services.eyebrow}</p>
+              <h2 className="vx-serif">
+                Creative support for <em>bigger results</em>
+              </h2>
+            </div>
+            <p className="vx-side-note">{content.services.description}</p>
           </div>
           <div ref={cardsRef} className={`vx-svc-row${cardsShown ? ' is-shown' : ''}`}>
             {content.services.items.map((service) => (
@@ -249,39 +281,6 @@ export default function VAHome() {
         </div>
       </section>
 
-      {/* SELECTED WORK */}
-      <section id="work" className="vx-work">
-        <div className="container vx-split-grid">
-          <div className="vx-side">
-            <p className="vx-eyebrow">Featured projects</p>
-            <h2 className="vx-serif">
-              Selected <em>work</em>
-            </h2>
-            <Squiggle />
-            <p className="vx-side-note">{content.featured.tagline}</p>
-          </div>
-          <div className="vx-card-row">
-            {work.map((item) => (
-              // The link stretches over the whole card so the clip's play button can sit above it.
-              <div className="vx-work-card" key={item.title}>
-                <WorkCover kind={item.kind} />
-                <div className="vx-work-meta">
-                  <div>
-                    <h3>
-                      <Link className="vx-work-link" to={item.path}>
-                        {item.title}
-                      </Link>
-                    </h3>
-                    <span>{item.meta}</span>
-                  </div>
-                  <ArrowRight size={18} aria-hidden="true" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* TESTIMONIALS */}
       <section id="testimonials" className="vx-quotes">
         <div className="container vx-split-grid">
@@ -290,7 +289,6 @@ export default function VAHome() {
             <h2 className="vx-serif">
               What clients <em>say</em>
             </h2>
-            <Squiggle className="vx-amber" />
             <Quote className="vx-quote-mark" aria-hidden="true" />
           </div>
           <div className="vx-quote-row">
@@ -310,13 +308,12 @@ export default function VAHome() {
       {/* TOOLS */}
       <section className="vx-tools">
         <div className="container">
-          <div className="vx-tools-head">
+          <div className="vx-section-head">
             <div>
               <p className="vx-eyebrow">My toolkit</p>
               <h2 className="vx-serif">
                 Tools I <em>use</em>
               </h2>
-              <Squiggle />
             </div>
             <p className="vx-side-note">{content.tools.description}</p>
           </div>
@@ -346,61 +343,42 @@ export default function VAHome() {
       {/* PROCESS */}
       <section id="process" className="vx-process">
         <div className="container">
-          <div className="vx-services-head">
-            <p className="vx-script">{vaOnboarding.eyebrow}</p>
-            <Squiggle className="vx-services-squiggle" />
-            <h2>
-              From first message to <mark>your first posts</mark>
-            </h2>
-            <p>{vaOnboarding.description}</p>
+          <div className="vx-section-head">
+            <div>
+              <p className="vx-eyebrow">{vaOnboarding.eyebrow}</p>
+              <h2 className="vx-serif">
+                From first message to <em>your first posts</em>
+              </h2>
+            </div>
+            <p className="vx-side-note">{vaOnboarding.description}</p>
           </div>
           <Timeline className="tl-va" steps={vaOnboarding.steps} />
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="vx-cta">
-        <div className="container vx-cta-grid">
-          <div>
+      {/* CLOSING: one section that offers the call and the form side by side. */}
+      <section id="contact" className="vx-close">
+        <div className="container vx-close-grid">
+          <div className="vx-book">
             <p className="vx-eyebrow">{content.closing.eyebrow}</p>
             <h2 className="vx-serif">
-              Let’s build something
-              <br />
-              <em>amazing</em> together.
+              Let’s build something <em>amazing</em> together.
             </h2>
-            <Squiggle />
-          </div>
-          <div className="vx-book">
             <p className="vx-script">Let’s cut the line!</p>
             <p>
               Book your <strong>free 30-minute discovery call</strong> and tell me about your brand, your podcast, or
               your content goals. We’ll find the right plan together.
             </p>
-            <div className="vx-book-actions">
-              <a
-                className="vx-pill vx-pill-dark"
-                href={bookingLink.href}
-                {...(bookingLink.external ? { target: '_blank', rel: 'noreferrer' } : {})}
-              >
-                <CalendarHeart size={16} aria-hidden="true" /> Book my free call
-              </a>
-              <a className="vx-book-alt" href="#contact">
-                or send a message
-              </a>
-            </div>
+            <a
+              className="vx-pill vx-pill-dark"
+              href={bookingLink.href}
+              {...(bookingLink.external ? { target: '_blank', rel: 'noreferrer' } : {})}
+            >
+              <CalendarHeart size={16} aria-hidden="true" /> Book my free call
+            </a>
+            <p className="vx-close-or">Prefer to write? Send a message and I’ll reply within 24 hours.</p>
           </div>
-          <div className="vx-cta-art" aria-hidden="true">
-            <Mic />
-            <CurlArrow />
-            <Sparkle />
-          </div>
-        </div>
-      </section>
-
-      {/* CONTACT */}
-      <section id="contact" className="vx-contact">
-        <div className="container">
-          <ContactForm intro="Need help with social media, content, podcast editing, or design? Send a message and tell me about your business." />
+          <ContactForm showInfo={false} />
         </div>
       </section>
     </VALayout>

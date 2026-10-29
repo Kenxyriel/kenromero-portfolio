@@ -24,7 +24,7 @@
   background: var(--tl-card);
   border: 3px solid var(--tl-rail);
   border-radius: 50%;
-  transition: background 250ms ease, border-color 250ms ease, transform 250ms ease;
+  transition: background 250ms ease, border-color 250ms ease;
   transition-delay: calc(var(--i) * var(--tl-step-delay));
 }
 /* The line from each dot to the next one, filled in as the steps light up. */
@@ -53,9 +53,13 @@
   border: 1px solid var(--tl-card-line);
   border-radius: 14px;
   opacity: .5;
-  transform: translateY(8px);
-  transition: opacity 350ms ease, transform 350ms ease, box-shadow 250ms ease;
-  transition-delay: calc(var(--i) * var(--tl-step-delay));
+  /* The reveal moves `translate` with a per-step delay; hover moves `transform` with none, so leaving a card is instant. */
+  translate: 0 8px;
+  transition:
+    opacity 350ms var(--ease-out) calc(var(--i) * var(--tl-step-delay)),
+    translate 350ms var(--ease-out) calc(var(--i) * var(--tl-step-delay)),
+    transform 200ms var(--ease-out),
+    box-shadow 200ms var(--ease-out);
 }
 .tl-card h3 { margin: 0; color: var(--tl-ink); font-family: var(--tl-title-font); font-size: 16px; line-height: 1.25; }
 .tl-card p { margin: 6px 0 0; color: var(--tl-text); font-size: 13.5px; line-height: 1.5; }
@@ -63,8 +67,10 @@
 .tl-list.is-shown .tl-time { color: var(--tl-ink); }
 .tl-list.is-shown .tl-dot { background: var(--tl-accent); border-color: var(--tl-accent); }
 .tl-list.is-shown .tl-step::after { transform: none; }
-.tl-list.is-shown .tl-card { opacity: 1; transform: none; }
-.tl-list.is-shown .tl-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0, 0, 0, .12); transition-delay: 0s; }
+.tl-list.is-shown .tl-card { opacity: 1; translate: none; }
+@media (hover: hover) and (pointer: fine) {
+  .tl-list.is-shown .tl-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0, 0, 0, .12); }
+}
 
 .tl-footer { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 28px; text-align: center; }
 
@@ -85,4 +91,5 @@
   .tl-dot,
   .tl-card,
   .tl-step:not(:last-child)::after { transition: none; }
+  .tl-card { translate: none; }
 }
