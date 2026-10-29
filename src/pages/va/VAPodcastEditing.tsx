@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { ShieldCheck } from 'lucide-react'
 import { podcastEditing as content } from '../../data/va'
+import PodcastCalendar from './PodcastCalendar'
 import VALayout, { ToolBadge, VACta, VAImg, VAPageHero, VASectionTitle } from './VALayout'
 
 export default function VAPodcastEditing() {
@@ -37,32 +38,7 @@ export default function VAPodcastEditing() {
       <section className="va-section va-section-cream">
         <div className="container">
           <VASectionTitle eyebrow="Content management" title={content.management.title} description={content.management.description} />
-          <div className="va-plan">
-            <h3>{content.management.plan.title}</h3>
-            <dl className="va-plan-stats">
-              {content.management.plan.stats.map((stat) => (
-                <div key={stat.label}>
-                  <dt>{stat.label}</dt>
-                  <dd>{stat.value}</dd>
-                </div>
-              ))}
-            </dl>
-            <ol className="va-plan-rhythm" aria-label="Weekly posting rhythm">
-              {content.management.plan.rhythm.map((step) => (
-                <li key={step}>{step}</li>
-              ))}
-            </ol>
-            <p className="va-plan-platforms">{content.management.plan.platforms}</p>
-          </div>
-          <div className="va-sheet-grid">
-            {content.management.items.map((item) => (
-              <div className="va-sheet" key={item.label}>
-                <VAImg item={item} />
-                <h3>{item.label}</h3>
-                <p>{item.detail}</p>
-              </div>
-            ))}
-          </div>
+          <PodcastCalendar />
         </div>
       </section>
 

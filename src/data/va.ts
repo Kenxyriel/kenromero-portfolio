@@ -506,6 +506,164 @@ export const jjjCalendar = {
   ],
 }
 
+export type PodStatus = 'Approved' | 'For review' | 'In progress' | 'Not started' | 'Revision' | 'Posted' | 'Guest approval'
+export type PodPlatform = 'youtube' | 'shorts' | 'instagram' | 'facebook'
+
+// Recreated from the client's podcast content calendar (Google Sheets) and the
+// OpusClip scheduler. Guest names, the show's name and every link are left out on
+// purpose: episodes are described by topic and clips by their hook.
+export const podcastCalendar = {
+  // Counts from the production calendar: 45 episodes on the sheet when it was shared.
+  stats: [
+    { value: '45', label: 'Episodes edited' },
+    { value: '39', label: 'Thumbnails approved' },
+    { value: '33', label: 'Reels posted in 2 weeks' },
+    { value: '7', label: 'Platforms planned' },
+  ],
+  pipeline: [
+    { step: '15-min edit', count: '40 of 45 approved' },
+    { step: '20–60s clips', count: '26 episodes clipped' },
+    { step: 'Thumbnail', count: '39 approved' },
+    { step: 'Guest approval', count: '32 waiting' },
+    { step: 'Posted', count: '7 live' },
+  ],
+  tracker: [
+    { ep: '01', topic: 'Scaling a telehealth practice from 1 provider to 17 states', edit: 'Approved', clips: 'Approved', thumb: 'Approved', status: 'Posted' },
+    { ep: '02', topic: 'Turning a nostalgic brand into a $500M private equity playbook', edit: 'Approved', clips: 'Approved', thumb: 'Approved', status: 'Posted' },
+    { ep: '03', topic: 'Growing enterprise value through strategic planning', edit: 'Approved', clips: 'Not started', thumb: 'For review', status: 'Posted' },
+    { ep: '04', topic: 'Bringing Fortune 500 growth playbooks to the middle market', edit: 'Approved', clips: 'Approved', thumb: 'Approved', status: 'Posted' },
+    { ep: '—', topic: 'Helping founders through the $100 trillion wealth transfer', edit: 'Approved', clips: 'Approved', thumb: 'Approved', status: 'Guest approval' },
+    { ep: '—', topic: 'From operator to CEO: scaling past $1M with the right team', edit: 'Approved', clips: 'Not started', thumb: 'Approved', status: 'Revision' },
+    { ep: '—', topic: 'Taking a food brand from 350 to 16,000+ grocery stores', edit: 'For review', clips: 'Not started', thumb: 'For review', status: 'In progress' },
+  ] as { ep: string; topic: string; edit: PodStatus; clips: PodStatus; thumb: PodStatus; status: PodStatus }[],
+  // Week 1 of the posting calendar (May 25–30, 2026). Every post went out public.
+  week: {
+    label: 'Week 1 · May 25–30, 2026',
+    days: [
+      { day: 'Mon', date: 'May 25', posts: [{ type: 'Clip', ep: '01', hook: 'Scaling healthcare during chaos', time: '8:00 AM', role: 'Teaser' }] },
+      {
+        day: 'Tue',
+        date: 'May 26',
+        posts: [
+          { type: 'Clip', ep: '01', hook: '17 states. One healthcare practice.', time: '8:00 AM', role: 'Promo link' },
+          { type: 'Episode', ep: '01', hook: 'Full episode drop', time: '8:00 AM', role: 'Drop' },
+        ],
+      },
+      {
+        day: 'Wed',
+        date: 'May 27',
+        posts: [
+          { type: 'Clip', ep: '01', hook: 'They were ready before everyone else', time: '8:00 AM', role: 'Recap' },
+          { type: 'Clip', ep: '02', hook: 'Nostalgia became a cash machine', time: '12:00 PM', role: 'Teaser' },
+        ],
+      },
+      {
+        day: 'Thu',
+        date: 'May 28',
+        posts: [
+          { type: 'Clip', ep: '02', hook: 'Emotional brands print royalties', time: '8:00 AM', role: 'Promo link' },
+          { type: 'Episode', ep: '02', hook: 'Full episode drop', time: '8:00 AM', role: 'Drop' },
+        ],
+      },
+      {
+        day: 'Fri',
+        date: 'May 29',
+        posts: [
+          { type: 'Clip', ep: '01', hook: 'AI bought back her sanity', time: '8:00 AM', role: 'Follow-up' },
+          { type: 'Clip', ep: '02', hook: 'Low risk. High margin. Licensing.', time: '12:00 PM', role: 'Recap' },
+        ],
+      },
+      { day: 'Sat', date: 'May 30', posts: [{ type: 'Clip', ep: '02', hook: 'Monetize the brand, not just content', time: '8:00 AM', role: 'Weekend reach' }] },
+    ] as { day: string; date: string; posts: { type: 'Clip' | 'Episode'; ep: string; hook: string; time: string; role: string }[] }[],
+    rule: 'Two episodes a week (Tue & Thu). Clips tease the day before, drop with a link on the day, then recap through the weekend.',
+  },
+  // The OpusClip calendar, May 17 – Jun 6, 2026. `more` = posts hidden behind "See more".
+  opus: {
+    label: 'May 17 – Jun 6, 2026',
+    start: '2026-05-17',
+    days: {
+      '2026-05-19': { posts: [{ platform: 'youtube', time: '1:00 AM', hook: 'She built across 17 states' }] },
+      '2026-05-20': { posts: [{ platform: 'youtube', time: '7:31 PM', hook: '7-figure business growth: founders’ real strategies' }] },
+      '2026-05-25': {
+        posts: [
+          { platform: 'youtube', time: '8:00 PM', hook: 'She scaled during chaos' },
+          { platform: 'instagram', time: '8:00 PM', hook: 'She scaled during chaos. Most practices were trying to survive…' },
+        ],
+        more: 1,
+      },
+      '2026-05-26': {
+        posts: [
+          { platform: 'facebook', time: '12:00 AM', hook: 'She scaled during chaos' },
+          { platform: 'instagram', time: '8:00 PM', hook: 'She built a 17-state practice. With a newborn.' },
+        ],
+        more: 1,
+      },
+      '2026-05-27': {
+        posts: [
+          { platform: 'youtube', time: '8:00 PM', hook: 'Everyone asked her how' },
+          { platform: 'instagram', time: '8:00 PM', hook: 'Everyone asked her how. While clinics struggled…' },
+        ],
+        more: 1,
+      },
+      '2026-05-28': {
+        posts: [
+          { platform: 'youtube', time: '12:00 AM', hook: 'How did one brand triple its royalties in 2 years?' },
+          { platform: 'instagram', time: '12:00 AM', hook: 'Nostalgia turned into a scalable cash machine' },
+        ],
+        more: 3,
+      },
+      '2026-05-29': {
+        posts: [
+          { platform: 'youtube', time: '8:00 PM', hook: 'How is AI helping founders avoid burnout?' },
+          { platform: 'instagram', time: '8:00 PM', hook: 'AI didn’t replace her work. It gave her time back.' },
+        ],
+        more: 1,
+      },
+      '2026-05-30': {
+        posts: [
+          { platform: 'youtube', time: '12:00 AM', hook: 'Why do licensing businesses earn 90–95% margins?' },
+          { platform: 'instagram', time: '12:00 AM', hook: '90–95% gross margins. That’s licensing.' },
+        ],
+        more: 4,
+      },
+      '2026-05-31': { posts: [{ platform: 'facebook', time: '12:00 AM', hook: 'Why are creators scaling faster than businesses?' }] },
+      '2026-06-01': {
+        posts: [
+          { platform: 'youtube', time: '8:00 PM', hook: 'Why do some businesses lose trust with great AI tools?' },
+          { platform: 'instagram', time: '8:00 PM', hook: 'Efficiency alone won’t build loyalty.' },
+        ],
+        more: 4,
+      },
+      '2026-06-02': { posts: [{ platform: 'facebook', time: '12:00 AM', hook: 'AI alone won’t build customer trust' }] },
+    } as Record<string, { posts: { platform: PodPlatform; time: string; hook: string }[]; more?: number }>,
+  },
+  // One episode's full package, from the Episode Details and Captions Bank tabs.
+  pack: {
+    label: 'Episode 03 · Strategic planning',
+    deliverables: ['15-min edit', '5 clips, 20–60s', 'Thumbnail', 'YouTube description', 'Timestamped transcript', 'Caption per clip', 'SEO tags'],
+    hear: [
+      'Why most companies have a wish list instead of a strategic plan',
+      'The hidden costs of running without a clear strategy',
+      'Why every business should be built as if it’s preparing for sale',
+      'How to turn a three-year vision into six-month milestones',
+    ],
+    hooks: [
+      'AI expands your bandwidth.',
+      'A 3-year vision means nothing without a 6-month plan.',
+      'A strategy isn’t real until it’s measured.',
+      'Your best employees don’t leave by accident.',
+      'Most businesses don’t have a strategic plan.',
+    ],
+    caption: [
+      'A 3-Year Vision Means Nothing Without a 6-Month Plan.',
+      'If you know where you want your business to be in three years, where do you need to be in six months?',
+      'If you can’t answer it, you don’t have a plan.',
+      'You have a wish list.',
+    ],
+    tags: ['Strategic planning', 'Enterprise value', 'Exit planning', 'Business valuation', 'Revenue diversification', 'Leadership alignment', 'AI for business'],
+  },
+}
+
 export const podcastEditing = {
   meta: {
     title: 'Podcast Editing & Content Management | Ken Romero',
@@ -539,24 +697,6 @@ export const podcastEditing = {
   management: {
     title: 'More than editing.',
     description: 'I help turn your podcast into content that gets seen.',
-    // The posting plan's summary, typed out from the posting calendar sheet so it stays sharp.
-    plan: {
-      title: 'A 13-week posting plan for one podcast',
-      stats: [
-        { value: '26', label: 'Full episodes' },
-        { value: '2', label: 'Episodes a week' },
-        { value: '6', label: 'Clips a week' },
-        { value: '7', label: 'Platforms' },
-      ],
-      rhythm: ['Mon teaser', 'Tue drop', 'Wed recap', 'Thu teaser', 'Thu drop', 'Fri–Sun clips'],
-      platforms: 'YouTube, YT Shorts, Instagram, Facebook, TikTok, X/Twitter, LinkedIn',
-    },
-    items: [
-      { image: '/va/work/podcast/episode-details.webp', label: 'Episode details', detail: 'Guest, title, what listeners will hear, description and SEO tags for every episode.' },
-      { image: '/va/work/podcast/production-calendar.webp', label: 'Production calendar', detail: 'Each episode’s edit status, from Not started to Approved.' },
-      { image: '/va/work/podcast/caption-bank.webp', label: 'Caption bank', detail: 'Facebook, Instagram and YouTube copy, plus hooks for three clips per episode.' },
-      { image: '/va/work/podcast/posting-calendar.webp', label: 'Posting calendar', detail: 'Every episode and clip, by day, time and platform, with its posting status.' },
-    ] as (VAImage & { detail: string })[],
   },
   cta: {
     eyebrow: 'Your podcast has the content.',
