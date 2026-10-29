@@ -261,6 +261,18 @@ function BookingCase() {
           <dd>{call.precondition}</dd>
         </div>
         <div>
+          <dt>Acceptance criteria</dt>
+          <dd>
+            <ul className="tx-case-bdd">
+              {call.acceptance.map(([keyword, text]) => (
+                <li key={keyword}>
+                  <b>{keyword}</b> {text}
+                </li>
+              ))}
+            </ul>
+          </dd>
+        </div>
+        <div>
           <dt>Reproduction steps</dt>
           <dd>
             <ol className="tx-case-steps">

@@ -463,6 +463,8 @@
 .tx-case-fields { display: grid; gap: 14px; margin: 20px 0 22px; }
 .tx-case-fields dt { color: #121518; font-size: 14px; font-weight: 600; }
 .tx-case-fields dd { margin: 2px 0 0; font-size: 16px; line-height: 1.55; }
+.tx-case-bdd { display: grid; gap: 2px; margin: 4px 0 0; padding: 0; list-style: none; font-family: var(--t-mono); font-size: 14px; }
+.tx-case-bdd b { color: #121518; font-weight: 600; }
 .tx-case-steps { display: grid; gap: 6px; margin: 4px 0 0; padding: 0; list-style: none; }
 .tx-case-steps li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; align-items: start; }
 .tx-case-check { display: grid; place-items: center; width: 20px; height: 20px; margin-top: 2px; color: transparent; background: rgba(18, 21, 24, .14); border-radius: 4px; transition: color 160ms ease, background-color 160ms ease, transform 260ms var(--ease-out); }
