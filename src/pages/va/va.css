@@ -798,11 +798,12 @@
 .va-img-caption { padding: 10px 12px; color: var(--va-ink); background: white; border-top: 2px solid var(--va-ink); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
 /* The full episode leads full-width; the shorter pieces sit two by two below. */
 .va-gallery-wide { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 1040px; margin: 0 auto 36px; }
-.va-gallery-wide > :first-child { grid-column: 1 / -1; }
+.va-gallery-wide > :first-child,
+.va-gallery-wide > :last-child:nth-child(even) { grid-column: 1 / -1; }
 .va-gallery-wide .va-img img,
 .va-gallery-wide .va-img video { aspect-ratio: 16 / 9; object-fit: cover; }
 @media (max-width: 600px) { .va-gallery-wide { grid-template-columns: 1fr; } }
-.va-gallery-thumbs { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 1040px; margin: 0 auto; }
+.va-gallery-thumbs { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 1040px; margin: 0 auto; }
 .va-gallery-thumbs .va-img img { aspect-ratio: 16 / 9; object-fit: cover; }
 @media (max-width: 767px) { .va-gallery-thumbs { grid-template-columns: 1fr; } }
 .va-show-link { max-width: 1040px; margin: 24px auto 0; color: var(--va-text); font-size: 15px; text-align: center; }

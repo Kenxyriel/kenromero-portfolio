@@ -39,7 +39,7 @@ export default function VAPodcastEditing() {
             ))}
           </div>
           <p className="va-show-link">
-            These thumbnails and the content calendar below are for {content.editing.show.name}.{' '}
+            The first three thumbnails and the content calendar below are for {content.editing.show.name}.{' '}
             <a href={content.editing.show.href} target="_blank" rel="noreferrer">
               {content.editing.show.label} ↗
             </a>
