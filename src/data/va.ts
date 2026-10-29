@@ -710,8 +710,8 @@ export const podcastEditing = {
     title: 'Featured Projects',
     notice: {
       tag: 'Client work',
-      title: 'These videos belong to my clients',
-      body: 'Every episode and clip here is client property, shown only as featured work from projects I edited. Please don\u2019t download, repost or reuse them.',
+      title: 'This work belongs to my clients',
+      body: 'Every episode, clip and thumbnail here is client property, shared with permission as featured work from projects I edited. The people shown are my clients and their guests, and some faces and names are blurred to protect their privacy. Please don\u2019t download, repost or reuse them.',
     },
     items: [
       { image: '/va/work/podcast/episode-15-min.webp', video: '/va/work/podcast/episode-15-min.mp4', label: '15 Min Episode (first minute)' },
