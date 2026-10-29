@@ -160,12 +160,15 @@ export default function VAHome() {
               </a>
               <span className="vx-hand">{content.hero.tagline}</span>
             </div>
+            <p className="vx-status">
+              <span className="vx-status-dot" aria-hidden="true" /> Open for new projects
+            </p>
           </div>
 
           <div className="vx-hero-art">
             <div className="vx-hero-block" />
             <img className="vx-hero-photo" {...imageProps('/ken-romero.webp', '(max-width: 760px) 80vw, 520px')} alt={profile.name} />
-            <RotatingBadge className="vx-hero-badge" text="OPEN FOR PROJECTS • OPEN FOR PROJECTS • " />
+            <RotatingBadge className="vx-hero-badge" text="PLAN • CREATE • PUBLISH • OPTIMIZE • " />
             <Waveform className="vx-hero-wave" />
             <DotGrid className="vx-hero-dots" />
             <Sparkle className="vx-hero-spark" />

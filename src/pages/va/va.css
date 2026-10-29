@@ -119,6 +119,9 @@
 /* Pressing pushes the button all the way into its shadow. */
 .vx-pill:active, .va-button:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--va-ink); }
 
+/* Availability pill under the hero buttons, like the tech site's status pill. */
+.vx-status { display: inline-flex; align-items: center; gap: 10px; margin: 22px 0 0; padding: 7px 14px; color: var(--va-ink); background: #fffdf8; border: 1.5px solid var(--va-ink); border-radius: 999px; font-size: 13px; font-weight: 700; }
+.vx-status-dot { width: 8px; height: 8px; background: #3fae5a; border-radius: 50%; box-shadow: 0 0 0 3px rgba(63, 174, 90, .2); }
 .vx-hand { font-family: var(--va-hand); font-size: 24px; font-weight: 700; color: var(--va-ink); }
 
 .vx-split-grid { display: grid; grid-template-columns: minmax(220px, .8fr) 3fr; gap: clamp(28px, 4vw, 56px); align-items: start; }
