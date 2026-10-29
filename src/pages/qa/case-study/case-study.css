@@ -1,19 +1,19 @@
 /* =========================================================
    QA CASE STUDY PAGES (/qa/projects/...)
-   Same "test report" look as the tech home page: paper hero,
-   lighter reading area, graphite ink, amber highlights, green for passes.
+   Same "test report" look as the tech home page: graphite night,
+   amber from the KR mark, green and red only for pass and fail.
    Builds on the tokens in ../tech.css (.tech-theme).
    ========================================================= */
 
 .cs-page {
-  --cs-card: #ffffff; --cs-line: #dde3df; --cs-soft: #fbf1df; --cs-green: #1d7a45; --cs-red: #b8402b;
-  --cs-text-2: #3b4540; --cs-muted: #5b6660; --cs-faint: #8f9993; --cs-subtle: #eef1ef; --cs-surface: #f4f6f4;
-  --cs-green-soft: #d8eee0; --cs-green-tint: #eef7f1; --cs-red-soft: #fbe2dc; --cs-red-tint: #fdf1ee;
+  --cs-card: #1c2125; --cs-line: #2f363b; --cs-soft: rgba(242, 163, 58, .12); --cs-green: #5cc98b; --cs-red: #ef6b55;
+  --cs-text-2: #c6ccc9; --cs-muted: #98a19d; --cs-faint: #7d8783; --cs-subtle: #262c31; --cs-surface: #22282c;
+  --cs-green-soft: rgba(92, 201, 139, .16); --cs-green-tint: rgba(92, 201, 139, .09); --cs-red-soft: rgba(239, 107, 85, .16); --cs-red-tint: rgba(239, 107, 85, .09);
 }
 
 .cs-kicker { margin: 0 0 12px; color: var(--t-muted); font-size: 15px; font-weight: 600; }
 
-.cs-status { display: inline-block; margin-left: 12px; padding: 2px 8px; color: #6b4100; background: #f8e2bd; border-radius: 4px; font-size: 13px; vertical-align: 1px; }
+.cs-status { display: inline-block; margin-left: 12px; padding: 2px 8px; color: var(--t-amber); background: rgba(242, 163, 58, .14); border-radius: 4px; font-size: 13px; vertical-align: 1px; }
 
 /* ---------- Hero ---------- */
 
@@ -61,7 +61,7 @@
 .cs-summary-grid > div { padding: 22px; background: var(--t-panel); border-radius: 10px; }
 .cs-summary-grid h3 { margin: 0 0 8px; color: var(--t-white); font-size: 15px; font-weight: 600; text-transform: capitalize; }
 .cs-summary-grid p { margin: 0; color: var(--t-text); font-size: 15px; line-height: 1.65; }
-.cs-summary-grid .is-result { background: #e1f1e7; }
+.cs-summary-grid .is-result { background: var(--cs-green-tint); box-shadow: inset 0 0 0 1px rgba(92, 201, 139, .35); }
 .cs-summary-grid .is-result h3 { color: var(--t-lime); }
 .cs-summary-grid .is-result p { color: var(--t-white); }
 
@@ -114,15 +114,15 @@
 .cs-pass { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; color: var(--cs-green); background: var(--cs-green-soft); border-radius: 999px; font-size: 13px; font-weight: 700; }
 .cs-pass::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 .cs-method { display: inline-block; min-width: 62px; padding: 3px 8px; border-radius: 6px; font-family: var(--t-mono); font-size: 12px; font-weight: 700; text-align: center; }
-.cs-method-get { color: #047857; background: #d1fae5; }
-.cs-method-post { color: #b45309; background: #fef3c7; }
-.cs-method-put { color: #3b4540; background: #e3e8e5; }
+.cs-method-get { color: var(--cs-green); background: var(--cs-green-soft); }
+.cs-method-post { color: var(--t-amber); background: rgba(242, 163, 58, .14); }
+.cs-method-put { color: var(--cs-text-2); background: var(--cs-subtle); }
 .cs-method-delete { color: var(--cs-red); background: var(--cs-red-soft); }
 
 /* Numbered or icon steps that wrap */
 .cs-steps { display: grid; grid-template-columns: repeat(var(--per-row, 4), minmax(0, 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; counter-reset: none; }
 .cs-steps li { display: grid; align-content: start; gap: 6px; padding: 14px; background: var(--cs-surface); border-radius: 14px; }
-.cs-step-num { display: grid; place-items: center; width: 34px; height: 34px; color: var(--t-blue-2); background: white; border-radius: 8px; font-family: var(--t-mono); font-size: 13px; font-weight: 600; }
+.cs-step-num { display: grid; place-items: center; width: 34px; height: 34px; color: var(--t-blue-2); background: var(--cs-card); border-radius: 8px; font-family: var(--t-mono); font-size: 13px; font-weight: 600; }
 .cs-step-num svg { width: 18px; height: 18px; }
 .cs-steps strong { color: var(--t-light-ink); font-size: 14px; line-height: 1.35; }
 .cs-steps small { color: var(--t-light-text); font-size: 13px; line-height: 1.45; }
@@ -132,8 +132,8 @@
 .cs-ladder li { display: grid; grid-template-columns: 64px minmax(0, 1fr) 96px; align-items: center; gap: 12px; font-size: 14px; }
 .cs-ladder-attempt { color: var(--t-light-ink); font-family: var(--t-mono); font-size: 13px; font-weight: 600; }
 .cs-ladder-bar { position: relative; height: 10px; background: var(--cs-subtle); border-radius: 99px; }
-.cs-ladder-bar::after { content: ""; position: absolute; inset: 0 auto 0 0; width: max(var(--w), 4px); border-radius: inherit; background: #5b6660; }
-.cs-ladder li:first-child .cs-ladder-bar::after { width: 100%; background: #b9e0c8; }
+.cs-ladder-bar::after { content: ""; position: absolute; inset: 0 auto 0 0; width: max(var(--w), 4px); border-radius: inherit; background: #98a19d; }
+.cs-ladder li:first-child .cs-ladder-bar::after { width: 100%; background: rgba(92, 201, 139, .5); }
 .cs-ladder li:last-child .cs-ladder-bar::after { background: var(--cs-red); }
 .cs-ladder-value { color: var(--cs-text-2); font-weight: 600; text-align: right; }
 
@@ -144,7 +144,7 @@
 .cs-checks svg { flex: 0 0 auto; width: 18px; height: 18px; margin-top: 1px; color: var(--cs-green); }
 .cs-questions { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; font-size: 15px; line-height: 1.5; }
 .cs-questions li { position: relative; padding-left: 26px; color: var(--cs-text-2); }
-.cs-questions li::before { content: "?"; position: absolute; left: 0; top: 1px; display: grid; place-items: center; width: 18px; height: 18px; color: #14181b; background: var(--t-amber); border-radius: 50%; font-family: var(--t-mono); font-size: 11px; font-weight: 700; }
+.cs-questions li::before { content: "?"; position: absolute; left: 0; top: 1px; display: grid; place-items: center; width: 18px; height: 18px; color: #121518; background: var(--t-amber); border-radius: 50%; font-family: var(--t-mono); font-size: 11px; font-weight: 700; }
 .cs-people { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
 .cs-people li { display: grid; gap: 2px; padding-bottom: 14px; border-bottom: 1px solid var(--cs-subtle); }
 .cs-people li:last-child { padding-bottom: 0; border-bottom: 0; }
@@ -159,12 +159,12 @@
 .cs-icon-card strong { color: var(--t-light-ink); font-size: 15px; }
 .cs-icon-card span { font-size: 14px; line-height: 1.5; }
 
-.cs-link { display: inline-flex; align-items: center; gap: 8px; justify-self: start; padding: 11px 16px; color: var(--t-light); background: var(--t-light-ink); border-radius: 8px; font-size: 15px; font-weight: 600; }
+.cs-link { display: inline-flex; align-items: center; gap: 8px; justify-self: start; padding: 11px 16px; color: var(--t-btn-ink); background: var(--t-btn); border-radius: 8px; font-size: 15px; font-weight: 600; }
 .cs-link svg { width: 16px; height: 16px; }
-.cs-link:hover { background: #2a3136; }
+.cs-link:hover { background: var(--t-amber-hover); }
 
 /* Defects and the bug ticket */
-.cs-defect { display: grid; gap: 12px; padding: clamp(20px, 2.4vw, 26px); background: white; border-radius: 12px; }
+.cs-defect { display: grid; gap: 12px; padding: clamp(20px, 2.4vw, 26px); background: var(--cs-card); border-radius: 12px; }
 .cs-defect-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .cs-defect-id { margin-right: auto; color: var(--cs-red); font-family: var(--t-mono); font-size: 13px; font-weight: 700; text-transform: uppercase; }
 .cs-defect h3 { margin: 0; color: var(--t-light-ink); font-family: var(--t-display); font-size: 19px; line-height: 1.25; }
@@ -187,7 +187,7 @@
 .cs-chip-red { color: var(--cs-red); background: var(--cs-red-soft); }
 .cs-chip-green { color: var(--cs-green); background: var(--cs-green-soft); }
 
-.cs-ticket { overflow: hidden; background: white; border-radius: 12px; }
+.cs-ticket { overflow: hidden; background: var(--cs-card); border-radius: 12px; }
 .cs-ticket-bar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 12px clamp(20px, 2.4vw, 26px); color: var(--t-light-text); background: var(--cs-soft); font-family: var(--t-mono); font-size: 13px; }
 .cs-ticket-bar .cs-id { color: var(--cs-red); }
 .cs-ticket h4 { margin: 18px clamp(20px, 2.4vw, 26px) 0; color: var(--t-light-ink); font-family: var(--t-display); font-size: 20px; line-height: 1.3; }
@@ -229,7 +229,7 @@
 .cs-pager-text small svg { width: 14px; height: 14px; transition: transform 160ms ease; }
 .cs-pager-text strong { color: var(--t-white); font-family: var(--t-display); font-size: 16px; line-height: 1.25; }
 .cs-pager-text > span { color: var(--t-muted); font-size: 13px; }
-.cs-pager-card:hover, .cs-pager-card:focus-visible { box-shadow: 0 0 0 1.5px var(--t-amber); background: #ffffff; }
+.cs-pager-card:hover, .cs-pager-card:focus-visible { box-shadow: 0 0 0 1.5px var(--t-amber); background: var(--cs-card); }
 .cs-pager-card:hover img { transform: scale(1.04); }
 .cs-pager-card.is-previous:hover small svg { transform: translateX(-3px); }
 .cs-pager-card.is-next:hover small svg { transform: translateX(3px); }
@@ -256,7 +256,7 @@
   .cs-next-inner { grid-template-columns: minmax(0, 1fr); }
   .cs-toc { position: static; min-width: 0; }
   .cs-toc ol { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; border-left: 0; scrollbar-width: none; }
-  .cs-toc ol a { margin: 0; padding: 8px 12px; white-space: nowrap; background: white; border: 1px solid var(--cs-line); border-radius: 999px; }
+  .cs-toc ol a { margin: 0; padding: 8px 12px; white-space: nowrap; background: var(--cs-card); border: 1px solid var(--cs-line); border-radius: 999px; }
   .cs-toc ol a.is-active { border-color: var(--t-amber); }
   .cs-toc-pdf { margin-top: 14px; }
   .cs-grid-2, .cs-grid-wide-right { grid-template-columns: minmax(0, 1fr); }
