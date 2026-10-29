@@ -10,6 +10,7 @@ import { bookingLink, profile } from "../../data/profile";
 import { techContent as content } from "../../data/tech";
 import { testimonials } from "../../data/testimonials";
 import "./fonts";
+import TechIntro, { INTRO_END_EVENT } from "./TechIntro";
 import "./tech.css";
 
 const navItems: NavItem[] = [
@@ -106,34 +107,43 @@ function TestRun() {
     setBugOpen(false);
     setBugPhase("hidden");
     setFinished(false);
-    let t = runId === 0 ? 450 : 120;
-    run.cases.forEach((testCase, index) => {
-      at(t, () => set(index, "run"));
-      t += 220;
-      if (testCase.bug) {
-        at(t, () => {
-          set(index, "fail");
-          setBugOpen(true);
-          setBugPhase("crawl");
-        });
-        t += 1000;
-        at(t, () => set(index, "retest"));
-        t += 360;
-        at(t, () => setBugPhase("caught"));
-        at(t + 420, () => setBugPhase("hidden"));
-      }
-      at(t, () => set(index, "pass"));
-      t += 60;
-    });
-    at(t + 120, () => {
-      setFinished(true);
-      try {
-        sessionStorage.setItem(RUN_SEEN_KEY, "1");
-      } catch {
-        // Storage can be blocked; the run just plays again next time.
-      }
-    });
-    return () => timers.forEach((id) => window.clearTimeout(id));
+    // The first run waits for the welcome intro to lift, so it is not played behind the cover.
+    const waitForIntro = runId === 0 && document.querySelector(".tx-intro") !== null;
+    const schedule = () => {
+      let t = runId === 0 ? 450 : 120;
+      run.cases.forEach((testCase, index) => {
+        at(t, () => set(index, "run"));
+        t += 220;
+        if (testCase.bug) {
+          at(t, () => {
+            set(index, "fail");
+            setBugOpen(true);
+            setBugPhase("crawl");
+          });
+          t += 1000;
+          at(t, () => set(index, "retest"));
+          t += 360;
+          at(t, () => setBugPhase("caught"));
+          at(t + 420, () => setBugPhase("hidden"));
+        }
+        at(t, () => set(index, "pass"));
+        t += 60;
+      });
+      at(t + 120, () => {
+        setFinished(true);
+        try {
+          sessionStorage.setItem(RUN_SEEN_KEY, "1");
+        } catch {
+          // Storage can be blocked; the run just plays again next time.
+        }
+      });
+    };
+    if (waitForIntro) window.addEventListener(INTRO_END_EVENT, schedule, { once: true });
+    else schedule();
+    return () => {
+      window.removeEventListener(INTRO_END_EVENT, schedule);
+      timers.forEach((id) => window.clearTimeout(id));
+    };
   }, [runId, run.cases]);
 
   const bug = run.cases.find((testCase) => testCase.bug);
@@ -294,6 +304,7 @@ export default function QAHome() {
 
   return (
     <div className="site-shell tech-theme">
+      <TechIntro />
       <SiteHeader brandRole="QA & SOFTWARE DEVELOPMENT" navItems={navItems} cta={{ label: "Book a Discovery Call", href: bookingLink.href }} />
 
       <main id="top">

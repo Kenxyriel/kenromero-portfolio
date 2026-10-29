@@ -565,3 +565,110 @@
   .tx-marquee-toggle { display: none; }
 }
 .tech-theme .logo-mark { --mark-ink: #f3f4f1; --mark-ring: #3a4247; --mark-ring-strong: #98a19d; }
+
+/* First-visit welcome intro (TechIntro.tsx): an issue that gets resolved, the tech side of the ticket. */
+.tx-intro { position: fixed; inset: 0; z-index: 300; }
+.tx-intro-cover { position: absolute; inset: 0; display: grid; place-items: center; padding: 20px; background: #121518; }
+.tx-intro-card {
+  display: grid;
+  gap: 18px;
+  width: min(480px, 100%);
+  padding: 24px 26px;
+  color: #c6ccc9;
+  background: #1c2125;
+  border: 1px solid #2f363b;
+  border-left: 3px solid #f2a33a;
+  border-radius: 10px;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  transition: border-color .2s ease;
+}
+.tx-intro.is-resolved .tx-intro-card { border-left-color: #5cc98b; }
+.tx-intro-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.tx-intro-id,
+.tx-intro-meta dt { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12px; letter-spacing: .06em; color: #98a19d; }
+.tx-intro-status { display: grid; }
+.tx-intro-status span {
+  grid-area: 1 / 1;
+  justify-self: end;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #c6ccc9;
+  background: #2f363b;
+}
+.tx-intro-status span + span { opacity: 0; }
+.tx-intro-status span:nth-child(2) { color: #121518; background: #f2a33a; }
+.tx-intro-status span:nth-child(3) { color: #121518; background: #5cc98b; }
+.tx-intro-title { font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", system-ui, sans-serif; font-size: clamp(30px, 7vw, 42px); font-weight: 600; line-height: 1.05; color: #f3f4f1; }
+.tx-intro-meta { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 8px 28px; margin: 0; padding-top: 16px; border-top: 1px solid #2f363b; }
+.tx-intro-meta dt { margin-bottom: 6px; font-size: 11px; text-transform: uppercase; }
+.tx-intro-meta dd { display: flex; align-items: center; gap: 8px; min-height: 28px; margin: 0; font-size: 15px; font-weight: 500; color: #f3f4f1; }
+.tx-intro-mark.logo-mark { width: 28px; height: 28px; }
+.tx-intro-flyer { position: fixed; margin: 0; transform-origin: 0 0; pointer-events: none; }
+.tx-intro-skip {
+  position: absolute;
+  right: max(20px, env(safe-area-inset-right, 0px));
+  bottom: max(20px, env(safe-area-inset-bottom, 0px));
+  min-height: 44px;
+  padding: 10px 18px;
+  font: 600 14px "IBM Plex Sans", system-ui, sans-serif;
+  color: #c6ccc9;
+  background: transparent;
+  border: 1px solid #2f363b;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.tx-intro-skip:hover { color: #f3f4f1; border-color: #98a19d; }
+.tx-intro-skip:focus-visible { outline: 2px solid #f2a33a; outline-offset: 2px; }
+@media (max-width: 480px) {
+  .tx-intro-card { padding: 20px; }
+  .tx-intro-meta { grid-template-columns: repeat(2, auto); }
+}
+
+/* Privacy / Terms (LegalPage.tsx) and the 404 page in the tech brand. */
+.tx-legal .legal-main { padding-top: 140px; }
+.tx-legal .legal-doc h1,
+.tx-legal .legal-doc h2,
+.tx-404 h1 { color: var(--t-white); font-family: var(--t-display); font-weight: 600; letter-spacing: -.01em; }
+.tx-legal .legal-doc .legal-kicker,
+.tx-404 .tx-404-id { color: var(--t-amber); font-family: var(--t-mono); font-weight: 500; letter-spacing: .08em; }
+.tx-legal .legal-doc a { color: var(--t-amber); }
+.tx-404 { display: grid; place-items: center; min-height: 100vh; padding: 120px 0; }
+.tx-404 h1 { margin: 12px 0 0; font-size: clamp(42px, 6vw, 64px); line-height: 1; }
+.tx-404 p:not(.tx-404-id) { max-width: 52ch; margin: 20px 0 30px; line-height: 1.75; }
+.tx-404-id { margin: 0; font-size: 13px; }
+.tx-404 .tx-404-home {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 22px;
+  font-weight: 600;
+  color: var(--t-btn-ink);
+  background: var(--t-btn);
+  border-radius: 999px;
+}
+.tx-404 .tx-404-home:hover { background: var(--t-amber-hover); }
+
+/* Touch screens: every tap target at least 44px tall (audit 2026-10-29). */
+@media (pointer: coarse) {
+  .tx-run-actions a,
+  .tx-run-actions button,
+  .tx-filters button,
+  .tech-theme .cs-toc ol a,
+  .tech-theme .cs-back,
+  .tech-theme .cs-toc-pdf,
+  .tech-theme .cs-link,
+  .tech-theme .cs-next-pdf { display: inline-flex; align-items: center; min-height: 44px; }
+  .tx-marquee-toggle,
+  .tech-theme .menu-toggle { min-width: 44px; min-height: 44px; }
+  .tx-contact-links a,
+  .tx-footer-legal a,
+  .tech-theme .cs-footer .legal-links a { display: inline-flex; align-items: center; min-height: 44px; margin-block: -12px; }
+  .tx-footer-legal a,
+  .tech-theme .cs-footer .legal-links a { min-width: 44px; justify-content: center; }
+}
