@@ -14,6 +14,7 @@ import '@fontsource-variable/fraunces/standard.css'
 import '@fontsource-variable/fraunces/standard-italic.css'
 import '@fontsource/caveat/700.css'
 import './va.css'
+import { packagePageForHost, portfolioUrl } from '../../packageHosts'
 import { VA_BASE, vaPath } from '../../vaPath'
 import WelcomeIntro from './WelcomeIntro'
 
@@ -103,6 +104,9 @@ export default function VALayout({ meta, children, unlisted = false }: VALayoutP
   usePageMeta(meta.title, meta.description)
   const [viewing, setViewing] = useState<VAImage | null>(null)
   const close = useCallback(() => setViewing(null), [])
+  // Package subdomains are shared with clients as a single price list: no page
+  // links, and the logo leads to the portfolio on the parent domain.
+  const onPackageHost = packagePageForHost() !== null
 
   useEffect(() => {
     if (!unlisted) return
@@ -118,8 +122,8 @@ export default function VALayout({ meta, children, unlisted = false }: VALayoutP
       <WelcomeIntro />
       <SiteHeader
         brandRole="CREATIVE PORTFOLIO"
-        brandHref={vaPath('/va')}
-        navItems={navItems}
+        brandHref={onPackageHost ? portfolioUrl(vaPath('/va')) : vaPath('/va')}
+        navItems={onPackageHost ? [] : navItems}
         cta={{ label: 'Book a Discovery Call', href: bookingLink.href }}
       />
       <LightboxContext.Provider value={setViewing}>
