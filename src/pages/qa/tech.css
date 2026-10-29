@@ -448,7 +448,7 @@
 .tx-contact-side > .tx-reveal { display: contents; }
 .tx-contact-side h3 { margin: 0; color: var(--t-white); font-family: var(--t-display); font-size: clamp(26px, 2.6vw, 32px); line-height: 1.1; }
 .tech-theme .tx-contact-side .contact-form-card.is-form-only { padding: 0; background: transparent; }
-.tx-contact-links { display: flex; flex-wrap: wrap; gap: 10px 20px; margin: auto 0 0; padding-top: 14px; border-top: 1px solid var(--t-line); padding: 0; list-style: none; font-size: 15px; }
+.tx-contact-links { display: flex; flex-wrap: wrap; gap: 10px 20px; margin: 0; padding: 0; list-style: none; font-size: 15px; }
 .tx-contact-links li { display: inline-flex; align-items: center; gap: 8px; min-width: 0; }
 .tx-contact-links svg { flex: none; color: var(--t-muted); }
 .tx-contact-links a { color: var(--t-white); font-weight: 500; overflow-wrap: anywhere; }
@@ -488,11 +488,14 @@
 
 /* ---------- Footer ---------- */
 
-.tx-footer { padding: 30px 0; color: var(--t-muted); font-size: 14px; }
-.tx-footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; }
+.tx-footer { padding: 36px 0 24px; color: var(--t-muted); font-size: 14px; }
+.tx-footer-inner { display: grid; grid-template-columns: minmax(180px, 1fr) minmax(0, 2fr); gap: 24px 48px; align-items: start; }
 .tx-footer strong { display: block; color: var(--t-white); font-family: var(--t-display); font-size: 18px; }
-.tx-footer-links { display: flex; flex-wrap: wrap; gap: 18px; }
-.tx-footer-links a:hover { color: var(--t-white); }
+.tx-footer .tx-contact-links { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px 24px; margin: 0; padding: 0; border: 0; }
+.tx-footer-base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--t-line); }
+.tx-footer-legal { display: flex; gap: 18px; }
+.tx-footer-legal a:hover { color: var(--t-white); }
+@media (max-width: 700px) { .tx-footer-inner { grid-template-columns: 1fr; } }
 
 /* ---------- Responsive ---------- */
 

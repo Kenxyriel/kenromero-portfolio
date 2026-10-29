@@ -571,7 +571,7 @@ main:focus { outline: none; }
   .case-back,
   .va-back,
   .legal-links a,
-  .tx-footer-links a,
+  .tx-footer-legal a,
   .contact-details a {
     padding-block: 14px;
     margin-block: -14px;
@@ -580,7 +580,7 @@ main:focus { outline: none; }
   .case-back,
   .va-back,
   .legal-links a,
-  .tx-footer-links a,
+  .tx-footer-legal a,
   .contact-details a {
     display: inline-flex;
     align-items: center;

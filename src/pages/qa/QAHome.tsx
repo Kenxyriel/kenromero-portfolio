@@ -595,38 +595,6 @@ export default function QAHome() {
             <Reveal className="tx-contact-side" delay={120}>
               <h3>Prefer to write?</h3>
               <ContactForm showInfo={false} />
-              <ul className="tx-contact-links">
-                <li>
-                  <Mail size={16} aria-hidden="true" />
-                  <a href={`mailto:${profile.email}`}>{profile.email}</a>
-                </li>
-                <li>
-                  <Smartphone size={16} aria-hidden="true" />
-                  <a href={profile.whatsapp.href} target="_blank" rel="noreferrer">
-                    WhatsApp {profile.whatsapp.label}
-                  </a>
-                </li>
-                <li>
-                  <Linkedin size={16} aria-hidden="true" />
-                  <a href={profile.linkedin.href} target="_blank" rel="noreferrer">
-                    LinkedIn
-                  </a>
-                </li>
-                <li>
-                  <Github size={16} aria-hidden="true" />
-                  <a href={profile.github.href} target="_blank" rel="noreferrer">
-                    GitHub
-                  </a>
-                </li>
-                <li>
-                  <FileText size={16} aria-hidden="true" />
-                  <a href={`mailto:${profile.email}?subject=${encodeURIComponent("Resume request")}`}>Request my resume</a>
-                </li>
-                <li>
-                  <MapPin size={16} aria-hidden="true" />
-                  <span>{profile.location}</span>
-                </li>
-              </ul>
             </Reveal>
           </div>
         </section>
@@ -634,24 +602,49 @@ export default function QAHome() {
 
       <footer className="tx-footer">
         <div className="container tx-footer-inner">
-          <div>
-            <strong>
-              KEN ROMERO
-            </strong>
+          <div className="tx-footer-brand">
+            <strong>KEN ROMERO</strong>
             <span>QA Engineer · Web Developer</span>
           </div>
-          <div className="tx-footer-links">
-            <a href={profile.linkedin.href} target="_blank" rel="noreferrer">
-              LinkedIn
-            </a>
-            <a href={profile.github.href} target="_blank" rel="noreferrer">
-              GitHub
-            </a>
-            <a href={`mailto:${profile.email}`}>{profile.email}</a>
+          <ul className="tx-contact-links" aria-label="Contact details">
+            <li>
+              <Mail size={16} aria-hidden="true" />
+              <a href={`mailto:${profile.email}`}>{profile.email}</a>
+            </li>
+            <li>
+              <Smartphone size={16} aria-hidden="true" />
+              <a href={profile.whatsapp.href} target="_blank" rel="noreferrer">
+                WhatsApp {profile.whatsapp.label}
+              </a>
+            </li>
+            <li>
+              <Linkedin size={16} aria-hidden="true" />
+              <a href={profile.linkedin.href} target="_blank" rel="noreferrer">
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <Github size={16} aria-hidden="true" />
+              <a href={profile.github.href} target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+            </li>
+            <li>
+              <FileText size={16} aria-hidden="true" />
+              <a href={`mailto:${profile.email}?subject=${encodeURIComponent("Resume request")}`}>Request my resume</a>
+            </li>
+            <li>
+              <MapPin size={16} aria-hidden="true" />
+              <span>{profile.location}</span>
+            </li>
+          </ul>
+        </div>
+        <div className="container tx-footer-base">
+          <span>© {new Date().getFullYear()} {profile.name}</span>
+          <div className="tx-footer-legal">
             <Link to="/privacy">Privacy</Link>
             <Link to="/terms">Terms</Link>
           </div>
-          <span>© {new Date().getFullYear()} {profile.name}</span>
         </div>
       </footer>
     </div>
