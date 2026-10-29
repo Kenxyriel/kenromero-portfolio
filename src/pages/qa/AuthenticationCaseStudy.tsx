@@ -193,7 +193,6 @@ export default function AuthenticationCaseStudy() {
       }}
       chapters={chapters}
       pdf="/documents/case-study-one.pdf"
-      next={{ title: 'API Testing and Validation', to: '/qa/projects/api-testing' }}
     >
       <Chapter
         id="context"
