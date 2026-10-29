@@ -83,7 +83,7 @@
 
 /* ---------- Shared ---------- */
 
-.tx-section { position: relative; padding: clamp(48px, 6vw, 80px) 0; }
+.tx-section { position: relative; padding: clamp(32px, 3.6vw, 48px) 0; }
 .tx-dark { background: var(--t-bg); }
 .tx-light { background: var(--t-light); color: var(--t-light-text); }
 .tx-light h2,
@@ -105,7 +105,7 @@
 .tx-hl,
 .tx-hero h1 mark { color: var(--t-amber); background: none; }
 
-.tx-heading { max-width: 760px; margin-bottom: clamp(24px, 3vw, 36px); }
+.tx-heading { max-width: 760px; margin-bottom: clamp(18px, 2vw, 24px); }
 .tx-heading > p:not(.tx-kicker) { margin: 14px 0 0; font-size: 18px; line-height: 1.65; }
 .tx-heading-row { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px; max-width: none; }
 
@@ -141,9 +141,9 @@
 
 /* ---------- Hero ---------- */
 
-.tx-hero { position: relative; overflow: hidden; padding: 112px 0 0; background: var(--t-bg); }
+.tx-hero { position: relative; overflow: hidden; padding: 100px 0 0; background: var(--t-bg); }
 .tx-hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 40px; align-items: end; }
-.tx-hero-copy { padding-bottom: clamp(36px, 4vw, 56px); }
+.tx-hero-copy { padding-bottom: clamp(28px, 3vw, 40px); }
 .tx-status { display: inline-flex; align-items: center; gap: 10px; margin: 0; color: var(--t-white); font-size: 15px; font-weight: 500; }
 .tx-dot { width: 9px; height: 9px; background: var(--t-lime); border-radius: 50%; box-shadow: 0 0 0 4px rgba(92, 201, 139, .18); }
 
@@ -256,7 +256,7 @@
 
 /* ---------- Marquee ---------- */
 
-.tx-marquee { position: relative; overflow: hidden; padding: 20px 0; background: var(--t-bg-2); }
+.tx-marquee { position: relative; overflow: hidden; padding: 16px 0; background: var(--t-bg-2); }
 /* The names fade out at both edges, and stop short of the pause button so it never covers one. */
 .tx-marquee-viewport { overflow: hidden; margin-right: 56px; -webkit-mask-image: linear-gradient(to right, transparent, #000 72px, #000 calc(100% - 72px), transparent); mask-image: linear-gradient(to right, transparent, #000 72px, #000 calc(100% - 72px), transparent); }
 .tx-marquee-track { display: flex; gap: 48px; width: max-content; animation: tx-marquee 38s linear infinite; }
@@ -271,13 +271,15 @@
 
 /* ---------- About ---------- */
 
-.tx-about { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(32px, 6vw, 88px); align-items: center; }
-.tx-about-photo { position: relative; display: flex; justify-content: center; align-items: flex-end; min-height: 420px; background: var(--t-panel); border-radius: 16px; overflow: hidden; }
+.tx-about { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(28px, 4vw, 56px); align-items: stretch; }
+.tx-about > .tx-reveal { display: flex; }
+.tx-about-photo { position: relative; display: flex; justify-content: center; align-items: flex-end; width: 100%; min-height: 360px; background: var(--t-panel); border-radius: 16px; overflow: hidden; }
 .tx-about-photo img { width: auto; max-width: 92%; max-height: 460px; object-fit: contain; }
-.tx-about-copy p { font-size: 17px; line-height: 1.75; }
-.tx-about-copy .tx-h2 { margin-bottom: 20px; }
-.tx-quote { margin: 26px 0 0; padding: 18px 22px; color: var(--t-light-ink); background: var(--t-bg); border-left: 3px solid var(--t-amber); border-radius: 0 8px 8px 0; font-size: 17px; font-style: italic; line-height: 1.7; }
-.tx-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 30px; }
+.tx-about-copy p { margin: 0 0 12px; font-size: 17px; line-height: 1.7; }
+.tx-about-copy { flex-direction: column; justify-content: center; }
+.tx-about-copy .tx-h2 { margin-bottom: 14px; }
+.tx-quote { margin: 8px 0 0; padding: 18px 22px; color: var(--t-light-ink); background: var(--t-bg); border-left: 3px solid var(--t-amber); border-radius: 0 8px 8px 0; font-size: 17px; font-style: italic; line-height: 1.7; }
+.tx-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 20px; }
 .tx-stats div { padding: 16px; background: var(--t-bg); border-radius: 8px; }
 .tx-stats strong { display: block; color: var(--t-light-ink); font-family: var(--t-display); font-size: 36px; line-height: 1; }
 .tx-stats span { display: block; margin-top: 6px; font-size: 14px; line-height: 1.4; }
@@ -440,24 +442,25 @@
 /* ---------- Contact ---------- */
 
 .tx-contact { overflow: hidden; }
-/* Left: heading + the discovery call as a test case. Right: the form and direct links. */
-.tx-contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
-.tx-contact-main { display: grid; gap: 0; min-width: 0; }
-.tx-contact-side { display: grid; gap: 14px; min-width: 0; }
-.tx-contact-side h3 { margin: 0; color: var(--t-white); font-family: var(--t-display); font-size: 24px; }
-.tx-contact-links { display: flex; flex-wrap: wrap; gap: 10px 20px; margin: 4px 0 0; padding: 0; list-style: none; font-size: 15px; }
+/* Heading above; below it the discovery call (TC-030) and the form as two cards of equal height. */
+.tx-contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: stretch; }
+.tx-contact-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; padding: clamp(20px, 2.6vw, 28px); background: var(--t-card); border-radius: 12px; }
+.tx-contact-side > .tx-reveal { display: contents; }
+.tx-contact-side h3 { margin: 0; color: var(--t-white); font-family: var(--t-display); font-size: clamp(26px, 2.6vw, 32px); line-height: 1.1; }
+.tech-theme .tx-contact-side .contact-form-card.is-form-only { padding: 0; background: transparent; }
+.tx-contact-links { display: flex; flex-wrap: wrap; gap: 10px 20px; margin: auto 0 0; padding-top: 14px; border-top: 1px solid var(--t-line); padding: 0; list-style: none; font-size: 15px; }
 .tx-contact-links li { display: inline-flex; align-items: center; gap: 8px; min-width: 0; }
 .tx-contact-links svg { flex: none; color: var(--t-muted); }
 .tx-contact-links a { color: var(--t-white); font-weight: 500; overflow-wrap: anywhere; }
 .tx-contact-links a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
-.tx-case { padding: clamp(20px, 2.6vw, 28px); color: #2a1d08; background: var(--t-amber); border-radius: 12px; }
+.tx-case { display: flex; flex-direction: column; padding: clamp(20px, 2.6vw, 28px); color: #2a1d08; background: var(--t-amber); border-radius: 12px; }
 .tx-case-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-family: var(--t-mono); font-size: 13px; }
 .tx-case-id { color: #5c4214; }
 .tx-case-status { padding: 2px 8px; color: #5c4214; background: rgba(18, 21, 24, .1); border-radius: 4px; transition: color 200ms ease, background-color 200ms ease; }
 .tx-case-status.is-ready { color: #f3f4f1; background: #121518; }
 .tx-case h3 { margin: 10px 0 0; color: #121518; font-family: var(--t-display); font-size: clamp(26px, 2.6vw, 32px); line-height: 1.1; text-wrap: balance; }
-.tx-case-fields { display: grid; gap: 14px; margin: 20px 0 0; }
+.tx-case-fields { display: grid; gap: 14px; margin: 20px 0 22px; }
 .tx-case-fields dt { color: #121518; font-size: 14px; font-weight: 600; }
 .tx-case-fields dd { margin: 2px 0 0; font-size: 16px; line-height: 1.55; }
 .tx-case-steps { display: grid; gap: 6px; margin: 4px 0 0; padding: 0; list-style: none; }
@@ -465,7 +468,7 @@
 .tx-case-check { display: grid; place-items: center; width: 20px; height: 20px; margin-top: 2px; color: transparent; background: rgba(18, 21, 24, .14); border-radius: 4px; transition: color 160ms ease, background-color 160ms ease, transform 260ms var(--ease-out); }
 .tx-case-steps li.is-done .tx-case-check { color: #5cc98b; background: #121518; transform: scale(1); animation: tx-tick 260ms var(--ease-out); }
 @keyframes tx-tick { from { transform: scale(.6); } to { transform: scale(1); } }
-.tx-case-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(18, 21, 24, .2); }
+.tx-case-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-top: auto; padding-top: 18px; border-top: 1px solid rgba(18, 21, 24, .2); }
 .tx-case-foot > span { color: #5c4214; font-size: 14px; }
 .tx-case-run { color: #f3f4f1; background: #121518; }
 .tx-case-run:hover { background: #262c31; }
@@ -498,7 +501,7 @@
 }
 
 /* Working with me: the shared onboarding timeline in the tech colours. */
-.tx-working-head { margin-top: clamp(40px, 5vw, 56px); }
+.tx-working-head { margin-top: clamp(28px, 3vw, 36px); }
 .tx-working-head .tx-h2 { font-size: clamp(28px, 3.2vw, 40px); }
 .tx-working-intro { max-width: 620px; margin: 10px 0 0; line-height: 1.6; }
 .tl.tl-tech {
@@ -511,7 +514,7 @@
   --tl-muted: var(--t-muted);
   --tl-time-font: var(--t-mono);
   --tl-title-font: var(--t-display);
-  margin-top: 32px;
+  margin-top: 20px;
 }
 
 @media (max-width: 1023px) {

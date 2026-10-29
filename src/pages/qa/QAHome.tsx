@@ -579,17 +579,18 @@ export default function QAHome() {
 
         {/* CONTACT */}
         <section id="contact" className="tx-section tx-dark tx-contact">
+          <div className="container">
+            <Reveal className="tx-heading">
+              <p className="tx-kicker">Let&apos;s connect</p>
+              <h2 className="tx-h2">
+                Let&apos;s build something <span className="tx-hl">reliable.</span>
+              </h2>
+              <p>{content.contactIntro}</p>
+            </Reveal>
+          </div>
+          {/* Two cards of equal height: book a call, or write. */}
           <div className="container tx-contact-grid">
-            <div className="tx-contact-main">
-              <Reveal className="tx-heading">
-                <p className="tx-kicker">Let&apos;s connect</p>
-                <h2 className="tx-h2">
-                  Let&apos;s build something <span className="tx-hl">reliable.</span>
-                </h2>
-                <p>{content.contactIntro}</p>
-              </Reveal>
-              <BookingCase />
-            </div>
+            <BookingCase />
 
             <Reveal className="tx-contact-side" delay={120}>
               <h3>Prefer to write?</h3>
