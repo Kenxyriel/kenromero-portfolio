@@ -424,7 +424,7 @@
 .tx-working-head { margin-top: clamp(56px, 7vw, 80px); }
 .tx-working-head .tx-h2 { font-size: clamp(28px, 3.2vw, 40px); }
 .tx-working-intro { max-width: 620px; margin: 10px 0 0; line-height: 1.6; }
-.tl-tech {
+.tl.tl-tech {
   --tl-rail: var(--t-line);
   --tl-accent: var(--t-lime);
   --tl-card: var(--t-bg-2);

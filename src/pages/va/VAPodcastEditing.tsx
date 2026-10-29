@@ -8,23 +8,12 @@ export default function VAPodcastEditing() {
     <VALayout meta={content.meta}>
       <VAPageHero title={content.title} subtitle={content.subtitle} intro={content.intro} />
 
-      <section className="va-section va-section-tight">
-        <div className="container va-podcast-tools">
-          <p className="va-kicker">Tools I use</p>
-          <ul className="va-tool-row">
-            {content.tools.map((tool, index) => (
-              <ToolBadge key={tool} name={tool} index={index} />
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="va-section">
-        <div className="va-band">
-          <h2>{content.editing.title}</h2>
-          <p>Podcast Editing &amp; Content Management</p>
-        </div>
+      {/* The work comes first: the first episode sits right under the page title. */}
+      <section className="va-section va-section-first" aria-labelledby="va-podcast-work">
         <div className="container">
+          <h2 id="va-podcast-work" className="sr-only">
+            {content.editing.title}
+          </h2>
           <ClientNotice />
           <p className="va-kicker">Long-form episodes &amp; video</p>
           <div className="va-gallery va-gallery-wide">
@@ -48,14 +37,43 @@ export default function VAPodcastEditing() {
       <section className="va-section va-section-cream">
         <div className="container">
           <VASectionTitle eyebrow="Content management" title={content.management.title} description={content.management.description} />
-          <div className="va-stack">
+          <div className="va-plan">
+            <h3>{content.management.plan.title}</h3>
+            <dl className="va-plan-stats">
+              {content.management.plan.stats.map((stat) => (
+                <div key={stat.label}>
+                  <dt>{stat.label}</dt>
+                  <dd>{stat.value}</dd>
+                </div>
+              ))}
+            </dl>
+            <ol className="va-plan-rhythm" aria-label="Weekly posting rhythm">
+              {content.management.plan.rhythm.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ol>
+            <p className="va-plan-platforms">{content.management.plan.platforms}</p>
+          </div>
+          <div className="va-sheet-grid">
             {content.management.items.map((item) => (
-              <div key={item.label}>
-                <p className="va-kicker">{item.label}</p>
-                <VAImg item={item} className="va-img-wide" />
+              <div className="va-sheet" key={item.label}>
+                <VAImg item={item} />
+                <h3>{item.label}</h3>
+                <p>{item.detail}</p>
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="va-section va-section-tight">
+        <div className="container va-podcast-tools">
+          <p className="va-kicker">Tools I use</p>
+          <ul className="va-tool-row">
+            {content.tools.map((tool, index) => (
+              <ToolBadge key={tool} name={tool} index={index} />
+            ))}
+          </ul>
         </div>
       </section>
 

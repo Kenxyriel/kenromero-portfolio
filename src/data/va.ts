@@ -52,8 +52,16 @@ export const vaHome = {
       'Ken Romero - social media management, podcast editing, graphic design, and content support for small businesses.',
   },
   hero: {
+    // The big promise under the name: what a client gets, in one line.
+    promise: 'Content that keeps your brand showing up, every week.',
     roles: ['Podcast Editor', 'Graphic Designer', 'Social Media Manager'],
     tagline: 'Built on Process, Driven by Results',
+    // A line from a real testimonial (vaTestimonials), shown under the hero buttons.
+    proof: {
+      quote: '…clear calls to action that encouraged inquiries.',
+      name: 'Jeffrey James',
+      org: 'JJJ Accounting and Tax Services',
+    },
     photo: { image: '', label: 'Hero portrait' } as VAImage,
   },
   about: {
@@ -142,7 +150,7 @@ export const vaHome = {
   },
   featured: {
     title: 'Featured Projects',
-    tagline: 'Crafted with strategy, built with purpose.',
+    tagline: 'Graphics, episodes and live posts I’ve made.',
     // Real samples shown inside the "Selected work" cards on the home page.
     // Swap any path for another file in public/va/work/ to change a preview.
     previews: {
@@ -217,6 +225,7 @@ export const vaTestimonials = [
     name: 'Jeffrey James',
     role: 'Business Owner, Founder of JJJ Accounting and Tax Services',
     rating: 5,
+    highlight: 'The posts balanced education and engagement, making complex topics easier for small business owners to understand.',
     quote:
       'Ken showed initiative in proposing content series, improving layout clarity, and aligning designs with the brand’s tone. With continued focus on optimizing text density and expanding into short-form video content, their work reflects a high level of professionalism and growth as an SMM. He maintained consistent brand visuals and messaging across Facebook and Instagram, using clear calls to action that encouraged inquiries. The posts balanced education and engagement, making complex topics easier for small business owners to understand. Job well done, Ken.',
   },
@@ -225,10 +234,33 @@ export const vaTestimonials = [
     name: 'Bethany',
     role: 'Business Owner',
     rating: 4.5,
+    highlight: 'The quality of his work truly exceeded our expectations.',
     quote:
       'Ken was absolutely amazing to work with. He is incredibly professional, kind, and clearly takes so much pride in his work. From start to finish, everything was handled with care, precision, and attention to detail. His expertise and calm presence made the entire experience seamless, and the quality of his work truly exceeded our expectations. We are beyond thankful for everything he did and would highly recommend him to anyone looking for someone they can trust to do an outstanding job. Thank you, Ken. We are so grateful.',
   },
 ]
+
+// Featured client story on the home page. Every fact here comes from JJJ work already on this site.
+export const jjjStory = {
+  client: 'JJJ Tax & Accounting',
+  title: 'Making tax talk easy to follow',
+  summary:
+    'An accounting firm that wanted to explain tax and bookkeeping to small business owners on Facebook and Instagram. I built the brand look, then planned, designed and wrote the posts.',
+  made: [
+    { label: 'Brand kit', detail: 'Colours, type and logo use' },
+    { label: '9 social graphics', detail: 'Q4 reminders, bookkeeping and tax tips' },
+    { label: '2 email designs', detail: 'Monthly newsletter and tax season promo' },
+    { label: 'October content calendar', detail: '16 posts across 4 content pillars' },
+  ],
+  images: {
+    kit: { image: '/va/work/design/brand-kit-1.webp', label: 'JJJ Tax and Accounting brand kit' },
+    post: { image: '/va/work/design/accounting-7.webp', label: 'JJJ Tax and Accounting Q4 graphic' },
+    email: { image: '/va/work/design/email-jjj-newsletter.webp', label: 'JJJ Tax and Accounting monthly newsletter' },
+  },
+  // An exact line from Jeffrey James's testimonial (vaTestimonials).
+  quote: 'Ken showed initiative in proposing content series, improving layout clarity, and aligning designs with the brand’s tone.',
+  quoteBy: 'Jeffrey James, Founder',
+}
 
 export type SamplePost = { account: string; caption: string; image?: string }
 
@@ -265,7 +297,7 @@ export const designBranding = {
     description: 'Brand kits, graphic design, and content visuals by Ken Romero.',
   },
   title: 'Design & Branding',
-  tagline: 'Crafted with strategy, built with purpose.',
+  tagline: 'Visuals that make your brand easy to remember.',
   intro:
     'Creating cohesive visuals that make your brand look professional, recognizable, and ready to connect with your audience.',
   sections: [
@@ -344,7 +376,7 @@ export const socialMedia = {
     description: 'Content planning, caption writing, hashtag research, and publishing strategy by Ken Romero.',
   },
   title: 'Social Media Content',
-  tagline: 'Crafted with strategy, built with purpose.',
+  tagline: 'Planned, written and posted on schedule.',
   intro: 'Strategic content, consistent execution, and research-driven growth.',
   planning: {
     title: 'Content Planning & Management',
@@ -485,25 +517,36 @@ export const podcastEditing = {
       { image: '/va/work/podcast/intro.webp', video: '/va/work/podcast/intro.mp4', label: 'Intro' },
       { image: '/va/work/podcast/outro.webp', video: '/va/work/podcast/outro.mp4', label: 'Outro' },
       { image: '/va/work/podcast/intro-teaser.webp', video: '/va/work/podcast/intro-teaser.mp4', label: 'Intro Teaser Clip' },
-      { image: '/va/work/podcast/ai-clip-1.webp', video: '/va/work/podcast/ai-clip-1.mp4', label: 'AI Generated Clip', tall: true },
-      { image: '/va/work/podcast/ai-clip-2.webp', video: '/va/work/podcast/ai-clip-2.mp4', label: 'AI Generated Clip 2', tall: true },
-      { image: '/va/work/podcast/manual-clip-1.webp', video: '/va/work/podcast/manual-clip-1.mp4', label: 'Manual Curated Clip', tall: true },
-      { image: '/va/work/podcast/manual-clip-2.webp', video: '/va/work/podcast/manual-clip-2.mp4', label: 'Manual Curated Clip 2', tall: true },
-      { image: '/va/work/podcast/manual-clip-3.webp', video: '/va/work/podcast/manual-clip-3.mp4', label: 'Manual Curated Clip 3', tall: true },
-      { image: '/va/work/podcast/manual-clip-4.webp', video: '/va/work/podcast/manual-clip-4.mp4', label: 'Manual Curated Clip 4', tall: true },
+      { image: '/va/work/podcast/ai-clip-1.webp', video: '/va/work/podcast/ai-clip-1.mp4', label: 'CFOs: from accountants to strategists (AI-assisted clip)', tall: true },
+      { image: '/va/work/podcast/ai-clip-2.webp', video: '/va/work/podcast/ai-clip-2.mp4', label: '50% of business exits are unplanned (AI-assisted clip)', tall: true },
+      { image: '/va/work/podcast/manual-clip-1.webp', video: '/va/work/podcast/manual-clip-1.mp4', label: 'Trust the process, trust your gut (hand-cut clip)', tall: true },
+      { image: '/va/work/podcast/manual-clip-2.webp', video: '/va/work/podcast/manual-clip-2.mp4', label: 'Most estate agents won’t survive the next 5 years (hand-cut clip)', tall: true },
+      { image: '/va/work/podcast/manual-clip-3.webp', video: '/va/work/podcast/manual-clip-3.mp4', label: 'The property sat unsold for 2 years (hand-cut clip)', tall: true },
+      { image: '/va/work/podcast/manual-clip-4.webp', video: '/va/work/podcast/manual-clip-4.mp4', label: 'Insights of a 23-year-old founder (hand-cut clip)', tall: true },
       { image: '/va/work/podcast/thumbnail.webp', label: 'Thumbnail' },
     ] as VAImage[],
   },
   management: {
     title: 'More than editing.',
     description: 'I help turn your podcast into content that gets seen.',
+    // The posting plan's summary, typed out from the posting calendar sheet so it stays sharp.
+    plan: {
+      title: 'A 13-week posting plan for one podcast',
+      stats: [
+        { value: '26', label: 'Full episodes' },
+        { value: '2', label: 'Episodes a week' },
+        { value: '6', label: 'Clips a week' },
+        { value: '7', label: 'Platforms' },
+      ],
+      rhythm: ['Mon teaser', 'Tue drop', 'Wed recap', 'Thu teaser', 'Thu drop', 'Fri–Sun clips'],
+      platforms: 'YouTube, YT Shorts, Instagram, Facebook, TikTok, X/Twitter, LinkedIn',
+    },
     items: [
-      { image: '/va/work/podcast/episode-details.webp', label: 'Episode Details' },
-      { image: '/va/work/podcast/production-calendar.webp', label: 'Production Calendar' },
-      { image: '/va/work/podcast/caption-bank.webp', label: 'Caption Bank' },
-      { image: '/va/work/podcast/posting-calendar.webp', label: 'Posting Calendar' },
-      { image: '/va/work/podcast/posting-strategy.webp', label: 'Posting Strategy / Summary' },
-    ] as VAImage[],
+      { image: '/va/work/podcast/episode-details.webp', label: 'Episode details', detail: 'Guest, title, what listeners will hear, description and SEO tags for every episode.' },
+      { image: '/va/work/podcast/production-calendar.webp', label: 'Production calendar', detail: 'Each episode’s edit status, from Not started to Approved.' },
+      { image: '/va/work/podcast/caption-bank.webp', label: 'Caption bank', detail: 'Facebook, Instagram and YouTube copy, plus hooks for three clips per episode.' },
+      { image: '/va/work/podcast/posting-calendar.webp', label: 'Posting calendar', detail: 'Every episode and clip, by day, time and platform, with its posting status.' },
+    ] as (VAImage & { detail: string })[],
   },
   cta: {
     eyebrow: 'Your podcast has the content.',
@@ -865,7 +908,7 @@ export const smmPackages = {
     title: 'Social Media Management Packages | Ken Romero',
     description: 'Social media management packages, add-ons, and terms.',
   },
-  title: 'Social Media Management Packages',
+  title: 'Social Media Packages',
   tagline: 'Consistent Content, Real Results',
   pillars: ['Strategy', 'Content', 'Design', 'Management', 'Results'],
   addOnNotes: [
