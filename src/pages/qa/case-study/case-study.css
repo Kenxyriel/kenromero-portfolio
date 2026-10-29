@@ -238,7 +238,9 @@
 .cs-next-pdf { display: inline-flex; align-items: center; gap: 6px; color: var(--t-blue-2); font-size: 13px; font-weight: 600; }
 .cs-next-pdf svg { width: 16px; height: 16px; }
 .cs-next-pdf:hover { color: var(--t-white); }
-.cs-pager { display: grid; grid-template-columns: repeat(2, minmax(0, 400px)); gap: 12px; }
+.cs-pager { display: grid; grid-template-columns: repeat(2, minmax(0, 400px)); gap: 12px; justify-content: space-between; }
+.cs-pager-card.is-next { flex-direction: row-reverse; text-align: right; }
+.cs-pager-card.is-next small { justify-content: flex-end; }
 .cs-pager-card { display: flex; align-items: center; gap: 12px; padding: 8px; color: var(--t-text); background: var(--t-bg-2); border: 1px solid var(--t-line); border-radius: 12px; transition: border-color 160ms ease, background-color 160ms ease; }
 .cs-pager-thumb { flex: 0 0 auto; width: 72px; aspect-ratio: 16 / 10; overflow: hidden; background: #111a30; border: 1px solid var(--t-line); border-radius: 6px; }
 .cs-pager-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 200ms ease; }
@@ -260,6 +262,8 @@
 
 @media (max-width: 680px) {
   .cs-pager { grid-template-columns: 1fr; gap: 8px; }
+  .cs-pager-card.is-next { flex-direction: row; text-align: left; }
+  .cs-pager-card.is-next small { justify-content: flex-start; }
   .cs-next-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; }
   .cs-pager-thumb { width: 64px; }
 }
