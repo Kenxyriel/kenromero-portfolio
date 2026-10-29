@@ -994,6 +994,8 @@
 @media (max-width: 1023px) {
   .cap-grid { grid-template-columns: 1fr; }
 }
+.va-client-notice-takedown { margin-top: 6px !important; }
+.va-client-notice-takedown a { color: var(--va-ink); font-weight: 800; text-decoration-thickness: 2px; text-underline-offset: 3px; }
 .va-podcast-tools { display: flex; flex-direction: column; align-items: center; gap: 18px; }
 .va-podcast-tools .va-kicker { margin: 0; }
 .va-podcast-tools .va-tool-row { justify-content: center; gap: 22px 28px; padding: 22px 28px; background: white; border: 2px solid var(--va-ink); border-radius: 26px; box-shadow: 5px 5px 0 var(--va-ink); }

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { ShieldCheck } from 'lucide-react'
 import { podcastEditing as content } from '../../data/va'
+import { profile } from '../../data/profile'
 import PodcastCalendar from './PodcastCalendar'
 import VALayout, { ToolBadge, VACta, VAImg, VAPageHero, VASectionTitle } from './VALayout'
 
@@ -93,7 +94,7 @@ function ClientNotice() {
     observer.observe(node)
     return () => observer.disconnect()
   }, [])
-  const { tag, title, body } = content.editing.notice
+  const { tag, title, body, takedown, takedownLink } = content.editing.notice
   return (
     <div ref={ref} className={`va-client-notice${visible ? ' is-visible' : ''}`} role="note">
       <span className="va-client-notice-icon" aria-hidden="true">
@@ -103,6 +104,10 @@ function ClientNotice() {
         <p className="va-client-notice-tag">{tag}</p>
         <p className="va-client-notice-title">{title}</p>
         <p className="va-client-notice-body">{body}</p>
+        <p className="va-client-notice-body va-client-notice-takedown">
+          {takedown}{' '}
+          <a href={`mailto:${profile.email}?subject=${encodeURIComponent('Portfolio removal request')}`}>{takedownLink}</a>.
+        </p>
       </div>
     </div>
   )
