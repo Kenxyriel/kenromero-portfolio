@@ -83,7 +83,6 @@ export default function SaripointCaseStudy() {
       }}
       resultLabel="Where it stands"
       chapters={chapters}
-      next={{ title: 'JJJ Tax and Accounting Website', to: '/qa/projects/jjj-website' }}
     >
       <Chapter
         id="context"

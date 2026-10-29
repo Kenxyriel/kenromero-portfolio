@@ -231,21 +231,42 @@
 
 /* ---------- Next + footer ---------- */
 
-.cs-next { padding: clamp(56px, 7vw, 88px) 0; background: var(--t-bg); }
-.cs-next-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-.cs-next-card { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 28px; color: var(--t-white); background: var(--t-bg-2); border: 1px solid var(--t-line); border-radius: 18px; transition: border-color 160ms ease, transform 160ms ease; }
-.cs-next-card:hover { border-color: var(--t-blue-2); transform: translateY(-2px); }
-.cs-next-card small { display: block; margin-bottom: 6px; color: var(--t-blue-2); font-family: var(--t-mono); font-size: 13px; }
-.cs-next-card strong { font-family: var(--t-display); font-size: clamp(20px, 2.2vw, 26px); line-height: 1.2; letter-spacing: -.02em; }
-.cs-next-card > svg { flex: 0 0 auto; width: 26px; height: 26px; color: var(--t-blue-2); }
-.cs-next-pdf { justify-content: flex-start; }
-.cs-next-pdf > svg { order: -1; }
+.cs-next { padding: clamp(48px, 6vw, 72px) 0; background: var(--t-bg); border-top: 1px solid var(--t-line); }
+.cs-next-inner { max-width: 1040px; }
+.cs-next-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px 20px; margin-bottom: 20px; }
+.cs-next-head h2 { margin: 0; color: var(--t-white); font-family: var(--t-display); font-size: clamp(20px, 2vw, 24px); letter-spacing: -.02em; }
+.cs-next-pdf { display: inline-flex; align-items: center; gap: 8px; color: var(--t-blue-2); font-size: 14px; font-weight: 600; }
+.cs-next-pdf svg { width: 16px; height: 16px; }
+.cs-next-pdf:hover { color: var(--t-white); }
+.cs-pager { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.cs-pager-card { display: flex; align-items: center; gap: 16px; padding: 12px; color: var(--t-text); background: var(--t-bg-2); border: 1px solid var(--t-line); border-radius: 14px; transition: border-color 160ms ease, background-color 160ms ease; }
+.cs-pager-card.is-next { flex-direction: row-reverse; text-align: right; }
+.cs-pager-thumb { flex: 0 0 auto; width: 128px; aspect-ratio: 16 / 10; overflow: hidden; background: #111a30; border: 1px solid var(--t-line); border-radius: 8px; }
+.cs-pager-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 200ms ease; }
+.cs-pager-text { display: grid; gap: 4px; min-width: 0; }
+.cs-pager-text small { display: inline-flex; align-items: center; gap: 6px; color: var(--t-blue-2); font-family: var(--t-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+.cs-pager-card.is-next small { justify-content: flex-end; }
+.cs-pager-text small svg { width: 14px; height: 14px; transition: transform 160ms ease; }
+.cs-pager-text strong { color: var(--t-white); font-family: var(--t-display); font-size: 17px; line-height: 1.25; letter-spacing: -.01em; }
+.cs-pager-text > span { color: var(--t-muted); font-size: 13px; }
+.cs-pager-card:hover, .cs-pager-card:focus-visible { border-color: var(--t-blue); background: #101b34; }
+.cs-pager-card:hover img { transform: scale(1.04); }
+.cs-pager-card.is-previous:hover small svg { transform: translateX(-3px); }
+.cs-pager-card.is-next:hover small svg { transform: translateX(3px); }
 
 .cs-footer { padding: 26px 0; color: var(--t-muted); background: #04070f; border-top: 1px solid var(--t-line); font-size: 13px; }
 .cs-footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; }
 .cs-footer .legal-links a:hover { color: var(--t-white); }
 
 /* ---------- Responsive ---------- */
+
+@media (max-width: 680px) {
+  .cs-pager { grid-template-columns: 1fr; gap: 12px; }
+  .cs-pager-card.is-next { flex-direction: row; text-align: left; }
+  .cs-pager-card.is-next small { justify-content: flex-start; }
+  .cs-pager-thumb { width: 96px; }
+  .cs-pager-text strong { font-size: 16px; }
+}
 
 @media (max-width: 1023px) {
   .cs-hero-grid { grid-template-columns: 1fr; }

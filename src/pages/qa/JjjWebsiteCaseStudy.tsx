@@ -88,7 +88,6 @@ export default function JjjWebsiteCaseStudy() {
       }}
       resultLabel="Where it stands"
       chapters={chapters}
-      next={{ title: 'SalinLibro-CMS Client Management', to: '/qa/projects/salinlibro-cms' }}
     >
       <Chapter
         id="context"

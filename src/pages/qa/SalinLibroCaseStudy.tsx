@@ -75,7 +75,6 @@ export default function SalinLibroCaseStudy() {
       }}
       resultLabel="Where it stands"
       chapters={chapters}
-      next={{ title: 'Authentication & Proactive Lockout Testing', to: '/qa/projects/authentication-testing' }}
     >
       <Chapter
         id="context"

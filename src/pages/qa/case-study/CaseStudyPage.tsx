@@ -1,10 +1,11 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { ArrowLeft, ArrowRight, FileText } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import LegalLinks from '../../../components/LegalLinks'
 import { imageProps } from '../../../components/responsiveImage'
 import SiteHeader, { type NavItem } from '../../../components/SiteHeader'
 import { bookingLink } from '../../../data/profile'
+import { techContent } from '../../../data/tech'
 import usePageMeta from '../../../components/usePageMeta'
 import '@fontsource/space-grotesk/500.css'
 import '@fontsource/space-grotesk/600.css'
@@ -17,6 +18,23 @@ const navItems: NavItem[] = [
   { label: 'Skills', href: '/qa#skills' },
   { label: 'Projects', href: '/qa#projects' },
 ]
+
+// Case studies in the same order as the home page Projects grid.
+const caseStudies = techContent.projects.flatMap((project) =>
+  project.link?.to?.startsWith('/qa/projects/') ? [{ ...project, to: project.link.to }] : [],
+)
+
+// The case studies before and after this one, wrapping around at the ends.
+function usePagerLinks() {
+  const { pathname } = useLocation()
+  const index = caseStudies.findIndex((project) => project.to === pathname.replace(/\/$/, ''))
+  if (index < 0) return []
+  const at = (offset: number) => caseStudies[(index + offset + caseStudies.length) % caseStudies.length]
+  return [
+    { label: 'Previous', project: at(-1) },
+    { label: 'Next', project: at(1) },
+  ]
+}
 
 export type CaseStudyChapter = { id: string; label: string }
 
@@ -34,7 +52,6 @@ type CaseStudyPageProps = {
   status?: string
   chapters: CaseStudyChapter[]
   pdf?: string
-  next: { title: string; to: string }
   children: ReactNode
 }
 
@@ -72,13 +89,13 @@ export default function CaseStudyPage({
   summary,
   chapters,
   pdf,
-  next,
   resultLabel = 'Result',
   status,
   children,
 }: CaseStudyPageProps) {
   usePageMeta(`${title} | Ken Romero QA Case Study`, lead)
   const active = useActiveChapter(chapters.map((chapter) => chapter.id))
+  const pager = usePagerLinks()
   const summaryItems = [
     ['Problem', summary.problem],
     ['My role', summary.role],
@@ -181,24 +198,34 @@ export default function CaseStudyPage({
           </div>
         </div>
 
-        <section className="cs-next">
-          <div className="container cs-next-grid">
-            {pdf && (
-              <a className="cs-next-card cs-next-pdf" href={pdf} target="_blank" rel="noreferrer">
-                <FileText aria-hidden="true" />
-                <span>
-                  <small>QA artifact</small>
-                  <strong>Read the full case study (PDF)</strong>
-                </span>
-              </a>
-            )}
-            <Link className="cs-next-card" to={next.to}>
-              <span>
-                <small>Next case study</small>
-                <strong>{next.title}</strong>
-              </span>
-              <ArrowRight aria-hidden="true" />
-            </Link>
+        <section className="cs-next" aria-label="More case studies">
+          <div className="container cs-next-inner">
+            <div className="cs-next-head">
+              <h2>More case studies</h2>
+              {pdf && (
+                <a className="cs-next-pdf" href={pdf} target="_blank" rel="noreferrer">
+                  <FileText aria-hidden="true" /> Full case study (PDF)
+                </a>
+              )}
+            </div>
+            <div className="cs-pager">
+              {pager.map(({ label, project }) => (
+                <Link key={label} className={`cs-pager-card is-${label.toLowerCase()}`} to={project.to}>
+                  <span className="cs-pager-thumb">
+                    {project.image && <img {...imageProps(project.image)} alt="" loading="lazy" />}
+                  </span>
+                  <span className="cs-pager-text">
+                    <small>
+                      {label === 'Previous' && <ArrowLeft aria-hidden="true" />}
+                      {label}
+                      {label === 'Next' && <ArrowRight aria-hidden="true" />}
+                    </small>
+                    <strong>{project.title}</strong>
+                    <span>{project.category}</span>
+                  </span>
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
       </main>
