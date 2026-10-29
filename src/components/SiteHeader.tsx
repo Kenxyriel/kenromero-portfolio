@@ -21,21 +21,23 @@ type SiteHeaderProps = {
 }
 
 // Paths ("/va/...") navigate client-side; hashes ("#about") scroll on the page;
-// full URLs (the booking page) open in a new tab.
+// full URLs (the booking page) open in a new tab unless newTab is false.
 function NavLink({
   href,
   className,
   onClick,
+  newTab = true,
   children,
 }: {
   href: string
   className?: string
   onClick: () => void
+  newTab?: boolean
   children: ReactNode
 }) {
   if (href.startsWith('http')) {
     return (
-      <a className={className} href={href} target="_blank" rel="noreferrer" onClick={onClick}>
+      <a className={className} href={href} {...(newTab ? { target: '_blank', rel: 'noreferrer' } : {})} onClick={onClick}>
         {children}
       </a>
     )
@@ -56,6 +58,7 @@ function NavLink({
 
 // Fixed top navigation shared by every audience homepage. Each route passes
 // its own links so /qa, /it, and /va never expose each other's navigation.
+// With no links (the package price lists) it shows just the logo and the CTA.
 export default function SiteHeader({ brandRole, navItems, cta, brandHref = '#top' }: SiteHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -67,15 +70,16 @@ export default function SiteHeader({ brandRole, navItems, cta, brandHref = '#top
   }, [])
 
   const closeMenu = () => setMenuOpen(false)
+  const minimal = navItems.length === 0
 
   return (
-    <header className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
+    <header className={`navbar${scrolled ? ' navbar-scrolled' : ''}${minimal ? ' navbar-minimal' : ''}`}>
       {/* Keyboard users can jump past the navigation straight to the page content. */}
       <a className="skip-link" href="#top" onClick={skipToMain}>
         Skip to content
       </a>
       <div className="container nav-inner">
-        <NavLink className="brand" href={brandHref} onClick={closeMenu}>
+        <NavLink className="brand" href={brandHref} newTab={false} onClick={closeMenu}>
           <LogoMark />
           <span className="brand-text">
             <span className="brand-name">KEN ROMERO</span>
@@ -83,23 +87,27 @@ export default function SiteHeader({ brandRole, navItems, cta, brandHref = '#top
           </span>
         </NavLink>
 
-        <button
-          className="menu-toggle"
-          aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          {menuOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        {!minimal && (
+          <button
+            className="menu-toggle"
+            aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        )}
 
         <nav className={`nav-links ${menuOpen ? 'nav-links-open' : ''}`}>
-          <div className="nav-menu">
-            {navItems.map((item) => (
-              <NavLink key={item.href} href={item.href} onClick={closeMenu}>
-                {item.label}
-              </NavLink>
-            ))}
-          </div>
+          {!minimal && (
+            <div className="nav-menu">
+              {navItems.map((item) => (
+                <NavLink key={item.href} href={item.href} onClick={closeMenu}>
+                  {item.label}
+                </NavLink>
+              ))}
+            </div>
+          )}
           <NavLink className="nav-cta" href={cta.href} onClick={closeMenu}>
             {cta.label}
           </NavLink>

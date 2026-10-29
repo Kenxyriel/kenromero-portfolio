@@ -479,6 +479,22 @@ main:focus { outline: none; }
 
 }
 
+/* Logo + CTA only (package price lists): the CTA stays in the bar at every width. */
+@media (max-width: 850px) {
+  .navbar-minimal .nav-links { position: static; display: flex; flex-direction: row; padding: 0; background: none; border: 0; border-radius: 0; box-shadow: none; }
+  .navbar-minimal .nav-cta { margin-top: 0; }
+}
+@media (max-width: 420px) {
+  .navbar-minimal .nav-inner { gap: 10px; }
+  .navbar-minimal .brand { gap: 8px; }
+  .navbar-minimal .brand-name { font-size: 17px; white-space: nowrap; }
+  .navbar-minimal .nav-links a.nav-cta { padding: 9px 12px; font-size: 11px; letter-spacing: .03em; white-space: nowrap; }
+}
+/* Narrowest phones: the logo mark alone, so the button fits beside it. */
+@media (max-width: 374px) {
+  .navbar-minimal .brand-text { display: none; }
+}
+
 /* Phone and small-tablet menu: it grows out of its button instead of popping in. */
 @media (max-width: 850px) {
   .nav-links-open {
