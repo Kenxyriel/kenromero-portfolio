@@ -10,8 +10,10 @@ const SEEN_KEY = 'kr-intro-seen'
 const EASE_OUT = 'cubic-bezier(0.23, 1, 0.32, 1)'
 const EASE_IN_OUT = 'cubic-bezier(0.77, 0, 0.175, 1)'
 const EASE_PLAYFUL = 'cubic-bezier(0.34, 1.56, 0.64, 1)'
-const TEAR_AT = 1200
-const TOTAL = 1920
+// HOLD keeps the finished ticket on screen a beat longer so "Welcome in" can be read (2.3s total).
+const HOLD = 380
+const TEAR_AT = 1200 + HOLD
+const TOTAL = 1920 + HOLD
 
 function shouldPlay() {
   if (typeof window === 'undefined') return false
@@ -80,9 +82,9 @@ export default function WelcomeIntro() {
           { strokeDasharray: 1, strokeDashoffset: 0 },
         ], { duration: i < 3 ? 600 : 450, delay, easing: EASE_OUT })
       })
-      play(stub, [{ transform: 'rotate(0deg)' }, { transform: 'rotate(-8deg)' }], { duration: 200, delay: 1000, easing: EASE_OUT, fill: 'forwards' })
-      play(cover, [{ transform: 'translateY(0)' }, { transform: 'translateY(-100%)' }], { duration: 550, delay: 1300, easing: EASE_IN_OUT })
-      play(skip, [{ opacity: 1 }, { opacity: 0 }], { duration: 200, delay: 1300, easing: EASE_OUT, fill: 'forwards' })
+      play(stub, [{ transform: 'rotate(0deg)' }, { transform: 'rotate(-8deg)' }], { duration: 200, delay: 1000 + HOLD, easing: EASE_OUT, fill: 'forwards' })
+      play(cover, [{ transform: 'translateY(0)' }, { transform: 'translateY(-100%)' }], { duration: 550, delay: 1300 + HOLD, easing: EASE_IN_OUT })
+      play(skip, [{ opacity: 1 }, { opacity: 0 }], { duration: 200, delay: 1300 + HOLD, easing: EASE_OUT, fill: 'forwards' })
 
       // At the tear the mark lifts off the stub and flies to the real navbar logo.
       timers.push(window.setTimeout(() => {
