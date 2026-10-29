@@ -197,5 +197,5 @@ export const techContent = {
     note: 'Opens my calendar in a new tab. Free, no commitment.',
   },
   contactIntro:
-    'Hiring for QA or development, or have a project that needs testing or building? Send a message and introduce yourself.',
+    'Tell me what you’re building and what worries you about it. I’ll tell you how I’d test it.',
 }
