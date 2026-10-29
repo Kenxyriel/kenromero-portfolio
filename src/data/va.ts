@@ -726,6 +726,13 @@ export const podcastEditing = {
       { image: '/va/work/podcast/manual-clip-4.webp', video: '/va/work/podcast/manual-clip-4.mp4', label: 'Insights of a 23-year-old founder (hand-cut clip)', tall: true },
       { image: '/va/work/podcast/thumbnail.webp', label: 'Thumbnail' },
     ] as VAImage[],
+    // Guest faces and names are blurred on the 789 Show thumbnails.
+    thumbnails: [
+      { image: '/va/work/podcast/thumbnail-stores.webp', label: '350 stores to 16,000+ in 30 months' },
+      { image: '/va/work/podcast/thumbnail-renewals.webp', label: '90%+ client renewals' },
+      { image: '/va/work/podcast/thumbnail-sqft.webp', label: '500 sq ft to 89,000 sq ft' },
+    ] as VAImage[],
+    show: { name: 'The 789 Show', label: 'Watch the channel on YouTube', href: 'https://www.youtube.com/@The789Show' },
   },
   management: {
     title: 'More than editing.',

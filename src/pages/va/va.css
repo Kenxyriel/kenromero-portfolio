@@ -802,6 +802,11 @@
 .va-gallery-wide .va-img img,
 .va-gallery-wide .va-img video { aspect-ratio: 16 / 9; object-fit: cover; }
 @media (max-width: 600px) { .va-gallery-wide { grid-template-columns: 1fr; } }
+.va-gallery-thumbs { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 1040px; margin: 0 auto; }
+.va-gallery-thumbs .va-img img { aspect-ratio: 16 / 9; object-fit: cover; }
+@media (max-width: 767px) { .va-gallery-thumbs { grid-template-columns: 1fr; } }
+.va-show-link { max-width: 1040px; margin: 24px auto 0; color: var(--va-text); font-size: 15px; text-align: center; }
+.va-show-link a { color: var(--va-ink); font-weight: 700; text-decoration-color: var(--va-amber); text-decoration-thickness: 3px; text-underline-offset: 4px; }
 .va-gallery-tall { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 960px; margin-inline: auto; }
 @media (max-width: 767px) { .va-gallery-tall { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } }
 .va-stack { display: grid; gap: 36px; }

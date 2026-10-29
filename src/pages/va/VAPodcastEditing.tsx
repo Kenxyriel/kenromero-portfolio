@@ -32,6 +32,18 @@ export default function VAPodcastEditing() {
                 <VAImg key={item.label} item={item} caption />
               ))}
           </div>
+          <p className="va-kicker">Thumbnails</p>
+          <div className="va-gallery va-gallery-thumbs">
+            {content.editing.thumbnails.map((item) => (
+              <VAImg key={item.label} item={item} caption />
+            ))}
+          </div>
+          <p className="va-show-link">
+            These thumbnails and the content calendar below are for {content.editing.show.name}.{' '}
+            <a href={content.editing.show.href} target="_blank" rel="noreferrer">
+              {content.editing.show.label} ↗
+            </a>
+          </p>
         </div>
       </section>
 
