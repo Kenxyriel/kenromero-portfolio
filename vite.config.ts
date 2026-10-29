@@ -23,6 +23,8 @@ const pageMeta = {
 // Files in public/ used only by the QA + development portfolio. The VA-only
 // build drops them so, for example, the QA case-study PDF is not on that site.
 const techOnlyFiles = ['documents', 'case-study-preview', 'icons', 'brand/tech']
+// And the other way round: the QA-only build (the tech domain) has no creative pages.
+const vaOnlyFiles = ['va', 'brand/creative']
 
 // Public pages listed in sitemap.xml. Unlisted package pages are left out on purpose.
 const techPages = ['/', '/qa/projects/authentication-testing', '/qa/projects/api-testing', '/qa/projects/saripoint', '/qa/projects/jjj-website', '/qa/projects/salinlibro-cms', '/privacy', '/terms']
@@ -83,6 +85,9 @@ export default defineConfig(({ mode }) => {
           const dir = options.dir!
           if (portfolio === 'va') {
             for (const file of techOnlyFiles) rmSync(`${dir}/${file}`, { recursive: true, force: true })
+          }
+          if (portfolio === 'qa' || portfolio === 'it') {
+            for (const file of vaOnlyFiles) rmSync(`${dir}/${file}`, { recursive: true, force: true })
           }
           // Browsers ask for /favicon.ico on their own, so serve one at the root.
           writeFileSync(`${dir}/favicon.ico`, readFileSync(`public/brand/${brand}/favicon.ico`))

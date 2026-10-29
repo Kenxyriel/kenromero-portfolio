@@ -16,7 +16,8 @@ import { vaPath } from '../vaPath'
 export type VAImage = { image?: string; video?: string; label: string; tall?: boolean; brand?: string; long?: boolean }
 
 export const vaLinks = {
-  instagram: { label: '@heyitskhenn', href: 'https://www.instagram.com/heyitskhenn/' },
+  instagram: { label: '@kenromero.goesdigital_', href: 'https://www.instagram.com/kenromero.goesdigital_/' },
+  tiktok: { label: '@kenromero.goesdigital_', href: 'https://www.tiktok.com/@kenromero.goesdigital_' },
   aboutMe: { label: 'More about me', href: 'https://jobseekers.ph/kenxyrieldemesaromero' },
   linkedin: { label: 'LinkedIn', href: 'https://www.linkedin.com/in/kenxyrielromero/' },
   handle: 'kenromero.goesdigital_',

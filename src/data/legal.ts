@@ -100,7 +100,7 @@ export const privacyPolicy: LegalDoc = {
     {
       heading: 'Other websites',
       paragraphs: [
-        'Links to LinkedIn, Instagram, WhatsApp, GitHub, Google Sheets, and other sites are governed by those sites’ own privacy policies.',
+        'Links to LinkedIn, Instagram, TikTok, WhatsApp, GitHub, Google Sheets, and other sites are governed by those sites’ own privacy policies.',
       ],
     },
     {
