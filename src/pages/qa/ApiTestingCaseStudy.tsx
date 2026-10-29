@@ -121,7 +121,7 @@ const demonstrates = [
 export default function ApiTestingCaseStudy() {
   return (
     <CaseStudyPage
-      kicker="// case study 02 · API testing"
+      kicker="QA case study · API testing"
       title="API Testing and Validation"
       system="Cashless point of sale system"
       lead="An anonymized case study of testing product APIs in Postman and checking that every change showed up correctly in the POS app."
@@ -220,6 +220,7 @@ export default function ApiTestingCaseStudy() {
           <DefectCard
             defect={{
               id: 'Defect 01',
+              retested: true,
               title: 'Product not displayed correctly',
               summary: 'After successful product creation, the product did not appear in the POS application.',
               expected: 'Product information is correctly displayed in the POS UI.',
@@ -230,6 +231,7 @@ export default function ApiTestingCaseStudy() {
           <DefectCard
             defect={{
               id: 'Defect 02',
+              retested: true,
               title: 'PUT created a new product instead of updating',
               summary:
                 'When updating an existing product using a PUT request, the system created a new product instead of updating the existing one.',

@@ -61,7 +61,7 @@ const checks = [
 export default function JjjWebsiteCaseStudy() {
   return (
     <CaseStudyPage
-      kicker="// project · client website"
+      kicker="Project · Client website"
       status="Pre-launch"
       title="JJJ Tax and Accounting Website"
       system="Business website for a Philippine accounting firm"
