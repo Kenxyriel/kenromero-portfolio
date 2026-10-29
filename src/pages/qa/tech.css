@@ -448,6 +448,11 @@
 .tx-contact-side > .tx-reveal { display: contents; }
 .tx-contact-side h3 { margin: 0; color: var(--t-white); font-family: var(--t-display); font-size: clamp(26px, 2.6vw, 32px); line-height: 1.1; }
 .tech-theme .tx-contact-side .contact-form-card.is-form-only { padding: 0; background: transparent; }
+/* When the TC-030 card is taller, the message box grows so the send button sits at the bottom of the card. */
+.tech-theme .tx-contact-side .contact-form-card { display: flex; flex: 1; flex-direction: column; }
+.tech-theme .tx-contact-side .contact-form { display: flex; flex: 1; flex-direction: column; }
+.tech-theme .tx-contact-side .contact-form > label:has(textarea) { display: flex; flex: 1; flex-direction: column; }
+.tech-theme .tx-contact-side .contact-form textarea { flex: 1; min-height: 160px; }
 .tx-contact-links { display: flex; flex-wrap: wrap; gap: 10px 20px; margin: 0; padding: 0; list-style: none; font-size: 15px; }
 .tx-contact-links li { display: inline-flex; align-items: center; gap: 8px; min-width: 0; }
 .tx-contact-links svg { flex: none; color: var(--t-muted); }
