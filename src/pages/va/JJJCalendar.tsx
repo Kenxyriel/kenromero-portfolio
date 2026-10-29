@@ -1,6 +1,7 @@
-import { jjjCalendar as cal, type JJJPost } from '../../data/va'
+import { jjjCalendar as cal, socialMedia, type JJJPost } from '../../data/va'
 import { VASectionTitle } from './VALayout'
 
+const planning = socialMedia.planning
 const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
@@ -31,7 +32,16 @@ export default function JJJCalendar() {
   return (
     <section className="va-section" aria-labelledby="jjj-calendar-title">
       <div className="container">
-        <VASectionTitle eyebrow={cal.eyebrow} title={cal.title} description={cal.description} />
+        <VASectionTitle eyebrow={planning.title} title={planning.subtitle} description={planning.description} />
+
+        <div className="jjj-organize">
+          <p className="va-kicker">{planning.organizeTitle}</p>
+          <ul className="va-chip-grid">
+            {planning.organize.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
 
         <ul className="jjj-stats">
           {stats.map((stat) => (
@@ -45,11 +55,13 @@ export default function JJJCalendar() {
         <div className="jjj-board">
           <header className="jjj-board-head">
             <div>
-              <p className="va-kicker">Notion · Content schedule</p>
-              <h3 id="jjj-calendar-title">October 2026</h3>
+              <p className="va-kicker">{cal.eyebrow} · Notion</p>
+              <h3 id="jjj-calendar-title">{cal.title}</h3>
             </div>
             <p className="jjj-platforms">{cal.platforms.join(' · ')}</p>
           </header>
+
+          <p className="jjj-intro">{cal.description}</p>
 
           <ul className="jjj-legend" aria-label="Content pillars">
             {cal.pillars.map((pillar) => (

@@ -1319,6 +1319,10 @@
   --jjj-trust: #12534f;
 }
 
+.jjj-organize { display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 0 0 32px; }
+.jjj-organize .va-kicker { margin: 0; }
+.jjj-organize .va-chip-grid { justify-content: center; }
+.jjj-intro { margin: 10px 0 0; color: var(--va-text); font-size: 15px; }
 .jjj-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 0 0 28px; padding: 0; list-style: none; }
 .jjj-stats li { padding: 18px 20px; background: var(--va-paper-2); border: 2px solid var(--va-ink); }
 .jjj-stats strong { display: block; color: var(--va-ink); font-family: var(--va-serif); font-size: clamp(26px, 3.4vw, 38px); font-weight: 600; line-height: 1; }
