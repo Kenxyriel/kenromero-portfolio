@@ -339,18 +339,6 @@
 
 .tx-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 24px; color: var(--t-blue); font-weight: 700; }
 
-.tx-browser { width: min(380px, 100%); overflow: hidden; background: var(--t-bg-2); border: 1px solid rgba(96, 165, 250, .35); border-radius: 12px; box-shadow: 0 20px 40px rgba(0, 0, 0, .4); }
-.tx-browser-bar { display: flex; align-items: center; gap: 6px; padding: 10px 12px; border-bottom: 1px solid var(--t-line); }
-.tx-browser-bar span { width: 9px; height: 9px; border-radius: 50%; background: #f87171; }
-.tx-browser-bar span:nth-child(2) { background: var(--t-amber); }
-.tx-browser-bar span:nth-child(3) { background: var(--t-lime); }
-.tx-browser-bar em { margin-left: 8px; padding: 3px 10px; color: var(--t-muted); background: rgba(255, 255, 255, .05); border-radius: 6px; font-family: var(--t-mono); font-size: 11px; font-style: normal; }
-.tx-browser-body { position: relative; padding: 22px; }
-.tx-browser-routes { display: flex; gap: 8px; }
-.tx-browser-routes b { padding: 6px 12px; color: var(--t-white); background: rgba(59, 130, 246, .2); border: 1px solid rgba(96, 165, 250, .4); border-radius: 8px; font-family: var(--t-mono); font-size: 13px; }
-.tx-browser-body code { display: block; margin-top: 18px; color: var(--t-text); font-family: var(--t-mono); font-size: 13px; line-height: 1.8; }
-.tx-browser-body code i { color: var(--t-lime); font-style: normal; }
-.tx-browser-icon { position: absolute; right: 20px; bottom: 18px; width: 40px; height: 40px; color: var(--t-pink); }
 
 /* ---------- Process ---------- */
 
