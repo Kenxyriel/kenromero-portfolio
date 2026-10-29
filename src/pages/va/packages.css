@@ -1,0 +1,120 @@
+/* Package price lists (smm-packages, smm-local-packages, podcast-packages subdomains).
+   Builds on the creative styles in va.css: stickers, hard offset shadows, Caveat notes. */
+
+.va-pkg-page { overflow-x: clip; }
+
+/* Readability: bigger, darker text in every list and card. */
+.va-pkg-page .va-checklist li { padding: 8px 0; font-size: 16px; line-height: 1.5; color: var(--va-text); }
+.va-pkg-page .va-checklist svg { width: 18px; height: 18px; margin-top: 2px; padding: 3px; background: var(--va-teal); color: white; border-radius: 50%; stroke-width: 3; }
+.va-pkg-page .va-package-intro { font-size: 16px; }
+.va-pkg-page .va-price span,
+.va-pkg-page .va-currency-note { font-size: 15px; }
+.va-pkg-page .va-note { font-size: 16px; color: var(--va-text); }
+.va-pkg-page .va-addons p,
+.va-pkg-page .va-addons ul,
+.va-pkg-page .va-notes ul,
+.va-pkg-page .va-reminders ul { font-size: 16px; line-height: 1.7; color: var(--va-text); }
+.va-pkg-page .va-fineprint { font-size: 15px; color: var(--va-text); }
+.va-pkg-page .va-chip-grid li { font-size: 15px; }
+.va-pkg-page .va-retainer ul { font-size: 16px; line-height: 1.7; color: #efe8de; }
+.va-pkg-page .va-retainer h3 { font-size: 16px; }
+.va-pkg-page .va-section-dark .va-note { color: #e2d9cd; font-size: 16px; }
+
+/* Onboarding timeline: larger step text. */
+.va-pkg-page .tl-card p { font-size: 15px; color: var(--va-text); }
+
+/* Hero: title with two stickers either side. */
+.va-pkg-page .va-page-hero { position: relative; overflow: hidden; }
+.va-pkg-stickers { position: absolute; inset: 0; pointer-events: none; }
+.va-pkg-sticker {
+  position: absolute; display: grid; place-items: center; text-align: center;
+  border: 2px solid var(--va-ink); box-shadow: 4px 4px 0 var(--va-ink);
+  font-weight: 800; line-height: 1.15; color: var(--va-ink);
+  animation: va-pkg-float 5s ease-in-out infinite;
+}
+.va-pkg-sticker-price { top: 34%; left: max(0px, calc(50% - 560px)); width: 128px; height: 128px; padding: 12px; background: var(--va-amber); border-radius: 50%; rotate: -10deg; }
+.va-pkg-sticker-price small { font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.va-pkg-sticker-price strong { font-size: 32px; font-stretch: 80%; line-height: 1; }
+.va-pkg-sticker-call { top: 40%; right: max(0px, calc(50% - 560px)); gap: 4px; padding: 14px 18px; background: white; border-radius: 14px; font-size: 15px; rotate: 7deg; animation-delay: -2.5s; }
+.va-pkg-sticker-call svg { color: var(--va-teal); }
+@keyframes va-pkg-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+
+/* Ribbon of what's included, tilted across the bottom of the hero. */
+.va-pkg-ribbon { position: relative; z-index: 1; margin: -18px 0 0; padding: 14px 0; overflow: hidden; background: var(--va-teal); border-block: 2px solid var(--va-ink); color: white; rotate: -1.2deg; }
+.va-pkg-ribbon-track { display: flex; width: max-content; animation: va-pkg-ribbon 32s linear infinite; }
+.va-pkg-ribbon ul { display: flex; margin: 0; padding: 0; list-style: none; }
+.va-pkg-ribbon li { display: inline-flex; align-items: center; gap: 22px; padding-right: 22px; font-family: var(--va-serif); font-size: clamp(20px, 2.2vw, 26px); font-weight: 600; white-space: nowrap; }
+.va-pkg-ribbon li svg { color: var(--va-amber); }
+.va-pkg-ribbon:hover .va-pkg-ribbon-track,
+.va-pkg-ribbon.is-paused .va-pkg-ribbon-track { animation-play-state: paused; }
+.va-pkg-ribbon::after { content: ''; position: absolute; inset: 0 0 0 auto; width: 64px; background: linear-gradient(90deg, transparent, var(--va-teal) 40%); pointer-events: none; }
+.va-pkg-ribbon-toggle { position: absolute; z-index: 1; top: 50%; right: 12px; display: grid; place-items: center; width: 32px; height: 32px; translate: 0 -50%; background: white; color: var(--va-ink); border: 2px solid var(--va-ink); border-radius: 50%; cursor: pointer; }
+@keyframes va-pkg-ribbon { to { transform: translateX(-50%); } }
+
+/* Package cards: rise in one by one, lift like a sticker on hover. */
+.va-pkg-page .va-package { box-shadow: 6px 6px 0 var(--va-ink); transition: transform .25s cubic-bezier(.2, .8, .2, 1), box-shadow .25s cubic-bezier(.2, .8, .2, 1); }
+.va-pkg-page .va-package-featured { box-shadow: 8px 8px 0 var(--va-amber); }
+.va-pkg-page .va-package h3 { font-size: 24px; }
+.va-pkg-page .va-price { padding-bottom: 16px; border-bottom: 2px solid var(--va-ink); }
+.va-pkg-page .va-price strong { font-size: 54px; font-variant-numeric: tabular-nums; }
+.va-pkg-page .va-price strong span { color: inherit; font-size: inherit; font-weight: inherit; }
+.va-pkg-page .va-packages:not(.is-shown) .va-package { opacity: 0; transform: translateY(28px); }
+.va-pkg-page .va-packages.is-shown .va-package { animation: va-pkg-rise .6s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(var(--i) * 120ms); }
+@keyframes va-pkg-rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+.va-pkg-page .va-package-badge { animation: va-pkg-badge 3.2s ease-in-out infinite; }
+@keyframes va-pkg-badge { 0%, 80%, 100% { rotate: 0deg; } 85% { rotate: -4deg; } 90% { rotate: 3deg; } 95% { rotate: -1deg; } }
+@media (hover: hover) {
+  .va-pkg-page .va-packages.is-shown .va-package:hover { transform: translate(-4px, -6px); box-shadow: 10px 12px 0 var(--va-ink); }
+  .va-pkg-page .va-packages.is-shown .va-package-featured:hover { box-shadow: 12px 14px 0 var(--va-amber); }
+}
+
+/* Add-ons: icon tile, price as a tag, same sticker lift. */
+.va-pkg-page .va-addons article { position: relative; display: flex; flex-direction: column; gap: 6px; box-shadow: 4px 4px 0 var(--va-ink); transition: transform .2s ease-out, box-shadow .2s ease-out; }
+.va-pkg-addon-icon { display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 8px; background: var(--va-amber); border: 2px solid var(--va-ink); border-radius: 12px; color: var(--va-ink); rotate: -6deg; transition: rotate .25s ease-out; }
+.va-pkg-page .va-addons strong { width: fit-content; margin-top: auto; padding: 4px 12px; background: var(--va-paper-2); border: 2px solid var(--va-ink); border-radius: 999px; font-size: 20px; }
+.va-pkg-page .va-addons ul + strong,
+.va-pkg-page .va-addons h3 + strong { margin-top: 6px; }
+@media (hover: hover) {
+  .va-pkg-page .va-addons article:hover { transform: translate(-3px, -4px); box-shadow: 7px 8px 0 var(--va-ink); }
+  .va-pkg-page .va-addons article:hover .va-pkg-addon-icon { rotate: 6deg; }
+}
+
+/* Notes: teal number, coloured top edge. */
+.va-pkg-page .va-notes article { border-top: 8px solid var(--va-teal); }
+.va-pkg-page .va-notes h3 { font-size: 20px; }
+
+/* Retainer: lighter cards on the dark band. */
+.va-pkg-page .va-retainer article { background: rgba(255, 255, 255, .04); border: 1px solid rgba(255, 255, 255, .28); border-radius: 10px; }
+
+/* Closing band with the tear-off booking ticket. */
+.va-pkg-close { background: var(--va-amber); border-top: 2px solid var(--va-ink); }
+.va-pkg-close-inner { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+.va-pkg-close .va-script { color: var(--va-teal-2); }
+.va-pkg-close h2 { margin: 4px 0 12px; font-family: var(--va-serif); font-size: clamp(34px, 4.4vw, 54px); font-weight: 600; line-height: 1.05; color: var(--va-ink); }
+.va-pkg-close p:not(.va-script) { max-width: 52ch; margin: 0; font-size: 18px; line-height: 1.6; color: var(--va-ink); }
+.va-pkg-close-ticket { justify-self: center; }
+.va-pkg-close p.vx-ticket-hint { margin: 16px 0 0 6px; font-family: var(--va-hand); font-size: 22px; font-weight: 700; color: var(--va-teal-2); transform: rotate(-3deg); }
+
+@media (max-width: 1180px) {
+  .va-pkg-stickers { position: static; display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin-top: 24px; }
+  .va-pkg-sticker { position: static; }
+}
+@media (max-width: 1023px) {
+  .va-pkg-close-inner { grid-template-columns: 1fr; }
+  .va-pkg-close-ticket { justify-self: start; }
+}
+@media (max-width: 640px) {
+  .va-pkg-sticker-price { width: 116px; height: 116px; padding: 10px; }
+  .va-pkg-sticker-price small { font-size: 10px; }
+  .va-pkg-sticker-price strong { font-size: 26px; }
+  .va-pkg-sticker-call { font-size: 14px; }
+  .va-pkg-page .va-price strong { font-size: 46px; }
+  .va-pkg-page .va-package { padding: 24px; }
+  .va-pkg-ribbon-toggle { right: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .va-pkg-sticker,
+  .va-pkg-ribbon-track,
+  .va-pkg-page .va-package-badge { animation: none; }
+  .va-pkg-page .va-packages .va-package { opacity: 1; transform: none; animation: none; }
+}

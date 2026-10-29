@@ -87,6 +87,8 @@ type VALayoutProps = {
   children: ReactNode
   /** Keep the page out of search results (pages shared only by direct link). */
   unlisted?: boolean
+  /** Extra class on the page shell, for page-specific styling. */
+  className?: string
 }
 
 // Shell for every /va page: creative-portfolio theme, navigation, contact footer.
@@ -100,7 +102,7 @@ function TikTokIcon({ size = 17 }: { size?: number }) {
   )
 }
 
-export default function VALayout({ meta, children, unlisted = false }: VALayoutProps) {
+export default function VALayout({ meta, children, unlisted = false, className }: VALayoutProps) {
   usePageMeta(meta.title, meta.description)
   const [viewing, setViewing] = useState<VAImage | null>(null)
   const close = useCallback(() => setViewing(null), [])
@@ -118,7 +120,7 @@ export default function VALayout({ meta, children, unlisted = false }: VALayoutP
   }, [unlisted])
 
   return (
-    <div className="site-shell va-theme">
+    <div className={`site-shell va-theme${className ? ` ${className}` : ''}`}>
       <WelcomeIntro />
       <SiteHeader
         brandRole="CREATIVE PORTFOLIO"
@@ -280,12 +282,14 @@ export function VAPageHero({
   tagline,
   intro,
   backHref = vaPath('/va'),
+  children,
 }: {
   title: string
   subtitle?: string
   tagline?: string
   intro?: string
   backHref?: string
+  children?: ReactNode
 }) {
   return (
     <section className="va-page-hero">
@@ -306,6 +310,7 @@ export function VAPageHero({
         <Squiggle className="va-page-squiggle" />
         {tagline && <p className="va-tagline">{tagline}</p>}
         {intro && <p className="va-lead">{intro}</p>}
+        {children}
       </div>
     </section>
   )
