@@ -56,7 +56,7 @@ const safeguards = [
 export default function SaripointCaseStudy() {
   return (
     <CaseStudyPage
-      kicker="// project · full-stack development"
+      kicker="Project · Full-stack development"
       status="In progress"
       title="SARIPOINT Point of Sale"
       system="POS system for sari-sari stores and minimarts"

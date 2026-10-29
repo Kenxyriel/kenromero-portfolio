@@ -7,9 +7,7 @@ import SiteHeader, { type NavItem } from '../../../components/SiteHeader'
 import { bookingLink } from '../../../data/profile'
 import { techContent } from '../../../data/tech'
 import usePageMeta from '../../../components/usePageMeta'
-import '@fontsource/space-grotesk/500.css'
-import '@fontsource/space-grotesk/600.css'
-import '@fontsource/space-grotesk/700.css'
+import '../fonts'
 import '../tech.css'
 import './case-study.css'
 
@@ -157,7 +155,7 @@ export default function CaseStudyPage({
         <section className="cs-summary" aria-labelledby="cs-summary-title">
           <div className="container">
             <h2 id="cs-summary-title" className="cs-kicker">
-              // at a glance
+              At a glance
             </h2>
             <div className="cs-summary-grid">
               {summaryItems.map(([label, text]) => (

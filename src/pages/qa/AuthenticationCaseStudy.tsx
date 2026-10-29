@@ -168,7 +168,7 @@ const tools = [
 export default function AuthenticationCaseStudy() {
   return (
     <CaseStudyPage
-      kicker="// case study 01 · manual / functional QA"
+      kicker="QA case study · Manual and functional testing"
       title="Authentication & Proactive Lockout Testing"
       system="HR & Payroll system"
       lead="Validating a change from a fixed account lockout to a progressive one: test design, execution, defect reporting, retesting, and regression."
@@ -288,6 +288,7 @@ export default function AuthenticationCaseStudy() {
           <DefectCard
             defect={{
               id: 'Defect 01',
+              retested: true,
               title: 'Lockout message did not match the failed attempt count',
               summary:
                 'The displayed lockout message did not always correspond to the current invalid-login attempt and expected lockout duration.',
@@ -299,6 +300,7 @@ export default function AuthenticationCaseStudy() {
           <DefectCard
             defect={{
               id: 'Defect 02',
+              retested: true,
               title: 'Incorrect lockout message after session timeout',
               summary:
                 'When the user session timed out, the system could display an incorrect lockout message instead of the appropriate authentication state.',

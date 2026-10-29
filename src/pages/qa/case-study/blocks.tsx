@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { ArrowRight, Check, type LucideIcon } from 'lucide-react'
 import { imageProps } from '../../../components/responsiveImage'
 
@@ -168,6 +168,43 @@ export type Defect = {
   impact: string
   severity?: string
   priority?: string
+  // Only for defects that were fixed and passed their retest: the card stamps from Fail to Retest passed.
+  retested?: boolean
+}
+
+// Starts as "Fail" and stamps to "Retest passed" once the card has been on screen for a moment.
+function RetestStamp() {
+  const ref = useRef<HTMLSpanElement>(null)
+  const [passed, setPassed] = useState(false)
+
+  useEffect(() => {
+    const node = ref.current
+    const skip = window.matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.webdriver
+    if (!node || skip || !('IntersectionObserver' in window)) {
+      setPassed(true)
+      return
+    }
+    let timer = 0
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return
+        timer = window.setTimeout(() => setPassed(true), 700)
+        observer.disconnect()
+      },
+      { threshold: 0.6 },
+    )
+    observer.observe(node)
+    return () => {
+      observer.disconnect()
+      window.clearTimeout(timer)
+    }
+  }, [])
+
+  return (
+    <span ref={ref} className={`cs-stamp${passed ? ' is-pass' : ''}`}>
+      {passed ? 'Retest passed' : 'Fail'}
+    </span>
+  )
 }
 
 export function DefectCard({ defect }: { defect: Defect }) {
@@ -177,6 +214,7 @@ export function DefectCard({ defect }: { defect: Defect }) {
         <span className="cs-defect-id">{defect.id}</span>
         <span className="cs-chip cs-chip-red">Severity: {defect.severity ?? 'High'}</span>
         <span className="cs-chip cs-chip-red">Priority: {defect.priority ?? 'High'}</span>
+        {defect.retested && <RetestStamp />}
       </div>
       <h3>{defect.title}</h3>
       <p>{defect.summary}</p>

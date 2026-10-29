@@ -9,9 +9,28 @@ export const techContent = {
   },
   hero: {
     status: 'Open to QA & development roles',
-    rotating: ['Quality Assurance', 'Test Automation', 'API Testing', 'Web Development'],
-    lead: 'IT professional with 4+ years of experience working with enterprise applications. I find what breaks, document it clearly, and build web applications with React and TypeScript.',
-    chips: ['4+ years in IT', 'Manual + Automation QA', 'React · TypeScript'],
+    // The word in `mark` gets the amber highlighter.
+    promise: { before: 'I find what', mark: 'breaks', after: 'before your users do.' },
+    lead: 'I’m Ken Romero, a QA analyst who also builds with React and TypeScript. 4+ years testing enterprise applications: I find what breaks, document it clearly, and check the fix.',
+  },
+  // The hero test run: real cases and the real defect from the Authentication case study.
+  testRun: {
+    title: 'Login lockout',
+    system: 'HR & Payroll',
+    cases: [
+      { id: 'TC-003', name: '3 invalid attempts, no lockout' },
+      { id: 'TC-004', name: '4th attempt, 60-second lockout' },
+      { id: 'TC-009', name: '9th attempt, 4-hour lockout' },
+      { id: 'BUG-001', name: 'Lockout message matches the count', bug: 'Message did not match the failed attempt count' },
+      { id: 'TC-012', name: 'Session timeout state' },
+    ],
+    totals: [
+      { value: '12', label: 'cases' },
+      { value: '2', label: 'defects found' },
+      { value: '7/7', label: 'retests' },
+      { value: '9/9', label: 'regression' },
+    ],
+    link: '/qa/projects/authentication-testing',
   },
   // Real cases from the API Testing and Validation case study (shown on its project card).
   testWindow: [
@@ -49,7 +68,7 @@ export const techContent = {
   disciplines: [
     {
       key: 'qa',
-      kicker: '01 · Quality Engineering',
+      kicker: 'Quality engineering',
       title: 'I make sure it works.',
       text: 'Structured testing across expected, negative, and edge-case scenarios, with clear defect reports and verified fixes.',
       groups: [
@@ -60,7 +79,7 @@ export const techContent = {
     },
     {
       key: 'dev',
-      kicker: '02 · Software Development',
+      kicker: 'Software development',
       title: 'I build it, too.',
       text: 'Responsive web applications with a component-based frontend, version control, and automated delivery.',
       groups: [
@@ -74,6 +93,7 @@ export const techContent = {
       type: 'qa' as const,
       category: 'Manual / Functional QA',
       title: 'Authentication & Proactive Lockout Testing',
+      evidence: '12 cases · 2 defects · 7/7 retests',
       description:
         'Authentication behavior, failed attempts, and proactive lockout: test design, execution, defect reporting, retesting, and regression.',
       tags: ['Authentication', 'Lockout', 'Defects', 'Regression'],
@@ -85,6 +105,7 @@ export const techContent = {
       type: 'qa' as const,
       category: 'API / Functional QA',
       title: 'API Testing and Validation',
+      evidence: '9 API cases · 2 defects · 4/4 retests',
       description:
         'GET, POST, PUT, and DELETE validation: request and response checks, negative scenarios, API-to-UI comparison, and regression.',
       tags: ['Postman', 'REST API', 'Negative Testing', 'Regression'],
@@ -97,6 +118,7 @@ export const techContent = {
       type: 'dev' as const,
       category: 'Full-stack Development',
       title: 'SalinLibro-CMS Client Management',
+      evidence: '7 E2E tests · 1 real bug caught',
       status: 'Paused',
       description:
         'Client records for accounting firms in Vue, Express and MySQL, with a Playwright suite that runs on its own test database and caught a real search bug.',
@@ -109,6 +131,7 @@ export const techContent = {
       type: 'dev' as const,
       category: 'Full-stack Development',
       title: 'SARIPOINT Point of Sale',
+      evidence: '180+ endpoints · 120+ components',
       status: 'In progress',
       description:
         'A point of sale for sari-sari stores and minimarts: checkout, receipts, shifts, store credit, stock and reports, on React, Express and MySQL.',
@@ -121,6 +144,7 @@ export const techContent = {
       type: 'dev' as const,
       category: 'Client Website',
       title: 'JJJ Tax and Accounting Website',
+      evidence: '37 tests · 0 accessibility violations',
       status: 'Pre-launch',
       description:
         'A 15-page Next.js site for an accounting firm, with a protected contact form, 37 automated tests, and zero accessibility violations before launch.',
@@ -133,6 +157,7 @@ export const techContent = {
       type: 'dev' as const,
       category: 'Web Development',
       title: 'Multi-Audience Portfolio Platform',
+      evidence: '1 codebase · 2 sites',
       description:
         'One React and TypeScript codebase that builds separate portfolio sites per audience, with shared components, data-driven content, and per-site builds on Vercel.',
       tags: ['React', 'TypeScript', 'Vite', 'React Router', 'Vercel'],
@@ -151,7 +176,7 @@ export const techContent = {
     { title: 'Regression', text: 'Nothing else broke' },
   ],
   workingWithMe: {
-    kicker: '// working with me',
+    kicker: 'Working with me',
     description: 'For a testing or development project, or a role on your team: what happens after you reach out.',
     steps: [
       { time: 'day 0', title: 'Intro message', text: 'Send a project brief or a role through the contact form. I reply within 24 hours.' },
@@ -160,6 +185,16 @@ export const techContent = {
       { time: 'weeks 1–4', title: 'Execution with weekly updates', text: 'I test or build, log defects with steps and evidence, and send a status update every week.' },
       { time: 'handover', title: 'Handover', text: 'A test summary report, open defects and a regression checklist, or the code and its docs.' },
     ],
+  },
+  // The discovery call, written as a test case (QAHome BookingCase).
+  bookingCase: {
+    id: 'TC-030',
+    title: 'Book a free 30-minute discovery call',
+    precondition: 'You have a project to test or build, or a role on your team.',
+    steps: ['Pick a time on my calendar', 'We talk for 30 minutes about your product, risks or role', 'You leave with a clear next step'],
+    expected: 'You know whether I’m the right fit, at no cost.',
+    button: 'Run it: book a call',
+    note: 'Opens my calendar in a new tab. Free, no commitment.',
   },
   contactIntro:
     'Hiring for QA or development, or have a project that needs testing or building? Send a message and introduce yourself.',
