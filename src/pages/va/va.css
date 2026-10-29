@@ -471,6 +471,78 @@
 .vx-book p:not(.vx-eyebrow, .vx-script) { margin: 0 0 20px; color: var(--va-ink); font-size: 17px; line-height: 1.65; }
 .vx-book p.vx-close-or { margin: 22px 0 0; font-size: 15px; }
 
+/* Booking ticket: a paper queue ticket with a teal tear-off stub, tilted like it was just handed over. */
+.vx-ticket {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  color: var(--va-ink);
+  background: #fffdf8;
+  border: 2px solid var(--va-ink);
+  border-radius: 12px;
+  box-shadow: 5px 5px 0 var(--va-ink);
+  transform: rotate(-2deg);
+  transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
+}
+.vx-ticket-stub {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 2px;
+  width: 104px;
+  padding: 14px 10px;
+  color: var(--va-paper);
+  background: var(--va-teal);
+  border-radius: 10px 0 0 10px;
+  transform-origin: 100% 100%;
+  transition: transform 260ms var(--ease-playful);
+}
+.vx-ticket-stub strong { font-size: 40px; font-weight: 800; font-stretch: 80%; line-height: .9; letter-spacing: -.02em; }
+.vx-ticket small { font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.vx-ticket-stub small:last-child { color: var(--va-amber); }
+.vx-ticket-body {
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  padding: 14px 26px 14px 22px;
+  border-left: 2px dashed var(--va-ink);
+}
+.vx-ticket-body strong { display: inline-flex; align-items: center; gap: 8px; font-family: var(--va-serif); font-size: clamp(22px, 2.2vw, 26px); font-weight: 600; line-height: 1.1; }
+.vx-ticket-body small { color: var(--va-muted); }
+.vx-ticket-body small:first-child { color: var(--va-teal); }
+/* Half-circle notches where the ticket tears, cut in the section's amber. */
+.vx-ticket::before,
+.vx-ticket::after {
+  content: "";
+  position: absolute;
+  left: 93px;
+  width: 18px;
+  height: 18px;
+  background: var(--va-amber);
+  border: 2px solid var(--va-ink);
+  border-radius: 50%;
+}
+.vx-ticket::before { top: -11px; clip-path: inset(50% 0 0 0); }
+.vx-ticket::after { bottom: -11px; clip-path: inset(0 0 50% 0); }
+.vx-ticket-scissors { position: absolute; left: 93px; top: 50%; padding: 2px; color: var(--va-ink); background: #fffdf8; transform: translate(0, -50%) rotate(90deg); }
+.vx-book p.vx-ticket-hint { margin: 14px 0 0 6px; font-family: var(--va-hand); font-size: 22px; font-weight: 700; color: var(--va-teal); transform: rotate(-3deg); }
+.vx-ticket:focus-visible { outline: 3px solid var(--va-teal); outline-offset: 6px; }
+@media (hover: hover) and (pointer: fine) {
+  /* Hover: the ticket straightens and the stub starts to tear away. */
+  .vx-ticket:hover { transform: rotate(0deg) translate(-2px, -2px); box-shadow: 7px 7px 0 var(--va-ink); }
+  .vx-ticket:hover .vx-ticket-stub { transform: rotate(-7deg) translate(-4px, 2px); }
+}
+.vx-ticket:active { transform: rotate(0deg) translate(3px, 3px); box-shadow: 1px 1px 0 var(--va-ink); }
+@media (max-width: 420px) {
+  .vx-ticket-stub { width: 92px; padding: 12px 6px; }
+  .vx-ticket-stub strong { font-size: 32px; }
+  .vx-ticket::before, .vx-ticket::after, .vx-ticket-scissors { left: 81px; }
+  .vx-ticket-body { padding: 12px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vx-ticket, .vx-ticket-stub { transition: none; }
+}
+
 /* The form card in the sticker style: white card, ink border, hard shadow, outlined fields. */
 .va-theme .contact-form-card { border: 2px solid var(--va-ink); border-radius: 0; box-shadow: 8px 8px 0 var(--va-ink); }
 .va-theme .contact-form-card.is-form-only { grid-template-columns: 1fr; padding: clamp(22px, 3.4vw, 40px); }
