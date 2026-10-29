@@ -125,7 +125,7 @@ export default function VALayout({ meta, children, unlisted = false, className }
       <SiteHeader
         brandRole="CREATIVE PORTFOLIO"
         brandHref={onPackageHost ? portfolioUrl(vaPath('/va')) : vaPath('/va')}
-        navItems={onPackageHost ? [] : navItems}
+        navItems={onPackageHost || unlisted ? [] : navItems}
         cta={{ label: 'Book a Discovery Call', href: bookingLink.href }}
       />
       <LightboxContext.Provider value={setViewing}>
