@@ -2,7 +2,8 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import usePageMeta from './usePageMeta'
 
-export default function NotFound() {
+// Shared with the tech-brand 404 (pages/qa/TechNotFound.tsx).
+export function useNotFoundMeta() {
   usePageMeta('Page not found | Ken Romero', 'The requested page could not be found.')
 
   // Every URL returns the app, so tell search engines this one is not a real page.
@@ -13,6 +14,10 @@ export default function NotFound() {
     document.head.appendChild(tag)
     return () => tag.remove()
   }, [])
+}
+
+export default function NotFound() {
+  useNotFoundMeta()
 
   return (
     <main className="placeholder-page">

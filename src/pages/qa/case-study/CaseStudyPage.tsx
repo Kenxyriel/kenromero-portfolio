@@ -9,9 +9,11 @@ import { techContent } from '../../../data/tech'
 import usePageMeta from '../../../components/usePageMeta'
 import '../fonts'
 import '../tech.css'
+import TechIntro from '../TechIntro'
 import './case-study.css'
 
-const navItems: NavItem[] = [
+// Shared by the case studies and the tech legal pages.
+export const navItems: NavItem[] = [
   { label: 'About', href: '/qa#about' },
   { label: 'Skills', href: '/qa#skills' },
   { label: 'Projects', href: '/qa#projects' },
@@ -103,6 +105,7 @@ export default function CaseStudyPage({
 
   return (
     <div className="tech-theme cs-page">
+      <TechIntro />
       <SiteHeader
         brandRole="QA & Software Development"
         brandHref="/qa"

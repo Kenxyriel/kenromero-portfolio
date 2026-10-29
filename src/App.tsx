@@ -1,6 +1,5 @@
 import { lazy, Suspense } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import LegalPage from "./components/LegalPage";
 import NotFound from "./components/NotFound";
 import ScrollManager from "./components/ScrollManager";
 import ViewSwitcher from "./components/ViewSwitcher";
@@ -17,6 +16,9 @@ const HAS_QA = !mode || mode === "all" || mode === "qa" || mode === "it";
 const HAS_VA = !mode || mode === "all" || mode === "va";
 const SINGLE = mode === "qa" || mode === "it" || mode === "va";
 
+// Tech-brand legal and 404 pages, split out so the creative build doesn't carry the tech styles.
+const LegalPage = lazy(() => import("./components/LegalPage"));
+const TechNotFound = HAS_QA ? lazy(() => import("./pages/qa/TechNotFound")) : null;
 const QAHome = HAS_QA ? lazy(() => import("./pages/qa/QAHome")) : null;
 const AuthenticationCaseStudy = HAS_QA ? lazy(() => import("./pages/qa/AuthenticationCaseStudy")) : null;
 const ApiTestingCaseStudy = HAS_QA ? lazy(() => import("./pages/qa/ApiTestingCaseStudy")) : null;
@@ -108,7 +110,7 @@ function App() {
             </>
           )}
 
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={TechNotFound && !VA_AT_ROOT ? <TechNotFound /> : <NotFound />} />
         </Routes>
       </Suspense>
       {!SINGLE && <ViewSwitcher />}
