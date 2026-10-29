@@ -193,6 +193,7 @@ export const techContent = {
     precondition: 'You have a project to test or build, or a role on your team.',
     steps: ['Pick a time on my calendar', 'We talk for 30 minutes about your product, risks or role', 'You leave with a clear next step'],
     expected: 'You know whether I’m the right fit, at no cost.',
+    actual: 'Not run yet. This one’s waiting on you.',
     button: 'Run it: book a call',
     note: 'Opens my calendar in a new tab. Free, no commitment.',
   },

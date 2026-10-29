@@ -261,7 +261,7 @@ function BookingCase() {
           <dd>{call.precondition}</dd>
         </div>
         <div>
-          <dt>Steps</dt>
+          <dt>Reproduction steps</dt>
           <dd>
             <ol className="tx-case-steps">
               {call.steps.map((step, i) => (
@@ -278,6 +278,10 @@ function BookingCase() {
         <div>
           <dt>Expected result</dt>
           <dd>{call.expected}</dd>
+        </div>
+        <div>
+          <dt>Actual result</dt>
+          <dd>{call.actual}</dd>
         </div>
       </dl>
       <div className="tx-case-foot">
