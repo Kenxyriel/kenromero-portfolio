@@ -402,30 +402,63 @@ export const socialMedia = {
     hooks: [
       {
         hook: 'AI Saved Her Evenings.',
-        body: 'Dr. Emily stopped taking chart notes home every night after integrating AI into her workflow. Now her documentation gets done in real time while still improving patient care. More efficiency. Less burnout. Better outcomes. 🚀 That’s what smart AI adoption actually looks like.',
-        tags: '#789Podcast #HealthcareFounder #Telemedicine #AIForBusiness #WomenInBusiness #ScalingUp #Entrepreneur #BusinessPodcast',
+        body: 'She stopped taking chart notes home every night after integrating AI into her workflow. Now her documentation gets done in real time while still improving patient care. More efficiency. Less burnout. Better outcomes. 🚀 That’s what smart AI adoption actually looks like.',
+        tags: '#HealthcareFounder #Telemedicine #AIForBusiness #WomenInBusiness #ScalingUp #Entrepreneur #BusinessPodcast',
       },
       {
         hook: 'She Scaled During Chaos.',
-        body: 'Most healthcare practices were trying to survive. Dr. Emily scaled from 1 provider and 1 staff to 3 providers and 8 staff in just a few years. Technology didn’t replace the human side of the business. It amplified it. 🚀',
-        tags: '#789Podcast #WomenInBusiness #HealthcareFounder #ScalingUp #BusinessGrowth #Entrepreneur #BusinessPodcast #KMGrowth',
+        body: 'Most healthcare practices were trying to survive. She scaled from 1 provider and 1 staff to 3 providers and 8 staff in just a few years. Technology didn’t replace the human side of the business. It amplified it. 🚀',
+        tags: '#WomenInBusiness #HealthcareFounder #ScalingUp #BusinessGrowth #Entrepreneur #BusinessPodcast',
       },
       {
         hook: 'She Built Across 17 States.',
-        body: 'Dr. Emily built a healthcare business that reaches patients across 17 states through telemedicine and field clinics. Instead of making patients travel… she brought healthcare closer to them. 🌎 The future belongs to businesses that remove friction and improve accessibility.',
-        tags: '#789Podcast #Telemedicine #HealthcareFounder #WomenInBusiness #BusinessGrowth #ScalingUp #Entrepreneur #KMGrowth',
+        body: 'She built a healthcare business that reaches patients across 17 states through telemedicine and field clinics. Instead of making patients travel… she brought healthcare closer to them. 🌎 The future belongs to businesses that remove friction and improve accessibility.',
+        tags: '#Telemedicine #HealthcareFounder #WomenInBusiness #BusinessGrowth #ScalingUp #Entrepreneur',
       },
     ],
     hashtagTitle: 'Hashtag Research',
     hashtags:
-      '#789Podcast #FounderStory #WomenInBusiness #Telemedicine #HealthcareFounder #ScalingUp #Entrepreneur #Audiologist #KMGrowth #BusinessPodcast #ServiceBusiness #Alaska',
+      '#FounderStory #WomenInBusiness #Telemedicine #HealthcareFounder #ScalingUp #Entrepreneur #BusinessPodcast #ServiceBusiness',
     platformReady: 'One conversation → multiple platform-ready messages',
   },
   publishing: {
     title: 'Content Publishing and Strategy',
     description:
       'I organize content around platform behavior, audience engagement, and a consistent publishing rhythm to make every piece of content work harder.',
-    distributionImage: { image: '/va/work/social/caption-bank.webp', label: 'Caption bank & content research' } as VAImage,
+    // Recreated from the podcast's Captions Bank tab. Guest and show names are left out.
+    captionBank: {
+      title: 'Caption bank',
+      note: 'Every episode gets five Reels and Shorts hooks, plus its own X, LinkedIn and TikTok copy.',
+      episodes: [
+        {
+          ep: 'Ep 01',
+          topic: 'Telehealth founder',
+          hooks: ['AI Saved Her Evenings.', 'Everyone Asked Her How.', 'She Scaled During Chaos.', 'AI Bought Back Her Sanity.', 'She Built Across 17 States.'],
+          x: 'She had a newborn, 1 clinic, and zero roadmap. Now she’s licensed in 17 states. EP 01 is live.',
+          linkedin: 'Most healthcare founders wait for perfect conditions. She didn’t have that luxury. 1. She pioneered telemedicine before it was mainstream…',
+          tiktok: 'She flew to remote communities with a newborn to see patients who had no other options. Now she runs a 17-state telehealth practice.',
+          tags: '#FounderStory #WomenInBusiness #Telemedicine #HealthcareFounder #ScalingUp',
+        },
+        {
+          ep: 'Ep 02',
+          topic: 'Private equity & licensing',
+          hooks: ['Care Bears Became A Cash Machine.', 'Emotion Drives Revenue.', '90% Margin Business Model.', 'Warner Bros Built This Formula.', 'Creators Understand Branding.'],
+          x: 'Most PE firms look at spreadsheets. He looks at feelings, and built a $500M fund doing it. EP 02 is live.',
+          linkedin: 'What does a $500M private equity fund have in common with Care Bears? Emotional connection as a growth strategy.',
+          tiktok: 'He manages $500M and says the best investors focus on feelings, not financials. The $369B licensing industry most founders sleep on.',
+          tags: '#PrivateEquity #LicensingBusiness #BrandGrowth #InvestorMindset #BusinessStrategy',
+        },
+        {
+          ep: 'Ep 04',
+          topic: 'Growth agency founder',
+          hooks: ['Most Growth Agencies Think Too Small.', 'The Companies With The Best Data Win.', 'Founders Should Obsess Over Pipeline.', 'Your Network Pulls You Out Of Down Cycles.', 'Customers Matter More Than Investors.'],
+          x: 'Most founders think growth comes from marketing or funding. He says it starts inside the company.',
+          linkedin: 'He spent nearly 20 years inside some of the world’s largest consumer brands before starting his own agency. His conviction: most companies look for growth in the wrong places.',
+          tiktok: '20 years at the biggest consumer brands, then a decade bootstrapping a growth agency. Growth starts inside the company, not in your marketing budget.',
+          tags: '#GrowthStrategy #Bootstrapping #FirstPartyData #Fortune500 #FounderStory',
+        },
+      ],
+    },
     platforms: [
       { name: 'YouTube', role: 'Long-form authority', detail: 'Full podcast episodes and Shorts.' },
       { name: 'Instagram', role: 'Reach & engagement', detail: 'Reels and visual content designed for discovery.' },

@@ -1,5 +1,6 @@
 import { imageProps } from '../../components/responsiveImage'
 import { samplePosts, socialMedia as content } from '../../data/va'
+import CaptionBank from './CaptionBank'
 import JJJCalendar from './JJJCalendar'
 import VALayout, { VACta, VAImg, VAPageHero, VASectionTitle } from './VALayout'
 
@@ -67,7 +68,7 @@ export default function VASocialMedia() {
               </article>
             ))}
           </div>
-          <VAImg item={publishing.distributionImage} className="va-img-wide" />
+          <CaptionBank />
           <p className="va-kicker va-centered">Posting tools: {publishing.postingTools.join(' · ')}</p>
         </div>
       </section>
