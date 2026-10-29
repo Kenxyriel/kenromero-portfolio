@@ -367,6 +367,11 @@ export const designBranding = {
     button: 'Let’s Build Your Brand',
     path: vaPath('/va#contact'),
     points: ['Strategic Design', 'Consistent Branding', 'Made to Connect'],
+    samples: [
+      { image: '/va/work/design/brand-kit-2.webp', label: 'Brand kit' },
+      { image: '/va/work/design/accounting-7.webp', label: 'JJJ Tax and Accounting Q4 graphic' },
+      { image: '/va/work/design/food-1.webp', label: 'Bun Riot burger poster' },
+    ] as VAImage[],
   },
 }
 
@@ -439,6 +444,11 @@ export const socialMedia = {
     button: 'Let’s Grow Your Content',
     path: vaPath('/va#contact'),
     points: ['Plan', 'Create', 'Publish', 'Optimize'],
+    samples: [
+      { image: '/va/work/social/post-kr.webp', label: 'KR Digital Solutions post' },
+      { image: '/va/work/social/post-jjj.webp', label: 'JJJ Tax and Accounting post' },
+      { image: '/va/work/social/post-yuki.webp', label: 'Yuki Plays post' },
+    ] as VAImage[],
   },
 }
 
@@ -555,6 +565,11 @@ export const podcastEditing = {
     button: 'Let’s Talk About Your Podcast',
     path: vaPath('/va#contact'),
     points: ['Engaging Edits', 'Audience-Focused', 'Made for Growth'],
+    samples: [
+      { image: '/va/work/podcast/ai-clip-1.webp', label: 'CFOs: from accountants to strategists clip' },
+      { image: '/va/work/podcast/thumbnail.webp', label: 'Podcast thumbnail' },
+      { image: '/va/work/podcast/ai-clip-2.webp', label: '50% of business exits are unplanned clip' },
+    ] as VAImage[],
   },
 }
 

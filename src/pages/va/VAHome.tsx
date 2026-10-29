@@ -1,6 +1,5 @@
 import {
   ArrowRight,
-  CalendarHeart,
   Check,
   Bot,
   Cloud,
@@ -8,7 +7,6 @@ import {
   Pause,
   Play,
   Quote,
-  Scissors,
   Smartphone,
 } from 'lucide-react'
 import { useEffect, useRef, useState, type RefObject } from 'react'
@@ -16,10 +14,10 @@ import { Link } from 'react-router-dom'
 import ContactForm from '../../components/ContactForm'
 import { imageProps } from '../../components/responsiveImage'
 import Timeline from '../../components/Timeline'
-import { bookingLink, profile } from '../../data/profile'
+import { profile } from '../../data/profile'
 import { jjjStory, vaHome as content, vaOnboarding, vaTestimonials } from '../../data/va'
 import { DotGrid, Mic, RotatingBadge, Sparkle, Squiggle, Waveform } from './VAArt'
-import VALayout, { ToolBadge } from './VALayout'
+import VALayout, { BookingTicket, ToolBadge } from './VALayout'
 import { vaPath } from '../../vaPath'
 
 // True once the element has scrolled into view (immediately if motion is reduced).
@@ -384,28 +382,7 @@ export default function VAHome() {
               Book your <strong>free 30-minute discovery call</strong> and tell me about your brand, your podcast, or
               your content goals. We’ll find the right plan together.
             </p>
-            {/* "Cut the line": the booking button is a queue ticket with a tear-off stub. */}
-            <a
-              className="vx-ticket"
-              href={bookingLink.href}
-              aria-label="Book my free 30-minute discovery call"
-              {...(bookingLink.external ? { target: '_blank', rel: 'noreferrer' } : {})}
-            >
-              <span className="vx-ticket-stub" aria-hidden="true">
-                <small>No.</small>
-                <strong>01</strong>
-                <small>You’re next</small>
-              </span>
-              <span className="vx-ticket-body" aria-hidden="true">
-                <small>Admit one · skip the queue</small>
-                <strong>
-                  <CalendarHeart size={20} /> Book my free call
-                </strong>
-                <small>30 minutes · free</small>
-              </span>
-              <Scissors className="vx-ticket-scissors" size={18} aria-hidden="true" />
-            </a>
-            <p className="vx-ticket-hint" aria-hidden="true">← tear here, it’s free</p>
+            <BookingTicket />
             <p className="vx-close-or">Prefer to write? Send a message and I’ll reply within 24 hours.</p>
           </div>
           <ContactForm showInfo={false} />

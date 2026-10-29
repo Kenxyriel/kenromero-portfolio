@@ -1,4 +1,4 @@
-import { ArrowRight, Check, ImageIcon, Instagram, Linkedin, Mail, Maximize2, Smartphone, X } from 'lucide-react'
+import { ArrowRight, CalendarHeart, Check, ImageIcon, Instagram, Linkedin, Mail, Maximize2, Scissors, Smartphone, X } from 'lucide-react'
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import LegalLinks from '../../components/LegalLinks'
@@ -315,27 +315,71 @@ export function VASectionTitle({ eyebrow, title, description }: { eyebrow?: stri
   )
 }
 
+// "Cut the line": the booking button is a queue ticket with a tear-off stub.
+// Shared by the home page close and the closing banner on each work page.
+export function BookingTicket() {
+  return (
+    <>
+      <a
+        className="vx-ticket"
+        href={bookingLink.href}
+        aria-label="Book my free 30-minute discovery call"
+        {...(bookingLink.external ? { target: '_blank', rel: 'noreferrer' } : {})}
+      >
+        <span className="vx-ticket-stub" aria-hidden="true">
+          <small>No.</small>
+          <strong>01</strong>
+          <small>You’re next</small>
+        </span>
+        <span className="vx-ticket-body" aria-hidden="true">
+          <small>Admit one · skip the queue</small>
+          <strong>
+            <CalendarHeart size={20} /> Book my free call
+          </strong>
+          <small>30 minutes · free</small>
+        </span>
+        <Scissors className="vx-ticket-scissors" size={18} aria-hidden="true" />
+      </a>
+      <p className="vx-ticket-hint" aria-hidden="true">← tear here, it’s free</p>
+    </>
+  )
+}
+
+// Closing banner on each work page: the pitch and the booking ticket on one side,
+// three pieces of that page's own work fanned out like prints on the other.
 export function VACta({
   cta,
 }: {
-  cta: { eyebrow: string; title: string; description: string; button: string; path: string; points: string[] }
+  cta: { eyebrow: string; title: string; description: string; button: string; path: string; points: string[]; samples: VAImage[] }
 }) {
   return (
     <section className="va-cta">
-      <div className="container va-narrow va-cta-inner">
-        <p className="va-cta-eyebrow">{cta.eyebrow}</p>
-        <h2>{cta.title}</h2>
-        <p>{cta.description}</p>
-        <Link className="va-button" to={cta.path}>
-          {cta.button} <ArrowRight size={16} aria-hidden="true" />
-        </Link>
-        <ul className="va-cta-points">
-          {cta.points.map((point) => (
-            <li key={point}>
-              <Check size={14} aria-hidden="true" /> {point}
-            </li>
+      <div className="container va-cta-grid">
+        <div className="va-cta-copy">
+          <p className="va-cta-eyebrow">{cta.eyebrow}</p>
+          <h2>{cta.title}</h2>
+          <p className="va-cta-text">{cta.description}</p>
+          <ul className="va-cta-points">
+            {cta.points.map((point) => (
+              <li key={point}>
+                <Check size={14} strokeWidth={3} aria-hidden="true" /> {point}
+              </li>
+            ))}
+          </ul>
+          <BookingTicket />
+          <p className="va-cta-alt">
+            Prefer to write?{' '}
+            <Link to={cta.path}>
+              Send me a message <ArrowRight size={14} aria-hidden="true" />
+            </Link>
+          </p>
+        </div>
+        <div className="va-cta-fan">
+          {cta.samples.map((item) => (
+            <img key={item.image} {...imageProps(item.image ?? '', '(max-width: 760px) 40vw, 240px')} alt={item.label} loading="lazy" />
           ))}
-        </ul>
+          <RotatingBadge className="va-cta-badge" text="GOOD CONTENT • CREATES • OPPORTUNITIES • " />
+        </div>
       </div>
     </section>
   )
