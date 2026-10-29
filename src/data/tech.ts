@@ -114,7 +114,7 @@ export const techContent = {
         'A point of sale for sari-sari stores and minimarts: checkout, receipts, shifts, store credit, stock and reports, on React, Express and MySQL.',
       tags: ['React', 'TypeScript', 'Express', 'MySQL'],
       visual: 'image' as const,
-      image: '/projects/saripoint/pos.webp',
+      image: '/projects/saripoint/login.webp',
       link: { label: 'Read case study', to: '/qa/projects/saripoint' },
     },
     {
@@ -136,8 +136,8 @@ export const techContent = {
       description:
         'One React and TypeScript codebase that builds separate portfolio sites per audience, with shared components, data-driven content, and per-site builds on Vercel.',
       tags: ['React', 'TypeScript', 'Vite', 'React Router', 'Vercel'],
-      visual: 'browser' as const,
-      image: '',
+      visual: 'image' as const,
+      image: '/projects/portfolio/sites.webp',
       link: { label: 'Visit live site', href: 'https://www.kenromerogoestdigital.space/' },
     },
   ],

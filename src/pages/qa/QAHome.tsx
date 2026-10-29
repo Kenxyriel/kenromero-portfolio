@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowRight, ArrowUpRight, CalendarClock, Code2, FileText, Github, Linkedin, Pause, Play, ShieldCheck } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CalendarClock, FileText, Github, Linkedin, Pause, Play, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import ContactForm from "../../components/ContactForm";
 import { imageProps } from "../../components/responsiveImage";
@@ -99,31 +99,6 @@ function TestWindow() {
       </ol>
       <div className="tx-window-foot">
         <ShieldCheck size={14} aria-hidden="true" /> Request &amp; response validated · regression covered
-      </div>
-    </div>
-  );
-}
-
-function BrowserMock() {
-  return (
-    <div className="tx-browser" aria-hidden="true">
-      <div className="tx-browser-bar">
-        <span />
-        <span />
-        <span />
-        <em>kenromerogoestdigital.space</em>
-      </div>
-      <div className="tx-browser-body">
-        <div className="tx-browser-routes">
-          <b>/qa</b>
-          <b>/va</b>
-        </div>
-        <code>
-          VITE_PORTFOLIO=<i>va</i>
-          <br />
-          npm run build
-        </code>
-        <Code2 className="tx-browser-icon" />
       </div>
     </div>
   );
@@ -306,7 +281,6 @@ export default function QAHome() {
                   <>
                     <div className={`tx-project-visual tx-project-${project.visual}`}>
                       {project.visual === "tests" && <TestWindow />}
-                      {project.visual === "browser" && <BrowserMock />}
                       {project.visual === "image" && <img {...imageProps(project.image)} alt={`${project.title} preview`} loading="lazy" />}
                       <div className="tx-project-stack">
                         <span className="tx-mono">Tech stack</span>
