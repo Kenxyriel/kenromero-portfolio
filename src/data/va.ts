@@ -402,30 +402,63 @@ export const socialMedia = {
     hooks: [
       {
         hook: 'AI Saved Her Evenings.',
-        body: 'Dr. Emily stopped taking chart notes home every night after integrating AI into her workflow. Now her documentation gets done in real time while still improving patient care. More efficiency. Less burnout. Better outcomes. 🚀 That’s what smart AI adoption actually looks like.',
-        tags: '#789Podcast #HealthcareFounder #Telemedicine #AIForBusiness #WomenInBusiness #ScalingUp #Entrepreneur #BusinessPodcast',
+        body: 'She stopped taking chart notes home every night after integrating AI into her workflow. Now her documentation gets done in real time while still improving patient care. More efficiency. Less burnout. Better outcomes. 🚀 That’s what smart AI adoption actually looks like.',
+        tags: '#HealthcareFounder #Telemedicine #AIForBusiness #WomenInBusiness #ScalingUp #Entrepreneur #BusinessPodcast',
       },
       {
         hook: 'She Scaled During Chaos.',
-        body: 'Most healthcare practices were trying to survive. Dr. Emily scaled from 1 provider and 1 staff to 3 providers and 8 staff in just a few years. Technology didn’t replace the human side of the business. It amplified it. 🚀',
-        tags: '#789Podcast #WomenInBusiness #HealthcareFounder #ScalingUp #BusinessGrowth #Entrepreneur #BusinessPodcast #KMGrowth',
+        body: 'Most healthcare practices were trying to survive. She scaled from 1 provider and 1 staff to 3 providers and 8 staff in just a few years. Technology didn’t replace the human side of the business. It amplified it. 🚀',
+        tags: '#WomenInBusiness #HealthcareFounder #ScalingUp #BusinessGrowth #Entrepreneur #BusinessPodcast',
       },
       {
         hook: 'She Built Across 17 States.',
-        body: 'Dr. Emily built a healthcare business that reaches patients across 17 states through telemedicine and field clinics. Instead of making patients travel… she brought healthcare closer to them. 🌎 The future belongs to businesses that remove friction and improve accessibility.',
-        tags: '#789Podcast #Telemedicine #HealthcareFounder #WomenInBusiness #BusinessGrowth #ScalingUp #Entrepreneur #KMGrowth',
+        body: 'She built a healthcare business that reaches patients across 17 states through telemedicine and field clinics. Instead of making patients travel… she brought healthcare closer to them. 🌎 The future belongs to businesses that remove friction and improve accessibility.',
+        tags: '#Telemedicine #HealthcareFounder #WomenInBusiness #BusinessGrowth #ScalingUp #Entrepreneur',
       },
     ],
     hashtagTitle: 'Hashtag Research',
     hashtags:
-      '#789Podcast #FounderStory #WomenInBusiness #Telemedicine #HealthcareFounder #ScalingUp #Entrepreneur #Audiologist #KMGrowth #BusinessPodcast #ServiceBusiness #Alaska',
+      '#FounderStory #WomenInBusiness #Telemedicine #HealthcareFounder #ScalingUp #Entrepreneur #BusinessPodcast #ServiceBusiness',
     platformReady: 'One conversation → multiple platform-ready messages',
   },
   publishing: {
     title: 'Content Publishing and Strategy',
     description:
       'I organize content around platform behavior, audience engagement, and a consistent publishing rhythm to make every piece of content work harder.',
-    distributionImage: { image: '/va/work/social/caption-bank.webp', label: 'Caption bank & content research' } as VAImage,
+    // Recreated from the podcast's Captions Bank tab. Guest and show names are left out.
+    captionBank: {
+      title: 'Caption bank',
+      note: 'Every episode gets five Reels and Shorts hooks, plus its own X, LinkedIn and TikTok copy.',
+      episodes: [
+        {
+          ep: 'Ep 01',
+          topic: 'Telehealth founder',
+          hooks: ['AI Saved Her Evenings.', 'Everyone Asked Her How.', 'She Scaled During Chaos.', 'AI Bought Back Her Sanity.', 'She Built Across 17 States.'],
+          x: 'She had a newborn, 1 clinic, and zero roadmap. Now she’s licensed in 17 states. EP 01 is live.',
+          linkedin: 'Most healthcare founders wait for perfect conditions. She didn’t have that luxury. 1. She pioneered telemedicine before it was mainstream…',
+          tiktok: 'She flew to remote communities with a newborn to see patients who had no other options. Now she runs a 17-state telehealth practice.',
+          tags: '#FounderStory #WomenInBusiness #Telemedicine #HealthcareFounder #ScalingUp',
+        },
+        {
+          ep: 'Ep 02',
+          topic: 'Private equity & licensing',
+          hooks: ['Care Bears Became A Cash Machine.', 'Emotion Drives Revenue.', '90% Margin Business Model.', 'Warner Bros Built This Formula.', 'Creators Understand Branding.'],
+          x: 'Most PE firms look at spreadsheets. He looks at feelings, and built a $500M fund doing it. EP 02 is live.',
+          linkedin: 'What does a $500M private equity fund have in common with Care Bears? Emotional connection as a growth strategy.',
+          tiktok: 'He manages $500M and says the best investors focus on feelings, not financials. The $369B licensing industry most founders sleep on.',
+          tags: '#PrivateEquity #LicensingBusiness #BrandGrowth #InvestorMindset #BusinessStrategy',
+        },
+        {
+          ep: 'Ep 04',
+          topic: 'Growth agency founder',
+          hooks: ['Most Growth Agencies Think Too Small.', 'The Companies With The Best Data Win.', 'Founders Should Obsess Over Pipeline.', 'Your Network Pulls You Out Of Down Cycles.', 'Customers Matter More Than Investors.'],
+          x: 'Most founders think growth comes from marketing or funding. He says it starts inside the company.',
+          linkedin: 'He spent nearly 20 years inside some of the world’s largest consumer brands before starting his own agency. His conviction: most companies look for growth in the wrong places.',
+          tiktok: '20 years at the biggest consumer brands, then a decade bootstrapping a growth agency. Growth starts inside the company, not in your marketing budget.',
+          tags: '#GrowthStrategy #Bootstrapping #FirstPartyData #Fortune500 #FounderStory',
+        },
+      ],
+    },
     platforms: [
       { name: 'YouTube', role: 'Long-form authority', detail: 'Full podcast episodes and Shorts.' },
       { name: 'Instagram', role: 'Reach & engagement', detail: 'Reels and visual content designed for discovery.' },
@@ -506,6 +539,164 @@ export const jjjCalendar = {
   ],
 }
 
+export type PodStatus = 'Approved' | 'For review' | 'In progress' | 'Not started' | 'Revision' | 'Posted' | 'Guest approval'
+export type PodPlatform = 'youtube' | 'shorts' | 'instagram' | 'facebook'
+
+// Recreated from the client's podcast content calendar (Google Sheets) and the
+// OpusClip scheduler. Guest names, the show's name and every link are left out on
+// purpose: episodes are described by topic and clips by their hook.
+export const podcastCalendar = {
+  // Counts from the production calendar: 45 episodes on the sheet when it was shared.
+  stats: [
+    { value: '45', label: 'Episodes edited' },
+    { value: '39', label: 'Thumbnails approved' },
+    { value: '33', label: 'Reels posted in 2 weeks' },
+    { value: '7', label: 'Platforms planned' },
+  ],
+  pipeline: [
+    { step: '15-min edit', count: '40 of 45 approved' },
+    { step: '20–60s clips', count: '26 episodes clipped' },
+    { step: 'Thumbnail', count: '39 approved' },
+    { step: 'Guest approval', count: '32 waiting' },
+    { step: 'Posted', count: '7 live' },
+  ],
+  tracker: [
+    { ep: '01', topic: 'Scaling a telehealth practice from 1 provider to 17 states', edit: 'Approved', clips: 'Approved', thumb: 'Approved', status: 'Posted' },
+    { ep: '02', topic: 'Turning a nostalgic brand into a $500M private equity playbook', edit: 'Approved', clips: 'Approved', thumb: 'Approved', status: 'Posted' },
+    { ep: '03', topic: 'Growing enterprise value through strategic planning', edit: 'Approved', clips: 'Not started', thumb: 'For review', status: 'Posted' },
+    { ep: '04', topic: 'Bringing Fortune 500 growth playbooks to the middle market', edit: 'Approved', clips: 'Approved', thumb: 'Approved', status: 'Posted' },
+    { ep: '—', topic: 'Helping founders through the $100 trillion wealth transfer', edit: 'Approved', clips: 'Approved', thumb: 'Approved', status: 'Guest approval' },
+    { ep: '—', topic: 'From operator to CEO: scaling past $1M with the right team', edit: 'Approved', clips: 'Not started', thumb: 'Approved', status: 'Revision' },
+    { ep: '—', topic: 'Taking a food brand from 350 to 16,000+ grocery stores', edit: 'For review', clips: 'Not started', thumb: 'For review', status: 'In progress' },
+  ] as { ep: string; topic: string; edit: PodStatus; clips: PodStatus; thumb: PodStatus; status: PodStatus }[],
+  // Week 1 of the posting calendar (May 25–30, 2026). Every post went out public.
+  week: {
+    label: 'Week 1 · May 25–30, 2026',
+    days: [
+      { day: 'Mon', date: 'May 25', posts: [{ type: 'Clip', ep: '01', hook: 'Scaling healthcare during chaos', time: '8:00 AM', role: 'Teaser' }] },
+      {
+        day: 'Tue',
+        date: 'May 26',
+        posts: [
+          { type: 'Clip', ep: '01', hook: '17 states. One healthcare practice.', time: '8:00 AM', role: 'Promo link' },
+          { type: 'Episode', ep: '01', hook: 'Full episode drop', time: '8:00 AM', role: 'Drop' },
+        ],
+      },
+      {
+        day: 'Wed',
+        date: 'May 27',
+        posts: [
+          { type: 'Clip', ep: '01', hook: 'They were ready before everyone else', time: '8:00 AM', role: 'Recap' },
+          { type: 'Clip', ep: '02', hook: 'Nostalgia became a cash machine', time: '12:00 PM', role: 'Teaser' },
+        ],
+      },
+      {
+        day: 'Thu',
+        date: 'May 28',
+        posts: [
+          { type: 'Clip', ep: '02', hook: 'Emotional brands print royalties', time: '8:00 AM', role: 'Promo link' },
+          { type: 'Episode', ep: '02', hook: 'Full episode drop', time: '8:00 AM', role: 'Drop' },
+        ],
+      },
+      {
+        day: 'Fri',
+        date: 'May 29',
+        posts: [
+          { type: 'Clip', ep: '01', hook: 'AI bought back her sanity', time: '8:00 AM', role: 'Follow-up' },
+          { type: 'Clip', ep: '02', hook: 'Low risk. High margin. Licensing.', time: '12:00 PM', role: 'Recap' },
+        ],
+      },
+      { day: 'Sat', date: 'May 30', posts: [{ type: 'Clip', ep: '02', hook: 'Monetize the brand, not just content', time: '8:00 AM', role: 'Weekend reach' }] },
+    ] as { day: string; date: string; posts: { type: 'Clip' | 'Episode'; ep: string; hook: string; time: string; role: string }[] }[],
+    rule: 'Two episodes a week (Tue & Thu). Clips tease the day before, drop with a link on the day, then recap through the weekend.',
+  },
+  // The OpusClip calendar, May 17 – Jun 6, 2026. `more` = posts hidden behind "See more".
+  opus: {
+    label: 'May 17 – Jun 6, 2026',
+    start: '2026-05-17',
+    days: {
+      '2026-05-19': { posts: [{ platform: 'youtube', time: '1:00 AM', hook: 'She built across 17 states' }] },
+      '2026-05-20': { posts: [{ platform: 'youtube', time: '7:31 PM', hook: '7-figure business growth: founders’ real strategies' }] },
+      '2026-05-25': {
+        posts: [
+          { platform: 'youtube', time: '8:00 PM', hook: 'She scaled during chaos' },
+          { platform: 'instagram', time: '8:00 PM', hook: 'She scaled during chaos. Most practices were trying to survive…' },
+        ],
+        more: 1,
+      },
+      '2026-05-26': {
+        posts: [
+          { platform: 'facebook', time: '12:00 AM', hook: 'She scaled during chaos' },
+          { platform: 'instagram', time: '8:00 PM', hook: 'She built a 17-state practice. With a newborn.' },
+        ],
+        more: 1,
+      },
+      '2026-05-27': {
+        posts: [
+          { platform: 'youtube', time: '8:00 PM', hook: 'Everyone asked her how' },
+          { platform: 'instagram', time: '8:00 PM', hook: 'Everyone asked her how. While clinics struggled…' },
+        ],
+        more: 1,
+      },
+      '2026-05-28': {
+        posts: [
+          { platform: 'youtube', time: '12:00 AM', hook: 'How did one brand triple its royalties in 2 years?' },
+          { platform: 'instagram', time: '12:00 AM', hook: 'Nostalgia turned into a scalable cash machine' },
+        ],
+        more: 3,
+      },
+      '2026-05-29': {
+        posts: [
+          { platform: 'youtube', time: '8:00 PM', hook: 'How is AI helping founders avoid burnout?' },
+          { platform: 'instagram', time: '8:00 PM', hook: 'AI didn’t replace her work. It gave her time back.' },
+        ],
+        more: 1,
+      },
+      '2026-05-30': {
+        posts: [
+          { platform: 'youtube', time: '12:00 AM', hook: 'Why do licensing businesses earn 90–95% margins?' },
+          { platform: 'instagram', time: '12:00 AM', hook: '90–95% gross margins. That’s licensing.' },
+        ],
+        more: 4,
+      },
+      '2026-05-31': { posts: [{ platform: 'facebook', time: '12:00 AM', hook: 'Why are creators scaling faster than businesses?' }] },
+      '2026-06-01': {
+        posts: [
+          { platform: 'youtube', time: '8:00 PM', hook: 'Why do some businesses lose trust with great AI tools?' },
+          { platform: 'instagram', time: '8:00 PM', hook: 'Efficiency alone won’t build loyalty.' },
+        ],
+        more: 4,
+      },
+      '2026-06-02': { posts: [{ platform: 'facebook', time: '12:00 AM', hook: 'AI alone won’t build customer trust' }] },
+    } as Record<string, { posts: { platform: PodPlatform; time: string; hook: string }[]; more?: number }>,
+  },
+  // One episode's full package, from the Episode Details and Captions Bank tabs.
+  pack: {
+    label: 'Episode 03 · Strategic planning',
+    deliverables: ['15-min edit', '5 clips, 20–60s', 'Thumbnail', 'YouTube description', 'Timestamped transcript', 'Caption per clip', 'SEO tags'],
+    hear: [
+      'Why most companies have a wish list instead of a strategic plan',
+      'The hidden costs of running without a clear strategy',
+      'Why every business should be built as if it’s preparing for sale',
+      'How to turn a three-year vision into six-month milestones',
+    ],
+    hooks: [
+      'AI expands your bandwidth.',
+      'A 3-year vision means nothing without a 6-month plan.',
+      'A strategy isn’t real until it’s measured.',
+      'Your best employees don’t leave by accident.',
+      'Most businesses don’t have a strategic plan.',
+    ],
+    caption: [
+      'A 3-Year Vision Means Nothing Without a 6-Month Plan.',
+      'If you know where you want your business to be in three years, where do you need to be in six months?',
+      'If you can’t answer it, you don’t have a plan.',
+      'You have a wish list.',
+    ],
+    tags: ['Strategic planning', 'Enterprise value', 'Exit planning', 'Business valuation', 'Revenue diversification', 'Leadership alignment', 'AI for business'],
+  },
+}
+
 export const podcastEditing = {
   meta: {
     title: 'Podcast Editing & Content Management | Ken Romero',
@@ -519,8 +710,10 @@ export const podcastEditing = {
     title: 'Featured Projects',
     notice: {
       tag: 'Client work',
-      title: 'These videos belong to my clients',
-      body: 'Every episode and clip here is client property, shown only as featured work from projects I edited. Please don\u2019t download, repost or reuse them.',
+      title: 'This work belongs to my clients',
+      body: 'Every episode, clip and thumbnail here is client property, shared with permission as featured work from projects I edited. The people shown are my clients and their guests, and some faces and names are blurred to protect their privacy. Please don\u2019t download, repost or reuse them.',
+      takedown: 'Featured in this work and want it removed?',
+      takedownLink: 'Email me and I\u2019ll take it down',
     },
     items: [
       { image: '/va/work/podcast/episode-15-min.webp', video: '/va/work/podcast/episode-15-min.mp4', label: '15 Min Episode (first minute)' },
@@ -533,30 +726,19 @@ export const podcastEditing = {
       { image: '/va/work/podcast/manual-clip-2.webp', video: '/va/work/podcast/manual-clip-2.mp4', label: 'Most estate agents won’t survive the next 5 years (hand-cut clip)', tall: true },
       { image: '/va/work/podcast/manual-clip-3.webp', video: '/va/work/podcast/manual-clip-3.mp4', label: 'The property sat unsold for 2 years (hand-cut clip)', tall: true },
       { image: '/va/work/podcast/manual-clip-4.webp', video: '/va/work/podcast/manual-clip-4.mp4', label: 'Insights of a 23-year-old founder (hand-cut clip)', tall: true },
-      { image: '/va/work/podcast/thumbnail.webp', label: 'Thumbnail' },
     ] as VAImage[],
+    // Guest faces and names are blurred on the 789 Show thumbnails (the first three).
+    thumbnails: [
+      { image: '/va/work/podcast/thumbnail-stores.webp', label: '350 stores to 16,000+ in 30 months' },
+      { image: '/va/work/podcast/thumbnail-renewals.webp', label: '90%+ client renewals' },
+      { image: '/va/work/podcast/thumbnail-sqft.webp', label: '500 sq ft to 89,000 sq ft' },
+      { image: '/va/work/podcast/thumbnail.webp', label: 'The estate agency model is changing' },
+    ] as VAImage[],
+    show: { name: 'The 789 Show', label: 'Watch the channel on YouTube', href: 'https://www.youtube.com/@The789Show' },
   },
   management: {
     title: 'More than editing.',
     description: 'I help turn your podcast into content that gets seen.',
-    // The posting plan's summary, typed out from the posting calendar sheet so it stays sharp.
-    plan: {
-      title: 'A 13-week posting plan for one podcast',
-      stats: [
-        { value: '26', label: 'Full episodes' },
-        { value: '2', label: 'Episodes a week' },
-        { value: '6', label: 'Clips a week' },
-        { value: '7', label: 'Platforms' },
-      ],
-      rhythm: ['Mon teaser', 'Tue drop', 'Wed recap', 'Thu teaser', 'Thu drop', 'Fri–Sun clips'],
-      platforms: 'YouTube, YT Shorts, Instagram, Facebook, TikTok, X/Twitter, LinkedIn',
-    },
-    items: [
-      { image: '/va/work/podcast/episode-details.webp', label: 'Episode details', detail: 'Guest, title, what listeners will hear, description and SEO tags for every episode.' },
-      { image: '/va/work/podcast/production-calendar.webp', label: 'Production calendar', detail: 'Each episode’s edit status, from Not started to Approved.' },
-      { image: '/va/work/podcast/caption-bank.webp', label: 'Caption bank', detail: 'Facebook, Instagram and YouTube copy, plus hooks for three clips per episode.' },
-      { image: '/va/work/podcast/posting-calendar.webp', label: 'Posting calendar', detail: 'Every episode and clip, by day, time and platform, with its posting status.' },
-    ] as (VAImage & { detail: string })[],
   },
   cta: {
     eyebrow: 'Your podcast has the content.',

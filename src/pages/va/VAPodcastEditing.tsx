@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { ShieldCheck } from 'lucide-react'
 import { podcastEditing as content } from '../../data/va'
+import { profile } from '../../data/profile'
+import PodcastCalendar from './PodcastCalendar'
 import VALayout, { ToolBadge, VACta, VAImg, VAPageHero, VASectionTitle } from './VALayout'
 
 export default function VAPodcastEditing() {
@@ -31,38 +33,25 @@ export default function VAPodcastEditing() {
                 <VAImg key={item.label} item={item} caption />
               ))}
           </div>
+          <p className="va-kicker">Thumbnails</p>
+          <div className="va-gallery va-gallery-thumbs">
+            {content.editing.thumbnails.map((item) => (
+              <VAImg key={item.label} item={item} caption />
+            ))}
+          </div>
+          <p className="va-show-link">
+            The first three thumbnails and the content calendar below are for {content.editing.show.name}.{' '}
+            <a href={content.editing.show.href} target="_blank" rel="noreferrer">
+              {content.editing.show.label} ↗
+            </a>
+          </p>
         </div>
       </section>
 
       <section className="va-section va-section-cream">
         <div className="container">
           <VASectionTitle eyebrow="Content management" title={content.management.title} description={content.management.description} />
-          <div className="va-plan">
-            <h3>{content.management.plan.title}</h3>
-            <dl className="va-plan-stats">
-              {content.management.plan.stats.map((stat) => (
-                <div key={stat.label}>
-                  <dt>{stat.label}</dt>
-                  <dd>{stat.value}</dd>
-                </div>
-              ))}
-            </dl>
-            <ol className="va-plan-rhythm" aria-label="Weekly posting rhythm">
-              {content.management.plan.rhythm.map((step) => (
-                <li key={step}>{step}</li>
-              ))}
-            </ol>
-            <p className="va-plan-platforms">{content.management.plan.platforms}</p>
-          </div>
-          <div className="va-sheet-grid">
-            {content.management.items.map((item) => (
-              <div className="va-sheet" key={item.label}>
-                <VAImg item={item} />
-                <h3>{item.label}</h3>
-                <p>{item.detail}</p>
-              </div>
-            ))}
-          </div>
+          <PodcastCalendar />
         </div>
       </section>
 
@@ -105,7 +94,7 @@ function ClientNotice() {
     observer.observe(node)
     return () => observer.disconnect()
   }, [])
-  const { tag, title, body } = content.editing.notice
+  const { tag, title, body, takedown, takedownLink } = content.editing.notice
   return (
     <div ref={ref} className={`va-client-notice${visible ? ' is-visible' : ''}`} role="note">
       <span className="va-client-notice-icon" aria-hidden="true">
@@ -115,6 +104,10 @@ function ClientNotice() {
         <p className="va-client-notice-tag">{tag}</p>
         <p className="va-client-notice-title">{title}</p>
         <p className="va-client-notice-body">{body}</p>
+        <p className="va-client-notice-body va-client-notice-takedown">
+          {takedown}{' '}
+          <a href={`mailto:${profile.email}?subject=${encodeURIComponent('Portfolio removal request')}`}>{takedownLink}</a>.
+        </p>
       </div>
     </div>
   )

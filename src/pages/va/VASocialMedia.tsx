@@ -1,34 +1,17 @@
 import { imageProps } from '../../components/responsiveImage'
 import { samplePosts, socialMedia as content } from '../../data/va'
+import CaptionBank from './CaptionBank'
 import JJJCalendar from './JJJCalendar'
-import VALayout, { VACta, VAImg, VAPageHero, VASectionTitle } from './VALayout'
+import VALayout, { VACta, VAPageHero, VASectionTitle } from './VALayout'
 
 export default function VASocialMedia() {
-  const { planning, research, publishing } = content
+  const { research, publishing } = content
 
   return (
     <VALayout meta={content.meta}>
       <VAPageHero title={content.title} tagline={content.tagline} intro={content.intro} />
 
-      {/* PLANNING */}
-      <section className="va-section">
-        <div className="container va-split">
-          <div>
-            <p className="va-kicker">{planning.title}</p>
-            <h2 className="va-h2">{planning.subtitle}</h2>
-            <p>{planning.description}</p>
-            <p className="va-kicker">{planning.organizeTitle}</p>
-            <ul className="va-chip-grid">
-              {planning.organize.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
-          <VAImg item={planning.image} className="va-img-wide" />
-        </div>
-      </section>
-
-      {/* JJJ CASE STUDY: real calendar from Notion */}
+      {/* PLANNING: how I organize content, shown on the real JJJ calendar from Notion */}
       <JJJCalendar />
 
       {/* RESEARCH + HOOKS */}
@@ -67,7 +50,7 @@ export default function VASocialMedia() {
               </article>
             ))}
           </div>
-          <VAImg item={publishing.distributionImage} className="va-img-wide" />
+          <CaptionBank />
           <p className="va-kicker va-centered">Posting tools: {publishing.postingTools.join(' · ')}</p>
         </div>
       </section>
