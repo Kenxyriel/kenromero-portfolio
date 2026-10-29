@@ -1,6 +1,7 @@
 import { ArrowRight, Check } from 'lucide-react'
 import Timeline from '../../components/Timeline'
 import { getSmmPackages, podcastPackages, smmPackages, vaOnboarding, type Package } from '../../data/va'
+import { bookingLink } from '../../data/profile'
 import { portfolioUrl } from '../../packageHosts'
 import VALayout, { VAPageHero, VASectionTitle } from './VALayout'
 import { vaPath } from '../../vaPath'
@@ -35,8 +36,9 @@ function PackageCard({ pkg }: { pkg: Package }) {
         </>
       )}
       {pkg.note && <p className="va-note">{pkg.note}</p>}
-      <a className="va-button" href={portfolioUrl(vaPath('/va#contact'))}>
-        Let’s Work Together
+      {/* Same wording and destination as the navbar button, so there's one clear next step. */}
+      <a className="va-button" href={bookingLink.href} {...(bookingLink.external ? { target: '_blank', rel: 'noreferrer' } : {})}>
+        Book a discovery call
       </a>
     </article>
   )

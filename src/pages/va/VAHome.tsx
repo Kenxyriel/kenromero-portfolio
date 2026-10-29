@@ -1,6 +1,5 @@
 import {
   ArrowRight,
-  CalendarHeart,
   Check,
   Bot,
   Cloud,
@@ -8,7 +7,6 @@ import {
   Pause,
   Play,
   Quote,
-  Scissors,
   Smartphone,
 } from 'lucide-react'
 import { useEffect, useRef, useState, type RefObject } from 'react'
@@ -16,10 +14,10 @@ import { Link } from 'react-router-dom'
 import ContactForm from '../../components/ContactForm'
 import { imageProps } from '../../components/responsiveImage'
 import Timeline from '../../components/Timeline'
-import { bookingLink, profile } from '../../data/profile'
-import { vaHome as content, vaOnboarding, vaTestimonials } from '../../data/va'
+import { profile } from '../../data/profile'
+import { jjjStory, vaHome as content, vaOnboarding, vaTestimonials } from '../../data/va'
 import { DotGrid, Mic, RotatingBadge, Sparkle, Squiggle, Waveform } from './VAArt'
-import VALayout, { ToolBadge } from './VALayout'
+import VALayout, { BookingTicket, ToolBadge } from './VALayout'
 import { vaPath } from '../../vaPath'
 
 // True once the element has scrolled into view (immediately if motion is reduced).
@@ -150,6 +148,7 @@ export default function VAHome() {
               Romero
             </h1>
             <Squiggle className="vx-hero-squiggle" />
+            <p className="vx-hero-promise">{content.hero.promise}</p>
             <p className="vx-hero-roles">{content.hero.roles.join(' · ')}</p>
             <p className="vx-hero-intro">
               I help businesses turn ideas into content that connects, engages, and builds a consistent online presence.
@@ -160,6 +159,12 @@ export default function VAHome() {
               </a>
               <span className="vx-hand">{content.hero.tagline}</span>
             </div>
+            <figure className="vx-hero-proof">
+              <blockquote>“{content.hero.proof.quote}”</blockquote>
+              <figcaption>
+                {content.hero.proof.name}, {content.hero.proof.org}
+              </figcaption>
+            </figure>
             <p className="vx-status">
               <span className="vx-status-dot" aria-hidden="true" /> Open for new projects
             </p>
@@ -209,6 +214,9 @@ export default function VAHome() {
           </div>
         </div>
       </section>
+
+      {/* CLIENT STORY: one project told start to finish, with the client's own words. */}
+      <ClientStory />
 
       {/* ABOUT */}
       <section id="about" className="vx-about">
@@ -298,6 +306,7 @@ export default function VAHome() {
           <div className="vx-quote-row">
             {vaTestimonials.map((item) => (
               <figure key={item.id}>
+                <p className="vx-quote-pull">“{item.highlight}”</p>
                 <blockquote>“{item.quote}”</blockquote>
                 <figcaption>
                   <strong>{item.name}</strong>
@@ -373,33 +382,58 @@ export default function VAHome() {
               Book your <strong>free 30-minute discovery call</strong> and tell me about your brand, your podcast, or
               your content goals. We’ll find the right plan together.
             </p>
-            {/* "Cut the line": the booking button is a queue ticket with a tear-off stub. */}
-            <a
-              className="vx-ticket"
-              href={bookingLink.href}
-              aria-label="Book my free 30-minute discovery call"
-              {...(bookingLink.external ? { target: '_blank', rel: 'noreferrer' } : {})}
-            >
-              <span className="vx-ticket-stub" aria-hidden="true">
-                <small>No.</small>
-                <strong>01</strong>
-                <small>You’re next</small>
-              </span>
-              <span className="vx-ticket-body" aria-hidden="true">
-                <small>Admit one · skip the queue</small>
-                <strong>
-                  <CalendarHeart size={20} /> Book my free call
-                </strong>
-                <small>30 minutes · free</small>
-              </span>
-              <Scissors className="vx-ticket-scissors" size={18} aria-hidden="true" />
-            </a>
-            <p className="vx-ticket-hint" aria-hidden="true">← tear here, it’s free</p>
+            <BookingTicket />
             <p className="vx-close-or">Prefer to write? Send a message and I’ll reply within 24 hours.</p>
           </div>
           <ContactForm showInfo={false} />
         </div>
       </section>
     </VALayout>
+  )
+}
+
+function ClientStory() {
+  const { kit, post, email } = jjjStory.images
+  return (
+    <section className="vx-story" aria-labelledby="vx-story-title">
+      <div className="container vx-story-grid">
+        <div className="vx-story-copy">
+          <p className="vx-eyebrow">Client story · {jjjStory.client}</p>
+          <h2 id="vx-story-title" className="vx-serif">
+            {jjjStory.title}
+          </h2>
+          <p className="vx-story-summary">{jjjStory.summary}</p>
+          <ul className="vx-story-made">
+            {jjjStory.made.map((item) => (
+              <li key={item.label}>
+                <Check size={14} strokeWidth={3} aria-hidden="true" />
+                <span>
+                  <strong>{item.label}</strong> {item.detail}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <figure className="vx-story-quote">
+            <blockquote>“{jjjStory.quote}”</blockquote>
+            <figcaption>
+              {jjjStory.quoteBy}, {jjjStory.client}
+            </figcaption>
+          </figure>
+          <div className="vx-story-links">
+            <Link className="vx-pill" to={vaPath('/va/design-branding')}>
+              See the designs <ArrowRight size={16} aria-hidden="true" />
+            </Link>
+            <Link className="vx-text-link" to={vaPath('/va/social-media-content')}>
+              See the October calendar <ArrowRight size={14} aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+        <div className="vx-story-art">
+          <img className="vx-story-email" {...imageProps(email.image, '260px')} alt={email.label} loading="lazy" />
+          <img className="vx-story-kit" {...imageProps(kit.image, '(max-width: 760px) 70vw, 380px')} alt={kit.label} loading="lazy" />
+          <img className="vx-story-post" {...imageProps(post.image, '(max-width: 760px) 60vw, 320px')} alt={post.label} loading="lazy" />
+        </div>
+      </div>
+    </section>
   )
 }
