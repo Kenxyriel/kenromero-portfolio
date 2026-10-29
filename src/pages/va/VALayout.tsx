@@ -15,6 +15,7 @@ import '@fontsource-variable/fraunces/standard-italic.css'
 import '@fontsource/caveat/700.css'
 import './va.css'
 import { VA_BASE, vaPath } from '../../vaPath'
+import WelcomeIntro from './WelcomeIntro'
 
 const navItems: NavItem[] = [
   { label: 'Home', href: vaPath('/va') },
@@ -114,6 +115,7 @@ export default function VALayout({ meta, children, unlisted = false }: VALayoutP
 
   return (
     <div className="site-shell va-theme">
+      <WelcomeIntro />
       <SiteHeader
         brandRole="CREATIVE PORTFOLIO"
         brandHref={vaPath('/va')}
