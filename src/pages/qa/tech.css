@@ -180,6 +180,24 @@
 .tx-run-rows { display: grid; gap: 1px; margin: 0; padding: 0; list-style: none; }
 .tx-run-rows li { display: grid; grid-template-columns: 64px minmax(0, 1fr) 56px; gap: 10px; align-items: baseline; margin-inline: -6px; padding: 3px 6px; border-radius: 4px; transition: opacity 180ms ease, background-color 180ms ease; }
 .tx-run-id { color: var(--t-muted); }
+.tx-run-rows li { position: relative; }
+/* The bug crawls out of the failing row along its bottom edge, then is caught: a quick shrink inside an amber ring. */
+.tx-bug { position: absolute; left: 70px; bottom: -11px; z-index: 1; color: var(--t-pink); pointer-events: none; }
+.tx-bug svg { display: block; }
+.tx-bug.is-crawl { animation: tx-bug-crawl 1.4s cubic-bezier(.45, .05, .55, .95) forwards; }
+.tx-bug.is-crawl .tx-bug-legs { transform-origin: 12px 9px; animation: tx-bug-legs 120ms steps(2) infinite; }
+.tx-bug.is-caught { transform: translateX(min(220px, 40vw)); animation: tx-bug-caught 400ms var(--ease-out) forwards; }
+.tx-bug.is-caught::after { content: ""; position: absolute; inset: -6px; border-radius: 50%; box-shadow: 0 0 0 2px var(--t-amber); animation: tx-bug-ring 400ms var(--ease-out) forwards; }
+@keyframes tx-bug-crawl {
+  0% { opacity: 0; transform: translate(0, -4px); }
+  10% { opacity: 1; }
+  35% { transform: translate(calc(min(220px, 40vw) * .35), 2px) rotate(6deg); }
+  65% { transform: translate(calc(min(220px, 40vw) * .7), -2px) rotate(-6deg); }
+  100% { opacity: 1; transform: translate(min(220px, 40vw), 0); }
+}
+@keyframes tx-bug-legs { to { transform: scaleY(-1); } }
+@keyframes tx-bug-caught { to { opacity: 0; transform: translateX(min(220px, 40vw)) scale(.2); } }
+@keyframes tx-bug-ring { from { opacity: 1; transform: scale(.6); } to { opacity: 0; transform: scale(1.6); } }
 .tx-run-state { font-weight: 600; text-align: right; }
 .tx-run-rows li[data-state="wait"] { opacity: .4; }
 .tx-run-rows li[data-state="run"] .tx-run-state,
@@ -534,6 +552,7 @@
   .tx-bones { display: none; }
   .tx-project-build img { opacity: 1; }
   .tx-marquee-track { animation: none; }
+  .tx-bug { display: none; }
   .tx-window-body li,
   .tx-reveal.is-shown .tx-window-body li { animation: none; opacity: 1; }
   .tx-marquee-viewport { overflow-x: auto; }

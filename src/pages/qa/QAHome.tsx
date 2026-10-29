@@ -69,12 +69,31 @@ const skipRun = () => {
 type RowState = "wait" | "run" | "pass" | "fail" | "retest";
 const rowLabel: Record<RowState, string> = { wait: "·", run: "…", pass: "PASS", fail: "FAIL", retest: "RETEST" };
 
+// A small bug drawn facing right; legs wiggle while it crawls.
+function CrawlingBug({ phase }: { phase: "crawl" | "caught" }) {
+  return (
+    <span className={`tx-bug is-${phase}`} aria-hidden="true">
+      <svg viewBox="0 0 24 18" width="26" height="19">
+        <g className="tx-bug-legs" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" fill="none">
+          <path d="M8 6 5 2M12 5.5 12 1.5M16 6 19 2M8 12 5 16M12 12.5 12 16.5M16 12 19 16" />
+        </g>
+        <path d="M21 7.5 23.5 5M21 10.5 23.5 13" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+        <ellipse cx="12" cy="9" rx="7" ry="4.6" fill="currentColor" />
+        <circle cx="20" cy="9" r="2.6" fill="currentColor" />
+        <path d="M12 4.6V13.4" stroke="#121518" strokeWidth="1" opacity=".5" />
+      </svg>
+    </span>
+  );
+}
+
 // Hero card: replays real cases from the Authentication case study, including the defect and its retest.
 function TestRun() {
   const run = content.testRun;
   const allPassed = () => run.cases.map((): RowState => "pass");
   const [states, setStates] = useState<RowState[]>(() => (skipRun() ? allPassed() : run.cases.map((): RowState => "wait")));
   const [bugOpen, setBugOpen] = useState(false);
+  // The bug that crawls out of the failing row, then gets caught when its retest passes.
+  const [bugPhase, setBugPhase] = useState<"hidden" | "crawl" | "caught">("hidden");
   const [finished, setFinished] = useState(skipRun);
   const [runId, setRunId] = useState(0);
 
@@ -85,6 +104,7 @@ function TestRun() {
     const set = (index: number, state: RowState) => setStates((prev) => prev.map((value, i) => (i === index ? state : value)));
     setStates(run.cases.map(() => "wait"));
     setBugOpen(false);
+    setBugPhase("hidden");
     setFinished(false);
     let t = runId === 0 ? 450 : 120;
     run.cases.forEach((testCase, index) => {
@@ -94,10 +114,13 @@ function TestRun() {
         at(t, () => {
           set(index, "fail");
           setBugOpen(true);
+          setBugPhase("crawl");
         });
-        t += 850;
+        t += 1000;
         at(t, () => set(index, "retest"));
         t += 360;
+        at(t, () => setBugPhase("caught"));
+        at(t + 420, () => setBugPhase("hidden"));
       }
       at(t, () => set(index, "pass"));
       t += 60;
@@ -126,6 +149,7 @@ function TestRun() {
             <span className="tx-run-id">{testCase.id}</span>
             <span>{testCase.name}</span>
             <span className="tx-run-state">{rowLabel[states[index]]}</span>
+            {testCase.bug && bugPhase !== "hidden" && <CrawlingBug phase={bugPhase} />}
           </li>
         ))}
       </ol>
