@@ -10,8 +10,8 @@ const SEEN_KEY = 'kr-intro-seen'
 const EASE_OUT = 'cubic-bezier(0.23, 1, 0.32, 1)'
 const EASE_IN_OUT = 'cubic-bezier(0.77, 0, 0.175, 1)'
 const EASE_PLAYFUL = 'cubic-bezier(0.34, 1.56, 0.64, 1)'
-// HOLD keeps the finished ticket on screen a beat longer so "Welcome in" can be read (2.8s total).
-const HOLD = 900
+// HOLD keeps the finished ticket on screen a beat longer so "Welcome in" can be read (2.5s total).
+const HOLD = 580
 const TEAR_AT = 1200 + HOLD
 const TOTAL = 1920 + HOLD
 
