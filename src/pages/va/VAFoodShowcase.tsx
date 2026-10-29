@@ -41,12 +41,9 @@ export default function VAFoodShowcase({ items }: { items: VAImage[] }) {
     return () => observer.disconnect()
   }, [])
 
+  // The active progress bar is the timer: it pauses in place while the reel isn't
+  // playing, and the reel moves on when the bar finishes filling.
   const playing = visible && !paused && !hovered && !reduced
-  useEffect(() => {
-    if (!playing) return
-    const timer = window.setTimeout(() => go(active + 1), SLIDE_MS)
-    return () => window.clearTimeout(timer)
-  }, [playing, active, go])
 
   const current = items[active]
   const theme = brandTheme[current.brand ?? ''] ?? fallbackTheme
@@ -88,7 +85,10 @@ export default function VAFoodShowcase({ items }: { items: VAImage[] }) {
               aria-current={index === active}
               onClick={() => go(index)}
             >
-              <span key={index === active ? `run-${active}` : 'idle'} />
+              <span
+                key={index === active ? `run-${active}` : 'idle'}
+                onAnimationEnd={index === active ? () => go(active + 1) : undefined}
+              />
             </button>
           ))}
         </div>

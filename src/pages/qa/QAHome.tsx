@@ -175,13 +175,15 @@ export default function QAHome() {
           >
             {toolsPaused ? <Play size={14} aria-hidden="true" /> : <Pause size={14} aria-hidden="true" />}
           </button>
-          <div className="tx-marquee-track">
-            {[...content.tools, ...content.tools].map((tool, index) => (
-              <span className="tx-tool" key={`${tool.name}-${index}`} aria-hidden={index >= content.tools.length}>
-                <img src={tool.icon} alt="" />
-                {tool.name}
-              </span>
-            ))}
+          <div className="tx-marquee-viewport">
+            <div className="tx-marquee-track">
+              {[...content.tools, ...content.tools].map((tool, index) => (
+                <span className="tx-tool" key={`${tool.name}-${index}`} aria-hidden={index >= content.tools.length}>
+                  <img src={tool.icon} alt="" />
+                  {tool.name}
+                </span>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -225,20 +227,22 @@ export default function QAHome() {
             </Reveal>
             <div className="tx-disciplines">
               {content.disciplines.map((discipline, index) => (
-                <Reveal key={discipline.key} className={`tx-discipline tx-discipline-${discipline.key}`} delay={index * 140}>
-                  <p className="tx-mono tx-discipline-kicker">{discipline.kicker}</p>
-                  <h3>{discipline.title}</h3>
-                  <p>{discipline.text}</p>
-                  {discipline.groups.map((group) => (
-                    <div className="tx-skill-group" key={group.title}>
-                      <span>{group.title}</span>
-                      <ul>
-                        {group.items.map((item) => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
+                <Reveal key={discipline.key} delay={index * 140}>
+                  <article className={`tx-discipline tx-discipline-${discipline.key}`}>
+                    <p className="tx-mono tx-discipline-kicker">{discipline.kicker}</p>
+                    <h3>{discipline.title}</h3>
+                    <p>{discipline.text}</p>
+                    {discipline.groups.map((group) => (
+                      <div className="tx-skill-group" key={group.title}>
+                        <span>{group.title}</span>
+                        <ul>
+                          {group.items.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </article>
                 </Reveal>
               ))}
             </div>

@@ -27,6 +27,10 @@
   --section-space-sm: 64px;
   --hero-space-top: 150px;
   --hero-space-bottom: 92px;
+  /* Motion: strong ease-out for entrances and hovers that move, ease-in-out for things moving across the screen. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-playful: cubic-bezier(0.34, 1.56, 0.64, 1); /* small overshoot, creative-site moments only */
 }
 
 * { box-sizing: border-box; }
@@ -60,7 +64,7 @@ main:focus { outline: none; }
   background: rgba(248, 250, 252, 0.88);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid transparent;
-  transition: 180ms ease;
+  transition: background-color 180ms ease, border-color 180ms ease;
 }
 .navbar-scrolled { background: rgba(255,255,255,.96); border-color: var(--border); }
 
@@ -87,9 +91,14 @@ main:focus { outline: none; }
   color: var(--white);
   background: #0b0b0b;
   border-radius: 10px;
-  transition: background 150ms ease, transform 150ms ease;
+  transition: background 150ms ease, transform 160ms var(--ease-out);
 }
-.nav-cta:hover { background: var(--blue); transform: translateY(-1px); }
+.nav-cta:hover { background: var(--blue); }
+.nav-cta:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .nav-cta:hover { transform: translateY(-1px); }
+  .nav-cta:hover:active { transform: translateY(-1px) scale(0.97); }
+}
 .menu-toggle { display: none; background: transparent; color: var(--ink); cursor: pointer; }
 
 /* =========================================================
@@ -123,10 +132,15 @@ main:focus { outline: none; }
   border-radius: 11px;
   font-size: 14px;
   font-weight: 700;
-  transition: 150ms ease;
+  transition: background-color 150ms ease, transform 160ms var(--ease-out);
 }
+.button:active { transform: scale(0.97); }
 .button-primary { color: white; background: var(--blue); }
-.button-primary:hover { background: var(--blue-dark); transform: translateY(-1px); }
+.button-primary:hover { background: var(--blue-dark); }
+@media (hover: hover) and (pointer: fine) {
+  .button-primary:hover { transform: translateY(-1px); }
+  .button-primary:hover:active { transform: translateY(-1px) scale(0.97); }
+}
 
 /* =========================================
    EDITORIAL ABOUT ME
@@ -334,7 +348,7 @@ main:focus { outline: none; }
 .contact-form { display: grid; align-content: center; gap: 20px; }
 .contact-form label { display: grid; gap: 8px; }
 .contact-form label > span { color: var(--ink); font-size: 13px; font-weight: 700; }
-.contact-form input, .contact-form textarea { width: 100%; padding: 13px 14px; color: var(--ink); background: #f3f3f2; border: 1px solid transparent; border-radius: 10px; outline: none; transition: border-color 150ms ease, box-shadow 150ms ease; }
+.contact-form input, .contact-form textarea { width: 100%; font: inherit; padding: 13px 14px; color: var(--ink); background: #f3f3f2; border: 1px solid transparent; border-radius: 10px; outline: none; transition: border-color 150ms ease, box-shadow 150ms ease; }
 .contact-form input:focus, .contact-form textarea:focus { outline: 2px solid var(--form-focus, var(--blue)); outline-offset: 2px; }
 .contact-form ::placeholder { color: #6b6b6b; opacity: 1; }
 .contact-form textarea { resize: vertical; min-height: 170px; line-height: 1.6; }
@@ -465,9 +479,21 @@ main:focus { outline: none; }
 
 }
 
+/* Phone and small-tablet menu: it grows out of its button instead of popping in. */
+@media (max-width: 850px) {
+  .nav-links-open {
+    transform-origin: top right;
+    transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out);
+  }
+  @starting-style {
+    .nav-links-open { opacity: 0; transform: translateY(-4px) scale(.98); }
+  }
+}
+
+/* Each stylesheet turns off its own movement for reduced motion; fades and colour changes stay. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  .nav-links-open { transition: none; }
 }
 
 /* Slim top bar on the Privacy / Terms pages (LegalPage) */
