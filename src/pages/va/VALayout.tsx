@@ -88,6 +88,16 @@ type VALayoutProps = {
 }
 
 // Shell for every /va page: creative-portfolio theme, navigation, contact footer.
+// lucide-react has no TikTok logo; this matches its 24px stroke icons.
+function TikTokIcon({ size = 17 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5" />
+      <path d="M14 3c.4 2.6 2.2 4.4 5 4.6" />
+    </svg>
+  )
+}
+
 export default function VALayout({ meta, children, unlisted = false }: VALayoutProps) {
   usePageMeta(meta.title, meta.description)
   const [viewing, setViewing] = useState<VAImage | null>(null)
@@ -132,6 +142,9 @@ function VAFooter() {
             <a href={vaLinks.instagram.href} target="_blank" rel="noreferrer" aria-label="Instagram">
               <Instagram size={17} />
             </a>
+            <a href={vaLinks.tiktok.href} target="_blank" rel="noreferrer" aria-label="TikTok">
+              <TikTokIcon />
+            </a>
             <a href={vaLinks.linkedin.href} target="_blank" rel="noreferrer" aria-label="LinkedIn">
               <Linkedin size={17} />
             </a>
@@ -172,7 +185,16 @@ function VAFooter() {
                 <Smartphone size={14} aria-hidden="true" /> {profile.whatsapp.label}
               </a>
             </li>
-            <li>{vaLinks.instagram.label}</li>
+            <li>
+              <a href={vaLinks.instagram.href} target="_blank" rel="noreferrer">
+                <Instagram size={14} aria-hidden="true" /> Instagram
+              </a>
+            </li>
+            <li>
+              <a href={vaLinks.tiktok.href} target="_blank" rel="noreferrer">
+                <TikTokIcon size={14} /> TikTok
+              </a>
+            </li>
           </ul>
         </div>
         <RotatingBadge className="va-footer-badge" text="GOOD CONTENT • CREATES • OPPORTUNITIES • " />

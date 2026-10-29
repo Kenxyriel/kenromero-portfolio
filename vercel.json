@@ -1,5 +1,11 @@
 {
   "redirects": [
+    { "source": "/va", "has": [{ "type": "host", "value": "www.kenromerogoestdigital.space" }], "destination": "https://creative.kenromerogoestdigital.space/", "permanent": true },
+    { "source": "/va/:page(design-branding|social-media-content|podcast-editing|podcast-packages|smm-packages|smm-local-packages|privacy|terms)", "has": [{ "type": "host", "value": "www.kenromerogoestdigital.space" }], "destination": "https://creative.kenromerogoestdigital.space/:page", "permanent": true },
+    { "source": "/va/:path*", "has": [{ "type": "host", "value": "www.kenromerogoestdigital.space" }], "destination": "https://creative.kenromerogoestdigital.space/va/:path*", "permanent": true },
+    { "source": "/va", "has": [{ "type": "host", "value": "kenromerogoestdigital.space" }], "destination": "https://creative.kenromerogoestdigital.space/", "permanent": true },
+    { "source": "/va/:page(design-branding|social-media-content|podcast-editing|podcast-packages|smm-packages|smm-local-packages|privacy|terms)", "has": [{ "type": "host", "value": "kenromerogoestdigital.space" }], "destination": "https://creative.kenromerogoestdigital.space/:page", "permanent": true },
+    { "source": "/va/:path*", "has": [{ "type": "host", "value": "kenromerogoestdigital.space" }], "destination": "https://creative.kenromerogoestdigital.space/va/:path*", "permanent": true },
     { "source": "/va", "has": [{ "type": "host", "value": "creative.kenromerogoestdigital.space" }], "destination": "/", "permanent": true },
     { "source": "/va/:page(design-branding|social-media-content|podcast-editing|podcast-packages|smm-packages|smm-local-packages|privacy|terms)", "has": [{ "type": "host", "value": "creative.kenromerogoestdigital.space" }], "destination": "/:page", "permanent": true }
   ],

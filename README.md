@@ -50,8 +50,10 @@ each with its own `VITE_PORTFOLIO` environment variable and domain, for example:
 
 | Vercel project | `VITE_PORTFOLIO` | Domain to share |
 | --- | --- | --- |
-| portfolio-qa | `qa` | `qa.kenromerogoestdigital.space` |
-| portfolio-va | `va` | `creative.kenromerogoestdigital.space` |
+| kenromero-portfolio | `qa` (production; previews use `all`) | `kenromerogoestdigital.space` |
+| kenromero-creative-portfolio | `va` | `creative.kenromerogoestdigital.space` |
+
+`vercel.json` sends any `/va` link on the tech domain to the same page on the creative domain (301).
 
 Local check: `VITE_PORTFOLIO=va npm run build && npm run preview`.
 
