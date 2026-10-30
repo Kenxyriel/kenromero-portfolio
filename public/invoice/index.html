@@ -40,7 +40,7 @@
         <label>Issued<input id="f-issued" type="date"></label>
         <label>Due<input id="f-due" type="date"></label>
       </div>
-      <p class="hint">Use the KR number from your Notion Invoices list so they match.</p>
+      <p class="hint" id="f-no-hint">New invoices take the next number automatically.</p>
     </fieldset>
 
     <fieldset>
@@ -105,12 +105,21 @@ Final files are sent once the final payment is received.</textarea></label>
 
 <section class="saved" aria-labelledby="saved-title">
   <div class="saved-head">
-    <div><h2 id="saved-title">Saved invoices</h2><p class="hint"><span id="saved-count"></span> Saved in this browser. New invoices take the next KR number.</p></div>
+    <div><h2 id="saved-title">Saved invoices</h2><p class="hint" id="saved-count">Saved in this browser.</p></div>
     <div class="actions">
-      <button type="button" id="btn-backup" class="small">Download backup</button>
-      <label class="btn small file-btn">Restore backup<input type="file" id="f-restore" accept="application/json,.json"></label>
+      <span id="local-tools" class="actions">
+        <button type="button" id="btn-backup" class="small">Download backup</button>
+        <label class="btn small file-btn">Restore backup<input type="file" id="f-restore" accept="application/json,.json"></label>
+      </span>
+      <button type="button" id="btn-lock" class="small ghost" hidden>Lock</button>
     </div>
   </div>
+  <form class="notion-login" id="notion-login" hidden>
+    <label>Passcode to see your Notion invoices<input id="f-pass" type="password" autocomplete="current-password"></label>
+    <button type="submit" class="primary">Unlock</button>
+  </form>
+  <p class="hint" id="notion-note" role="status"></p>
+  <button type="button" id="btn-move" class="small" hidden>Move invoices to Notion</button>
   <p class="hint" id="saved-empty">Nothing saved yet. Click Save, or download a PDF, and the invoice shows up here.</p>
   <div class="saved-wrap" id="saved-wrap" hidden>
     <table class="saved-table">

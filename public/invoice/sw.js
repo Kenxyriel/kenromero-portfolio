@@ -1,5 +1,5 @@
 // Keeps the invoice maker working offline. Bump VERSION when any file below changes.
-const VERSION = 'invoice-v1'
+const VERSION = 'invoice-v2'
 const FILES = [
   '/invoice/',
   '/invoice/invoice.css',
@@ -24,7 +24,8 @@ self.addEventListener('activate', (event) => {
 
 // Network first, so updates show up; the cache is the fallback when offline.
 self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') return
+  // Invoice data from /api/ is private and always fetched fresh, never cached.
+  if (event.request.method !== 'GET' || new URL(event.request.url).pathname.startsWith('/api/')) return
   event.respondWith(
     fetch(event.request)
       .then((response) => {
