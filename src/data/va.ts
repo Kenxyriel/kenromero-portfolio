@@ -1145,7 +1145,7 @@ export const smmPackages = {
     {
       title: 'Revisions',
       items: [
-        'Each package includes 1 consolidated revision round per monthly content batch.',
+        'Each package includes up to 2 revision rounds per monthly content batch.',
         'Additional revision rounds are available as an add-on.',
         'Major changes outside the original brief may be quoted separately.',
       ],
