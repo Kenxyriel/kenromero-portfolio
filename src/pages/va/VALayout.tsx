@@ -526,8 +526,10 @@ function CtaFan({ samples }: { samples: VAImage[] }) {
       ref={ref}
       className={`va-cta-fan${paused ? ' is-paused' : ''}`}
       onClick={() => !reduced && setPaused((value) => !value)}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      // Mouse only: phones fire a fake hover on tap that never ends, which would
+      // leave the fan stuck after a second tap.
+      onPointerEnter={(event) => event.pointerType === 'mouse' && setHovered(true)}
+      onPointerLeave={() => setHovered(false)}
     >
       {samples.map((item, index) => {
         const slot = fanSlot(index, active, count)
@@ -539,6 +541,7 @@ function CtaFan({ samples }: { samples: VAImage[] }) {
             alt={slot === 'back' ? '' : item.label}
             aria-hidden={slot === 'back' || undefined}
             loading="lazy"
+            decoding="async"
           />
         )
       })}
