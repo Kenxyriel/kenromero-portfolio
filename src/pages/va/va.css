@@ -822,6 +822,55 @@
 .va-tagline { margin: 14px 0 0; font-family: var(--va-hand); font-size: 26px; font-weight: 700; color: var(--va-ink); }
 .va-lead { max-width: 640px; margin: 12px auto 0; font-size: 17px; line-height: 1.75; }
 
+/* Work-page header: a queue ticket (same family as the welcome intro and the
+   booking ticket). Lines up with the 1240px work grid below it. */
+.va-ticket-hero { padding: 128px 0 56px; background: var(--va-paper-2); border-bottom: 2px solid var(--va-ink); }
+.va-ticket-hero-inner { max-width: 1240px; }
+.va-ticket { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 300px; background: var(--va-paper); border: 2px solid var(--va-ink); border-radius: 18px; box-shadow: 8px 8px 0 var(--va-ink); animation: va-ticket-in 400ms var(--ease-out) both; }
+.va-ticket-main { min-width: 0; padding: 44px 56px 48px; }
+.va-ticket h1 { margin: 0; font-family: var(--va-serif); font-size: clamp(44px, 6.4vw, 88px); font-weight: 600; line-height: .98; letter-spacing: -.02em; color: var(--va-ink); text-wrap: balance; }
+.va-ticket h1 span { display: block; margin-top: 12px; font-family: var(--va-hand); font-size: clamp(26px, 2.4vw, 32px); font-weight: 700; line-height: 1.1; letter-spacing: 0; color: var(--va-teal); }
+.va-ticket-tagline { margin: 14px 0 0; font-family: var(--va-hand); font-size: clamp(24px, 2.4vw, 30px); font-weight: 700; line-height: 1.15; color: var(--va-teal); }
+.va-ticket-lead { max-width: 58ch; margin: 12px 0 0; font-size: 17px; line-height: 1.7; color: var(--va-text); }
+/* The stub: a tone step and a dashed tear line with two punched notches. */
+.va-ticket-stub { position: relative; display: flex; flex-direction: column; justify-content: center; padding: 96px 30px 36px; background: var(--va-paper-2); border-left: 2px dashed var(--va-ink); border-radius: 0 16px 16px 0; }
+.va-ticket-stub::before, .va-ticket-stub::after { content: ""; position: absolute; left: -15px; width: 28px; height: 28px; background: var(--va-paper-2); border: 2px solid var(--va-ink); border-radius: 50%; }
+.va-ticket-stub::before { top: -16px; clip-path: inset(50% 0 0 0); }
+.va-ticket-stub::after { bottom: -16px; clip-path: inset(0 0 50% 0); }
+.va-ticket-stub p { margin: 0; font-size: 14px; font-weight: 600; color: var(--va-text); }
+.va-ticket-stub ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 0; padding: 0; list-style: none; }
+.va-ticket-stub a { display: inline-flex; align-items: center; min-height: 36px; padding: 6px 14px; color: var(--va-ink); background: white; border: 2px solid var(--va-ink); border-radius: 999px; box-shadow: 2px 2px 0 var(--va-ink); font-size: 14px; font-weight: 700; text-decoration: none; transition: transform 160ms var(--ease-out), box-shadow 160ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .va-ticket-stub a:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--va-teal); } }
+.va-ticket-stub a:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--va-ink); }
+.va-ticket-stub a:focus-visible { outline: 3px solid var(--va-teal); outline-offset: 3px; }
+/* "Now serving", as on the welcome intro ticket. Sits at the top of the stub. */
+.va-ticket-stamp { position: absolute; z-index: 1; top: 34px; left: calc(100% - 270px); padding: 6px 14px; color: var(--va-teal); background: var(--va-paper-2); border: 2.5px solid var(--va-teal); border-radius: 8px; font-family: var(--va-display); font-size: 14px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; rotate: -8deg; animation: va-stamp-in 220ms var(--ease-playful) 250ms both; }
+.va-ticket.is-stamped .va-ticket-stamp { animation: none; }
+@keyframes va-ticket-in { from { opacity: 0; transform: translateY(12px); } }
+@keyframes va-stamp-in { from { opacity: 0; transform: scale(1.15); } }
+@keyframes va-fade-in { from { opacity: 0; } }
+/* Jump targets land below the sticky navbar. */
+.va-theme [id] { scroll-margin-top: 96px; }
+@media (max-width: 860px) {
+  .va-ticket-hero { padding: 104px 0 40px; }
+  .va-ticket { grid-template-columns: 1fr; box-shadow: 6px 6px 0 var(--va-ink); }
+  .va-ticket-main { padding: 26px 22px 24px; }
+  /* Room for the stamp in the top corner, beside the back link. */
+  .va-ticket-main .va-back { margin-right: 120px; }
+  .va-ticket h1 { font-size: clamp(38px, 10vw, 52px); }
+  .va-ticket-stub { padding: 18px 22px 22px; border-left: 0; border-top: 2px dashed var(--va-ink); border-radius: 0 0 16px 16px; }
+  .va-ticket-stub::before, .va-ticket-stub::after { top: -15px; bottom: auto; }
+  .va-ticket-stub::before { left: -15px; clip-path: inset(0 0 0 50%); }
+  .va-ticket-stub::after { left: auto; right: -15px; clip-path: inset(0 50% 0 0); }
+  .va-ticket-stub a { font-size: 13px; }
+  .va-ticket-stamp { top: 18px; right: 16px; left: auto; padding: 4px 9px; border-width: 2px; font-size: 11px; background: var(--va-paper); rotate: 6deg; }
+}
+@media (pointer: coarse) { .va-ticket-stub a { min-height: 44px; } }
+@media (prefers-reduced-motion: reduce) {
+  .va-ticket, .va-ticket-stamp { animation: va-fade-in 200ms ease both; }
+  .va-ticket.is-stamped .va-ticket-stamp { animation: none; }
+}
+
 .va-split { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
 .va-split p { line-height: 1.75; }
 .va-hooks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }

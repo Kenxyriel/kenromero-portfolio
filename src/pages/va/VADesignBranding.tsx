@@ -2,9 +2,13 @@ import { useState, type CSSProperties } from 'react'
 import { designBranding as content } from '../../data/va'
 import VAEmailShowcase from './VAEmailShowcase'
 import VAFoodShowcase from './VAFoodShowcase'
-import VALayout, { VACta, VAImg, VAPageHero } from './VALayout'
+import VALayout, { VACta, VAImg, VATicketHero } from './VALayout'
 
 // Columns that fill every row: 9 samples sit 3 × 3 rather than 4 + 4 + 1.
+// Section anchors for the header's jump links ("Brand Kit" -> "brand-kit").
+const slug = (title: string) => title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+const jumpLinks = content.sections.map((section) => ({ label: section.title, id: slug(section.title) }))
+
 const columnsFor = (count: number) => (count <= 4 ? count : count % 4 === 0 ? 4 : count % 3 === 0 ? 3 : 4)
 
 export default function VADesignBranding() {
@@ -13,7 +17,7 @@ export default function VADesignBranding() {
 
   return (
     <VALayout meta={content.meta}>
-      <VAPageHero title={content.title} tagline={content.tagline} intro={content.intro} />
+      <VATicketHero title={content.title} tagline={content.tagline} intro={content.intro} links={jumpLinks} onJump={() => setActive('All')} />
 
       <section className="va-section va-design">
         <div className="container va-design-inner">
@@ -32,7 +36,7 @@ export default function VADesignBranding() {
           </div>
 
           {sections.map((section) => (
-            <div className="va-design-section" key={section.title}>
+            <div className="va-design-section" id={slug(section.title)} key={section.title}>
               <header className="va-design-head">
                 <h2>{section.title}</h2>
                 <p>{section.detail}</p>
