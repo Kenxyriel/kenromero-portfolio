@@ -10,8 +10,9 @@
     { "source": "/va/:page(design-branding|social-media-content|podcast-editing|podcast-packages|smm-packages|smm-local-packages|privacy|terms)", "has": [{ "type": "host", "value": "creative.kenromerogoestdigital.space" }], "destination": "/:page", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/invoice", "destination": "/invoice/index.html" },
     {
-      "source": "/((?!api/).*)",
+      "source": "/((?!api/|invoice/).*)",
       "destination": "/index.html"
     }
   ],

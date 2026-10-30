@@ -24,7 +24,7 @@ const pageMeta = {
 // build drops them so, for example, the QA case-study PDF is not on that site.
 const techOnlyFiles = ['documents', 'case-study-preview', 'icons', 'brand/tech']
 // And the other way round: the QA-only build (the tech domain) has no creative pages.
-const vaOnlyFiles = ['va', 'brand/creative']
+const vaOnlyFiles = ['va', 'brand/creative', 'invoice']
 
 // Public pages listed in sitemap.xml. Unlisted package pages are left out on purpose.
 const techPages = ['/', '/qa/projects/authentication-testing', '/qa/projects/api-testing', '/qa/projects/saripoint', '/qa/projects/jjj-website', '/qa/projects/salinlibro-cms', '/privacy', '/terms']

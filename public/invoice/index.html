@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Invoice Maker | Ken Romero</title>
+<meta name="theme-color" content="#12534f">
+<link rel="manifest" href="/invoice/manifest.webmanifest">
+<link rel="icon" href="/brand/creative/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/invoice/icon-192.png">
+<link rel="preload" href="/invoice/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/invoice/invoice.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke-width="2.6" stroke-linecap="round"><path d="M32 59A27 27 0 0 1 32 5" stroke="#f2b124"/><path d="M32 5A27 27 0 0 1 55.38 45.5" stroke="var(--line)"/><path d="M48.62 53.28A27 27 0 0 1 32.94 58.98" stroke="var(--muted)"/></g><defs><clipPath id="kc1"><rect x="10" y="19" width="40" height="26"/></clipPath></defs><g fill="none" stroke-width="5.4" transform="translate(32 32) scale(1.08) translate(-32 -32)"><g clip-path="url(#kc1)" stroke="var(--fg)"><path d="M19 17V47"/><path d="M19 35.5L33.5 17M24 30.5L35.5 47"/></g><path d="M31.5 21.7H38a6.3 6.3 0 0 1 0 12.6H33.5" stroke="#f2b124" stroke-linejoin="round"/><path d="M35.5 34.3L50.3 47.4" stroke="#f2b124"/></g></svg>
+    <div><h1>Invoice maker</h1><p>Fill in the left side. The invoice updates as you type.</p></div>
+  </div>
+  <div class="actions">
+    <button type="button" id="btn-install" class="ghost" hidden>Install app</button>
+    <button type="button" id="btn-new" class="ghost">New invoice</button>
+    <button type="button" id="btn-save">Save</button>
+    <button type="button" id="btn-pdf" class="primary">Download PDF</button>
+  </div>
+</header>
+
+<p class="install-hint" id="install-hint" hidden>To add this to your phone: tap Share, then Add to Home Screen.</p>
+
+<main class="app">
+  <form class="editor" id="form" autocomplete="off">
+    <fieldset>
+      <legend>Invoice</legend>
+      <div class="row">
+        <label>Invoice no.<input id="f-no" value="KR-1"></label>
+        <label>Currency<select id="f-cur"><option value="USD">USD ($)</option><option value="PHP">PHP (₱)</option></select></label>
+      </div>
+      <div class="row">
+        <label>Issued<input id="f-issued" type="date"></label>
+        <label>Due<input id="f-due" type="date"></label>
+      </div>
+      <p class="hint" id="f-no-hint">New invoices take the next number automatically.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Bill to</legend>
+      <label>Client business<input id="f-client" value="Example Client Co."></label>
+      <div class="row">
+        <label>Contact name<input id="f-contact" value="Jane Doe"></label>
+        <label>Email<input id="f-cemail" value="jane@example.com"></label>
+      </div>
+      <label>Address (optional)<textarea id="f-caddr" rows="2"></textarea></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Items</legend>
+      <div id="items" style="display:grid;gap:8px"></div>
+      <button type="button" id="btn-add" class="small">+ Add item</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>This invoice covers</legend>
+      <div class="seg" role="group" aria-label="Payment part">
+        <button type="button" data-part="deposit" aria-pressed="true">50% deposit</button>
+        <button type="button" data-part="final" aria-pressed="false">Final 50%</button>
+        <button type="button" data-part="full" aria-pressed="false">Full amount</button>
+      </div>
+      <label class="check"><input type="checkbox" id="f-paid"> Mark as paid (turns it into a receipt)</label>
+      <label id="paid-on-wrap" hidden>Paid on<input id="f-paidon" type="date"></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>How to pay</legend>
+      <label>Payment details<textarea id="f-pay" rows="4">Wise
+Account name: [your name as on Wise]
+[Wise account details or payment link]</textarea></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Terms</legend>
+      <label>One per line<textarea id="f-terms" rows="4">Payment is due within 7 days of the invoice date.
+Work starts once the deposit is received.
+Final files are sent once the final payment is received.</textarea></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Your details</legend>
+      <div class="row">
+        <label>Name<input id="f-name" value="Ken Romero"></label>
+        <label>Title<input id="f-role" value="Digital Specialist"></label>
+      </div>
+      <label>Email<input id="f-email" placeholder="your business email"></label>
+      <label>Website<input id="f-web" value="creative.kenromerogoestdigital.space"></label>
+      <p class="hint">Your details, payment details and terms are remembered in this browser for next time.</p>
+    </fieldset>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+  </form>
+
+  <section class="stage" aria-label="Invoice preview">
+    <div class="stage-head"><span>Preview, A4</span><span id="stage-note">Example details. Replace them with your client's.</span></div>
+    <div class="fit" id="fit"><div class="fit-inner" id="fit-inner"><div id="sheet-host"></div></div></div>
+  </section>
+</main>
+
+<section class="saved" aria-labelledby="saved-title">
+  <div class="saved-head">
+    <div><h2 id="saved-title">Saved invoices</h2><p class="hint" id="saved-count">Saved in this browser.</p></div>
+    <div class="actions">
+      <span id="local-tools" class="actions">
+        <button type="button" id="btn-backup" class="small">Download backup</button>
+        <label class="btn small file-btn">Restore backup<input type="file" id="f-restore" accept="application/json,.json"></label>
+      </span>
+      <button type="button" id="btn-lock" class="small ghost" hidden>Lock</button>
+    </div>
+  </div>
+  <form class="notion-login" id="notion-login" hidden>
+    <label>Passcode to see your Notion invoices<input id="f-pass" type="password" autocomplete="current-password"></label>
+    <button type="submit" class="primary">Unlock</button>
+  </form>
+  <p class="hint" id="notion-note" role="status"></p>
+  <button type="button" id="btn-move" class="small" hidden>Move invoices to Notion</button>
+  <p class="hint" id="saved-empty">Nothing saved yet. Click Save, or download a PDF, and the invoice shows up here.</p>
+  <div class="saved-wrap" id="saved-wrap" hidden>
+    <table class="saved-table">
+      <thead><tr><th>No.</th><th>Client</th><th class="num">Amount</th><th>Issued</th><th>Status</th><th><span class="sr">Actions</span></th></tr></thead>
+      <tbody id="saved-body"></tbody>
+    </table>
+  </div>
+</section>
+<div id="capture-host" class="capture" aria-hidden="true"></div>
+
+<script src="/invoice/vendor/html2canvas.min.js"></script>
+<script src="/invoice/vendor/jspdf.umd.min.js"></script>
+<script src="/invoice/app.js"></script>
+</body>
+</html>
