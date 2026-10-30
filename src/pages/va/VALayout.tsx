@@ -533,11 +533,15 @@ function CtaFan({ samples }: { samples: VAImage[] }) {
     >
       {samples.map((item, index) => {
         const slot = fanSlot(index, active, count)
+        const image = imageProps(item.image ?? '', '(max-width: 760px) 60vw, 360px')
         return (
           <img
             key={item.image}
             data-slot={slot}
-            {...imageProps(item.image ?? '', '(max-width: 760px) 40vw, 240px')}
+            // Landscape pieces (video thumbnails) keep their own shape instead of
+            // being cropped into the portrait poster frame.
+            data-shape={image.width && image.height && image.width > image.height ? 'wide' : undefined}
+            {...image}
             alt={slot === 'back' ? '' : item.label}
             aria-hidden={slot === 'back' || undefined}
             loading="lazy"
