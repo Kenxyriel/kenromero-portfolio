@@ -1511,14 +1511,19 @@
 }
 
 /* Sound controls on the inline podcast clips: a mute button and, where the
-   browser allows it, a volume slider. They sit above the click-to-enlarge layer. */
+   browser allows it, a volume slider that slides out when the button is
+   hovered or focused. They sit above the click-to-enlarge layer. */
 .va-video { position: relative; }
-.va-video-sound { position: absolute; z-index: 1; left: 10px; bottom: 10px; display: flex; align-items: center; gap: 2px; max-width: calc(100% - 20px); padding: 0 12px 0 0; color: white; background: rgba(21, 18, 17, .72); border-radius: 999px; }
+.va-video-sound { position: absolute; z-index: 1; left: 10px; bottom: 10px; display: flex; align-items: center; gap: 2px; max-width: calc(100% - 20px); color: white; background: rgba(21, 18, 17, .72); border-radius: 999px; }
 .va-video-sound button { display: grid; place-items: center; flex: none; width: 44px; height: 44px; color: inherit; background: none; border: 0; border-radius: 50%; cursor: pointer; }
 .va-video-sound button:focus-visible,
 .va-video-sound input:focus-visible { outline: 3px solid var(--va-amber); outline-offset: 2px; }
 .va-video-sound.is-on button { color: var(--va-amber); }
-.va-video-sound input { --fill: 0%; flex: 1 1 auto; width: 88px; min-width: 40px; height: 44px; margin: 0; background: none; cursor: pointer; appearance: none; -webkit-appearance: none; }
+.va-video-sound input { --fill: 0%; flex: none; width: 0; min-width: 0; height: 44px; margin: 0; background: none; cursor: pointer; opacity: 0; visibility: hidden; appearance: none; -webkit-appearance: none; transition: width 200ms var(--ease-out), margin 200ms var(--ease-out), opacity 150ms ease, visibility 0s 200ms; }
+.va-video-sound:hover input,
+.va-video-sound:focus-within input { width: 88px; margin-right: 12px; opacity: 1; visibility: visible; transition-delay: 0s; }
+/* Phones have no hover, so the slider stays out while the sound is on. */
+@media (hover: none) { .va-video-sound.is-on input { width: 88px; margin-right: 12px; opacity: 1; visibility: visible; transition-delay: 0s; } }
 .va-video-sound input::-webkit-slider-runnable-track { height: 4px; background: linear-gradient(to right, var(--va-amber) var(--fill), rgba(255, 255, 255, .35) var(--fill)); border-radius: 2px; }
 .va-video-sound input::-moz-range-track { height: 4px; background: rgba(255, 255, 255, .35); border-radius: 2px; }
 .va-video-sound input::-moz-range-progress { height: 4px; background: var(--va-amber); border-radius: 2px; }
