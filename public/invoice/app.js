@@ -128,7 +128,10 @@
     const pdf = new jsPDF({ unit: 'pt', format: 'a4', compress: true });
     const pw = pdf.internal.pageSize.getWidth(), ph = pdf.internal.pageSize.getHeight();
     const pagePx = Math.floor(canvas.width * ph / pw);
-    for (let y = 0, page = 0; y < canvas.height; y += pagePx, page++) {
+    // A one-page sheet renders a pixel or two taller than A4 after rounding; ignore that sliver
+    // instead of giving it a blank page of its own.
+    const pages = Math.max(1, Math.ceil((canvas.height - 8) / pagePx));
+    for (let y = 0, page = 0; page < pages; y += pagePx, page++) {
       const slice = document.createElement('canvas');
       slice.width = canvas.width; slice.height = Math.min(pagePx, canvas.height - y);
       const ctx = slice.getContext('2d');
