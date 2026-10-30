@@ -158,9 +158,9 @@
 
 /* ---------- Hero ---------- */
 
-.vx-hero { padding: 110px 0 0; overflow: hidden; border-bottom: 2px solid var(--va-ink); }
+.vx-hero { padding: 100px 0 0; overflow: hidden; border-bottom: 2px solid var(--va-ink); }
 .vx-hero-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 24px; align-items: end; }
-.vx-hero-copy { padding-bottom: clamp(48px, 7vw, 96px); }
+.vx-hero-copy { padding-bottom: clamp(28px, 3vw, 40px); }
 .vx-hero h1 {
   margin: 0;
   font-size: clamp(64px, 8.6vw, 132px);
@@ -216,7 +216,7 @@
 /* Zoomed-in portrait framing: the photo fills the arch and is cropped below the waist. */
 .vx-about-photo img { position: absolute; left: 50%; bottom: -20%; width: auto; max-width: none; height: 112%; transform: translateX(-50%); object-fit: contain; }
 .vx-about-mic { position: absolute; top: 28px; left: 28px; width: 46px; color: var(--va-amber); transform: rotate(-12deg); }
-.vx-about-copy { position: relative; padding: clamp(40px, 6vw, 80px) clamp(24px, 6vw, 80px); }
+.vx-about-copy { position: relative; padding: clamp(32px, 3.6vw, 48px) clamp(24px, 6vw, 80px); }
 .vx-about-copy p { max-width: 560px; line-height: 1.75; }
 .vx-about-copy .vx-serif { margin-bottom: 24px; }
 .vx-greeting { margin: 0; font-size: 20px; font-weight: 800; color: var(--va-ink); }
@@ -247,7 +247,7 @@
 
 /* ---------- Numbers ---------- */
 
-.vx-numbers { padding: 28px 0; background: var(--va-amber); border-bottom: 2px solid var(--va-ink); }
+.vx-numbers { padding: 22px 0; background: var(--va-amber); border-bottom: 2px solid var(--va-ink); }
 .vx-numbers-row { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
 .vx-numbers-row div { display: flex; flex-direction: column; }
 .vx-numbers-row strong { color: var(--va-ink); font-size: clamp(32px, 4vw, 46px); font-weight: 800; font-stretch: 75%; line-height: 1; }
@@ -256,9 +256,9 @@
 
 /* ---------- Services (compact row of cards) ---------- */
 
-.vx-services { position: relative; overflow: hidden; isolation: isolate; padding: clamp(56px, 6vw, 84px) 0; background: var(--va-paper); border-bottom: 2px solid var(--va-ink); }
+.vx-services { position: relative; overflow: hidden; isolation: isolate; padding: clamp(32px, 3.6vw, 48px) 0; background: var(--va-paper); border-bottom: 2px solid var(--va-ink); }
 /* Shared section heading: eyebrow + serif title on the left, a short note on the right. */
-.vx-section-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 48px; margin-bottom: clamp(28px, 3.4vw, 40px); }
+.vx-section-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 48px; margin-bottom: clamp(18px, 2vw, 24px); }
 .vx-section-head .vx-side-note { max-width: 440px; }
 .vx-script { margin: 0; font-family: var(--va-hand); font-size: clamp(32px, 3.4vw, 42px); font-weight: 700; line-height: 1; color: var(--va-ink); }
 
@@ -318,7 +318,7 @@
 /* ---------- Selected work ---------- */
 
 .vx-work,
-.vx-tools { padding: clamp(56px, 7vw, 88px) 0; border-bottom: 2px solid var(--va-ink); }
+.vx-tools { padding: clamp(32px, 3.6vw, 48px) 0; border-bottom: 2px solid var(--va-ink); }
 .vx-work-card { position: relative; display: flex; flex-direction: column; color: var(--va-ink); }
 .vx-work-link { color: inherit; }
 .vx-work-link::after { content: ''; position: absolute; inset: 0; z-index: 4; }
@@ -427,7 +427,7 @@
 
 /* ---------- Testimonials (teal band) ---------- */
 
-.vx-quotes { padding: clamp(56px, 7vw, 88px) 0; background: var(--va-teal); color: #d7e6e3; border-bottom: 2px solid var(--va-ink); }
+.vx-quotes { padding: clamp(32px, 3.6vw, 48px) 0; background: var(--va-teal); color: #d7e6e3; border-bottom: 2px solid var(--va-ink); }
 .vx-quotes h2 { color: white; }
 .vx-quotes .vx-serif em { color: var(--va-amber); }
 .vx-quote-mark { width: 54px; height: 54px; margin-top: 8px; color: var(--va-amber); }
@@ -499,7 +499,7 @@
 
 /* ---------- Closing: booking call beside the contact form ---------- */
 
-.vx-close { padding: clamp(56px, 7vw, 96px) 0; background: var(--va-amber); }
+.vx-close { padding: clamp(32px, 3.6vw, 48px) 0; background: var(--va-amber); }
 .vx-close-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
 .vx-close .vx-eyebrow { color: var(--va-ink); }
 .vx-close .vx-serif em { color: var(--va-teal); }
@@ -593,7 +593,7 @@
 
 /* ---------- Footer ---------- */
 
-.va-footer { padding: 56px 0 26px; background: var(--va-ink); color: #c8beb2; }
+.va-footer { padding: 44px 0 24px; background: var(--va-ink); color: #c8beb2; }
 .va-footer-grid { display: grid; grid-template-columns: 1.5fr repeat(3, 1fr) auto; gap: 32px; align-items: start; }
 .va-footer-brand strong { display: inline-flex; align-items: center; gap: 8px; color: white; font-size: 26px; font-weight: 800; font-stretch: 75%; }
 .va-footer-brand .va-sparkle { color: var(--va-amber); font-size: 20px; }
@@ -631,8 +631,8 @@
 .va-note { margin-top: 24px; color: var(--va-muted); font-size: 14px; line-height: 1.7; }
 .va-narrow { max-width: 900px; }
 
-.va-section { padding: clamp(56px, 8vw, 96px) 0; border-bottom: 2px solid var(--va-ink); }
-.va-section-tight { padding-bottom: 24px; border-bottom: 0; }
+.va-section { padding: clamp(32px, 3.6vw, 48px) 0; border-bottom: 2px solid var(--va-ink); }
+.va-section-tight { padding-bottom: 16px; border-bottom: 0; }
 .va-section-cream { background: var(--va-paper-2); }
 .va-section-dark { background: var(--va-ink); color: #ddd3c7; }
 .va-section-dark h2,
@@ -812,7 +812,7 @@
 @media (max-width: 767px) { .va-gallery-tall { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } }
 .va-stack { display: grid; gap: 36px; }
 
-.va-page-hero { padding: 132px 0 52px; background: var(--va-paper-2); border-bottom: 2px solid var(--va-ink); text-align: center; }
+.va-page-hero { padding: 116px 0 36px; background: var(--va-paper-2); border-bottom: 2px solid var(--va-ink); text-align: center; }
 .va-page-hero .va-narrow { margin: 0 auto; }
 .va-back { display: inline-block; margin-bottom: 18px; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--va-teal); }
 .va-back:hover { color: var(--va-ink); }
@@ -851,7 +851,7 @@
 .va-post-shot img { width: 100%; height: auto; border-radius: 22px; box-shadow: 6px 6px 0 rgba(0, 0, 0, .45); }
 
 /* Podcast page: the work starts right under the title. */
-.va-section-first { padding-top: clamp(40px, 5vw, 64px); }
+.va-section-first { padding-top: clamp(28px, 3vw, 40px); }
 /* Podcast content calendar, recreated from the client's sheets and OpusClip so it
    reads sharply and carries no guest names. */
 .pod-cal { display: grid; gap: clamp(28px, 4vw, 44px); }
@@ -998,7 +998,7 @@
 .va-client-notice-takedown a { color: var(--va-ink); font-weight: 800; text-decoration-thickness: 2px; text-underline-offset: 3px; }
 
 /* Closing banner on each work page: pitch + booking ticket left, a fan of that page's work right. */
-.va-cta { padding: clamp(64px, 8vw, 104px) 0; overflow: hidden; background: var(--va-amber); border-bottom: 2px solid var(--va-ink); }
+.va-cta { padding: clamp(32px, 3.6vw, 48px) 0; overflow: hidden; background: var(--va-amber); border-bottom: 2px solid var(--va-ink); }
 .va-cta-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(36px, 5vw, 72px); align-items: center; }
 .va-cta-eyebrow { margin: 0; font-size: 12px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--va-ink); }
 .va-cta h2 { margin: 12px 0 0; font-family: var(--va-serif); font-size: clamp(38px, 5vw, 64px); font-weight: 600; line-height: 1.02; letter-spacing: -.015em; text-wrap: balance; }
@@ -1114,12 +1114,12 @@
 /* ---------- Design & Branding page ---------- */
 
 .va-design-inner { max-width: 1240px; }
-.va-filter { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 auto clamp(36px, 5vw, 56px); padding: 6px; width: fit-content; max-width: 100%; background: white; border: 2px solid var(--va-ink); border-radius: 999px; box-shadow: 4px 4px 0 var(--va-ink); }
+.va-filter { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 auto clamp(24px, 3vw, 36px); padding: 6px; width: fit-content; max-width: 100%; background: white; border: 2px solid var(--va-ink); border-radius: 999px; box-shadow: 4px 4px 0 var(--va-ink); }
 .va-filter button { padding: 9px 18px; color: var(--va-ink); background: transparent; border-radius: 999px; font-size: 13px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; transition: background 150ms ease; }
 .va-filter button:hover { background: var(--va-paper-2); }
 .va-filter button.is-active { background: var(--va-amber); }
-.va-design-section + .va-design-section { margin-top: clamp(56px, 7vw, 88px); }
-.va-design-head { margin-bottom: 28px; text-align: center; }
+.va-design-section + .va-design-section { margin-top: clamp(36px, 4vw, 52px); }
+.va-design-head { margin-bottom: 20px; text-align: center; }
 .va-design-head h2 { margin: 0; font-family: var(--va-serif); font-size: clamp(32px, 4.4vw, 52px); font-weight: 600; letter-spacing: -.02em; }
 .va-design-head p { margin: 8px 0 0; color: var(--va-teal); font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
 .va-design-gallery + .va-design-gallery { margin-top: 40px; }
@@ -1252,7 +1252,7 @@
 }
 
 @media (max-width: 767px) {
-  .vx-hero { padding-top: 96px; }
+  .vx-hero { padding-top: 88px; }
   .vx-hero-grid,
   .vx-about,
   .vx-card-row,
@@ -1294,7 +1294,7 @@
   .va-notes,
   .va-hooks,
   .va-retainer { grid-template-columns: 1fr; }
-  .va-page-hero { padding-top: 108px; }
+  .va-page-hero { padding-top: 96px; }
   /* Four logos per row on phones. */
   .va-tool-row { gap: 14px 6px; justify-content: space-between; }
   .va-tool-badge { width: 76px; }
@@ -1416,7 +1416,7 @@
 }
 
 /* ---------- Client story ---------- */
-.vx-story { padding: clamp(64px, 8vw, 110px) 0; background: var(--va-paper-2); border-top: 2px solid var(--va-ink); }
+.vx-story { padding: clamp(32px, 3.6vw, 48px) 0; background: var(--va-paper-2); border-top: 2px solid var(--va-ink); }
 .vx-story-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
 .vx-story-summary { max-width: 52ch; margin: 18px 0 0; font-size: 17px; line-height: 1.65; }
 .vx-story-made { display: grid; gap: 10px; margin: 24px 0 0; padding: 0; list-style: none; }
@@ -1440,7 +1440,7 @@
 }
 
 /* ---------- Onboarding timeline ---------- */
-.vx-process { padding: clamp(56px, 6vw, 84px) 0; background: var(--va-paper-2); border-bottom: 2px solid var(--va-ink); }
+.vx-process { padding: clamp(32px, 3.6vw, 48px) 0; background: var(--va-paper-2); border-bottom: 2px solid var(--va-ink); }
 .tl.tl-va {
   --tl-rail: var(--va-line);
   --tl-accent: var(--va-teal);

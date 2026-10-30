@@ -573,7 +573,7 @@ main:focus { outline: none; }
 .legal-links { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; }
 .legal-links a { text-decoration: underline; text-underline-offset: 3px; }
 .legal-links a:hover { text-decoration-thickness: 2px; }
-.va-legal { padding-top: 140px; color: var(--va-text); }
+.va-legal { padding-top: 116px; padding-bottom: 48px; color: var(--va-text); }
 .va-legal h1, .va-legal h2 { color: var(--va-ink); font-family: var(--va-display); }
 .va-legal h1 { font-stretch: 75%; font-weight: 800; text-transform: uppercase; letter-spacing: 0; }
 .va-legal .legal-kicker { color: var(--va-teal); }
