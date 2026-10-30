@@ -854,7 +854,7 @@
 .va-section-first { padding-top: clamp(40px, 5vw, 64px); }
 /* Podcast content calendar, recreated from the client's sheets and OpusClip so it
    reads sharply and carries no guest names. */
-.pod-cal { display: grid; gap: clamp(28px, 4vw, 44px); max-width: 1120px; margin: 0 auto; }
+.pod-cal { display: grid; gap: clamp(28px, 4vw, 44px); }
 .pod-cal .jjj-stats { margin: 0; }
 .pod-board { padding: clamp(18px, 3vw, 32px); background: white; border: 2px solid var(--va-ink); box-shadow: 6px 6px 0 var(--va-ink); }
 .pod-board-head .va-kicker { margin: 0 0 4px; }
