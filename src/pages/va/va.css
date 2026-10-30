@@ -1009,7 +1009,8 @@
 .va-cta p.vx-ticket-hint { margin: 14px 0 0 6px; font-family: var(--va-hand); font-size: 22px; font-weight: 700; color: var(--va-teal); transform: rotate(-3deg); }
 .va-cta p.va-cta-alt { margin: 18px 0 0; color: var(--va-ink); font-size: 15px; }
 .va-cta-alt a { display: inline-flex; align-items: center; gap: 4px; font-weight: 800; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
-/* Three real pieces fanned like prints; they spread a little further on hover. */
+/* Real pieces fanned like prints. They shuffle every few seconds (CtaFan):
+   right -> front -> left -> behind, and spread a little further on hover. */
 .va-cta-fan { position: relative; min-height: clamp(320px, 34vw, 440px); }
 .va-cta-fan img {
   position: absolute;
@@ -1022,16 +1023,26 @@
   background: #fff;
   border: 2px solid var(--va-ink);
   box-shadow: 6px 6px 0 var(--va-ink);
-  transition: transform 420ms var(--ease-playful);
+  /* The shuffle: a little overshoot to match the site's sticker feel. */
+  transition: transform 600ms var(--ease-playful), opacity 360ms var(--ease-out);
 }
-.va-cta-fan img:nth-of-type(1) { z-index: 1; transform: translate(-108%, -48%) rotate(-9deg); }
-.va-cta-fan img:nth-of-type(2) { z-index: 3; transform: translate(-50%, -54%) rotate(1deg); }
-.va-cta-fan img:nth-of-type(3) { z-index: 2; transform: translate(8%, -46%) rotate(8deg); }
+.va-cta-fan img[data-slot='left'] { z-index: 1; transform: translate(-108%, -48%) rotate(-9deg); }
+.va-cta-fan img[data-slot='front'] { z-index: 3; transform: translate(-50%, -54%) rotate(1deg); }
+.va-cta-fan img[data-slot='right'] { z-index: 2; transform: translate(8%, -46%) rotate(8deg); }
+.va-cta-fan img[data-slot='back'] { z-index: 0; opacity: 0; transform: translate(-50%, -50%) rotate(-2deg) scale(.86); }
 @media (hover: hover) and (pointer: fine) {
-  .va-cta-fan:hover img:nth-of-type(1) { transform: translate(-122%, -50%) rotate(-13deg); }
-  .va-cta-fan:hover img:nth-of-type(2) { transform: translate(-50%, -60%) rotate(0deg) scale(1.04); }
-  .va-cta-fan:hover img:nth-of-type(3) { transform: translate(22%, -44%) rotate(12deg); }
+  /* The hover spread answers the pointer, so it is quicker than the shuffle. */
+  .va-cta-fan:hover img { transition-duration: 280ms, 360ms; transition-timing-function: var(--ease-out); }
+  .va-cta-fan:hover img[data-slot='left'] { transform: translate(-122%, -50%) rotate(-13deg); }
+  .va-cta-fan:hover img[data-slot='front'] { transform: translate(-50%, -60%) rotate(0deg) scale(1.04); }
+  .va-cta-fan:hover img[data-slot='right'] { transform: translate(22%, -44%) rotate(12deg); }
 }
+.va-cta-fan { cursor: pointer; }
+/* Only shows for keyboard focus; mouse and touch just click the fan itself. */
+.va-cta-fan-toggle { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; padding: 0; }
+.va-cta-fan-toggle:focus-visible { right: 0; bottom: 0; z-index: 5; width: auto; height: auto; clip: auto; padding: 8px 14px; color: var(--va-ink); background: #fffdf8; border: 2px solid var(--va-ink); border-radius: 999px; font-size: 14px; font-weight: 800; }
+.va-cta-fan p.va-cta-fan-paused { position: absolute; right: 4%; bottom: 0; z-index: 4; margin: 0; color: var(--va-teal); font-family: var(--va-hand); font-size: 22px; font-weight: 700; transform: rotate(-3deg); pointer-events: none; transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out); }
+@starting-style { .va-cta-fan p.va-cta-fan-paused { opacity: 0; transform: rotate(-3deg) translateY(6px); } }
 .va-cta-badge { position: absolute; left: 0; top: 0; z-index: 4; width: 104px; color: var(--va-ink); }
 @media (max-width: 1023px) {
   .va-cta-grid { grid-template-columns: 1fr; }
@@ -1039,7 +1050,7 @@
   .va-cta-fan img { width: 38%; }
   .va-cta-badge { width: 84px; }
 }
-@media (prefers-reduced-motion: reduce) { .va-cta-fan img { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .va-cta-fan img, .va-cta-fan p.va-cta-fan-paused { transition: none; } }
 
 .va-currency-note { width: fit-content; margin: 0 auto 32px; padding: 7px 16px; color: var(--va-ink); background: var(--va-paper-2); border: 2px solid var(--va-ink); border-radius: 999px; font-size: 13px; font-weight: 800; letter-spacing: .04em; }
 

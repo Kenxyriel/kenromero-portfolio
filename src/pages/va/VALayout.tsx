@@ -468,13 +468,90 @@ export function VACta({
             </Link>
           </p>
         </div>
-        <div className="va-cta-fan">
-          {cta.samples.map((item) => (
-            <img key={item.image} {...imageProps(item.image ?? '', '(max-width: 760px) 40vw, 240px')} alt={item.label} loading="lazy" />
-          ))}
-          <RotatingBadge className="va-cta-badge" text="GOOD CONTENT • CREATES • OPPORTUNITIES • " />
-        </div>
+        <CtaFan samples={cta.samples} />
       </div>
     </section>
+  )
+}
+
+const FAN_MS = 3200
+
+// Which spot a card sits in, counted from the card at the front: the next card
+// waits on the right, the last one on the left, and the rest hide behind.
+function fanSlot(index: number, active: number, count: number) {
+  const step = (index - active + count) % count
+  if (step === 0) return 'front'
+  if (step === 1) return 'right'
+  if (step === count - 1) return 'left'
+  return 'back'
+}
+
+// The fanned prints shuffle on their own: the right card slides to the front,
+// the front one drops to the left, and a new piece comes in behind. Hover holds
+// it still; a click or tap on the fan pauses it (no visible button, so the fan
+// stays clean; keyboard users get a toggle that shows on focus). Off screen or
+// reduced motion keeps it still too.
+function CtaFan({ samples }: { samples: VAImage[] }) {
+  const [active, setActive] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const [hovered, setHovered] = useState(false)
+  const [visible, setVisible] = useState(false)
+  const [reduced, setReduced] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  const count = samples.length
+  const playing = count > 1 && visible && !paused && !hovered && !reduced
+
+  useEffect(() => {
+    setReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+    const node = ref.current
+    if (!node || !('IntersectionObserver' in window)) {
+      setVisible(true)
+      return
+    }
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.3 })
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!playing) return
+    const timer = window.setInterval(() => {
+      if (!document.hidden) setActive((value) => (value + 1) % count)
+    }, FAN_MS)
+    return () => window.clearInterval(timer)
+  }, [playing, count])
+
+  return (
+    <div
+      ref={ref}
+      className={`va-cta-fan${paused ? ' is-paused' : ''}`}
+      onClick={() => !reduced && setPaused((value) => !value)}
+      // Mouse only: phones fire a fake hover on tap that never ends, which would
+      // leave the fan stuck after a second tap.
+      onPointerEnter={(event) => event.pointerType === 'mouse' && setHovered(true)}
+      onPointerLeave={() => setHovered(false)}
+    >
+      {samples.map((item, index) => {
+        const slot = fanSlot(index, active, count)
+        return (
+          <img
+            key={item.image}
+            data-slot={slot}
+            {...imageProps(item.image ?? '', '(max-width: 760px) 40vw, 240px')}
+            alt={slot === 'back' ? '' : item.label}
+            aria-hidden={slot === 'back' || undefined}
+            loading="lazy"
+            decoding="async"
+          />
+        )
+      })}
+      <RotatingBadge className="va-cta-badge" text="GOOD CONTENT • CREATES • OPPORTUNITIES • " />
+      {count > 1 && !reduced && (
+        <button type="button" className="va-cta-fan-toggle" aria-pressed={paused}>
+          {paused ? 'Play the work shuffle' : 'Pause the work shuffle'}
+        </button>
+      )}
+      {paused && <p className="va-cta-fan-paused" aria-hidden="true">paused · tap again to play</p>}
+    </div>
   )
 }
