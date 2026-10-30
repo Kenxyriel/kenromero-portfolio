@@ -1,4 +1,4 @@
-import { ArrowRight, CalendarHeart, Check, ImageIcon, Instagram, Linkedin, Mail, Maximize2, Scissors, Smartphone, Volume1, Volume2, VolumeX, X } from 'lucide-react'
+import { ArrowRight, CalendarHeart, Check, ImageIcon, Instagram, Linkedin, Mail, Maximize2, Pause, Play, Scissors, Smartphone, Volume1, Volume2, VolumeX, X } from 'lucide-react'
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import LegalLinks from '../../components/LegalLinks'
@@ -468,13 +468,90 @@ export function VACta({
             </Link>
           </p>
         </div>
-        <div className="va-cta-fan">
-          {cta.samples.map((item) => (
-            <img key={item.image} {...imageProps(item.image ?? '', '(max-width: 760px) 40vw, 240px')} alt={item.label} loading="lazy" />
-          ))}
-          <RotatingBadge className="va-cta-badge" text="GOOD CONTENT • CREATES • OPPORTUNITIES • " />
-        </div>
+        <CtaFan samples={cta.samples} />
       </div>
     </section>
+  )
+}
+
+const FAN_MS = 3200
+
+// Which spot a card sits in, counted from the card at the front: the next card
+// waits on the right, the last one on the left, and the rest hide behind.
+function fanSlot(index: number, active: number, count: number) {
+  const step = (index - active + count) % count
+  if (step === 0) return 'front'
+  if (step === 1) return 'right'
+  if (step === count - 1) return 'left'
+  return 'back'
+}
+
+// The fanned prints shuffle on their own: the right card slides to the front,
+// the front one drops to the left, and a new piece comes in behind. Hover, focus,
+// the pause button, being off screen or reduced motion all hold it still.
+function CtaFan({ samples }: { samples: VAImage[] }) {
+  const [active, setActive] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const [hovered, setHovered] = useState(false)
+  const [visible, setVisible] = useState(false)
+  const [reduced, setReduced] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  const count = samples.length
+  const playing = count > 1 && visible && !paused && !hovered && !reduced
+
+  useEffect(() => {
+    setReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+    const node = ref.current
+    if (!node || !('IntersectionObserver' in window)) {
+      setVisible(true)
+      return
+    }
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.3 })
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!playing) return
+    const timer = window.setInterval(() => {
+      if (!document.hidden) setActive((value) => (value + 1) % count)
+    }, FAN_MS)
+    return () => window.clearInterval(timer)
+  }, [playing, count])
+
+  return (
+    <div
+      ref={ref}
+      className="va-cta-fan"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
+    >
+      {samples.map((item, index) => {
+        const slot = fanSlot(index, active, count)
+        return (
+          <img
+            key={item.image}
+            data-slot={slot}
+            {...imageProps(item.image ?? '', '(max-width: 760px) 40vw, 240px')}
+            alt={slot === 'back' ? '' : item.label}
+            aria-hidden={slot === 'back' || undefined}
+            loading="lazy"
+          />
+        )
+      })}
+      <RotatingBadge className="va-cta-badge" text="GOOD CONTENT • CREATES • OPPORTUNITIES • " />
+      {count > 1 && !reduced && (
+        <button
+          type="button"
+          className="va-cta-fan-toggle"
+          onClick={() => setPaused((value) => !value)}
+          aria-label={paused ? 'Play the work shuffle' : 'Pause the work shuffle'}
+        >
+          {paused ? <Play size={14} aria-hidden="true" /> : <Pause size={14} aria-hidden="true" />}
+        </button>
+      )}
+    </div>
   )
 }

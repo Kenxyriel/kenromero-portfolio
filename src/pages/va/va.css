@@ -1009,7 +1009,8 @@
 .va-cta p.vx-ticket-hint { margin: 14px 0 0 6px; font-family: var(--va-hand); font-size: 22px; font-weight: 700; color: var(--va-teal); transform: rotate(-3deg); }
 .va-cta p.va-cta-alt { margin: 18px 0 0; color: var(--va-ink); font-size: 15px; }
 .va-cta-alt a { display: inline-flex; align-items: center; gap: 4px; font-weight: 800; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
-/* Three real pieces fanned like prints; they spread a little further on hover. */
+/* Real pieces fanned like prints. They shuffle every few seconds (CtaFan):
+   right -> front -> left -> behind, and spread a little further on hover. */
 .va-cta-fan { position: relative; min-height: clamp(320px, 34vw, 440px); }
 .va-cta-fan img {
   position: absolute;
@@ -1022,16 +1023,19 @@
   background: #fff;
   border: 2px solid var(--va-ink);
   box-shadow: 6px 6px 0 var(--va-ink);
-  transition: transform 420ms var(--ease-playful);
+  transition: transform 700ms var(--ease-playful), opacity 400ms ease;
 }
-.va-cta-fan img:nth-of-type(1) { z-index: 1; transform: translate(-108%, -48%) rotate(-9deg); }
-.va-cta-fan img:nth-of-type(2) { z-index: 3; transform: translate(-50%, -54%) rotate(1deg); }
-.va-cta-fan img:nth-of-type(3) { z-index: 2; transform: translate(8%, -46%) rotate(8deg); }
+.va-cta-fan img[data-slot='left'] { z-index: 1; transform: translate(-108%, -48%) rotate(-9deg); }
+.va-cta-fan img[data-slot='front'] { z-index: 3; transform: translate(-50%, -54%) rotate(1deg); }
+.va-cta-fan img[data-slot='right'] { z-index: 2; transform: translate(8%, -46%) rotate(8deg); }
+.va-cta-fan img[data-slot='back'] { z-index: 0; opacity: 0; transform: translate(-50%, -50%) rotate(-2deg) scale(.86); }
 @media (hover: hover) and (pointer: fine) {
-  .va-cta-fan:hover img:nth-of-type(1) { transform: translate(-122%, -50%) rotate(-13deg); }
-  .va-cta-fan:hover img:nth-of-type(2) { transform: translate(-50%, -60%) rotate(0deg) scale(1.04); }
-  .va-cta-fan:hover img:nth-of-type(3) { transform: translate(22%, -44%) rotate(12deg); }
+  .va-cta-fan:hover img[data-slot='left'] { transform: translate(-122%, -50%) rotate(-13deg); }
+  .va-cta-fan:hover img[data-slot='front'] { transform: translate(-50%, -60%) rotate(0deg) scale(1.04); }
+  .va-cta-fan:hover img[data-slot='right'] { transform: translate(22%, -44%) rotate(12deg); }
 }
+.va-cta-fan-toggle { position: absolute; right: 0; bottom: 0; z-index: 4; display: grid; place-items: center; width: 36px; height: 36px; background: #fffdf8; color: var(--va-ink); border: 2px solid var(--va-ink); border-radius: 50%; cursor: pointer; }
+@media (pointer: coarse) { .va-cta-fan-toggle { width: 44px; height: 44px; } }
 .va-cta-badge { position: absolute; left: 0; top: 0; z-index: 4; width: 104px; color: var(--va-ink); }
 @media (max-width: 1023px) {
   .va-cta-grid { grid-template-columns: 1fr; }

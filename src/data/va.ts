@@ -371,6 +371,11 @@ export const designBranding = {
       { image: '/va/work/design/brand-kit-2.webp', label: 'Brand kit' },
       { image: '/va/work/design/accounting-7.webp', label: 'JJJ Tax and Accounting Q4 graphic' },
       { image: '/va/work/design/food-1.webp', label: 'Bun Riot burger poster' },
+      { image: '/va/work/design/promo-2.webp', label: 'Promotional graphic' },
+      { image: '/va/work/design/food-4.webp', label: 'Kape at Kuwento Brown Sugar Latte poster' },
+      { image: '/va/work/design/content-visual-4.webp', label: 'Content visual' },
+      { image: '/va/work/design/book-podcast-1.webp', label: 'Book and podcast graphic' },
+      { image: '/va/work/design/game-1.webp', label: 'Game graphic' },
     ] as VAImage[],
   },
 }
@@ -481,6 +486,7 @@ export const socialMedia = {
       { image: '/va/work/social/post-kr.webp', label: 'KR Digital Solutions post' },
       { image: '/va/work/social/post-jjj.webp', label: 'JJJ Tax and Accounting post' },
       { image: '/va/work/social/post-yuki.webp', label: 'Yuki Plays post' },
+      { image: '/va/work/social/post-husay.webp', label: 'Husay Coaching Co. post' },
     ] as VAImage[],
   },
 }
@@ -750,6 +756,8 @@ export const podcastEditing = {
       { image: '/va/work/podcast/ai-clip-1.webp', label: 'CFOs: from accountants to strategists clip' },
       { image: '/va/work/podcast/thumbnail.webp', label: 'Podcast thumbnail' },
       { image: '/va/work/podcast/ai-clip-2.webp', label: '50% of business exits are unplanned clip' },
+      { image: '/va/work/podcast/thumbnail-stores.webp', label: 'Podcast thumbnail: 350 stores to 16,000+' },
+      { image: '/va/work/podcast/manual-clip-1.webp', label: 'Trust the process clip' },
     ] as VAImage[],
   },
 }
