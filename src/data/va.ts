@@ -705,7 +705,6 @@ export const podcastEditing = {
   title: 'Podcast Editing',
   subtitle: '& Content Management',
   intro: 'From raw recordings to content that gets people watching.',
-  tools: ['ChatGPT', 'Claude', 'Canva', 'Google Drive', 'Google Suite', 'Riverside.fm', 'OpusClip'] as ToolName[],
   editing: {
     title: 'Featured Projects',
     notice: {

@@ -854,7 +854,7 @@
 .va-section-first { padding-top: clamp(40px, 5vw, 64px); }
 /* Podcast content calendar, recreated from the client's sheets and OpusClip so it
    reads sharply and carries no guest names. */
-.pod-cal { display: grid; gap: clamp(28px, 4vw, 44px); max-width: 1120px; margin: 0 auto; }
+.pod-cal { display: grid; gap: clamp(28px, 4vw, 44px); }
 .pod-cal .jjj-stats { margin: 0; }
 .pod-board { padding: clamp(18px, 3vw, 32px); background: white; border: 2px solid var(--va-ink); box-shadow: 6px 6px 0 var(--va-ink); }
 .pod-board-head .va-kicker { margin: 0 0 4px; }
@@ -996,12 +996,6 @@
 }
 .va-client-notice-takedown { margin-top: 6px !important; }
 .va-client-notice-takedown a { color: var(--va-ink); font-weight: 800; text-decoration-thickness: 2px; text-underline-offset: 3px; }
-.va-podcast-tools { display: flex; flex-direction: column; align-items: center; gap: 18px; }
-.va-podcast-tools .va-kicker { margin: 0; }
-.va-podcast-tools .va-tool-row { justify-content: center; gap: 22px 28px; padding: 22px 28px; background: white; border: 2px solid var(--va-ink); border-radius: 26px; box-shadow: 5px 5px 0 var(--va-ink); }
-.va-podcast-tools .va-tool-badge { width: 104px; }
-.va-podcast-tools .va-tool-circle { width: 88px; height: 88px; }
-.va-podcast-tools .va-tool-name { font-size: 13px; }
 
 /* Closing banner on each work page: pitch + booking ticket left, a fan of that page's work right. */
 .va-cta { padding: clamp(64px, 8vw, 104px) 0; overflow: hidden; background: var(--va-amber); border-bottom: 2px solid var(--va-ink); }
@@ -1226,9 +1220,6 @@
   .vx-split-grid,
   .vx-close-grid { grid-template-columns: 1fr; }
   .vx-tool-groups { grid-template-columns: 1fr; }
-  .va-podcast-tools .va-tool-row { padding: 16px 12px; gap: 14px 8px; }
-  .va-podcast-tools .va-tool-badge { width: 76px; }
-  .va-podcast-tools .va-tool-circle { width: 64px; height: 64px; }
   .va-design-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .va-platforms { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .va-posts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1509,3 +1500,23 @@
   .intro-body { padding: 14px 18px; }
   .intro-ticket small { font-size: 10px; }
 }
+
+/* Sound controls on the inline podcast clips: a mute button and, where the
+   browser allows it, a volume slider that slides out when the button is
+   hovered or focused. They sit above the click-to-enlarge layer. */
+.va-video { position: relative; }
+.va-video-sound { position: absolute; z-index: 1; left: 10px; bottom: 10px; display: flex; align-items: center; gap: 2px; max-width: calc(100% - 20px); color: white; background: rgba(21, 18, 17, .72); border-radius: 999px; }
+.va-video-sound button { display: grid; place-items: center; flex: none; width: 44px; height: 44px; color: inherit; background: none; border: 0; border-radius: 50%; cursor: pointer; }
+.va-video-sound button:focus-visible,
+.va-video-sound input:focus-visible { outline: 3px solid var(--va-amber); outline-offset: 2px; }
+.va-video-sound.is-on button { color: var(--va-amber); }
+.va-video-sound input { --fill: 0%; flex: none; width: 0; min-width: 0; height: 44px; margin: 0; background: none; cursor: pointer; opacity: 0; visibility: hidden; appearance: none; -webkit-appearance: none; transition: width 200ms var(--ease-out), margin 200ms var(--ease-out), opacity 150ms ease, visibility 0s 200ms; }
+.va-video-sound:hover input,
+.va-video-sound:focus-within input { width: 88px; margin-right: 12px; opacity: 1; visibility: visible; transition-delay: 0s; }
+/* Phones have no hover, so the slider stays out while the sound is on. */
+@media (hover: none) { .va-video-sound.is-on input { width: 88px; margin-right: 12px; opacity: 1; visibility: visible; transition-delay: 0s; } }
+.va-video-sound input::-webkit-slider-runnable-track { height: 4px; background: linear-gradient(to right, var(--va-amber) var(--fill), rgba(255, 255, 255, .35) var(--fill)); border-radius: 2px; }
+.va-video-sound input::-moz-range-track { height: 4px; background: rgba(255, 255, 255, .35); border-radius: 2px; }
+.va-video-sound input::-moz-range-progress { height: 4px; background: var(--va-amber); border-radius: 2px; }
+.va-video-sound input::-webkit-slider-thumb { width: 14px; height: 14px; margin-top: -5px; background: white; border: 0; border-radius: 50%; -webkit-appearance: none; }
+.va-video-sound input::-moz-range-thumb { width: 14px; height: 14px; background: white; border: 0; border-radius: 50%; }

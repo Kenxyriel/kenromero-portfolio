@@ -3,7 +3,7 @@ import { ShieldCheck } from 'lucide-react'
 import { podcastEditing as content } from '../../data/va'
 import { profile } from '../../data/profile'
 import PodcastCalendar from './PodcastCalendar'
-import VALayout, { ToolBadge, VACta, VAImg, VAPageHero, VASectionTitle } from './VALayout'
+import VALayout, { VACta, VAImg, VAPageHero, VASectionTitle } from './VALayout'
 
 export default function VAPodcastEditing() {
   return (
@@ -52,17 +52,6 @@ export default function VAPodcastEditing() {
         <div className="container">
           <VASectionTitle eyebrow="Content management" title={content.management.title} description={content.management.description} />
           <PodcastCalendar />
-        </div>
-      </section>
-
-      <section className="va-section va-section-tight">
-        <div className="container va-podcast-tools">
-          <p className="va-kicker">Tools I use</p>
-          <ul className="va-tool-row">
-            {content.tools.map((tool, index) => (
-              <ToolBadge key={tool} name={tool} index={index} />
-            ))}
-          </ul>
         </div>
       </section>
 

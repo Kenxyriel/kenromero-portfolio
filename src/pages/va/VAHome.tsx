@@ -70,6 +70,7 @@ function PlayableClip({ clip, className }: { clip: { image: string; video: strin
         poster={clip.image}
         preload="none"
         playsInline
+        onContextMenu={(event) => event.preventDefault()}
         onPlay={(event) => {
           setPlaying(true)
           document.querySelectorAll<HTMLVideoElement>('.va-cover-video video').forEach((other) => {
