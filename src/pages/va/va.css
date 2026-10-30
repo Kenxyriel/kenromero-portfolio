@@ -1034,8 +1034,11 @@
   .va-cta-fan:hover img[data-slot='front'] { transform: translate(-50%, -60%) rotate(0deg) scale(1.04); }
   .va-cta-fan:hover img[data-slot='right'] { transform: translate(22%, -44%) rotate(12deg); }
 }
-.va-cta-fan-toggle { position: absolute; right: 0; bottom: 0; z-index: 4; display: grid; place-items: center; width: 36px; height: 36px; background: #fffdf8; color: var(--va-ink); border: 2px solid var(--va-ink); border-radius: 50%; cursor: pointer; }
-@media (pointer: coarse) { .va-cta-fan-toggle { width: 44px; height: 44px; } }
+.va-cta-fan { cursor: pointer; }
+/* Only shows for keyboard focus; mouse and touch just click the fan itself. */
+.va-cta-fan-toggle { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; padding: 0; }
+.va-cta-fan-toggle:focus-visible { right: 0; bottom: 0; z-index: 5; width: auto; height: auto; clip: auto; padding: 8px 14px; color: var(--va-ink); background: #fffdf8; border: 2px solid var(--va-ink); border-radius: 999px; font-size: 14px; font-weight: 800; }
+.va-cta-fan p.va-cta-fan-paused { position: absolute; right: 4%; bottom: 0; z-index: 4; margin: 0; color: var(--va-teal); font-family: var(--va-hand); font-size: 22px; font-weight: 700; transform: rotate(-3deg); pointer-events: none; }
 .va-cta-badge { position: absolute; left: 0; top: 0; z-index: 4; width: 104px; color: var(--va-ink); }
 @media (max-width: 1023px) {
   .va-cta-grid { grid-template-columns: 1fr; }

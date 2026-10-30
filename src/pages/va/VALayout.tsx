@@ -1,4 +1,4 @@
-import { ArrowRight, CalendarHeart, Check, ImageIcon, Instagram, Linkedin, Mail, Maximize2, Pause, Play, Scissors, Smartphone, Volume1, Volume2, VolumeX, X } from 'lucide-react'
+import { ArrowRight, CalendarHeart, Check, ImageIcon, Instagram, Linkedin, Mail, Maximize2, Scissors, Smartphone, Volume1, Volume2, VolumeX, X } from 'lucide-react'
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import LegalLinks from '../../components/LegalLinks'
@@ -487,8 +487,10 @@ function fanSlot(index: number, active: number, count: number) {
 }
 
 // The fanned prints shuffle on their own: the right card slides to the front,
-// the front one drops to the left, and a new piece comes in behind. Hover, focus,
-// the pause button, being off screen or reduced motion all hold it still.
+// the front one drops to the left, and a new piece comes in behind. Hover holds
+// it still; a click or tap on the fan pauses it (no visible button, so the fan
+// stays clean; keyboard users get a toggle that shows on focus). Off screen or
+// reduced motion keeps it still too.
 function CtaFan({ samples }: { samples: VAImage[] }) {
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
@@ -522,11 +524,10 @@ function CtaFan({ samples }: { samples: VAImage[] }) {
   return (
     <div
       ref={ref}
-      className="va-cta-fan"
+      className={`va-cta-fan${paused ? ' is-paused' : ''}`}
+      onClick={() => !reduced && setPaused((value) => !value)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onFocus={() => setHovered(true)}
-      onBlur={() => setHovered(false)}
     >
       {samples.map((item, index) => {
         const slot = fanSlot(index, active, count)
@@ -543,15 +544,11 @@ function CtaFan({ samples }: { samples: VAImage[] }) {
       })}
       <RotatingBadge className="va-cta-badge" text="GOOD CONTENT • CREATES • OPPORTUNITIES • " />
       {count > 1 && !reduced && (
-        <button
-          type="button"
-          className="va-cta-fan-toggle"
-          onClick={() => setPaused((value) => !value)}
-          aria-label={paused ? 'Play the work shuffle' : 'Pause the work shuffle'}
-        >
-          {paused ? <Play size={14} aria-hidden="true" /> : <Pause size={14} aria-hidden="true" />}
+        <button type="button" className="va-cta-fan-toggle" aria-pressed={paused}>
+          {paused ? 'Play the work shuffle' : 'Pause the work shuffle'}
         </button>
       )}
+      {paused && <p className="va-cta-fan-paused" aria-hidden="true">paused · tap again to play</p>}
     </div>
   )
 }
