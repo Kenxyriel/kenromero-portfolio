@@ -388,6 +388,13 @@ export const socialMedia = {
   title: 'Social Media Content',
   tagline: 'Planned, written and posted on schedule.',
   intro: 'Strategic content, consistent execution, and research-driven growth.',
+  // Jump links on the page header's ticket stub (ids live on the page sections).
+  jump: [
+    { label: 'Content calendar', id: 'content-calendar' },
+    { label: 'Research & hashtags', id: 'research' },
+    { label: 'Publishing', id: 'publishing' },
+    { label: 'Caption ideas', id: 'caption-ideas' },
+  ],
   planning: {
     title: 'Content Planning & Management',
     subtitle: 'Content Calendar',
@@ -711,6 +718,13 @@ export const podcastEditing = {
   title: 'Podcast Editing',
   subtitle: '& Content Management',
   intro: 'From raw recordings to content that gets people watching.',
+  // Jump links on the page header's ticket stub (ids live on the page sections).
+  jump: [
+    { label: 'Episodes', id: 'episodes' },
+    { label: 'Short clips', id: 'short-clips' },
+    { label: 'Thumbnails', id: 'thumbnails' },
+    { label: 'Show calendar', id: 'show-calendar' },
+  ],
   editing: {
     title: 'Featured Projects',
     notice: {

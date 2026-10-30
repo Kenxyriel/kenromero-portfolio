@@ -1,5 +1,5 @@
 import { ArrowRight, CalendarHeart, Check, ImageIcon, Instagram, Linkedin, Mail, Maximize2, Scissors, Smartphone, Volume1, Volume2, VolumeX, X } from 'lucide-react'
-import { createContext, useCallback, useContext, useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type CSSProperties, type MouseEvent, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import LegalLinks from '../../components/LegalLinks'
 import { imageProps } from '../../components/responsiveImage'
@@ -359,6 +359,106 @@ function InlineVideo({ src, poster, label }: { src: string; poster?: string; lab
   )
 }
 
+function BackLink({ href }: { href: string }) {
+  return href.startsWith('/') ? (
+    <Link className="va-back" to={href}>
+      ← Back to portfolio
+    </Link>
+  ) : (
+    <a className="va-back" href={href}>
+      ← Back to portfolio
+    </a>
+  )
+}
+
+export type JumpLink = { label: string; id: string }
+
+// Work-page header: a queue ticket like the welcome intro's. The main part holds
+// the title; the tear-off stub carries a "Now serving" stamp and jump links to
+// the page's sections. The ticket rises in once; the stamp lands once per page
+// per visit (a stamp that thuds on every view gets old).
+export function VATicketHero({
+  title,
+  subtitle,
+  tagline,
+  intro,
+  links,
+  onJump,
+  backHref = vaPath('/va'),
+}: {
+  title: string
+  subtitle?: string
+  tagline?: string
+  intro?: string
+  links: JumpLink[]
+  // Runs before scrolling, e.g. to clear a filter that hides the target.
+  onJump?: () => void
+  backHref?: string
+}) {
+  const stampKey = `va-stamp:${title}`
+  const [stamped] = useState(() => {
+    try {
+      return sessionStorage.getItem(stampKey) === '1'
+    } catch {
+      return false
+    }
+  })
+
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(stampKey, '1')
+    } catch {
+      // Storage blocked: the stamp just lands on every view.
+    }
+  }, [stampKey])
+
+  const jump = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
+    event.preventDefault()
+    onJump?.()
+    // Wait a frame so a section revealed by onJump exists before scrolling to it.
+    requestAnimationFrame(() => {
+      const target = document.getElementById(id)
+      if (!target) return
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
+      history.replaceState(null, '', `#${id}`)
+    })
+  }
+
+  return (
+    <section className="va-ticket-hero">
+      <div className="container va-ticket-hero-inner">
+        <div className={`va-ticket${stamped ? ' is-stamped' : ''}`}>
+          <div className="va-ticket-main">
+            <BackLink href={backHref} />
+            <h1>
+              {title}
+              {subtitle && <span>{subtitle}</span>}
+            </h1>
+            {tagline && <p className="va-ticket-tagline">{tagline}</p>}
+            {intro && <p className="va-ticket-lead">{intro}</p>}
+          </div>
+          <span className="va-ticket-stamp" aria-hidden="true">
+            Now serving
+          </span>
+          <nav className="va-ticket-stub" aria-label="Sections on this page">
+            <p>Jump to a section</p>
+            <ul>
+              {links.map((link) => (
+                <li key={link.id}>
+                  <a href={`#${link.id}`} onClick={(event) => jump(event, link.id)}>
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export function VAPageHero({
   title,
   subtitle,
@@ -377,15 +477,7 @@ export function VAPageHero({
   return (
     <section className="va-page-hero">
       <div className="container va-narrow">
-        {backHref.startsWith('/') ? (
-          <Link className="va-back" to={backHref}>
-            ← Back to portfolio
-          </Link>
-        ) : (
-          <a className="va-back" href={backHref}>
-            ← Back to portfolio
-          </a>
-        )}
+        <BackLink href={backHref} />
         <h1>
           {title}
           {subtitle && <span>{subtitle}</span>}

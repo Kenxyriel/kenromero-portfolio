@@ -2,20 +2,20 @@ import { imageProps } from '../../components/responsiveImage'
 import { samplePosts, socialMedia as content } from '../../data/va'
 import CaptionBank from './CaptionBank'
 import JJJCalendar from './JJJCalendar'
-import VALayout, { VACta, VAPageHero, VASectionTitle } from './VALayout'
+import VALayout, { VACta, VATicketHero, VASectionTitle } from './VALayout'
 
 export default function VASocialMedia() {
   const { research, publishing } = content
 
   return (
     <VALayout meta={content.meta}>
-      <VAPageHero title={content.title} tagline={content.tagline} intro={content.intro} />
+      <VATicketHero title={content.title} tagline={content.tagline} intro={content.intro} links={content.jump} />
 
       {/* PLANNING: how I organize content, shown on the real JJJ calendar from Notion */}
       <JJJCalendar />
 
       {/* RESEARCH + HOOKS */}
-      <section className="va-section va-section-cream">
+      <section className="va-section va-section-cream" id="research">
         <div className="container">
           <VASectionTitle eyebrow={research.subtitle} title={research.title} description={research.description} />
           <p className="va-kicker">{research.hooksTitle}</p>
@@ -38,7 +38,7 @@ export default function VASocialMedia() {
       </section>
 
       {/* PUBLISHING */}
-      <section className="va-section">
+      <section className="va-section" id="publishing">
         <div className="container">
           <VASectionTitle title={publishing.title} description={publishing.description} />
           <div className="va-platforms">
@@ -56,7 +56,7 @@ export default function VASocialMedia() {
       </section>
 
       {/* CAPTION SAMPLES */}
-      <section className="va-section va-section-dark">
+      <section className="va-section va-section-dark" id="caption-ideas">
         <div className="container">
           <VASectionTitle title={content.captionsTitle} />
           <div className="va-posts">

@@ -30,7 +30,7 @@ export default function JJJCalendar() {
   ]
 
   return (
-    <section className="va-section" aria-labelledby="jjj-calendar-title">
+    <section className="va-section" id="content-calendar" aria-labelledby="jjj-calendar-title">
       <div className="container">
         <VASectionTitle eyebrow={planning.title} title={planning.subtitle} description={planning.description} />
 

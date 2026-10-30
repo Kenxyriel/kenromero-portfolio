@@ -3,12 +3,12 @@ import { ShieldCheck } from 'lucide-react'
 import { podcastEditing as content } from '../../data/va'
 import { profile } from '../../data/profile'
 import PodcastCalendar from './PodcastCalendar'
-import VALayout, { VACta, VAImg, VAPageHero, VASectionTitle } from './VALayout'
+import VALayout, { VACta, VAImg, VATicketHero, VASectionTitle } from './VALayout'
 
 export default function VAPodcastEditing() {
   return (
     <VALayout meta={content.meta}>
-      <VAPageHero title={content.title} subtitle={content.subtitle} intro={content.intro} />
+      <VATicketHero title={content.title} subtitle={content.subtitle} intro={content.intro} links={content.jump} />
 
       {/* The work comes first: the first episode sits right under the page title. */}
       <section className="va-section va-section-first" aria-labelledby="va-podcast-work">
@@ -17,7 +17,7 @@ export default function VAPodcastEditing() {
             {content.editing.title}
           </h2>
           <ClientNotice />
-          <p className="va-kicker">Long-form episodes &amp; video</p>
+          <p className="va-kicker" id="episodes">Long-form episodes &amp; video</p>
           <div className="va-gallery va-gallery-wide">
             {content.editing.items
               .filter((item) => !item.tall)
@@ -25,7 +25,7 @@ export default function VAPodcastEditing() {
                 <VAImg key={item.label} item={item} caption />
               ))}
           </div>
-          <p className="va-kicker">Short-form clips</p>
+          <p className="va-kicker" id="short-clips">Short-form clips</p>
           <div className="va-gallery va-gallery-tall">
             {content.editing.items
               .filter((item) => item.tall)
@@ -33,7 +33,7 @@ export default function VAPodcastEditing() {
                 <VAImg key={item.label} item={item} caption />
               ))}
           </div>
-          <p className="va-kicker">Thumbnails</p>
+          <p className="va-kicker" id="thumbnails">Thumbnails</p>
           <div className="va-gallery va-gallery-thumbs">
             {content.editing.thumbnails.map((item) => (
               <VAImg key={item.label} item={item} caption />
@@ -48,7 +48,7 @@ export default function VAPodcastEditing() {
         </div>
       </section>
 
-      <section className="va-section va-section-cream">
+      <section className="va-section va-section-cream" id="show-calendar">
         <div className="container">
           <VASectionTitle eyebrow="Content management" title={content.management.title} description={content.management.description} />
           <PodcastCalendar />
