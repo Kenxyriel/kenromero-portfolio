@@ -72,7 +72,8 @@ function Lightbox({ item, onClose }: { item: VAImage; onClose: () => void }) {
       </button>
       <figure onClick={(event) => event.stopPropagation()}>
         {item.video ? (
-          <video src={item.video} poster={item.image} controls autoPlay playsInline onPlay={muteInlineVideos} />
+          // No download item in the player menu, and no "Save video as" on right-click.
+          <video src={item.video} poster={item.image} controls controlsList="nodownload" autoPlay playsInline onPlay={muteInlineVideos} onContextMenu={(event) => event.preventDefault()} />
         ) : (
           <img {...imageProps(item.image)} alt={item.label} />
         )}
@@ -331,6 +332,7 @@ function InlineVideo({ src, poster, label }: { src: string; poster?: string; lab
         playsInline
         preload="none"
         aria-label={label}
+        onContextMenu={(event) => event.preventDefault()}
         onVolumeChange={(event) => {
           setMuted(event.currentTarget.muted)
           setVolume(event.currentTarget.volume)
