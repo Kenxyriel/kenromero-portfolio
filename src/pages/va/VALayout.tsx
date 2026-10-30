@@ -1,5 +1,5 @@
-import { ArrowRight, CalendarHeart, Check, ImageIcon, Instagram, Linkedin, Mail, Maximize2, Scissors, Smartphone, X } from 'lucide-react'
-import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
+import { ArrowRight, CalendarHeart, Check, ImageIcon, Instagram, Linkedin, Mail, Maximize2, Scissors, Smartphone, Volume1, Volume2, VolumeX, X } from 'lucide-react'
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import LegalLinks from '../../components/LegalLinks'
 import { imageProps } from '../../components/responsiveImage'
@@ -72,7 +72,7 @@ function Lightbox({ item, onClose }: { item: VAImage; onClose: () => void }) {
       </button>
       <figure onClick={(event) => event.stopPropagation()}>
         {item.video ? (
-          <video src={item.video} poster={item.image} controls autoPlay playsInline />
+          <video src={item.video} poster={item.image} controls autoPlay playsInline onPlay={muteInlineVideos} />
         ) : (
           <img {...imageProps(item.image)} alt={item.label} />
         )}
@@ -256,10 +256,30 @@ export function VAImg({ item, className = '', caption = false }: { item: VAImage
   )
 }
 
+// Mutes every inline clip except the one passed in, so only one sound plays at a time.
+function muteInlineVideos(event?: { currentTarget: HTMLVideoElement }) {
+  document.querySelectorAll<HTMLVideoElement>('.va-video video').forEach((video) => {
+    if (video !== event?.currentTarget) video.muted = true
+  })
+}
+
+// iPhones ignore video.volume (only the hardware buttons change it), so the
+// slider is left out there and only the mute button shows.
+const canSetVolume = (() => {
+  if (typeof document === 'undefined') return false
+  const probe = document.createElement('video')
+  probe.volume = 0.5
+  return probe.volume === 0.5
+})()
+
 // Muted preview loop that only plays while on screen, so a page of clips
-// doesn't download and decode every video at once. Sound plays in the viewer.
+// doesn't download and decode every video at once. Browsers only allow
+// autoplay without sound, so it starts muted; the sound button and slider
+// turn it up in place.
 function InlineVideo({ src, poster, label }: { src: string; poster?: string; label: string }) {
   const ref = useRef<HTMLVideoElement>(null)
+  const [muted, setMuted] = useState(true)
+  const [volume, setVolume] = useState(1)
   useEffect(() => {
     const video = ref.current
     if (!video || window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return
@@ -273,7 +293,68 @@ function InlineVideo({ src, poster, label }: { src: string; poster?: string; lab
     observer.observe(video)
     return () => observer.disconnect()
   }, [])
-  return <video ref={ref} src={src} poster={poster} muted loop playsInline preload="none" aria-label={label} />
+
+  const unmute = (video: HTMLVideoElement) => {
+    muteInlineVideos({ currentTarget: video })
+    video.muted = false
+    // Reduced-motion visitors never get the autoplay, so asking for sound starts it.
+    if (video.paused) video.play().catch(() => {})
+  }
+  const toggleSound = () => {
+    const video = ref.current
+    if (!video) return
+    if (!video.muted) {
+      video.muted = true
+      return
+    }
+    if (video.volume === 0) video.volume = 1
+    unmute(video)
+  }
+  const changeVolume = (value: number) => {
+    const video = ref.current
+    if (!video) return
+    video.volume = value
+    if (value === 0) video.muted = true
+    else if (video.muted) unmute(video)
+  }
+
+  const silent = muted || volume === 0
+  const SoundIcon = silent ? VolumeX : volume < 0.5 ? Volume1 : Volume2
+  return (
+    <div className="va-video">
+      <video
+        ref={ref}
+        src={src}
+        poster={poster}
+        muted
+        loop
+        playsInline
+        preload="none"
+        aria-label={label}
+        onVolumeChange={(event) => {
+          setMuted(event.currentTarget.muted)
+          setVolume(event.currentTarget.volume)
+        }}
+      />
+      <div className={`va-video-sound${silent ? '' : ' is-on'}`}>
+        <button type="button" onClick={toggleSound} aria-label={silent ? `Turn on sound for ${label}` : `Mute ${label}`} aria-pressed={!silent}>
+          <SoundIcon size={18} aria-hidden="true" />
+        </button>
+        {canSetVolume && (
+          <input
+            type="range"
+            min={0}
+            max={1}
+            step={0.05}
+            value={silent ? 0 : volume}
+            onChange={(event) => changeVolume(Number(event.currentTarget.value))}
+            aria-label={`Volume for ${label}`}
+            style={{ '--fill': `${(silent ? 0 : volume) * 100}%` } as CSSProperties}
+          />
+        )}
+      </div>
+    </div>
+  )
 }
 
 export function VAPageHero({
