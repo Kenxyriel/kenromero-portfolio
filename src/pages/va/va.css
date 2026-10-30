@@ -996,12 +996,6 @@
 }
 .va-client-notice-takedown { margin-top: 6px !important; }
 .va-client-notice-takedown a { color: var(--va-ink); font-weight: 800; text-decoration-thickness: 2px; text-underline-offset: 3px; }
-.va-podcast-tools { display: flex; flex-direction: column; align-items: center; gap: 18px; }
-.va-podcast-tools .va-kicker { margin: 0; }
-.va-podcast-tools .va-tool-row { justify-content: center; gap: 22px 28px; padding: 22px 28px; background: white; border: 2px solid var(--va-ink); border-radius: 26px; box-shadow: 5px 5px 0 var(--va-ink); }
-.va-podcast-tools .va-tool-badge { width: 104px; }
-.va-podcast-tools .va-tool-circle { width: 88px; height: 88px; }
-.va-podcast-tools .va-tool-name { font-size: 13px; }
 
 /* Closing banner on each work page: pitch + booking ticket left, a fan of that page's work right. */
 .va-cta { padding: clamp(64px, 8vw, 104px) 0; overflow: hidden; background: var(--va-amber); border-bottom: 2px solid var(--va-ink); }
@@ -1226,9 +1220,6 @@
   .vx-split-grid,
   .vx-close-grid { grid-template-columns: 1fr; }
   .vx-tool-groups { grid-template-columns: 1fr; }
-  .va-podcast-tools .va-tool-row { padding: 16px 12px; gap: 14px 8px; }
-  .va-podcast-tools .va-tool-badge { width: 76px; }
-  .va-podcast-tools .va-tool-circle { width: 64px; height: 64px; }
   .va-design-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .va-platforms { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .va-posts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
