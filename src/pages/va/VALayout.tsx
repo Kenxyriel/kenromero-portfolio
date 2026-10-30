@@ -500,6 +500,11 @@ function CtaFan({ samples }: { samples: VAImage[] }) {
   const ref = useRef<HTMLDivElement>(null)
   const count = samples.length
   const playing = count > 1 && visible && !paused && !hovered && !reduced
+  const images = samples.map((item) => imageProps(item.image ?? '', '(max-width: 760px) 90vw, 480px'))
+  const isWide = (index: number) => (images[index].width ?? 0) > (images[index].height ?? 0)
+  // Landscape pieces (video thumbnails) can't fan side by side without hiding
+  // their titles, so an all-landscape deck sits as a loose pile instead.
+  const pile = images.every((_, index) => isWide(index))
 
   useEffect(() => {
     setReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches)
@@ -524,7 +529,7 @@ function CtaFan({ samples }: { samples: VAImage[] }) {
   return (
     <div
       ref={ref}
-      className={`va-cta-fan${paused ? ' is-paused' : ''}`}
+      className={`va-cta-fan${pile ? ' is-pile' : ''}${paused ? ' is-paused' : ''}`}
       onClick={() => !reduced && setPaused((value) => !value)}
       // Mouse only: phones fire a fake hover on tap that never ends, which would
       // leave the fan stuck after a second tap.
@@ -533,15 +538,11 @@ function CtaFan({ samples }: { samples: VAImage[] }) {
     >
       {samples.map((item, index) => {
         const slot = fanSlot(index, active, count)
-        const image = imageProps(item.image ?? '', '(max-width: 760px) 60vw, 360px')
         return (
           <img
             key={item.image}
             data-slot={slot}
-            // Landscape pieces (video thumbnails) keep their own shape instead of
-            // being cropped into the portrait poster frame.
-            data-shape={image.width && image.height && image.width > image.height ? 'wide' : undefined}
-            {...image}
+            {...images[index]}
             alt={slot === 'back' ? '' : item.label}
             aria-hidden={slot === 'back' || undefined}
             loading="lazy"
