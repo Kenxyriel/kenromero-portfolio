@@ -1030,12 +1030,21 @@
 .va-cta-fan img[data-slot='front'] { z-index: 3; transform: translate(-50%, -54%) rotate(1deg); }
 .va-cta-fan img[data-slot='right'] { z-index: 2; transform: translate(8%, -46%) rotate(8deg); }
 .va-cta-fan img[data-slot='back'] { z-index: 0; opacity: 0; transform: translate(-50%, -50%) rotate(-2deg) scale(.86); }
+/* All-landscape decks (podcast thumbnails) sit as a loose pile at their own
+   ratio: the front one is fully readable, the next two peek out behind it. */
+.va-cta-fan.is-pile img { width: 82%; aspect-ratio: auto; height: auto; object-fit: contain; }
+.va-cta-fan.is-pile img[data-slot='front'] { transform: translate(-50%, -50%) rotate(-1deg); }
+.va-cta-fan.is-pile img[data-slot='right'] { transform: translate(-40%, -66%) rotate(5deg); }
+.va-cta-fan.is-pile img[data-slot='left'] { transform: translate(-60%, -36%) rotate(-6deg); }
 @media (hover: hover) and (pointer: fine) {
   /* The hover spread answers the pointer, so it is quicker than the shuffle. */
   .va-cta-fan:hover img { transition-duration: 280ms, 360ms; transition-timing-function: var(--ease-out); }
   .va-cta-fan:hover img[data-slot='left'] { transform: translate(-122%, -50%) rotate(-13deg); }
   .va-cta-fan:hover img[data-slot='front'] { transform: translate(-50%, -60%) rotate(0deg) scale(1.04); }
   .va-cta-fan:hover img[data-slot='right'] { transform: translate(22%, -44%) rotate(12deg); }
+  .va-cta-fan.is-pile:hover img[data-slot='front'] { transform: translate(-50%, -52%) rotate(0deg) scale(1.03); }
+  .va-cta-fan.is-pile:hover img[data-slot='right'] { transform: translate(-34%, -74%) rotate(8deg); }
+  .va-cta-fan.is-pile:hover img[data-slot='left'] { transform: translate(-66%, -30%) rotate(-9deg); }
 }
 .va-cta-fan { cursor: pointer; }
 /* Only shows for keyboard focus; mouse and touch just click the fan itself. */
@@ -1048,6 +1057,7 @@
   .va-cta-grid { grid-template-columns: 1fr; }
   .va-cta-fan { width: min(100%, 560px); min-height: clamp(260px, 70vw, 420px); margin: 0 auto; }
   .va-cta-fan img { width: 38%; }
+  .va-cta-fan.is-pile img { width: 84%; }
   .va-cta-badge { width: 84px; }
 }
 @media (prefers-reduced-motion: reduce) { .va-cta-fan img, .va-cta-fan p.va-cta-fan-paused { transition: none; } }

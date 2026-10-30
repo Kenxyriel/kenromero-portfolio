@@ -753,11 +753,10 @@ export const podcastEditing = {
     path: vaPath('/va#contact'),
     points: ['Engaging Edits', 'Audience-Focused', 'Made for Growth'],
     samples: [
-      { image: '/va/work/podcast/ai-clip-1.webp', label: 'CFOs: from accountants to strategists clip' },
-      { image: '/va/work/podcast/thumbnail.webp', label: 'Podcast thumbnail' },
-      { image: '/va/work/podcast/ai-clip-2.webp', label: '50% of business exits are unplanned clip' },
       { image: '/va/work/podcast/thumbnail-stores.webp', label: 'Podcast thumbnail: 350 stores to 16,000+' },
-      { image: '/va/work/podcast/manual-clip-1.webp', label: 'Trust the process clip' },
+      { image: '/va/work/podcast/thumbnail.webp', label: 'Podcast thumbnail: the estate agency model is changing' },
+      { image: '/va/work/podcast/thumbnail-renewals.webp', label: 'Podcast thumbnail: 90%+ client renewals' },
+      { image: '/va/work/podcast/thumbnail-sqft.webp', label: 'Podcast thumbnail: 500 sq ft to 89,000 sq ft' },
     ] as VAImage[],
   },
 }
